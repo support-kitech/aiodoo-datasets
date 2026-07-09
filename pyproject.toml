@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aiodoo-datasets"
+version = "0.1.0"
+description = "Deterministic dataset generation pipeline for AIODOO Protocol V1."
+authors = [
+    { name = "AIODOO Engineering Team" }
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+]
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "mypy"
+]

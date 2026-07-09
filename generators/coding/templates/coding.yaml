@@ -1,0 +1,9 @@
+templates:
+  - id: 1
+    text: "Implement the backend logic for the {module_name} module, focusing on the core business objects defined in {feature}."
+  - id: 2
+    text: "Create the data models and views required to implement {feature} for the {module_name} addon."
+  - id: 3
+    text: "Refactor the inventory workflow by adding the requested components for {module_name} regarding {feature}."
+  - id: 4
+    text: "Extend the core Odoo functionality with the {feature} enhancements as part of the {module_name} implementation."

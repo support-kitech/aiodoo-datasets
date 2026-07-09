@@ -1,0 +1,12 @@
+"Scheduled Automation":
+  - "Add scheduled automation (Cron jobs) to the {module_name} module to automate periodic backend processing."
+"Mail Template Automation":
+  - "Integrate automated email templates into the {module_tech_name} module to send automated notifications based on backend triggers."
+"Dynamic Business Logic":
+  - "Implement dynamic business logic in {module_tech_name} utilizing computed fields and onchange methods to automatically calculate values on the fly."
+"Extend Model and View":
+  - "Extend existing models and views in {module_tech_name} to add additional custom fields and tracking capabilities."
+"New Business Model":
+  - "Create new backend business models and database tables for the {module_name} module from scratch."
+"Module Architecture":
+  - "Build the {module_name} module to satisfy the architectural requirements defined by its dependencies."

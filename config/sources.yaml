@@ -1,0 +1,42 @@
+repositories:
+  community:
+    "17.0":
+      root: "/home/yagnesh-borad/workspace/odoo17"
+      addons:
+        - "addons"
+
+    "18.0":
+      root: "/home/yagnesh-borad/workspace/odoo18"
+      addons:
+        - "addons"
+
+    "19.0":
+      root: "/home/yagnesh-borad/workspace/odoo19.3"
+      addons:
+        - "addons"
+
+  enterprise:
+    "17.0":
+      root: "/home/yagnesh-borad/workspace/enterprise17"
+      addons:
+        - "."
+
+    "18.0":
+      root: "/home/yagnesh-borad/workspace/enterprise18"
+      addons:
+        - "."
+
+    "19.0":
+      root: "/home/yagnesh-borad/workspace/enterprise19.3"
+      addons:
+        - "."
+
+  framework:
+    "17.0":
+      root: "/home/yagnesh-borad/workspace/odoo17/odoo"
+
+    "18.0":
+      root: "/home/yagnesh-borad/workspace/odoo18/odoo"
+
+    "19.0":
+      root: "/home/yagnesh-borad/workspace/odoo19.3/odoo"

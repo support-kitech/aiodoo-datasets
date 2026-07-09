@@ -1,0 +1,2 @@
+"Portal Interface":
+  - "Create a portal interface for the {module_name} module. Implement the necessary HTTP controllers and QWeb templates to expose backend records securely to portal users."
