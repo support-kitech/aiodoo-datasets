@@ -1,0 +1,45 @@
+"""Enumerations for the Context Graph domain model."""
+
+from enum import Enum
+
+class NodeType(str, Enum):
+    """Supported types of engineering symbols."""
+    MODEL = "model"
+    FIELD = "field"
+    METHOD = "method"
+    VIEW = "view"
+    ACTION = "action"
+    MENU = "menu"
+    REPORT = "report"
+    MANIFEST = "manifest"
+    SECURITY_RULE = "security_rule"
+    ACL = "acl"
+    CONTROLLER = "controller"
+    JS_COMPONENT = "js_component"
+    QWEB_TEMPLATE = "qweb_template"
+    RPC_ENDPOINT = "rpc_endpoint"
+
+class LanguageType(str, Enum):
+    """Supported source code languages."""
+    PYTHON = "python"
+    XML = "xml"
+    CSV = "csv"
+    JAVASCRIPT = "javascript"
+    UNKNOWN = "unknown"
+
+class RelationshipType(str, Enum):
+    """Supported types of engineering relationships."""
+    CONTAINS = "contains"
+    INHERITS = "inherits"
+    COMPUTES = "computes"
+    REFERENCES = "references"
+    DEPENDS = "depends"
+    IMPORTS = "imports"
+    USES = "uses"
+    CALLS = "calls"
+    OPENS = "opens"
+    DISPLAYS = "displays"
+    EXTENDS = "extends"
+    SECURES = "secures"
+    LOADS = "loads"
+    TRIGGERS = "triggers"
