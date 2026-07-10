@@ -62,3 +62,4 @@ aiodoo_workspace/
 
 #temprory disble
 validate_framework.py
+validate_repair.py
