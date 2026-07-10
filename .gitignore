@@ -60,6 +60,3 @@ venv.bak/
 # AIODOO specific test workspaces
 aiodoo_workspace/
 
-#temprory disble
-validate_framework.py
-validate_repair.py

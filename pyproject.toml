@@ -1,22 +1,63 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "aiodoo-datasets"
-version = "0.1.0"
-description = "Deterministic dataset generation pipeline for AIODOO Protocol V1."
-authors = [
-    { name = "AIODOO Engineering Team" }
-]
-dependencies = [
-    "pydantic>=2.0.0",
-    "pyyaml>=6.0",
-]
+name = "aiodoo-execution-generator"
+version = "1.0.0"
+description = "Deterministic AI dataset generator for Odoo execution graphs."
+readme = "README.md"
 requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [
+    {name = "AIODOO Team"}
+]
+dependencies = []
+
+[tool.setuptools]
+package-dir = {"aiodoo_datasets" = "."}
+packages = ["aiodoo_datasets", "aiodoo_datasets.generators", "aiodoo_datasets.tests"]
 
 [project.optional-dependencies]
 dev = [
+    "ruff",
+    "mypy",
+    "pyright",
     "pytest",
-    "mypy"
+    "coverage",
 ]
+
+[project.scripts]
+generate-execution = "aiodoo_datasets.generators.execution.cli.main:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pyright]
+pythonVersion = "3.11"
+typeCheckingMode = "strict"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+markers = [
+    "integration: marks tests as integration tests",
+]
+testpaths = [
+    "generators/execution/tests",
+    "tests/integration",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["generators/execution"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
