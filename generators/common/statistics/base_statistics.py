@@ -9,15 +9,15 @@ from typing import Any
 class BaseStatistics:
     """Aggregates base generation metrics shared across all pipelines."""
 
-    def __init__(self):
-        self.total_modules = 0
-        self._seen_modules = set()
-        self.total_samples = 0
+    def __init__(self) -> None:
+        self.total_modules: int = 0
+        self._seen_modules: set[str] = set()
+        self.total_samples: int = 0
 
-        self.version_distribution = defaultdict(int)
-        self.edition_distribution = defaultdict(int)
-        self.scenario_distribution = defaultdict(int)
-        self.difficulty_distribution = defaultdict(int)
+        self.version_distribution: defaultdict[str, int] = defaultdict(int)
+        self.edition_distribution: defaultdict[str, int] = defaultdict(int)
+        self.scenario_distribution: defaultdict[str, int] = defaultdict(int)
+        self.difficulty_distribution: defaultdict[int, int] = defaultdict(int)
 
         self.duplicate_count = 0
         self.validation_failures = 0

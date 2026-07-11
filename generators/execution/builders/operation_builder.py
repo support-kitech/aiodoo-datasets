@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.execution.domain.execution_operation import Exec
 from aiodoo_datasets.generators.execution.builders.artifact_builder import ArtifactBuilder
 
 
-class OperationBuilder(BaseBuilder):
+class OperationBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 20
     REQUIRES = (ArtifactBuilder,)
     INPUT = OperationKnowledge

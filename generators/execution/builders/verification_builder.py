@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.execution.domain.execution_verification import E
 from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
 
 
-class VerificationBuilder(BaseBuilder):
+class VerificationBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 50
     REQUIRES = (OperationBuilder,)
     INPUT = VerificationKnowledge

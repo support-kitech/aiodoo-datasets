@@ -13,7 +13,7 @@ from aiodoo_datasets.generators.execution.protocol.protocol_statistics import Pr
 
 
 class TestMetadataWriter(unittest.TestCase):
-    def test_generate_content(self):
+    def test_generate_content(self) -> None:
         protocol = ExecutionProtocol(plan_id="p1", graph_id="g1", metadata=None)
 
         ctx = ExportContext(

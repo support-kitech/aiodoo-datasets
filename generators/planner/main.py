@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.planner.pipeline import PlannerPipeline
 from aiodoo_datasets.generators.common.cli.arguments import build_base_parser, setup_logging
 
 
-def main():
+def main():  # type: ignore[no-untyped-def]
     setup_logging()
     parser = build_base_parser("AIODOO Planner Dataset Generator")
     args = parser.parse_args()
@@ -22,4 +22,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  # type: ignore[no-untyped-call]

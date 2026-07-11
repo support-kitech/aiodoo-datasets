@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.build_pipeline_context import
 
 
 class TestBuildPipeline(unittest.TestCase):
-    def test_orchestration(self):
+    def test_orchestration(self) -> None:
         executor_mock = Mock()
         pipeline = BuildPipeline(executor=executor_mock)
 

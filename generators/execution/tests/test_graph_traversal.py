@@ -15,7 +15,7 @@ class TestGraphTraversal(unittest.TestCase):
         e2 = ExecutionEdge(source_id="b", target_id="c", edge_type=EdgeType.DEPENDENCY)
         return ExecutionGraph(nodes=(n1, n2, n3), edges=(e1, e2))
 
-    def test_dfs(self):
+    def test_dfs(self) -> None:
         graph = self._make_graph()
         result = GraphTraversal.traverse(graph, TraversalStrategy.DFS)
         self.assertTrue(result.success)
@@ -24,27 +24,27 @@ class TestGraphTraversal(unittest.TestCase):
         self.assertEqual(ids[0], "a")
         self.assertEqual(len(ids), 3)
 
-    def test_bfs(self):
+    def test_bfs(self) -> None:
         graph = self._make_graph()
         result = GraphTraversal.traverse(graph, TraversalStrategy.BFS)
         self.assertTrue(result.success)
         ids = [n.node_id for n in result.nodes]
         self.assertEqual(ids, ["a", "b", "c"])
 
-    def test_reverse(self):
+    def test_reverse(self) -> None:
         graph = self._make_graph()
         result = GraphTraversal.traverse(graph, TraversalStrategy.REVERSE)
         self.assertTrue(result.success)
         ids = [n.node_id for n in result.nodes]
         self.assertEqual(ids[0], "c")
 
-    def test_dependency(self):
+    def test_dependency(self) -> None:
         graph = self._make_graph()
         result = GraphTraversal.traverse(graph, TraversalStrategy.DEPENDENCY)
         self.assertTrue(result.success)
         self.assertEqual(len(result.nodes), 3)
 
-    def test_no_mutation(self):
+    def test_no_mutation(self) -> None:
         graph = self._make_graph()
         nodes_before = graph.nodes
         edges_before = graph.edges

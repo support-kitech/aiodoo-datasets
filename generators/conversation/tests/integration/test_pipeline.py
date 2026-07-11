@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.conversation.enums import ConversationType
 from aiodoo_datasets.generators.conversation.pipeline import ConversationPipeline
 
 
-def test_pipeline_generate():
+def test_pipeline_generate() -> None:
     """Test complete pipeline execution."""
     with TemporaryDirectory() as tmp_dir:
         tmp_path = Path(tmp_dir)

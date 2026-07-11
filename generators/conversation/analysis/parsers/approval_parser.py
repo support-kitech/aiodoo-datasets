@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.conversation.domain.reference import Reference
 
 
 @ParserRegistry.register("approval_protocol")
-class ApprovalParser(BaseParser):
+class ApprovalParser(BaseParser):  # type: ignore[misc]
     """Parses Approval protocols."""
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:

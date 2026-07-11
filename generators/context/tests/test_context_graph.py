@@ -11,7 +11,7 @@ from aiodoo_datasets.generators.context.analysis.graph import (
 
 
 class TestContextNode(unittest.TestCase):
-    def test_node_creation_and_deterministic_id(self):
+    def test_node_creation_and_deterministic_id(self) -> None:
         node1 = ContextNode(
             name="sale.order",
             module="sale",
@@ -48,7 +48,7 @@ class TestContextNode(unittest.TestCase):
         self.assertNotEqual(node1, node3)
         self.assertEqual(hash(node1), hash(node2))
 
-    def test_node_serialization(self):
+    def test_node_serialization(self) -> None:
         node = ContextNode(
             name="sale.order",
             module="sale",
@@ -68,7 +68,7 @@ class TestContextNode(unittest.TestCase):
 
 
 class TestContextEdge(unittest.TestCase):
-    def test_edge_creation_and_deterministic_id(self):
+    def test_edge_creation_and_deterministic_id(self) -> None:
         edge1 = ContextEdge(
             source_id="id1", target_id="id2", relationship_type=RelationshipType.CONTAINS
         )
@@ -86,7 +86,7 @@ class TestContextEdge(unittest.TestCase):
         self.assertEqual(edge1, edge2)
         self.assertNotEqual(edge1, edge3)
 
-    def test_edge_serialization(self):
+    def test_edge_serialization(self) -> None:
         edge = ContextEdge(
             source_id="id1",
             target_id="id2",
@@ -103,7 +103,7 @@ class TestContextEdge(unittest.TestCase):
 
 
 class TestContextGraph(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.graph = ContextGraph()
         self.node1 = ContextNode(
             name="node1",
@@ -127,7 +127,7 @@ class TestContextGraph(unittest.TestCase):
             relationship_type=RelationshipType.CONTAINS,
         )
 
-    def test_graph_add_and_retrieve(self):
+    def test_graph_add_and_retrieve(self) -> None:
         self.graph.add_node(self.node1)
         self.graph.add_node(self.node2)
         self.graph.add_edge(self.edge1)
@@ -157,7 +157,7 @@ class TestContextGraph(unittest.TestCase):
         self.assertEqual(len(neighbors_n2), 1)
         self.assertEqual(neighbors_n2[0], self.edge1)
 
-    def test_duplicate_prevention(self):
+    def test_duplicate_prevention(self) -> None:
         self.graph.add_node(self.node1)
         with self.assertRaises(ValueError):
             self.graph.add_node(self.node1)
@@ -167,12 +167,12 @@ class TestContextGraph(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.graph.add_edge(self.edge1)
 
-    def test_missing_node_edge_prevention(self):
+    def test_missing_node_edge_prevention(self) -> None:
         # Adding edge before adding nodes
         with self.assertRaises(ValueError):
             self.graph.add_edge(self.edge1)
 
-    def test_deterministic_ordering(self):
+    def test_deterministic_ordering(self) -> None:
         # Node ordering depends on relative_path, then start_line
         n_z = ContextNode(
             name="z",
@@ -205,7 +205,7 @@ class TestContextGraph(unittest.TestCase):
         self.assertEqual(nodes[1].relative_path, "m.py")
         self.assertEqual(nodes[2].relative_path, "z.py")
 
-    def test_graph_serialization(self):
+    def test_graph_serialization(self) -> None:
         self.graph.add_node(self.node1)
         self.graph.add_node(self.node2)
         self.graph.add_edge(self.edge1)

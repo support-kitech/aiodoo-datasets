@@ -16,7 +16,7 @@ from aiodoo_datasets.generators.execution.planning.enums import StageType
 
 
 class TestProtocolMapper(unittest.TestCase):
-    def test_deterministic_mapping(self):
+    def test_deterministic_mapping(self) -> None:
         # Create Planning Domain Objects
         stage = ExecutionStage(stage_id="stg1", stage_type=StageType.EXECUTION, nodes=())
         phase = ExecutionPhase(phase_id="ph1", name="Phase 1", stages=(stage,))

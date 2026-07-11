@@ -26,7 +26,7 @@ class DummyAnalyzer3(BaseAnalyzer):
 
 
 class TestAnalyzerRegistry(unittest.TestCase):
-    def test_ordering(self):
+    def test_ordering(self) -> None:
         analyzers = AnalyzerRegistry.get_analyzers()
         priorities = [a.PRIORITY for a in analyzers]
 
@@ -37,7 +37,7 @@ class TestAnalyzerRegistry(unittest.TestCase):
         "aiodoo_datasets.generators.execution.registries.analyzer_registry._REGISTERED_ANALYZERS",
         (DummyAnalyzer1, DummyAnalyzer2),
     )
-    def test_duplicate_priority_rejected(self):
+    def test_duplicate_priority_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "Duplicate PRIORITY 10"):
             AnalyzerRegistry.get_analyzers()
 
@@ -45,7 +45,7 @@ class TestAnalyzerRegistry(unittest.TestCase):
         "aiodoo_datasets.generators.execution.registries.analyzer_registry._REGISTERED_ANALYZERS",
         (DummyAnalyzer3,),
     )
-    def test_missing_priority_rejected(self):
+    def test_missing_priority_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "DummyAnalyzer3 missing PRIORITY"):
             AnalyzerRegistry.get_analyzers()
 

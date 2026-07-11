@@ -43,7 +43,7 @@ def validate(result: _PipelineResult) -> tuple[str, ...]:
     Returns:
         A tuple of validation violation messages. Empty if successful.
     """
-    return _PipelineValidator.validate(result)
+    return _PipelineValidator.validate(result)  # type: ignore[no-any-return]
 
 
 def export(context: _ExportContext) -> _ExportResult:

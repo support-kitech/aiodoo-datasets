@@ -28,22 +28,22 @@ class ExecutionAnalyzer:
 
         # Assembly of Knowledge object
         return ExecutionKnowledge(
-            artifacts=results.get("ArtifactAnalyzer").artifacts
+            artifacts=results.get("ArtifactAnalyzer").artifacts  # type: ignore[union-attr]
             if "ArtifactAnalyzer" in results
             else (),
-            operations=results.get("OperationAnalyzer").operations
+            operations=results.get("OperationAnalyzer").operations  # type: ignore[union-attr]
             if "OperationAnalyzer" in results
             else (),
-            dependencies=results.get("DependencyAnalyzer").dependencies
+            dependencies=results.get("DependencyAnalyzer").dependencies  # type: ignore[union-attr]
             if "DependencyAnalyzer" in results
             else (),
-            constraints=results.get("ConstraintAnalyzer").constraints
+            constraints=results.get("ConstraintAnalyzer").constraints  # type: ignore[union-attr]
             if "ConstraintAnalyzer" in results
             else (),
-            verifications=results.get("VerificationAnalyzer").verifications
+            verifications=results.get("VerificationAnalyzer").verifications  # type: ignore[union-attr]
             if "VerificationAnalyzer" in results
             else (),
-            rollbacks=results.get("RollbackAnalyzer").rollbacks
+            rollbacks=results.get("RollbackAnalyzer").rollbacks  # type: ignore[union-attr]
             if "RollbackAnalyzer" in results
             else (),
         )

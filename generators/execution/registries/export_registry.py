@@ -3,7 +3,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class ExportRegistry(BaseRegistry):
+class ExportRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Static registry for Writers, Export Validators, and Export Hooks.
     Inherits from BaseRegistry. Exposes validate() and snapshot().

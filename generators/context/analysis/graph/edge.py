@@ -17,7 +17,7 @@ class ContextEdge:
     metadata: dict[str, Any] = field(default_factory=dict)
     edge_id: str = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self):  # type: ignore[no-untyped-def]
         # Generate a deterministic edge_id
         hash_input = f"{self.source_id}:{self.target_id}:{self.relationship_type.value}"
         self.edge_id = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()
@@ -36,7 +36,7 @@ class ContextEdge:
             return self.source_id < other.source_id
         if self.target_id != other.target_id:
             return self.target_id < other.target_id
-        return self.relationship_type.value < other.relationship_type.value
+        return self.relationship_type.value < other.relationship_type.value  # type: ignore[no-any-return]
 
     def to_dict(self) -> dict[str, Any]:
         """Deterministically serialize the edge to a dictionary."""

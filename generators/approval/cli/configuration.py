@@ -19,7 +19,7 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
 
     # In a real scenario, this would dynamically parse the protocols from input paths
     # For now, we initialize an empty context to satisfy the pipeline
-    input_protocols = {}
+    input_protocols = {}  # type: ignore[var-annotated]
 
     metadata = ReviewMetadata(
         generator_version="1.0.0",

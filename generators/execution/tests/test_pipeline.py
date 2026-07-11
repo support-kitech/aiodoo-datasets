@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.execution.integration.pipeline_statistics import
 
 
 class TestIntegrationPipeline(unittest.TestCase):
-    def test_pipeline_execution(self):
+    def test_pipeline_execution(self) -> None:
         context = PipelineContext(
             generator_config=GeneratorConfig(),
             export_config=ExportConfig(output_directory=Path("/tmp")),

@@ -19,7 +19,7 @@ from aiodoo_datasets.generators.context.protocol.enums import (
 
 
 class TestContextStatistics(unittest.TestCase):
-    def test_statistics_accumulation(self):
+    def test_statistics_accumulation(self) -> None:
         stats = ContextStatistics()
 
         query = ProtocolQuery(

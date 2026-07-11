@@ -5,13 +5,13 @@ from aiodoo_datasets.generators.execution.cli.configuration import build_pipelin
 
 
 class TestCLI(unittest.TestCase):
-    def test_parse_args(self):
+    def test_parse_args(self) -> None:
         args = parse_args(["--source-dir", "/tmp/src", "--output-dir", "/tmp/out", "--fail-fast"])
         self.assertEqual(args.source_dir, Path("/tmp/src"))
         self.assertEqual(args.output_dir, Path("/tmp/out"))
         self.assertTrue(args.fail_fast)
 
-    def test_build_pipeline_context(self):
+    def test_build_pipeline_context(self) -> None:
         args = parse_args(["--source-dir", "/tmp/src", "--output-dir", "/tmp/out"])
         ctx = build_pipeline_context(args)
 

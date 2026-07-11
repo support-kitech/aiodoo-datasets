@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType, Re
 class ContextGraph:
     """A deterministic, directed engineering graph representing Odoo modules."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._nodes: dict[str, ContextNode] = {}
         self._edges: dict[str, ContextEdge] = {}
 

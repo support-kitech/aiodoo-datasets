@@ -5,10 +5,10 @@ from aiodoo_datasets.generators.common.statistics.base_statistics import BaseSta
 from aiodoo_datasets.generators.planner.validation.schema import PlannerDatasetRecord
 
 
-class PlannerStatistics(BaseStatistics):
+class PlannerStatistics(BaseStatistics):  # type: ignore[misc]
     """Aggregates generation metrics without holding the dataset in memory."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.total_tasks = 0
         self.total_dependencies = 0

@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.planning.builders.stage_builder import
 
 
 class TestPlanningRegistry(unittest.TestCase):
-    def test_registry_validation(self):
+    def test_registry_validation(self) -> None:
         registry = PlanningRegistry()
         registry.register(StageBuilder())
 

@@ -16,7 +16,7 @@ from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
 
 
 class TestApprovalStatistics(unittest.TestCase):
-    def test_compile_statistics(self):
+    def test_compile_statistics(self) -> None:
         metadata = ReviewMetadata(
             generator_version="1.0.0",
             protocol_version="1.0",

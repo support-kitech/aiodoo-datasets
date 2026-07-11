@@ -3,7 +3,7 @@ from aiodoo_datasets.generators.execution.protocol.protocol_statistics import Pr
 
 
 class TestProtocolStatistics(unittest.TestCase):
-    def test_statistics(self):
+    def test_statistics(self) -> None:
         stats = ProtocolStatistics()
         self.assertEqual(stats.mapped_plans, 0)
 

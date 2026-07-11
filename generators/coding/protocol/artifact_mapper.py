@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.coding.validation.schema import GeneratedArtifac
 
 
 def map_to_artifact(
-    raw_data: dict, dependencies: list[str], module_version: str, module_name: str
+    raw_data: dict, dependencies: list[str], module_version: str, module_name: str  # type: ignore[type-arg]
 ) -> GeneratedArtifact:
     """Translates raw file data into a strictly typed GeneratedArtifact with deterministic ID."""
 

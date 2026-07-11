@@ -18,7 +18,7 @@ class DummyWriter(BaseWriter):
 
 
 class TestAtomicExport(unittest.TestCase):
-    def test_atomic_write(self):
+    def test_atomic_write(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             target_path = Path(temp_dir) / "test.txt"
 

@@ -10,10 +10,10 @@ class ParserRegistry:
     _parsers: Dict[str, Type[BaseParser]] = {}
 
     @classmethod
-    def register(cls, parser_key: str):
+    def register(cls, parser_key: str):  # type: ignore[no-untyped-def]
         """Decorator to register a parser."""
 
-        def decorator(parser_class: Type[BaseParser]):
+        def decorator(parser_class: Type[BaseParser]):  # type: ignore[no-untyped-def]
             cls._parsers[parser_key] = parser_class
             return parser_class
 

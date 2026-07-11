@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.verification_build_re
 
 
 class TestVerificationBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = VerificationBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.artifact_build_result
 
 
 class TestArtifactBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = ArtifactBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

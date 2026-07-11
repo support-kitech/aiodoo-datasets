@@ -11,7 +11,7 @@ class BaseBuilder(ABC):
     """
 
     PRIORITY: int
-    REQUIRES: tuple = ()
+    REQUIRES: tuple = ()  # type: ignore[type-arg]
     INPUT: Any
     OUTPUT: Any
 

@@ -24,7 +24,7 @@ class DummyBuilderB(BaseBuilder):
 
 
 class TestBuilderRegistry(unittest.TestCase):
-    def test_valid_registration(self):
+    def test_valid_registration(self) -> None:
         reg = BuilderRegistry()
         reg.register(DummyBuilderB())
         reg.register(DummyBuilderA())

@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class MockModuleScanner:
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         self.modules = [
             OdooModule(
                 name="mock_module",
@@ -61,7 +61,7 @@ class TestEndToEnd(unittest.TestCase):
     @patch("aiodoo_datasets.generators.context.pipeline.ModuleScanner", MockModuleScanner)
     @patch("aiodoo_datasets.generators.context.pipeline.OdooASTParser", MockASTParser)
     @patch("aiodoo_datasets.generators.context.pipeline.OdooXMLParser", MockXMLParser)
-    def test_end_to_end_determinism(self):
+    def test_end_to_end_determinism(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             # Run 1
             pipeline1 = ContextPipeline(config_path="fake.yaml", output_dir=tempdir, workers=1)

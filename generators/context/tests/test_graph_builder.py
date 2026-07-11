@@ -54,7 +54,7 @@ class MockMissingNodeExtractor(BaseRelationshipExtractor):
 
 
 class TestGraphBuilder(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         # Disable logging for the duration of the tests to keep console clean
         logging.getLogger("aiodoo_datasets.generators.context.analysis.graph_builder").setLevel(
             logging.CRITICAL
@@ -71,7 +71,7 @@ class TestGraphBuilder(unittest.TestCase):
         self.graph.add_node(self.node2)
         self.knowledge = ContextKnowledge(module_name="test_module")
 
-    def test_registration_order(self):
+    def test_registration_order(self) -> None:
         builder = GraphBuilder()
         # Ensure exact alphabetical determinism
         extractor_names = [e.__class__.__name__ for e in builder.extractors]
@@ -84,7 +84,7 @@ class TestGraphBuilder(unittest.TestCase):
         ]
         self.assertEqual(extractor_names, expected)
 
-    def test_fault_tolerance(self):
+    def test_fault_tolerance(self) -> None:
         builder = GraphBuilder()
         # Inject our mock crashing extractor
         builder.extractors.append(MockCrashingExtractor())
@@ -96,7 +96,7 @@ class TestGraphBuilder(unittest.TestCase):
         # The success extractor should still have successfully added 1 edge
         self.assertEqual(self.graph.edge_count(), 1)
 
-    def test_invalid_node_rejection(self):
+    def test_invalid_node_rejection(self) -> None:
         builder = GraphBuilder()
         builder.extractors = [MockMissingNodeExtractor()]
 
@@ -104,7 +104,7 @@ class TestGraphBuilder(unittest.TestCase):
         builder.build_relationships(self.graph, self.knowledge)
         self.assertEqual(self.graph.edge_count(), 0)
 
-    def test_duplicate_prevention_and_determinism(self):
+    def test_duplicate_prevention_and_determinism(self) -> None:
         builder = GraphBuilder()
         # Inject the success extractor multiple times to simulate duplicate edge proposals
         builder.extractors = [MockSuccessExtractor(), MockSuccessExtractor()]

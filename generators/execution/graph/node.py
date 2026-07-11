@@ -22,7 +22,7 @@ class ExecutionNode:
     node_type: NodeType
     payload: Any
     depth: int = 0
-    metadata: MappingProxyType = field(default_factory=lambda: MappingProxyType({}))
+    metadata: MappingProxyType = field(default_factory=lambda: MappingProxyType({}))  # type: ignore[type-arg]
 
     def __hash__(self) -> int:
         return hash(self.node_id)

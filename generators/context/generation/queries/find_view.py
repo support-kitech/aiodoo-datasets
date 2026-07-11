@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.generation.queries.base import BaseConte
 from types import MappingProxyType
 
 
-class FindViewQuery(BaseContextQuery):
+class FindViewQuery(BaseContextQuery):  # type: ignore[misc]
     """
     Generates queries asking which view displays a given element (like a field or model).
 

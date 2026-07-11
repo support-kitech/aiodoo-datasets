@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.repair.analysis.rules.base import (
 from aiodoo_datasets.generators.repair.validation.schema import RepairSeverity, ArtifactType
 
 
-class ApiMultiRule(BaseRepairRule):
+class ApiMultiRule(BaseRepairRule):  # type: ignore[misc]
     rule_id = "RP002"
     title = "Deprecated api.multi"
     description = "Detects deprecated @api.multi decorators in Python files."
@@ -20,7 +20,7 @@ class ApiMultiRule(BaseRepairRule):
     target_artifacts = [ArtifactType.PYTHON]
 
     def detect(self, context: AnalyzeContext) -> list[RepairOpportunity]:
-        opportunities = []
+        opportunities = []  # type: ignore[var-annotated]
         if not context.tree:
             return opportunities
 

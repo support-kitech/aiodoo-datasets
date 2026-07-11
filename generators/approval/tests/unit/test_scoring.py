@@ -12,13 +12,13 @@ from aiodoo_datasets.generators.approval.enums import (
 
 
 class TestDecisionScorer(unittest.TestCase):
-    def test_evaluate_decision_approved(self):
+    def test_evaluate_decision_approved(self) -> None:
         findings = []
         decision, confidence, reasoning = DecisionScorer.evaluate_decision(findings)
         self.assertEqual(decision, DecisionEnum.APPROVED)
         self.assertEqual(confidence, ConfidenceLevel.MEDIUM)
 
-    def test_evaluate_decision_rejected(self):
+    def test_evaluate_decision_rejected(self) -> None:
         finding = Finding(
             finding_id="f1",
             rule_id="SEC-001",
@@ -31,7 +31,7 @@ class TestDecisionScorer(unittest.TestCase):
         self.assertEqual(decision, DecisionEnum.REJECTED)
         self.assertEqual(confidence, ConfidenceLevel.HIGH)
 
-    def test_evaluate_decision_changes_requested(self):
+    def test_evaluate_decision_changes_requested(self) -> None:
         finding = Finding(
             finding_id="f2",
             rule_id="STYLE-001",

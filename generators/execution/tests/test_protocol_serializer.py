@@ -12,7 +12,7 @@ from aiodoo_datasets.generators.execution.planning.planning_result import Planni
 
 
 class TestProtocolSerializer(unittest.TestCase):
-    def test_deterministic_serialization(self):
+    def test_deterministic_serialization(self) -> None:
         metadata = MetadataProtocol(
             protocol_version="1.0.0",
             schema_version="1.0",

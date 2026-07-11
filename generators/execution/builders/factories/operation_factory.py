@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.domain.execution_operation import Exec
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class OperationFactory(BaseFactory):
+class OperationFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = OperationKnowledge
     TARGET = ExecutionOperation
 

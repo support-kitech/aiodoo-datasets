@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.execution.domain.execution_step import Execution
 
 
 class TestOrdering(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.artifact = PythonArtifact(
             module="sale",
             relative_path="models/sale.py",
@@ -17,7 +17,7 @@ class TestOrdering(unittest.TestCase):
             artifact_type=PythonArtifactType.MODEL,
         )
 
-    def test_operation_ordering(self):
+    def test_operation_ordering(self) -> None:
         op_a = ExecutionOperation(
             operation_id="a_123", action=OperationAction.CREATE, target=self.artifact
         )
@@ -31,7 +31,7 @@ class TestOrdering(unittest.TestCase):
         ops = [op_b, op_a]
         self.assertEqual(sorted(ops), [op_a, op_b])
 
-    def test_step_ordering(self):
+    def test_step_ordering(self) -> None:
         op = ExecutionOperation(
             operation_id="op_1", action=OperationAction.CREATE, target=self.artifact
         )

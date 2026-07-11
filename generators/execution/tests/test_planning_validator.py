@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.planning.domain.execution_schedule imp
 
 
 class TestPlanningValidator(unittest.TestCase):
-    def test_validation(self):
+    def test_validation(self) -> None:
         plan = PlannedExecution(plan_id="p1", graph_id="g1", schedules=())
         violations = PlanningValidator.validate(plan)
         self.assertTrue(len(violations) > 0)

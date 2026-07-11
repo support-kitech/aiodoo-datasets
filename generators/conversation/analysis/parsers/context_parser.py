@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.conversation.domain.reference import Reference
 
 
 @ParserRegistry.register("context_protocol")
-class ContextParser(BaseParser):
+class ContextParser(BaseParser):  # type: ignore[misc]
     """Parses Context protocols."""
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:

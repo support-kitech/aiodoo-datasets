@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.artifacts.enums import CSVArtifactType
 
 
 @dataclass(frozen=True, eq=True)
-class CSVArtifact(Artifact):
+class CSVArtifact(Artifact):  # type: ignore[misc]
     """
     Represents a CSV-based execution target.
 

@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.common.discovery.xml_parser import XMLKnowledge
 
 
 class TestAnalysisPipeline(unittest.TestCase):
-    def test_pipeline_execution(self):
+    def test_pipeline_execution(self) -> None:
         analyzer = ExecutionAnalyzer()
         context = AnalysisContext(
             module=OdooModule(

@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.generation.queries.base import BaseConte
 from types import MappingProxyType
 
 
-class FindActionQuery(BaseContextQuery):
+class FindActionQuery(BaseContextQuery):  # type: ignore[misc]
     """
     Generates queries asking which action opens a target (like a view or model).
 

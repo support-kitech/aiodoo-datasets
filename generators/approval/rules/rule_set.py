@@ -12,7 +12,7 @@ class RuleSet:
 
     rules: Tuple[BaseRule, ...]
 
-    def __post_init__(self):
+    def __post_init__(self):  # type: ignore[no-untyped-def]
         """Ensure uniqueness of RULE_ID and strict ordering by PRIORITY."""
         rule_ids = set()
         last_priority = -1

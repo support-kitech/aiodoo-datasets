@@ -34,7 +34,7 @@ class GraphBuilder:
     - Provides fault tolerance if an extractor fails.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Register extractors statically and ensure deterministic alphabetical sorting.
         self.extractors = sorted(
             [extractor_cls() for extractor_cls in REGISTERED_RELATIONSHIP_EXTRACTORS],

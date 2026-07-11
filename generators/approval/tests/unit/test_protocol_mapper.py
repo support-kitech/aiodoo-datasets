@@ -18,7 +18,7 @@ from aiodoo_datasets.generators.approval.protocol.mapper import ProtocolMapper
 
 
 class TestProtocolMapper(unittest.TestCase):
-    def test_map_review_to_protocol(self):
+    def test_map_review_to_protocol(self) -> None:
         evidence = Evidence(
             evidence_id="e1",
             source_generator=SourceGenerator.CODING,

@@ -54,9 +54,9 @@ class ExecutionStep:
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, ExecutionStep):
             return NotImplemented
-        return self.step_id == other.step_id
+        return self.step_id == other.step_id  # type: ignore[no-any-return]
 
     def __lt__(self, other: "ExecutionStep") -> bool:
         if not isinstance(other, ExecutionStep):
             return NotImplemented
-        return self.step_id < other.step_id
+        return self.step_id < other.step_id  # type: ignore[no-any-return]

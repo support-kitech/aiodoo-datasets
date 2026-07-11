@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.evaluation.analysis.parsers.base_parser import B
 from aiodoo_datasets.generators.evaluation.registries.parser_registry import ParserRegistry
 
 
-class ApprovalParser(BaseParser):
+class ApprovalParser(BaseParser):  # type: ignore[misc]
     """Extracts deterministic evidence from Approval protocol objects."""
 
     def parse(self, protocol_object: Any) -> Dict[str, Any]:

@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.analysis.results.verification_result i
 )
 
 
-class VerificationAnalyzer(BaseAnalyzer):
+class VerificationAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Defines testing commands asserting operation success."""
 
     PRIORITY = 50

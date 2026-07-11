@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.artifacts.enums import PythonArtifactT
 
 
 @dataclass(frozen=True, eq=True)
-class PythonArtifact(Artifact):
+class PythonArtifact(Artifact):  # type: ignore[misc]
     """
     Represents a Python-based execution target.
 

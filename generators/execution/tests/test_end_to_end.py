@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.cli.commands import run_pipeline
 
 
 class TestEndToEnd(unittest.TestCase):
-    def test_complete_execution(self):
+    def test_complete_execution(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             src_dir = Path(temp_dir) / "src"
             out_dir = Path(temp_dir) / "out"

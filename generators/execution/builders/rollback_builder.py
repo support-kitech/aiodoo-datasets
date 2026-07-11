@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.execution.domain.execution_rollback import Execu
 from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
 
 
-class RollbackBuilder(BaseBuilder):
+class RollbackBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 60
     REQUIRES = (OperationBuilder,)
     INPUT = RollbackKnowledge

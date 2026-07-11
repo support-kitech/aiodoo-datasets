@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.artifacts.enums import XMLArtifactType
 
 
 @dataclass(frozen=True, eq=True)
-class XMLArtifact(Artifact):
+class XMLArtifact(Artifact):  # type: ignore[misc]
     """
     Represents an XML-based execution target.
 

@@ -8,11 +8,11 @@ from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import
 
 
 @ParserRegistry.register("planner_data")
-class PlannerParser(BaseParser):
+class PlannerParser(BaseParser):  # type: ignore[misc]
     """Parses Planner protocol data to extract evidence."""
 
     def parse(self, data: Dict[str, Any]) -> List[Evidence]:
-        evidence_list = []
+        evidence_list = []  # type: ignore[var-annotated]
         if not data:
             return evidence_list
 

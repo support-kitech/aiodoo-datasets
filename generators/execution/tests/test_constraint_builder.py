@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.constraint_build_resu
 
 
 class TestConstraintBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = ConstraintBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

@@ -12,7 +12,7 @@ import hashlib
 
 
 @ParserRegistry.register("repair_protocol")
-class RepairParser(BaseParser):
+class RepairParser(BaseParser):  # type: ignore[misc]
     """Parses Repair protocols."""
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:

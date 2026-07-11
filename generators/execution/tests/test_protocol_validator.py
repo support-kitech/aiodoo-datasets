@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.execution.protocol.domain.schedule_protocol impo
 
 
 class TestProtocolValidator(unittest.TestCase):
-    def test_validation(self):
+    def test_validation(self) -> None:
         metadata = MetadataProtocol(
             protocol_version="1.0.0", schema_version="1.0", compatibility_version="1.0.0"
         )

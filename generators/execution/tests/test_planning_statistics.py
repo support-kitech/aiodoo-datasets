@@ -3,7 +3,7 @@ from aiodoo_datasets.generators.execution.planning.planning_statistics import Pl
 
 
 class TestPlanningStatistics(unittest.TestCase):
-    def test_statistics(self):
+    def test_statistics(self) -> None:
         stats = PlanningStatistics()
         self.assertEqual(stats.stage_count, 0)
 

@@ -13,7 +13,7 @@ from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
 from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
 
 
-class DependencyRule(BaseRankingRule):
+class DependencyRule(BaseRankingRule):  # type: ignore[misc]
     """
     Ranks manifest dependencies.
 

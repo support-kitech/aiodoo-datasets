@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.metadata_build_result
 from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
 
 
-class MetadataBuilder(BaseBuilder):
+class MetadataBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 70
     REQUIRES = (OperationBuilder,)
     INPUT = dict

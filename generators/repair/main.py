@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.common.cli.arguments import build_parser
 from aiodoo_datasets.generators.repair.pipeline import RepairPipeline
 
 
-def main():
+def main():  # type: ignore[no-untyped-def]
     parser = build_parser(description="AIODOO Repair Dataset Generator")
     args = parser.parse_args()
 
@@ -22,4 +22,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  # type: ignore[no-untyped-call]

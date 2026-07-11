@@ -34,4 +34,4 @@ class ExecutionPlan:
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, ExecutionPlan):
             return NotImplemented
-        return self.plan_id == other.plan_id
+        return self.plan_id == other.plan_id  # type: ignore[no-any-return]

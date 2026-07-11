@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.conversation.domain.reference import Reference
 
 
 @ParserRegistry.register("planner_protocol")
-class PlannerParser(BaseParser):
+class PlannerParser(BaseParser):  # type: ignore[misc]
     """Parses Planner protocols."""
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:

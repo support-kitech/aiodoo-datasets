@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.domain.execution_constraint import Exe
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class ConstraintFactory(BaseFactory):
+class ConstraintFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = ConstraintKnowledge
     TARGET = ExecutionConstraint
 

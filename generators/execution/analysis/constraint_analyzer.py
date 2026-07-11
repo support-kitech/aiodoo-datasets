@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.analysis.context import AnalysisContex
 from aiodoo_datasets.generators.execution.analysis.results.constraint_result import ConstraintResult
 
 
-class ConstraintAnalyzer(BaseAnalyzer):
+class ConstraintAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Discovers environmental constraints (e.g. Enterprise only) for operations."""
 
     PRIORITY = 40

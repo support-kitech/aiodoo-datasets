@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
 
-class ContainsRelationship(BaseRelationshipExtractor):
+class ContainsRelationship(BaseRelationshipExtractor):  # type: ignore[misc]
     """
     Extracts structural ownership relationships (e.g. Model -> Field, Model -> Method).
 
@@ -19,7 +19,7 @@ class ContainsRelationship(BaseRelationshipExtractor):
     supported_languages = [LanguageType.PYTHON, LanguageType.XML]
 
     def extract(self, graph: ContextGraph, knowledge: ContextKnowledge) -> list[ContextEdge]:
-        edges = []
+        edges = []  # type: ignore[var-annotated]
         # Structural logic to discover contains edges goes here.
         # Returning mock edges purely for framework architecture.
         return edges

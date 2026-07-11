@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.analysis.context import AnalysisContex
 from aiodoo_datasets.generators.execution.analysis.results.artifact_result import ArtifactResult
 
 
-class ArtifactAnalyzer(BaseAnalyzer):
+class ArtifactAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Identifies concrete Odoo engineering artifacts from raw structural knowledge."""
 
     PRIORITY = 10

@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.approval.domain.source_generator import SourceGe
 
 
 class TestEvidenceCollector(unittest.TestCase):
-    def test_collect_evidence(self):
+    def test_collect_evidence(self) -> None:
         planner_data = {"tasks": [{"id": "t1", "description": "task 1"}]}
         coding_data = {"files": [{"id": "f1", "path": "models.py", "content": "class Test:"}]}
         execution_data = {"test_results": [{"id": "tr1", "name": "test_1", "status": "passed"}]}

@@ -5,12 +5,12 @@ from aiodoo_datasets.generators.execution.builders.exceptions import FactoryErro
 
 
 class TestMetadataFactory(unittest.TestCase):
-    def test_validation(self):
+    def test_validation(self) -> None:
         factory = MetadataFactory()
         with self.assertRaises(FactoryError):
             factory.create(None)
 
-    def test_creation(self):
+    def test_creation(self) -> None:
         factory = MetadataFactory()
         result = factory.create({"a": 1})
         self.assertIsInstance(result, MappingProxyType)

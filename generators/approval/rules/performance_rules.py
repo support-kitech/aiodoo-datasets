@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
 from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 
 
-class NPlusOneQueryRule(BaseRule):
+class NPlusOneQueryRule(BaseRule):  # type: ignore[misc]
     """Detects ORM queries inside loops."""
 
     RULE_ID = "PERF-001"

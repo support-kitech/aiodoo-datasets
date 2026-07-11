@@ -77,15 +77,15 @@ class DependencyEdge:
 
 
 class DependencyGraph:
-    def __init__(self):
+    def __init__(self) -> None:
         self.nodes: dict[str, DependencyNode] = {}
         self.edges: list[DependencyEdge] = []
 
-    def add_node(self, node_id: str, path: str):
+    def add_node(self, node_id: str, path: str):  # type: ignore[no-untyped-def]
         if node_id not in self.nodes:
             self.nodes[node_id] = DependencyNode(id=node_id, path=path)
 
-    def add_edge(self, source_id: str, target_id: str, reason: str):
+    def add_edge(self, source_id: str, target_id: str, reason: str):  # type: ignore[no-untyped-def]
         self.edges.append(DependencyEdge(source_id=source_id, target_id=target_id, reason=reason))
 
     def get_dependencies_for(self, source_id: str) -> list[str]:

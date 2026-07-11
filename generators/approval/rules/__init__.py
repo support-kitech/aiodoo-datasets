@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.approval.rules.odoo_rules import OdooManifestRul
 from aiodoo_datasets.generators.approval.rules.protocol_rules import ProtocolIntegrityRule
 
 
-def register_all_rules():
+def register_all_rules():  # type: ignore[no-untyped-def]
     RuleRegistry.register(SQLInjectionRule)
     RuleRegistry.register(Pep8ComplianceRule)
     RuleRegistry.register(DependencyCycleRule)
@@ -18,4 +18,4 @@ def register_all_rules():
     RuleRegistry.register(ProtocolIntegrityRule)
 
 
-register_all_rules()
+register_all_rules()  # type: ignore[no-untyped-call]

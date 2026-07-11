@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
 from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 
 
-class OdooManifestRule(BaseRule):
+class OdooManifestRule(BaseRule):  # type: ignore[misc]
     """Validates the presence and format of __manifest__.py."""
 
     RULE_ID = "ODOO-001"

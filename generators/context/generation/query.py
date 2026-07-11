@@ -20,7 +20,7 @@ class Query:
     metadata: MappingProxyType[str, Any] = field(default_factory=lambda: MappingProxyType({}))
     query_id: str = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self):  # type: ignore[no-untyped-def]
         # Generate deterministic query_id from immutable properties
         hash_input = (
             f"{self.query_type.value}:{self.intent.value}:{self.target_symbol}:{self.target_node}"
@@ -39,7 +39,7 @@ class Query:
     def __lt__(self, other: "Query") -> bool:
         # Deterministic sorting: query_type -> target_symbol -> query_id
         if self.query_type.value != other.query_type.value:
-            return self.query_type.value < other.query_type.value
+            return self.query_type.value < other.query_type.value  # type: ignore[no-any-return]
         if self.target_symbol != other.target_symbol:
             return self.target_symbol < other.target_symbol
         return self.query_id < other.query_id

@@ -18,7 +18,7 @@ from aiodoo_datasets.generators.approval.enums import (
 class TestDomainModels(unittest.TestCase):
     """Test immutability and initialization of domain models."""
 
-    def test_evidence_immutability(self):
+    def test_evidence_immutability(self) -> None:
         from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
 
         evidence = Evidence(
@@ -27,7 +27,7 @@ class TestDomainModels(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             evidence.description = "new description"
 
-    def test_finding_immutability(self):
+    def test_finding_immutability(self) -> None:
         from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
 
         evidence = Evidence(
@@ -46,7 +46,7 @@ class TestDomainModels(unittest.TestCase):
 
         self.assertEqual(finding.evidence[0].evidence_id, "e1")
 
-    def test_decision_immutability(self):
+    def test_decision_immutability(self) -> None:
         decision = Decision(
             decision_id="d1",
             status=DecisionEnum.APPROVED,
@@ -56,7 +56,7 @@ class TestDomainModels(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             decision.reasoning = "Bad"
 
-    def test_metadata_immutability(self):
+    def test_metadata_immutability(self) -> None:
         metadata = ReviewMetadata(
             generator_version="1.0",
             protocol_version="1.0",
@@ -66,7 +66,7 @@ class TestDomainModels(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             metadata.complexity_score = 10
 
-    def test_review_immutability(self):
+    def test_review_immutability(self) -> None:
         metadata = ReviewMetadata(
             generator_version="1.0",
             protocol_version="1.0",

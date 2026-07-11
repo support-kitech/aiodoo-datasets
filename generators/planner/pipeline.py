@@ -26,7 +26,7 @@ from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipeli
 logger = logging.getLogger(__name__)
 
 
-def process_module(module: OdooModule) -> list[dict]:
+def process_module(module: OdooModule) -> list[dict]:  # type: ignore[type-arg]
     """Worker function to process a single module independently."""
     try:
         ast_parser = OdooASTParser()
@@ -59,7 +59,7 @@ def process_module(module: OdooModule) -> list[dict]:
         return []
 
 
-class PlannerPipeline(SharedPipelineOrchestrator):
+class PlannerPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
     """Orchestrates the deterministic generation of Protocol V1 JSONL."""
 
     def __init__(
@@ -69,7 +69,7 @@ class PlannerPipeline(SharedPipelineOrchestrator):
         workers: int = 4,
         resume: bool = False,
         reset_checkpoint: bool = False,
-    ):
+    ) -> None:
         scanner = ModuleScanner(config_path=sources_yaml, cache_dir=output_dir / "cache")
         writer = DatasetWriter(
             output_dir=output_dir,

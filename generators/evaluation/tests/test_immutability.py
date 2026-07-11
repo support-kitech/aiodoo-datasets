@@ -11,7 +11,7 @@ from aiodoo_datasets.generators.evaluation.analysis.context import AnalysisConte
 class TestImmutability(unittest.TestCase):
     """Verifies data structure immutability across Analysis and Statistics layers."""
 
-    def test_analysis_context_immutability(self):
+    def test_analysis_context_immutability(self) -> None:
         """Ensure AnalysisContext source_protocols is a MappingProxyType."""
         ctx = AnalysisContext(
             source_protocols=MappingProxyType({"test": "data"}), evaluation_type="test"
@@ -20,7 +20,7 @@ class TestImmutability(unittest.TestCase):
         with self.assertRaises(TypeError):
             ctx.source_protocols["hack"] = "mutated"
 
-    def test_statistics_immutability(self):
+    def test_statistics_immutability(self) -> None:
         """Ensure EvaluationStatistics outputs are strictly immutable."""
         # Empty dataset for testing
         stats = EvaluationStatistics.compute(())

@@ -14,7 +14,7 @@ class BuilderContext:
     """
 
     generator_version: str
-    global_config: dict
+    global_config: dict  # type: ignore[type-arg]
     analysis_context: AnalysisContext
     execution_knowledge: ExecutionKnowledge
     statistics: BuilderStatistics

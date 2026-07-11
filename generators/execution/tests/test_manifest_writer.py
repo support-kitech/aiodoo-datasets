@@ -14,7 +14,7 @@ from aiodoo_datasets.generators.execution.protocol.domain.metadata_protocol impo
 
 
 class TestManifestWriter(unittest.TestCase):
-    def test_generate_content(self):
+    def test_generate_content(self) -> None:
         metadata = MetadataProtocol("1.0", "1.0", "1.0", "time")
         protocol = ExecutionProtocol(plan_id="p1", graph_id="g1", metadata=metadata)
 

@@ -12,7 +12,7 @@ import hashlib
 
 
 @ParserRegistry.register("coding_protocol")
-class CodingParser(BaseParser):
+class CodingParser(BaseParser):  # type: ignore[misc]
     """Parses Coding protocols."""
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:

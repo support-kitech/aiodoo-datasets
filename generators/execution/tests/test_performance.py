@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.execution.integration.pipeline_statistics import
 
 
 class TestPerformance(unittest.TestCase):
-    def test_repeated_execution_stability(self):
+    def test_repeated_execution_stability(self) -> None:
         context = PipelineContext(
             generator_config=GeneratorConfig(),
             export_config=ExportConfig(output_directory=Path("/tmp")),

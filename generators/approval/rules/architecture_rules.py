@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
 from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 
 
-class DependencyCycleRule(BaseRule):
+class DependencyCycleRule(BaseRule):  # type: ignore[misc]
     """Detects topological cycles in execution dependencies."""
 
     RULE_ID = "ARCH-001"

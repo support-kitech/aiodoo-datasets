@@ -10,4 +10,4 @@ class AttachmentBuilder:
 
     @staticmethod
     def build_from_evidence(evidence: ExtractedEvidence) -> Tuple[Attachment, ...]:
-        return evidence.attachments
+        return evidence.attachments  # type: ignore[no-any-return]

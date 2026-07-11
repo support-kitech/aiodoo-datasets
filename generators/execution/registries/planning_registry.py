@@ -3,7 +3,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class PlanningRegistry(BaseRegistry):
+class PlanningRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Static registry for Stage Builders, Planning Strategies, and Scheduling Strategies.
     Inherits from BaseRegistry. Exposes validate() and snapshot().

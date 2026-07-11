@@ -3,7 +3,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class IntegrationRegistry(BaseRegistry):
+class IntegrationRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Static registry for Integration pipeline stages.
     Inherits from BaseRegistry. Exposes validate() and snapshot().

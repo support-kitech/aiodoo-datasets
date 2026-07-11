@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.evaluation import api
 class TestEvaluationPipeline(unittest.TestCase):
     """Verifies complete integration flow."""
 
-    def test_end_to_end_generate(self):
+    def test_end_to_end_generate(self) -> None:
         """Verify the pipeline generates a valid dataset."""
         config = {"benchmark_name": "IntegrationBench", "evaluation_type": "logic"}
 

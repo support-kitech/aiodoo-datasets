@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.domain.execution_constraint import Exe
 
 
 @dataclass(frozen=True, slots=True)
-class ConstraintBuildResult(BaseBuildResult):
+class ConstraintBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the ConstraintBuilder."""
 
     constraints: tuple[ExecutionConstraint, ...]

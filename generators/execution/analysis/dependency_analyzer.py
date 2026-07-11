@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.analysis.context import AnalysisContex
 from aiodoo_datasets.generators.execution.analysis.results.dependency_result import DependencyResult
 
 
-class DependencyAnalyzer(BaseAnalyzer):
+class DependencyAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Calculates sequential prerequisites between extracted operations."""
 
     PRIORITY = 30

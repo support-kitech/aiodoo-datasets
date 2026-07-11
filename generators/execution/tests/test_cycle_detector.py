@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.execution.graph.exceptions import CycleDetectedE
 
 
 class TestCycleDetector(unittest.TestCase):
-    def test_acyclic(self):
+    def test_acyclic(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p1")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p2")
         e = ExecutionEdge(source_id="a", target_id="b", edge_type=EdgeType.DEPENDENCY)
@@ -17,7 +17,7 @@ class TestCycleDetector(unittest.TestCase):
         result = CycleDetector.detect(graph)
         self.assertEqual(result, ())
 
-    def test_simple_cycle(self):
+    def test_simple_cycle(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p1")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p2")
         e1 = ExecutionEdge(source_id="a", target_id="b", edge_type=EdgeType.DEPENDENCY)
@@ -28,7 +28,7 @@ class TestCycleDetector(unittest.TestCase):
             CycleDetector.detect(graph)
         self.assertTrue(len(ctx.exception.cycles) > 0)
 
-    def test_self_loop(self):
+    def test_self_loop(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p1")
         e = ExecutionEdge(source_id="a", target_id="a", edge_type=EdgeType.DEPENDENCY)
         graph = ExecutionGraph(nodes=(n1,), edges=(e,))
@@ -36,7 +36,7 @@ class TestCycleDetector(unittest.TestCase):
         with self.assertRaises(CycleDetectedError):
             CycleDetector.detect(graph)
 
-    def test_complex_multi_path(self):
+    def test_complex_multi_path(self) -> None:
         nodes = tuple(ExecutionNode(node_id=c, node_type=NodeType.STEP, payload=c) for c in "abcd")
         edges = (
             ExecutionEdge(source_id="a", target_id="b", edge_type=EdgeType.DEPENDENCY),

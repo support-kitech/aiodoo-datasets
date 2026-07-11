@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.export.writers.jsonl_writer import JSO
 
 
 class TestExportRegistry(unittest.TestCase):
-    def test_registry_validation(self):
+    def test_registry_validation(self) -> None:
         registry = ExportRegistry()
         registry.register(JSONLWriter())
 

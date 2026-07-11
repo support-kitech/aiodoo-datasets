@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.generation.queries.base import BaseConte
 from types import MappingProxyType
 
 
-class FindMenuQuery(BaseContextQuery):
+class FindMenuQuery(BaseContextQuery):  # type: ignore[misc]
     """
     Generates queries asking which menu opens an action.
 

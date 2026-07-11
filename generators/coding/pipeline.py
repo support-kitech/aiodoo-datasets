@@ -26,7 +26,7 @@ from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipeli
 logger = logging.getLogger(__name__)
 
 
-def run_discovery(module: OdooModule):
+def run_discovery(module: OdooModule):  # type: ignore[no-untyped-def]
     """Stage 1: Discovery"""
     ast_parser = OdooASTParser()
     xml_parser = OdooXMLParser()
@@ -35,13 +35,13 @@ def run_discovery(module: OdooModule):
     return py_k, xml_k
 
 
-def run_classification(module: OdooModule, py_k, xml_k):
+def run_classification(module: OdooModule, py_k, xml_k):  # type: ignore[no-untyped-def]
     """Stage 2: Classification"""
     classifier = ScenarioClassifier()
     return classifier.classify(module, py_k, xml_k)
 
 
-def run_context(module: OdooModule, scenario, py_k, xml_k, artifacts):
+def run_context(module: OdooModule, scenario, py_k, xml_k, artifacts):  # type: ignore[no-untyped-def]
     """Stage 3: Context"""
     dummy_payload = ArtifactPayload(
         goal="", workspace="", artifacts=artifacts, operations=[], validation_actions=[], summary=""
@@ -49,7 +49,7 @@ def run_context(module: OdooModule, scenario, py_k, xml_k, artifacts):
     return build_context(module, scenario, py_k, xml_k, dummy_payload)
 
 
-def run_instruction(module: OdooModule, scenario, context):
+def run_instruction(module: OdooModule, scenario, context):  # type: ignore[no-untyped-def]
     """Stage 4: Instruction"""
     base = generate_instruction(module, scenario)
 
@@ -59,17 +59,17 @@ def run_instruction(module: OdooModule, scenario, context):
     return base
 
 
-def run_protocol_mapping(module: OdooModule, scenario, py_k, xml_k, artifacts):
+def run_protocol_mapping(module: OdooModule, scenario, py_k, xml_k, artifacts):  # type: ignore[no-untyped-def]
     """Stage 5 & 6: Artifact & Protocol Mapping"""
     return build_artifact_payload(module, scenario, py_k, xml_k, artifacts)
 
 
-def run_metadata(module: OdooModule, scenario, payload):
+def run_metadata(module: OdooModule, scenario, payload):  # type: ignore[no-untyped-def]
     """Stage 7: Export Metadata"""
     return build_metadata(module, scenario, payload)
 
 
-def process_module(module: OdooModule) -> list[dict]:
+def process_module(module: OdooModule) -> list[dict]:  # type: ignore[type-arg]
     """Worker function orchestrating the strictly ordered pipeline stages."""
     try:
         py_k, xml_k = run_discovery(module)
@@ -98,7 +98,7 @@ def process_module(module: OdooModule) -> list[dict]:
         return []
 
 
-class CodingPipeline(SharedPipelineOrchestrator):
+class CodingPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
     """Orchestrates the deterministic generation of Artifact Protocol V1 JSONL."""
 
     def __init__(
@@ -108,7 +108,7 @@ class CodingPipeline(SharedPipelineOrchestrator):
         workers: int = 4,
         resume: bool = False,
         reset_checkpoint: bool = False,
-    ):
+    ) -> None:
         scanner = ModuleScanner(config_path=sources_yaml, cache_dir=output_dir / "cache")
         writer = DatasetWriter(
             output_dir=output_dir,

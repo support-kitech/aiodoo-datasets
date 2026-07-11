@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.execution.domain.execution_constraint import Exe
 from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
 
 
-class ConstraintBuilder(BaseBuilder):
+class ConstraintBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 40
     REQUIRES = (OperationBuilder,)
     INPUT = ConstraintKnowledge

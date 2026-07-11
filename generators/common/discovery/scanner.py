@@ -53,7 +53,7 @@ class OdooModule:
 class ModuleScanner:
     """Scans directories for Odoo modules, supporting local caching and incremental checks."""
 
-    def __init__(self, config_path: Path, cache_dir: Path | None = None):
+    def __init__(self, config_path: Path, cache_dir: Path | None = None) -> None:
         self.config_path = config_path
         self.cache_dir = cache_dir or Path(".aiodoo_cache/discovery")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -110,7 +110,7 @@ class ModuleScanner:
         if self._cache_file.exists():
             try:
                 with open(self._cache_file, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                    return json.load(f)  # type: ignore[no-any-return]
             except Exception as exc:
                 logger.warning("Cache file corrupted, starting fresh: %s", exc)
         return {}

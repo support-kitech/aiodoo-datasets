@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.domain.execution_operation import Exec
 
 
 @dataclass(frozen=True, slots=True)
-class OperationBuildResult(BaseBuildResult):
+class OperationBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the OperationBuilder."""
 
     operations: tuple[ExecutionOperation, ...]

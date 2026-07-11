@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.execution.protocol.protocol_result import Protoc
 
 
 class TestExportValidator(unittest.TestCase):
-    def test_validation_failure(self):
+    def test_validation_failure(self) -> None:
         ctx = ExportContext(
             protocol_result=ProtocolResult(success=False),
             protocol_statistics=None,

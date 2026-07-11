@@ -1,7 +1,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class FactoryRegistry(BaseRegistry):
+class FactoryRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Validates and manages the mapping of Knowledge (SOURCE) to Domain (TARGET).
     """

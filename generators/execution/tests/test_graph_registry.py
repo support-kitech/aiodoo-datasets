@@ -11,21 +11,21 @@ class DummyB:
 
 
 class TestGraphRegistry(unittest.TestCase):
-    def test_valid_registration(self):
+    def test_valid_registration(self) -> None:
         reg = GraphRegistry()
         reg.register(DummyA())
         reg.register(DummyB())
         reg.validate()  # Should not raise
         self.assertEqual(len(reg.items()), 2)
 
-    def test_duplicate_rejected(self):
+    def test_duplicate_rejected(self) -> None:
         reg = GraphRegistry()
         reg.register(DummyA())
         reg.register(DummyA())
         with self.assertRaisesRegex(ValueError, "Duplicate"):
             reg.validate()
 
-    def test_snapshot_immutable(self):
+    def test_snapshot_immutable(self) -> None:
         reg = GraphRegistry()
         reg.register(DummyA())
         snap = reg.snapshot()

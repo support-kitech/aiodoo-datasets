@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.execution.domain.execution_dependency import Exe
 from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
 
 
-class DependencyBuilder(BaseBuilder):
+class DependencyBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 30
     REQUIRES = (OperationBuilder,)
     INPUT = DependencyKnowledge

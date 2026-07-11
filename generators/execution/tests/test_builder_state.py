@@ -3,7 +3,7 @@ from aiodoo_datasets.generators.execution.builders.builder_state import BuilderS
 
 
 class TestBuilderState(unittest.TestCase):
-    def test_state_enum(self):
+    def test_state_enum(self) -> None:
         self.assertEqual(BuilderState.PENDING.name, "PENDING")
         self.assertEqual(BuilderState.RUNNING.name, "RUNNING")
         self.assertEqual(BuilderState.COMPLETED.name, "COMPLETED")

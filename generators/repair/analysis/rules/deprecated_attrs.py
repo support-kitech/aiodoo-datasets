@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.repair.analysis.rules.base import (
 from aiodoo_datasets.generators.repair.validation.schema import RepairSeverity, ArtifactType
 
 
-class DeprecatedAttrsRule(BaseRepairRule):
+class DeprecatedAttrsRule(BaseRepairRule):  # type: ignore[misc]
     rule_id = "RP003"
     title = "Deprecated attrs"
     description = "Detects deprecated 'attrs' attributes in XML views."

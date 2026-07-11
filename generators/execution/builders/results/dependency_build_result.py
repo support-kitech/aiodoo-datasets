@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.domain.execution_dependency import Exe
 
 
 @dataclass(frozen=True, slots=True)
-class DependencyBuildResult(BaseBuildResult):
+class DependencyBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the DependencyBuilder."""
 
     dependencies: tuple[ExecutionDependency, ...]

@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.domain.execution_verification import E
 
 
 @dataclass(frozen=True, slots=True)
-class VerificationBuildResult(BaseBuildResult):
+class VerificationBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the VerificationBuilder."""
 
     verifications: tuple[ExecutionVerification, ...]

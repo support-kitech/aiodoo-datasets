@@ -7,12 +7,12 @@ from aiodoo_datasets.generators.execution.export.enums import WriterType
 from aiodoo_datasets.generators.execution.export.export_context import ExportContext
 
 
-class ManifestWriter(BaseWriter):
+class ManifestWriter(BaseWriter):  # type: ignore[misc]
     """Writes the dataset manifest file."""
 
     @property
     def writer_type(self) -> str:
-        return WriterType.MANIFEST.value
+        return WriterType.MANIFEST.value  # type: ignore[no-any-return]
 
     def generate_content(self, context: ExportContext) -> str:
         """Generate deterministic manifest content."""

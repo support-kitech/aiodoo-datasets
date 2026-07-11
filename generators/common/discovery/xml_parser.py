@@ -62,10 +62,10 @@ class XMLKnowledge:
     data_records: list[OdooDataRecordDef] = field(default_factory=list)
 
 
-class ModuleKnowledgeList(list):
+class ModuleKnowledgeList(list):  # type: ignore[type-arg]
     """Backwards compatible list that also holds a .files attribute mapping path -> knowledge."""
 
-    def __init__(self, items=None, files_dict=None):
+    def __init__(self, items=None, files_dict=None) -> None:  # type: ignore[no-untyped-def]
         super().__init__(items or [])
         self.files = files_dict or {}
 
@@ -73,9 +73,9 @@ class ModuleKnowledgeList(list):
 class OdooXMLParser:
     """Parses Odoo XML/CSV files."""
 
-    def parse_module(self, module_path: Path):
-        results = []
-        files_dict = {}
+    def parse_module(self, module_path: Path):  # type: ignore[no-untyped-def]
+        results = []  # type: ignore[var-annotated]
+        files_dict = {}  # type: ignore[var-annotated]
         if not module_path.is_dir():
             return ModuleKnowledgeList(results, files_dict)
 

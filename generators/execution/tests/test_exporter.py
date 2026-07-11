@@ -14,7 +14,7 @@ from aiodoo_datasets.generators.execution.protocol.protocol_statistics import Pr
 
 
 class TestExporter(unittest.TestCase):
-    def test_successful_export(self):
+    def test_successful_export(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             metadata = MetadataProtocol("1.0", "1.0", "1.0", "time")
             protocol = ExecutionProtocol(plan_id="test_plan", graph_id="g1", metadata=metadata)

@@ -51,7 +51,7 @@ class CycleDetector:
                             cycle_path = [neighbor, node_id]
                             p = node_id
                             while p != neighbor and parent.get(p) is not None:
-                                p = parent[p]
+                                p = parent[p]  # type: ignore[assignment]
                                 cycle_path.append(p)
                             cycles.append(tuple(reversed(cycle_path)))
                 else:

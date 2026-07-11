@@ -5,12 +5,12 @@ from aiodoo_datasets.generators.execution.export.enums import WriterType
 from aiodoo_datasets.generators.execution.export.export_context import ExportContext
 
 
-class JSONLWriter(BaseWriter):
+class JSONLWriter(BaseWriter):  # type: ignore[misc]
     """Writes the dataset payload as a JSON Lines file."""
 
     @property
     def writer_type(self) -> str:
-        return WriterType.JSONL.value
+        return WriterType.JSONL.value  # type: ignore[no-any-return]
 
     def generate_content(self, context: ExportContext) -> str:
         """

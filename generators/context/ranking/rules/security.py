@@ -13,7 +13,7 @@ from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
 from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
 
 
-class SecurityRule(BaseRankingRule):
+class SecurityRule(BaseRankingRule):  # type: ignore[misc]
     """
     Ranks security rules (ACL, Record Rules, Groups).
 

@@ -3,7 +3,7 @@ from aiodoo_datasets.generators.execution.protocol import version
 
 
 class TestProtocolVersion(unittest.TestCase):
-    def test_version_constants(self):
+    def test_version_constants(self) -> None:
         self.assertIsNotNone(version.protocol_version)
         self.assertIsNotNone(version.schema_version)
         self.assertIsNotNone(version.compatibility_version)

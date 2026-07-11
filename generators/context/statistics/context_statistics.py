@@ -7,10 +7,10 @@ from aiodoo_datasets.generators.common.statistics.base_statistics import BaseSta
 from aiodoo_datasets.generators.context.protocol.schema import ContextTask
 
 
-class ContextStatistics(BaseStatistics):
+class ContextStatistics(BaseStatistics):  # type: ignore[misc]
     """Aggregates context generation metrics."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.nodes_discovered = 0
         self.edges_discovered = 0
@@ -18,14 +18,14 @@ class ContextStatistics(BaseStatistics):
         self.ranking_results = 0
         self.relationships_extracted = 0
 
-        self.query_type_counts = defaultdict(int)
-        self.ranking_rule_counts = defaultdict(int)
+        self.query_type_counts = defaultdict(int)  # type: ignore[var-annotated]
+        self.ranking_rule_counts = defaultdict(int)  # type: ignore[var-annotated]
 
     def add_sample(self, record: ContextTask, json_str: str) -> None:
         """Processes a single validated context protocol record."""
 
         class DummyRecord:
-            def __init__(self, metadata):
+            def __init__(self, metadata) -> None:  # type: ignore[no-untyped-def]
                 self.metadata = metadata
 
         dummy = DummyRecord(record.metadata.model_dump())

@@ -12,7 +12,7 @@ class BenchmarkStatistics:
     """Computes deterministic coverage and distribution statistics."""
 
     @staticmethod
-    def compute(dataset: Tuple[EvaluationProtocol, ...]) -> MappingProxyType:
+    def compute(dataset: Tuple[EvaluationProtocol, ...]) -> MappingProxyType:  # type: ignore[type-arg]
         """Compute coverage and distributions deterministically."""
 
         coverage_by_generator: Dict[str, int] = defaultdict(int)

@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.execution.protocol.protocol_result import Protoc
 
 
 class TestJSONLWriter(unittest.TestCase):
-    def test_generate_content(self):
+    def test_generate_content(self) -> None:
         ctx = ExportContext(
             protocol_result=ProtocolResult(success=True, serialized_data='{"plan_id":"p1"}'),
             protocol_statistics=None,

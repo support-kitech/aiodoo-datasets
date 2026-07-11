@@ -20,7 +20,7 @@ from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnosti
 
 
 class TestBuildPipelineContext(unittest.TestCase):
-    def test_immutability(self):
+    def test_immutability(self) -> None:
         ac = AnalysisContext(
             module=OdooModule(
                 name="test", path="", version="17.0", edition="community", manifest={}

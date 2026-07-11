@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
 
-class ComputesRelationship(BaseRelationshipExtractor):
+class ComputesRelationship(BaseRelationshipExtractor):  # type: ignore[misc]
     """
     Extracts computation links (e.g. Field compute="_compute_foo" -> Method).
 
@@ -18,5 +18,5 @@ class ComputesRelationship(BaseRelationshipExtractor):
     supported_languages = [LanguageType.PYTHON]
 
     def extract(self, graph: ContextGraph, knowledge: ContextKnowledge) -> list[ContextEdge]:
-        edges = []
+        edges = []  # type: ignore[var-annotated]
         return edges

@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
 
-class InheritsRelationship(BaseRelationshipExtractor):
+class InheritsRelationship(BaseRelationshipExtractor):  # type: ignore[misc]
     """
     Extracts extension relationships (e.g. _inherit in Python, inherit_id in XML).
 
@@ -18,5 +18,5 @@ class InheritsRelationship(BaseRelationshipExtractor):
     supported_languages = [LanguageType.PYTHON, LanguageType.XML]
 
     def extract(self, graph: ContextGraph, knowledge: ContextKnowledge) -> list[ContextEdge]:
-        edges = []
+        edges = []  # type: ignore[var-annotated]
         return edges

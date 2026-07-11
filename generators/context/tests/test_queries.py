@@ -22,7 +22,7 @@ from aiodoo_datasets.generators.context.generation.queries import (
 
 
 class TestQueries(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.graph = ContextGraph()
         # Mock Nodes
         self.n_model = ContextNode(
@@ -100,7 +100,7 @@ class TestQueries(unittest.TestCase):
         ]:
             self.graph.add_edge(edge)
 
-    def test_find_model_query(self):
+    def test_find_model_query(self) -> None:
         plugin = FindModelQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
@@ -108,14 +108,14 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Where is model sale.order defined?")
         self.assertEqual(queries[0].target_node, self.n_model.node_id)
 
-    def test_find_field_query(self):
+    def test_find_field_query(self) -> None:
         plugin = FindFieldQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
         self.assertEqual(queries[0].query_type, QueryType.FIND_FIELD)
         self.assertEqual(queries[0].natural_language, "Where is field amount_total defined?")
 
-    def test_find_compute_query(self):
+    def test_find_compute_query(self) -> None:
         plugin = FindComputeQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
@@ -123,7 +123,7 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Where is field amount_total computed?")
         self.assertEqual(queries[0].target_node, self.n_field.node_id)
 
-    def test_find_view_query(self):
+    def test_find_view_query(self) -> None:
         plugin = FindViewQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
@@ -131,7 +131,7 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Which view displays amount_total?")
         self.assertEqual(queries[0].target_node, self.n_field.node_id)
 
-    def test_find_action_query(self):
+    def test_find_action_query(self) -> None:
         plugin = FindActionQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
@@ -139,7 +139,7 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Which action opens view_sale_order_form?")
         self.assertEqual(queries[0].target_node, self.n_view.node_id)
 
-    def test_find_menu_query(self):
+    def test_find_menu_query(self) -> None:
         plugin = FindMenuQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
@@ -147,7 +147,7 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Which menu opens action_orders?")
         self.assertEqual(queries[0].target_node, self.n_action.node_id)
 
-    def test_find_security_query(self):
+    def test_find_security_query(self) -> None:
         plugin = FindSecurityQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)
@@ -155,7 +155,7 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Which ACL protects sale.order?")
         self.assertEqual(queries[0].target_node, self.n_model.node_id)
 
-    def test_find_dependency_query(self):
+    def test_find_dependency_query(self) -> None:
         plugin = FindDependencyQuery()
         queries = plugin.generate(self.graph)
         self.assertEqual(len(queries), 1)

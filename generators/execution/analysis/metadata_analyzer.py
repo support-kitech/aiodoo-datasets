@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.analysis.context import AnalysisContex
 from typing import Any
 
 
-class MetadataAnalyzer(BaseAnalyzer):
+class MetadataAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Calculates deterministic IDs, hashes, and lineage details."""
 
     PRIORITY = 70

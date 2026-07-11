@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.rollback_build_result
 
 
 class TestRollbackBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = RollbackBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

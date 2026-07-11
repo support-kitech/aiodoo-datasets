@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class InstructionEngine:
     """Loads YAML templates and renders deterministic instructions."""
 
-    def __init__(self, templates_dir: Path | None = None):
+    def __init__(self, templates_dir: Path | None = None) -> None:
         if templates_dir is None:
             # Default to the templates directory relative to this file
             templates_dir = Path(__file__).parent.parent / "templates"

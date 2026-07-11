@@ -26,7 +26,7 @@ class DummyFactoryB(BaseFactory):
 
 
 class TestFactoryRegistry(unittest.TestCase):
-    def test_duplicate_mapping(self):
+    def test_duplicate_mapping(self) -> None:
         reg = FactoryRegistry()
         reg.register(DummyFactoryA())
         reg.register(DummyFactoryB())

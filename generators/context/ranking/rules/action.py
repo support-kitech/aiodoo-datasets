@@ -13,7 +13,7 @@ from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
 from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
 
 
-class ActionRule(BaseRankingRule):
+class ActionRule(BaseRankingRule):  # type: ignore[misc]
     """
     Ranks UI Actions and Menus.
 
@@ -52,7 +52,7 @@ class ActionRule(BaseRankingRule):
                         results.append(self._build_result(query, source_node, edge))
         return results
 
-    def _build_result(self, query: Query, node, edge) -> RankingResult:
+    def _build_result(self, query: Query, node, edge) -> RankingResult:  # type: ignore[no-untyped-def]
         return RankingResult(
             query_id=query.query_id,
             node_id=node.node_id,

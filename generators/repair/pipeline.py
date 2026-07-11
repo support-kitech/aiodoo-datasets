@@ -19,7 +19,7 @@ from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipeli
 logger = logging.getLogger(__name__)
 
 
-def process_module(module: OdooModule) -> list[dict]:
+def process_module(module: OdooModule) -> list[dict]:  # type: ignore[type-arg]
     """Worker function orchestrating the strictly ordered pipeline stages."""
     try:
         analyzer = RepairAnalyzer()
@@ -45,7 +45,7 @@ def process_module(module: OdooModule) -> list[dict]:
         return []
 
 
-class RepairPipeline(SharedPipelineOrchestrator):
+class RepairPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
     """Orchestrates the deterministic generation of Repair Protocol V1 JSONL."""
 
     def __init__(
@@ -55,7 +55,7 @@ class RepairPipeline(SharedPipelineOrchestrator):
         workers: int = 4,
         resume: bool = False,
         reset_checkpoint: bool = False,
-    ):
+    ) -> None:
         scanner = ModuleScanner(config_path=sources_yaml, cache_dir=output_dir / "cache")
         stats = RepairStatistics()
         writer = DatasetWriter(

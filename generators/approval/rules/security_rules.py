@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 from aiodoo_datasets.generators.approval.domain.finding import Finding
 
 
-class SQLInjectionRule(BaseRule):
+class SQLInjectionRule(BaseRule):  # type: ignore[misc]
     """Detects raw cr.execute calls without parameterization."""
 
     RULE_ID = "SEC-001"

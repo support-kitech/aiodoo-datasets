@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.protocol.mappers.stage_mapper import S
 
 
 class TestProtocolRegistry(unittest.TestCase):
-    def test_registry_validation(self):
+    def test_registry_validation(self) -> None:
         registry = ProtocolRegistry()
         registry.register(StageMapper())
 

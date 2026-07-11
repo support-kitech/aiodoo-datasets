@@ -20,7 +20,7 @@ class QueryGenerator:
     - Provides fault tolerance if a plugin fails.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Register plugins statically and ensure deterministic alphabetical sorting.
         self.plugins = sorted(
             [plugin_cls() for plugin_cls in REGISTERED_QUERY_PLUGINS],

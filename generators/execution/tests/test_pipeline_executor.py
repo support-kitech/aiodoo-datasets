@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.build_pipeline_context import
 
 
 class TestPipelineExecutor(unittest.TestCase):
-    def test_executor_empty(self):
+    def test_executor_empty(self) -> None:
         executor = PipelineExecutor()
         ctx_mock = Mock(spec=BuildPipelineContext)
         ctx_mock.builder_registry = Mock()

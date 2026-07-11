@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.execution.analysis.knowledge.artifact_knowledge 
 from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
 
 
-class ArtifactBuilder(BaseBuilder):
+class ArtifactBuilder(BaseBuilder):  # type: ignore[misc]
     PRIORITY = 10
     REQUIRES = ()
     INPUT = ArtifactKnowledge

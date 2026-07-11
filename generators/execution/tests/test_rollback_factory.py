@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.builders.exceptions import FactoryErro
 
 
 class TestRollbackFactory(unittest.TestCase):
-    def test_validation(self):
+    def test_validation(self) -> None:
         factory = RollbackFactory()
         with self.assertRaises(FactoryError):
             factory.create(None)

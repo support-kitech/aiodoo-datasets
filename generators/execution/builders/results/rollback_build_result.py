@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.domain.execution_rollback import Execu
 
 
 @dataclass(frozen=True, slots=True)
-class RollbackBuildResult(BaseBuildResult):
+class RollbackBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the RollbackBuilder."""
 
     rollbacks: tuple[ExecutionRollback, ...]

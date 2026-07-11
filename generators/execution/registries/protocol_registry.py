@@ -3,7 +3,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class ProtocolRegistry(BaseRegistry):
+class ProtocolRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Static registry for Protocol Mappers, Protocol Validators, and Protocol Serializers.
     Inherits from BaseRegistry. Exposes validate() and snapshot().

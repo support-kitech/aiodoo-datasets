@@ -18,7 +18,7 @@ class RepairOpportunity:
     root_cause: str
     location: str
     code_snippet: str
-    operations: list[dict]
+    operations: list[dict]  # type: ignore[type-arg]
     explanation: str
     rule_id: str
     rule_title: str

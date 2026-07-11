@@ -10,7 +10,7 @@ class BuildPipeline:
     Contains no business logic, iteration, or lifecycle logic itself.
     """
 
-    def __init__(self, executor):
+    def __init__(self, executor) -> None:  # type: ignore[no-untyped-def]
         self.executor = executor
 
     def before_pipeline(self, context: BuildPipelineContext) -> None:

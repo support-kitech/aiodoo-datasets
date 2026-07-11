@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.builders.results.base import BaseBuild
 
 
 @dataclass(frozen=True, slots=True)
-class MetadataBuildResult(BaseBuildResult):
+class MetadataBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the MetadataBuilder."""
 
     metadata: MappingProxyType[str, Any]

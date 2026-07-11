@@ -8,11 +8,11 @@ from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import
 
 
 @ParserRegistry.register("repair_data")
-class RepairParser(BaseParser):
+class RepairParser(BaseParser):  # type: ignore[misc]
     """Parses Repair protocol data to extract evidence."""
 
     def parse(self, data: Dict[str, Any]) -> List[Evidence]:
-        evidence_list = []
+        evidence_list = []  # type: ignore[var-annotated]
         if not data:
             return evidence_list
 

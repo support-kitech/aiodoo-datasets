@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.conversation.factories.conversation_factory impo
 )
 
 
-def test_message_factory_determinism():
+def test_message_factory_determinism() -> None:
     """Test that message IDs are perfectly deterministic based on inputs."""
     # Test identical inputs yield identical IDs
     msg1 = MessageFactory.create(Role.USER, "Hello world", "TRN-1", 0)
@@ -32,7 +32,7 @@ def test_message_factory_determinism():
     assert msg1.message_id.startswith("MSG-")
 
 
-def test_turn_factory_determinism():
+def test_turn_factory_determinism() -> None:
     """Test that turn IDs are perfectly deterministic."""
     turn_id1 = TurnFactory.generate_id("CONV-1", 0)
     turn_id2 = TurnFactory.generate_id("CONV-1", 0)
@@ -43,7 +43,7 @@ def test_turn_factory_determinism():
     assert turn_id1.startswith("TRN-")
 
 
-def test_conversation_factory_determinism():
+def test_conversation_factory_determinism() -> None:
     """Test that conversation IDs are perfectly deterministic."""
     conv_id1 = ConversationFactory.generate_id(ConversationType.PLANNING.value, "source_1")
     conv_id2 = ConversationFactory.generate_id(ConversationType.PLANNING.value, "source_1")

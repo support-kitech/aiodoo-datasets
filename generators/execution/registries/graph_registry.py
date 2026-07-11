@@ -3,7 +3,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class GraphRegistry(BaseRegistry):
+class GraphRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Static registry for Graph Builders, Graph Validators, and Graph Traversals.
 

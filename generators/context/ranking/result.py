@@ -28,7 +28,7 @@ class RankingResult:
     _start_line: int = field(init=False, repr=False, compare=False)
     result_id: str = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self):  # type: ignore[no-untyped-def]
         # Extract tie-breaking context if provided, default to empty/0
         object.__setattr__(self, "_relative_path", self.metadata.get("relative_path", ""))
         object.__setattr__(self, "_start_line", self.metadata.get("start_line", 0))
@@ -58,7 +58,7 @@ class RankingResult:
         score DESC -> node_id ASC -> relative_path ASC -> start_line ASC
         """
         if self.score != other.score:
-            return self.score > other.score  # Higher score comes FIRST
+            return bool(self.score > other.score)  # Higher score comes FIRST
         if self.node_id != other.node_id:
             return self.node_id < other.node_id
         if self._relative_path != other._relative_path:

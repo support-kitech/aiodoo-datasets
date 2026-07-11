@@ -8,11 +8,11 @@ from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import
 
 
 @ParserRegistry.register("coding_data")
-class CodingParser(BaseParser):
+class CodingParser(BaseParser):  # type: ignore[misc]
     """Parses Coding protocol data to extract evidence."""
 
     def parse(self, data: Dict[str, Any]) -> List[Evidence]:
-        evidence_list = []
+        evidence_list = []  # type: ignore[var-annotated]
         if not data:
             return evidence_list
 

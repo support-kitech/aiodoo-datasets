@@ -6,17 +6,17 @@ from aiodoo_datasets.generators.execution.config.runtime_config import RuntimeCo
 
 
 class TestConfiguration(unittest.TestCase):
-    def test_generator_config_immutability(self):
+    def test_generator_config_immutability(self) -> None:
         config = GeneratorConfig(version="1.0.0")
         with self.assertRaises(Exception):
             config.version = "2.0.0"  # Should raise dataclass FrozenInstanceError
 
-    def test_export_config_defaults(self):
+    def test_export_config_defaults(self) -> None:
         config = ExportConfig(output_directory=Path("/tmp"))
         self.assertTrue(config.generate_manifest)
         self.assertTrue(config.generate_metadata)
 
-    def test_runtime_config_defaults(self):
+    def test_runtime_config_defaults(self) -> None:
         config = RuntimeConfig()
         self.assertFalse(config.debug_mode)
         self.assertTrue(config.fail_fast)

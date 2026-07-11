@@ -12,7 +12,7 @@ import hashlib
 
 
 @ParserRegistry.register("execution_protocol")
-class ExecutionParser(BaseParser):
+class ExecutionParser(BaseParser):  # type: ignore[misc]
     """Parses Execution protocols."""
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:

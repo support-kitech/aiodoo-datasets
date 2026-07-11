@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class ArtifactFactory(BaseFactory):
+class ArtifactFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = ArtifactKnowledge
     TARGET = Artifact
 

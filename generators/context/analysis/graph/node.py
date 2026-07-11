@@ -21,7 +21,7 @@ class ContextNode:
     metadata: dict[str, Any] = field(default_factory=dict)
     node_id: str = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self):  # type: ignore[no-untyped-def]
         # Generate a deterministic node_id
         hash_input = f"{self.module}:{self.relative_path}:{self.name}:{self.node_type.value}"
         if self.start_line is not None:

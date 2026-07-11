@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.graph.serializer import GraphSerialize
 
 
 class TestGraphSerializer(unittest.TestCase):
-    def test_deterministic(self):
+    def test_deterministic(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p")
         e = ExecutionEdge(source_id="a", target_id="b", edge_type=EdgeType.DEPENDENCY)
@@ -17,7 +17,7 @@ class TestGraphSerializer(unittest.TestCase):
         s2 = GraphSerializer.serialize(graph)
         self.assertEqual(s1, s2)
 
-    def test_identical_graphs(self):
+    def test_identical_graphs(self) -> None:
         """Two graphs with the same structure must produce identical serialization."""
         g1 = ExecutionGraph(
             nodes=(
@@ -35,7 +35,7 @@ class TestGraphSerializer(unittest.TestCase):
         )
         self.assertEqual(GraphSerializer.serialize(g1), GraphSerializer.serialize(g2))
 
-    def test_empty_graph(self):
+    def test_empty_graph(self) -> None:
         graph = ExecutionGraph()
         result = GraphSerializer.serialize(graph)
         self.assertIn('"edges":[]', result)

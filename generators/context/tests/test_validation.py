@@ -27,7 +27,7 @@ from aiodoo_datasets.generators.context.validation.result import ValidationResul
 
 
 class TestValidation(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         logging.getLogger(
             "aiodoo_datasets.generators.context.validation.schema_validator"
         ).setLevel(logging.CRITICAL)
@@ -75,23 +75,23 @@ class TestValidation(unittest.TestCase):
             ),
         )
 
-    def test_validator_registry(self):
+    def test_validator_registry(self) -> None:
         self.assertIn(SchemaValidator, REGISTERED_VALIDATORS)
         self.assertIn(ProtocolValidator, REGISTERED_VALIDATORS)
         self.assertIn(CoreValidator, REGISTERED_VALIDATORS)
 
-    def test_schema_validator(self):
+    def test_schema_validator(self) -> None:
         validator = SchemaValidator()
         result = validator.validate(self.valid_task)
         self.assertIsInstance(result, ValidationResult)
         self.assertTrue(result.valid)
 
-    def test_protocol_validator_success(self):
+    def test_protocol_validator_success(self) -> None:
         validator = ProtocolValidator()
         result = validator.validate(self.valid_task)
         self.assertTrue(result.valid)
 
-    def test_protocol_validator_missing_node(self):
+    def test_protocol_validator_missing_node(self) -> None:
         validator = ProtocolValidator()
         task = self.valid_task.model_copy(deep=True)
         # Remove n2 from graph but keep it in artifacts
@@ -100,26 +100,26 @@ class TestValidation(unittest.TestCase):
         self.assertFalse(result.valid)
         self.assertTrue(len(result.errors) > 0)
 
-    def test_protocol_validator_duplicate_artifact(self):
+    def test_protocol_validator_duplicate_artifact(self) -> None:
         validator = ProtocolValidator()
         task = self.valid_task.model_copy(deep=True)
         task.artifacts.append(task.artifacts[0])  # Duplicate
         result = validator.validate(task)
         self.assertFalse(result.valid)
 
-    def test_core_validator_success(self):
+    def test_core_validator_success(self) -> None:
         validator = CoreValidator()
         result = validator.validate(self.valid_task)
         self.assertTrue(result.valid)
 
-    def test_core_validator_bad_counts(self):
+    def test_core_validator_bad_counts(self) -> None:
         validator = CoreValidator()
         task = self.valid_task.model_copy(deep=True)
         task.metadata.artifact_count = 99
         result = validator.validate(task)
         self.assertFalse(result.valid)
 
-    def test_core_validator_ordering(self):
+    def test_core_validator_ordering(self) -> None:
         validator = CoreValidator()
         task = self.valid_task.model_copy(deep=True)
         # Add another artifact with higher score, but place it second

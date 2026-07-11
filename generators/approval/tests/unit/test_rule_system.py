@@ -11,7 +11,7 @@ from aiodoo_datasets.generators.approval.enums import Severity
 
 
 class TestRuleSystem(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.metadata = ReviewMetadata(
             generator_version="1.0",
             protocol_version="1.0",
@@ -21,7 +21,7 @@ class TestRuleSystem(unittest.TestCase):
             odoo_edition="CE",
         )
 
-    def test_sql_injection_rule(self):
+    def test_sql_injection_rule(self) -> None:
         rule = SQLInjectionRule()
 
         # Test positive match (vulnerable code)
@@ -47,7 +47,7 @@ class TestRuleSystem(unittest.TestCase):
         result_safe = rule.evaluate(context_safe)
         self.assertEqual(len(result_safe.findings), 0)
 
-    def test_pep8_compliance_rule(self):
+    def test_pep8_compliance_rule(self) -> None:
         rule = Pep8ComplianceRule()
 
         evidence_bad = Evidence(

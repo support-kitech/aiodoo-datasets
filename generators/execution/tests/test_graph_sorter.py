@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.graph.sorter import TopologicalSorter
 
 
 class TestGraphSorter(unittest.TestCase):
-    def test_linear_sort(self):
+    def test_linear_sort(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p1")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p2")
         n3 = ExecutionNode(node_id="c", node_type=NodeType.STEP, payload="p3")
@@ -21,7 +21,7 @@ class TestGraphSorter(unittest.TestCase):
         ids = [n.node_id for n in result.sorted_nodes]
         self.assertEqual(ids, ["a", "b", "c"])
 
-    def test_deterministic_parallel(self):
+    def test_deterministic_parallel(self) -> None:
         nodes = tuple(ExecutionNode(node_id=c, node_type=NodeType.STEP, payload=c) for c in "dcba")
         graph = ExecutionGraph(nodes=nodes, edges=())
 
@@ -33,7 +33,7 @@ class TestGraphSorter(unittest.TestCase):
         # Secondary alphanumeric ordering
         self.assertEqual(ids1, ["a", "b", "c", "d"])
 
-    def test_diamond(self):
+    def test_diamond(self) -> None:
         na = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="a")
         nb = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="b")
         nc = ExecutionNode(node_id="c", node_type=NodeType.STEP, payload="c")

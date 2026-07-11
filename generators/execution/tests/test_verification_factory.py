@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.builders.exceptions import FactoryErro
 
 
 class TestVerificationFactory(unittest.TestCase):
-    def test_validation(self):
+    def test_validation(self) -> None:
         factory = VerificationFactory()
         with self.assertRaises(FactoryError):
             factory.create(None)

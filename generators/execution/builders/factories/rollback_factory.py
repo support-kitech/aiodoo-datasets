@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.domain.execution_rollback import Execu
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class RollbackFactory(BaseFactory):
+class RollbackFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = RollbackKnowledge
     TARGET = ExecutionRollback
 

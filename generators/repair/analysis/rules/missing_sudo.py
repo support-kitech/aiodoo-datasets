@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.repair.analysis.rules.base import (
 from aiodoo_datasets.generators.repair.validation.schema import RepairSeverity, ArtifactType
 
 
-class MissingSudoRule(BaseRepairRule):
+class MissingSudoRule(BaseRepairRule):  # type: ignore[misc]
     rule_id = "RP001"
     title = "Missing sudo()"
     description = (
@@ -22,7 +22,7 @@ class MissingSudoRule(BaseRepairRule):
     target_artifacts = [ArtifactType.PYTHON]
 
     def detect(self, context: AnalyzeContext) -> list[RepairOpportunity]:
-        opportunities = []
+        opportunities = []  # type: ignore[var-annotated]
         if not context.tree:
             return opportunities
 

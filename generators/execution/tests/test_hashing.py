@@ -14,7 +14,7 @@ from aiodoo_datasets.generators.execution.environment.version import OdooVersion
 
 
 class TestHashing(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.artifact = PythonArtifact(
             module="sale",
             relative_path="models/sale.py",
@@ -23,7 +23,7 @@ class TestHashing(unittest.TestCase):
         )
         self.env = ExecutionEnvironment(version=OdooVersion.V17, edition=OdooEdition.COMMUNITY)
 
-    def test_operation_hashing(self):
+    def test_operation_hashing(self) -> None:
         op1 = ExecutionOperation(
             operation_id="op_123", action=OperationAction.CREATE, target=self.artifact
         )
@@ -35,7 +35,7 @@ class TestHashing(unittest.TestCase):
         self.assertEqual(hash(op1), hash(op2))
         self.assertEqual(op1, op2)
 
-    def test_step_hashing(self):
+    def test_step_hashing(self) -> None:
         op = ExecutionOperation(
             operation_id="op_123", action=OperationAction.CREATE, target=self.artifact
         )
@@ -57,7 +57,7 @@ class TestHashing(unittest.TestCase):
         self.assertEqual(hash(step1), hash(step2))
         self.assertEqual(step1, step2)
 
-    def test_plan_hashing(self):
+    def test_plan_hashing(self) -> None:
         plan1 = ExecutionPlan(
             plan_id="plan_xyz",
             environment=self.env,

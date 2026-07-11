@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.coding.protocol.operation_builder import build_o
 from aiodoo_datasets.generators.coding.protocol.validation_mapper import build_validation_actions
 
 
-def build_artifact_payload(
+def build_artifact_payload(  # type: ignore[no-untyped-def]
     module: OdooModule, scenario: Scenario, py_k, xml_k, artifacts
 ) -> ArtifactPayload:
     """Orchestrates the protocol payload construction."""

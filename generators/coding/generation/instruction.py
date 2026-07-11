@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.coding.discovery import OdooModule, Scenario
 
 
 class InstructionEngine:
-    def __init__(self, templates_dir: Path):
+    def __init__(self, templates_dir: Path) -> None:
         self.templates_dir = templates_dir
         self.templates = self._load_templates()
 

@@ -23,7 +23,7 @@ class TestGraphBuilder(unittest.TestCase):
             step_id=step_id, description=f"Step {step_id}", operation=op, dependencies=deps
         )
 
-    def test_deterministic_build(self):
+    def test_deterministic_build(self) -> None:
         s1 = self._make_step("s1")
         s2 = self._make_step("s2", deps=(ExecutionDependency(depends_on_step_id="s1"),))
         ctx = GraphContext(builder_context=Mock(), domain_steps=(s1, s2))
@@ -38,13 +38,13 @@ class TestGraphBuilder(unittest.TestCase):
         self.assertEqual(len(result.graph.edges), 1)
         self.assertEqual(result.graph.edges[0].edge_type, EdgeType.DEPENDENCY)
 
-    def test_empty_graph(self):
+    def test_empty_graph(self) -> None:
         ctx = GraphContext(builder_context=Mock())
         result = GraphBuilder().build(ctx)
         self.assertTrue(result.success)
         self.assertEqual(result.statistics.node_count, 0)
 
-    def test_determinism(self):
+    def test_determinism(self) -> None:
         s1 = self._make_step("s1")
         s2 = self._make_step("s2", deps=(ExecutionDependency(depends_on_step_id="s1"),))
         ctx = GraphContext(builder_context=Mock(), domain_steps=(s1, s2))

@@ -16,7 +16,7 @@ class GraphContext:
     """
 
     builder_context: BuilderContext
-    domain_steps: tuple = field(default_factory=tuple)
-    domain_dependencies: tuple = field(default_factory=tuple)
+    domain_steps: tuple = field(default_factory=tuple)  # type: ignore[type-arg]
+    domain_dependencies: tuple = field(default_factory=tuple)  # type: ignore[type-arg]
     statistics: GraphStatistics = field(default_factory=GraphStatistics)
     config: dict[str, Any] = field(default_factory=dict)

@@ -54,6 +54,10 @@ ignore_missing_imports = true
 explicit_package_bases = true
 namespace_packages = true
 
+[[tool.mypy.overrides]]
+module = "generators.*.tests.*"
+disable_error_code = ["no-untyped-def", "no-untyped-call", "misc", "var-annotated"]
+
 [tool.pyright]
 pythonVersion = "3.12"
 typeCheckingMode = "strict"

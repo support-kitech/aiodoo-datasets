@@ -29,13 +29,13 @@ class MockDuplicatePlugin(BaseContextQuery):
 
 
 class TestQueryGenerator(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         logging.getLogger("aiodoo_datasets.generators.context.generation.query_generator").setLevel(
             logging.CRITICAL
         )
         self.graph = ContextGraph()
 
-    def test_registry_validation(self):
+    def test_registry_validation(self) -> None:
         self.assertIsInstance(REGISTERED_QUERY_PLUGINS, tuple)
         # Ensure no duplicate plugins
         self.assertEqual(len(REGISTERED_QUERY_PLUGINS), len(set(REGISTERED_QUERY_PLUGINS)))
@@ -50,7 +50,7 @@ class TestQueryGenerator(unittest.TestCase):
             self.assertNotIn(q_type, query_types)
             query_types.add(q_type)
 
-    def test_registration_order(self):
+    def test_registration_order(self) -> None:
         generator = QueryGenerator()
         plugin_names = [p.__class__.__name__ for p in generator.plugins]
         expected = [
@@ -65,7 +65,7 @@ class TestQueryGenerator(unittest.TestCase):
         ]
         self.assertEqual(plugin_names, expected)
 
-    def test_fault_tolerance(self):
+    def test_fault_tolerance(self) -> None:
         generator = QueryGenerator()
         generator.plugins = [MockCrashingPlugin(), MockDuplicatePlugin()]
 
@@ -76,7 +76,7 @@ class TestQueryGenerator(unittest.TestCase):
         self.assertEqual(len(queries), 1)
         self.assertEqual(queries[0].target_symbol, "symbol")
 
-    def test_duplicate_prevention_and_determinism(self):
+    def test_duplicate_prevention_and_determinism(self) -> None:
         generator = QueryGenerator()
         generator.plugins = [MockDuplicatePlugin()]
 

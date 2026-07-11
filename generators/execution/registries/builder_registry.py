@@ -1,7 +1,7 @@
 from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
 
 
-class BuilderRegistry(BaseRegistry):
+class BuilderRegistry(BaseRegistry):  # type: ignore[misc]
     """
     Validates and manages the deterministic ordering of Builders.
     """

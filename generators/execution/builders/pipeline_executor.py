@@ -13,7 +13,7 @@ class PipelineExecutor:
     def execute(self, context: BuildPipelineContext) -> PipelineResult:
         results = {}
         failed = []
-        skipped = []
+        skipped = []  # type: ignore[var-annotated]
 
         builders = context.builder_registry.items()
 

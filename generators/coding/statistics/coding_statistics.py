@@ -6,13 +6,13 @@ from aiodoo_datasets.generators.common.statistics.base_statistics import BaseSta
 from aiodoo_datasets.generators.coding.validation.schema import CodingDatasetRecord
 
 
-class CodingStatistics(BaseStatistics):
+class CodingStatistics(BaseStatistics):  # type: ignore[misc]
     """Aggregates generation metrics without holding the dataset in memory."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.artifact_type_distribution = defaultdict(int)
-        self.operation_type_distribution = defaultdict(int)
+        self.artifact_type_distribution = defaultdict(int)  # type: ignore[var-annotated]
+        self.operation_type_distribution = defaultdict(int)  # type: ignore[var-annotated]
 
         self.total_artifacts = 0
         self.total_operations = 0

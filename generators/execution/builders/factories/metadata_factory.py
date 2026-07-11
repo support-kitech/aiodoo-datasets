@@ -3,14 +3,14 @@ from aiodoo_datasets.generators.execution.builders.factories.base import BaseFac
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class MetadataFactory(BaseFactory):
+class MetadataFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = dict
     TARGET = MappingProxyType
 
-    def validate(self, knowledge: dict) -> None:
+    def validate(self, knowledge: dict) -> None:  # type: ignore[type-arg]
         if not isinstance(knowledge, dict):
             raise FactoryError("Cannot create MappingProxyType from non-dict.")
 
-    def create(self, knowledge: dict) -> MappingProxyType:
+    def create(self, knowledge: dict) -> MappingProxyType:  # type: ignore[type-arg]
         self.validate(knowledge)
         return MappingProxyType(knowledge)

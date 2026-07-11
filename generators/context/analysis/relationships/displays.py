@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
 
-class DisplaysRelationship(BaseRelationshipExtractor):
+class DisplaysRelationship(BaseRelationshipExtractor):  # type: ignore[misc]
     """
     Extracts display relationships (e.g. View -> Field, View -> Model).
 
@@ -18,5 +18,5 @@ class DisplaysRelationship(BaseRelationshipExtractor):
     supported_languages = [LanguageType.XML]
 
     def extract(self, graph: ContextGraph, knowledge: ContextKnowledge) -> list[ContextEdge]:
-        edges = []
+        edges = []  # type: ignore[var-annotated]
         return edges

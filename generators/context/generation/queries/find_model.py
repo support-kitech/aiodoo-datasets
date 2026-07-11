@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.generation.queries.base import BaseConte
 from types import MappingProxyType
 
 
-class FindModelQuery(BaseContextQuery):
+class FindModelQuery(BaseContextQuery):  # type: ignore[misc]
     """
     Generates queries asking where a specific Odoo Model is defined.
 

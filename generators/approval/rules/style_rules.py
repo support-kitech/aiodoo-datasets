@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 from aiodoo_datasets.generators.approval.domain.finding import Finding
 
 
-class Pep8ComplianceRule(BaseRule):
+class Pep8ComplianceRule(BaseRule):  # type: ignore[misc]
     """Detects basic PEP-8 violations."""
 
     RULE_ID = "STYLE-001"

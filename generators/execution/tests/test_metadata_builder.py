@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.metadata_build_result
 
 
 class TestMetadataBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = MetadataBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

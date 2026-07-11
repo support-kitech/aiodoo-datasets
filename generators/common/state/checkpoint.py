@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class CheckpointManager:
     """Handles JSON checkpointing to safely resume long-running pipeline processing."""
 
-    def __init__(self, output_dir: Path, filename: str = "checkpoint.json"):
+    def __init__(self, output_dir: Path, filename: str = "checkpoint.json") -> None:
         self.checkpoint_file = output_dir / filename
         self.checkpoint_file.parent.mkdir(parents=True, exist_ok=True)
         self.state: dict[str, Any] = {
@@ -31,7 +31,7 @@ class CheckpointManager:
                     # Handle legacy flat structure "processed_modules" array
                     if "processed_modules" in raw_state:
                         flat_modules = raw_state.get("processed_modules", [])
-                        items = {}
+                        items = {}  # type: ignore[var-annotated]
                         for m in flat_modules:
                             items.setdefault("legacy_repo", {})[m] = {"default": ["legacy_hash"]}
                         self.state["processed_items"] = items
@@ -51,7 +51,7 @@ class CheckpointManager:
 
         return self.state
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]
         """
         Accepts either:
         Flat (Planner): save(module_name: str, written_rows: int)
@@ -106,7 +106,7 @@ class CheckpointManager:
         if self.checkpoint_file.exists():
             self.checkpoint_file.unlink()
 
-    def is_processed(self, *args) -> bool:
+    def is_processed(self, *args) -> bool:  # type: ignore[no-untyped-def]
         """
         Accepts:
         Flat (Planner): is_processed(module_name: str)

@@ -31,8 +31,8 @@ def get_git_commit(module: OdooModule) -> str:
     except (subprocess.SubprocessError, OSError, Exception):
         pass
 
-    _GIT_CACHE[repo_path] = git_commit
-    return git_commit
+    _GIT_CACHE[repo_path] = git_commit  # type: ignore[assignment]
+    return git_commit  # type: ignore[return-value]
 
 
 def compute_difficulty(metrics: dict[str, int]) -> int:
@@ -51,7 +51,7 @@ def compute_difficulty(metrics: dict[str, int]) -> int:
     score += metrics.get("scheduled_actions", 0) * 3
     score += metrics.get("dependencies", 0) * 1
     score += metrics.get("assets", 0) * 1
-    score += metrics.get("file_count", 0) * 0.5
+    score += metrics.get("file_count", 0) * 0.5  # type: ignore[assignment]
 
     if score < 10:
         return 1

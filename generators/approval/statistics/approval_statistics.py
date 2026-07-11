@@ -19,7 +19,7 @@ class ApprovalStatistics:
         findings_count = len(review.findings)
         recommendations_count = len(review.recommendations)
 
-        findings_by_severity = {}
+        findings_by_severity = {}  # type: ignore[var-annotated]
         for finding in review.findings:
             severity = finding.severity.value
             findings_by_severity[severity] = findings_by_severity.get(severity, 0) + 1

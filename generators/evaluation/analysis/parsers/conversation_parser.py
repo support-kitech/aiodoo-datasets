@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.evaluation.analysis.parsers.base_parser import B
 from aiodoo_datasets.generators.evaluation.registries.parser_registry import ParserRegistry
 
 
-class ConversationParser(BaseParser):
+class ConversationParser(BaseParser):  # type: ignore[misc]
     """Extracts deterministic evidence from Conversation protocol objects."""
 
     def parse(self, protocol_object: Any) -> Dict[str, Any]:

@@ -6,20 +6,20 @@ from aiodoo_datasets.generators.repair.validation.schema import RepairDatasetRec
 from typing import Any
 
 
-class RepairStatistics(BaseStatistics):
+class RepairStatistics(BaseStatistics):  # type: ignore[misc]
     """Tracks metrics specific to the Repair dataset generation process."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.total_opportunities_found = 0
         self.total_operations = 0
 
-        self.severity_counts = defaultdict(int)
-        self.rule_frequency = defaultdict(int)
-        self.category_frequency = defaultdict(int)
-        self.artifact_type_frequency = defaultdict(int)
-        self.version_frequency = defaultdict(int)
-        self.module_frequency = defaultdict(int)
+        self.severity_counts = defaultdict(int)  # type: ignore[var-annotated]
+        self.rule_frequency = defaultdict(int)  # type: ignore[var-annotated]
+        self.category_frequency = defaultdict(int)  # type: ignore[var-annotated]
+        self.artifact_type_frequency = defaultdict(int)  # type: ignore[var-annotated]
+        self.version_frequency = defaultdict(int)  # type: ignore[var-annotated]
+        self.module_frequency = defaultdict(int)  # type: ignore[var-annotated]
 
     def add_sample(self, record: RepairDatasetRecord, json_str: str) -> None:
         self._add_base_sample(record, json_str)

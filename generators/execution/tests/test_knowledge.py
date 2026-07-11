@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.execution.analysis.knowledge.operation_knowledge
 
 
 class TestKnowledge(unittest.TestCase):
-    def test_knowledge_immutability(self):
+    def test_knowledge_immutability(self) -> None:
         op = OperationKnowledge(artifact_ref_id="art_1", action_type="create")
 
         ek = ExecutionKnowledge(operations=(op,))

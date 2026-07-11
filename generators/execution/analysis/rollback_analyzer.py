@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.analysis.context import AnalysisContex
 from aiodoo_datasets.generators.execution.analysis.results.rollback_result import RollbackResult
 
 
-class RollbackAnalyzer(BaseAnalyzer):
+class RollbackAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Defines reversion commands if operation failure occurs."""
 
     PRIORITY = 60

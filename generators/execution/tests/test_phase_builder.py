@@ -12,7 +12,7 @@ from types import MappingProxyType
 
 
 class TestPhaseBuilder(unittest.TestCase):
-    def test_phase_generation(self):
+    def test_phase_generation(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         g = ExecutionGraph(nodes=(n1,), edges=())
         g_stats = GraphStatistics()

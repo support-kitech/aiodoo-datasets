@@ -22,7 +22,7 @@ class RankingEngine:
     - Provides fault tolerance for failing plugins.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Register rules statically and ensure deterministic alphabetical sorting.
         self.rules = sorted(
             [rule_cls() for rule_cls in REGISTERED_RANKING_RULES],

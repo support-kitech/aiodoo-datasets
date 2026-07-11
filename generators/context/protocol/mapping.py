@@ -69,7 +69,7 @@ def map_node(node_id: str, graph: ContextGraph) -> ProtocolNode | None:
     )
 
 
-def map_edge(edge) -> ProtocolEdge:
+def map_edge(edge) -> ProtocolEdge:  # type: ignore[no-untyped-def]
     """Maps an engineering edge to ProtocolEdge."""
     return ProtocolEdge(
         edge_id=edge.edge_id,

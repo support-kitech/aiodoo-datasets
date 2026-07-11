@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.pipeline import ContextPipeline
 logger = logging.getLogger(__name__)
 
 
-def main():
+def main():  # type: ignore[no-untyped-def]
     setup_logging()
 
     parser = build_base_parser(description="Generate AIODOO Context Protocol V1 Dataset")
@@ -36,4 +36,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  # type: ignore[no-untyped-call]

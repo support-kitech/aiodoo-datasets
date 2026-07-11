@@ -56,10 +56,10 @@ def build_artifacts(
             file_info = py_k.files[rel_path]
             if file_info.models:
                 models = [m.name for m in file_info.models.values()]
-                intent["targets"].extend([f"Model: {m}" for m in models])
+                intent["targets"].extend([f"Model: {m}" for m in models])  # type: ignore[attr-defined]
                 intent["purpose"] = f"Backend logic and data models for {', '.join(models)}"
             if hasattr(file_info, "controllers") and file_info.controllers:
-                intent["targets"].append("Controller routes")
+                intent["targets"].append("Controller routes")  # type: ignore[attr-defined]
                 intent["purpose"] = "Define web controller endpoints"
 
         elif lang == "xml" and rel_path in xml_k.files:
@@ -67,7 +67,7 @@ def build_artifacts(
             if file_info.views:
                 models_viewed = sorted(list(set([v.model for v in file_info.views if v.model])))
                 if models_viewed:
-                    intent["targets"].extend([f"View for model: {m}" for m in models_viewed])
+                    intent["targets"].extend([f"View for model: {m}" for m in models_viewed])  # type: ignore[attr-defined]
                     intent["purpose"] = f"User interface views for {', '.join(models_viewed)}"
 
         # Do NOT embed raw source code, only engineering intent!

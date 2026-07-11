@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.evaluation import api
 class TestEvaluationDeterminism(unittest.TestCase):
     """Verifies complete deterministic behavior of the pipeline."""
 
-    def test_pipeline_determinism(self):
+    def test_pipeline_determinism(self) -> None:
         """Run identical input multiple times and verify byte-for-byte identical output."""
         config = {
             "evaluation_type": "coding",

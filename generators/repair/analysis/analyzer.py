@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class RepairAnalyzer:
     """Analyzes Odoo source code for known anti-patterns and generates repair opportunities."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.rules = [MissingSudoRule(), ApiMultiRule(), DeprecatedAttrsRule()]
 
     def analyze(self, module: OdooModule) -> list[RepairOpportunity]:
@@ -34,7 +34,7 @@ class RepairAnalyzer:
     def _analyze_python(
         self, py_file: Path, base_path: Path, module_name: str
     ) -> list[RepairOpportunity]:
-        opportunities = []
+        opportunities = []  # type: ignore[var-annotated]
         try:
             content = py_file.read_text(encoding="utf-8")
             lines = content.splitlines()
@@ -70,7 +70,7 @@ class RepairAnalyzer:
     def _analyze_xml(
         self, xml_file: Path, base_path: Path, module_name: str
     ) -> list[RepairOpportunity]:
-        opportunities = []
+        opportunities = []  # type: ignore[var-annotated]
         try:
             content = xml_file.read_text(encoding="utf-8")
             lines = content.splitlines()

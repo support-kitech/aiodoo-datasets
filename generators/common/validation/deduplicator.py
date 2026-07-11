@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 class Deduplicator:
     """Thread-safe hash registry to prevent duplicate planner outputs based on deterministic Protocol Hashes."""
 
-    def __init__(self):
-        self._hashes = set()
+    def __init__(self) -> None:
+        self._hashes = set()  # type: ignore[var-annotated]
         self._lock = threading.Lock()
 
     def is_unique(self, protocol_hash: str) -> bool:

@@ -12,7 +12,7 @@ from aiodoo_datasets.generators.approval.rules.security_rules import SQLInjectio
 
 
 class TestApprovalPipeline(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.temp_dir = tempfile.TemporaryDirectory()
         self.output_path = Path(self.temp_dir.name)
 
@@ -43,10 +43,10 @@ class TestApprovalPipeline(unittest.TestCase):
             }
         }
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         self.temp_dir.cleanup()
 
-    def test_pipeline_generate(self):
+    def test_pipeline_generate(self) -> None:
         context = PipelineContext(
             config=self.config,
             input_protocols=self.input_protocols,

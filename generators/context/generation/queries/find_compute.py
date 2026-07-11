@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.generation.queries.base import BaseConte
 from types import MappingProxyType
 
 
-class FindComputeQuery(BaseContextQuery):
+class FindComputeQuery(BaseContextQuery):  # type: ignore[misc]
     """
     Generates queries asking where a field's computation logic resides.
 

@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.dependency_build_resu
 
 
 class TestDependencyBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = DependencyBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

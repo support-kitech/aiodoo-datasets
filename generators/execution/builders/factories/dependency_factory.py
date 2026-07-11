@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.domain.execution_dependency import Exe
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class DependencyFactory(BaseFactory):
+class DependencyFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = DependencyKnowledge
     TARGET = ExecutionDependency
 

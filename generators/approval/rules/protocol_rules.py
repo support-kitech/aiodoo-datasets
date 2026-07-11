@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
 from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 
 
-class ProtocolIntegrityRule(BaseRule):
+class ProtocolIntegrityRule(BaseRule):  # type: ignore[misc]
     """Ensures that upstream protocols do not contain critical diagnostic failures."""
 
     RULE_ID = "PROTO-001"

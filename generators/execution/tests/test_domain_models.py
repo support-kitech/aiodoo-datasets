@@ -18,7 +18,7 @@ from aiodoo_datasets.generators.execution.domain.execution_plan import Execution
 
 
 class TestDomainModels(unittest.TestCase):
-    def test_artifact_immutability(self):
+    def test_artifact_immutability(self) -> None:
         artifact = PythonArtifact(
             module="sale",
             relative_path="models/sale_order.py",
@@ -29,7 +29,7 @@ class TestDomainModels(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             artifact.module = "stock"
 
-    def test_environment_immutability(self):
+    def test_environment_immutability(self) -> None:
         env = ExecutionEnvironment(
             version=OdooVersion.V17,
             edition=OdooEdition.COMMUNITY,
@@ -39,7 +39,7 @@ class TestDomainModels(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             env.version = OdooVersion.V18
 
-    def test_domain_model_aggregation(self):
+    def test_domain_model_aggregation(self) -> None:
         artifact = PythonArtifact(
             module="sale",
             relative_path="models/sale_order.py",

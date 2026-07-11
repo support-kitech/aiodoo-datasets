@@ -11,7 +11,7 @@ from types import MappingProxyType
 
 
 class TestPlanner(unittest.TestCase):
-    def test_deterministic_planning(self):
+    def test_deterministic_planning(self) -> None:
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         g = ExecutionGraph(nodes=(n1,), edges=())
         g_stats = GraphStatistics()

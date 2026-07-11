@@ -10,7 +10,7 @@ class GraphError(Exception):
 class CycleDetectedError(GraphError):
     """Raised when a circular dependency is detected in the graph."""
 
-    def __init__(self, cycles: tuple[tuple[str, ...], ...], message: str = ""):
+    def __init__(self, cycles: tuple[tuple[str, ...], ...], message: str = "") -> None:
         self.cycles = cycles
         super().__init__(message or f"Cycle(s) detected: {cycles}")
 

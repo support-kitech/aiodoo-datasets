@@ -28,6 +28,6 @@ class BuilderRegistry:
         cls._frozen = True
 
     @classmethod
-    def get_all(cls) -> MappingProxyType:
+    def get_all(cls) -> MappingProxyType:  # type: ignore[type-arg]
         """Return a read-only mapping of all registered builders."""
         return MappingProxyType(cls._builders)

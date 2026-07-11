@@ -56,7 +56,7 @@ class DummySettings:
 class CoreProtocolValidator:
     """Pluggable adapter for AIODOO Core V1 validation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.is_available = ProtocolValidator is not None
         if self.is_available:
             self._context = AgentContext(

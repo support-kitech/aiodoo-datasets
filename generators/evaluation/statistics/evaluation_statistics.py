@@ -11,7 +11,7 @@ class EvaluationStatistics:
     """Computes deterministic aggregates for the entire evaluation dataset."""
 
     @staticmethod
-    def compute(dataset: Tuple[EvaluationProtocol, ...]) -> MappingProxyType:
+    def compute(dataset: Tuple[EvaluationProtocol, ...]) -> MappingProxyType:  # type: ignore[type-arg]
         """Compute total counts across the dataset."""
         total_evaluations = len(dataset)
         total_catalogs = 0

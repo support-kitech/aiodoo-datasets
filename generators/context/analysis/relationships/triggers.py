@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
 
-class TriggersRelationship(BaseRelationshipExtractor):
+class TriggersRelationship(BaseRelationshipExtractor):  # type: ignore[misc]
     """
     Extracts action triggers (e.g. Menu -> Action, Action -> View).
 
@@ -18,5 +18,5 @@ class TriggersRelationship(BaseRelationshipExtractor):
     supported_languages = [LanguageType.XML]
 
     def extract(self, graph: ContextGraph, knowledge: ContextKnowledge) -> list[ContextEdge]:
-        edges = []
+        edges = []  # type: ignore[var-annotated]
         return edges

@@ -132,7 +132,7 @@ class ContextPipeline:
         resume: bool = False,
         limit: int | None = None,
         target_module: str | None = None,
-    ):
+    ) -> None:
         self.config_path = Path(config_path)
         self.output_dir = Path(output_dir)
         self.workers = workers

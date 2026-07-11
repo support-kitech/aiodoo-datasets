@@ -105,13 +105,13 @@ class MockTieRule1(BaseRankingRule):
 
 
 class TestRankingEngine(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         logging.getLogger("aiodoo_datasets.generators.context.ranking.ranking_engine").setLevel(
             logging.CRITICAL
         )
         self.graph = ContextGraph()
 
-    def test_registry_validation(self):
+    def test_registry_validation(self) -> None:
         self.assertIsInstance(REGISTERED_RANKING_RULES, tuple)
         self.assertEqual(len(REGISTERED_RANKING_RULES), len(set(REGISTERED_RANKING_RULES)))
 
@@ -123,7 +123,7 @@ class TestRankingEngine(unittest.TestCase):
             self.assertNotIn(r_type, rule_types)
             rule_types.add(r_type)
 
-    def test_registration_order(self):
+    def test_registration_order(self) -> None:
         engine = RankingEngine()
         rule_names = [r.__class__.__name__ for r in engine.rules]
         expected = [
@@ -136,7 +136,7 @@ class TestRankingEngine(unittest.TestCase):
         ]
         self.assertEqual(rule_names, expected)
 
-    def test_max_aggregation_and_deduplication(self):
+    def test_max_aggregation_and_deduplication(self) -> None:
         engine = RankingEngine()
         engine.rules = [MockMultiRule1(), MockMultiRule2(), MockMultiRuleAction()]
         query = Query(QueryType.FIND_MODEL, QueryIntent.FIND_MODEL, "target_node", "symbol", "NL")
@@ -148,7 +148,7 @@ class TestRankingEngine(unittest.TestCase):
         self.assertEqual(results[0].score, RankingScore.DEFINITION)
         self.assertEqual(results[0].matched_rule, RankingRuleType.DEFINITION)
 
-    def test_tie_breaking_ordering(self):
+    def test_tie_breaking_ordering(self) -> None:
         engine = RankingEngine()
         engine.rules = [MockTieRule1()]
         query = Query(QueryType.FIND_MODEL, QueryIntent.FIND_MODEL, "target", "symbol", "NL")
@@ -159,7 +159,7 @@ class TestRankingEngine(unittest.TestCase):
         self.assertEqual(results[0].node_id, "node_a")
         self.assertEqual(results[1].node_id, "node_z")
 
-    def test_fault_tolerance(self):
+    def test_fault_tolerance(self) -> None:
         engine = RankingEngine()
         engine.rules = [MockCrashingRule(), MockMultiRule1()]
         query = Query(QueryType.FIND_MODEL, QueryIntent.FIND_MODEL, "target", "symbol", "NL")
@@ -168,7 +168,7 @@ class TestRankingEngine(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].node_id, "node_a")
 
-    def test_identical_executions(self):
+    def test_identical_executions(self) -> None:
         engine = RankingEngine()
         engine.rules = [MockTieRule1(), MockMultiRule1(), MockMultiRule2()]
         query = Query(QueryType.FIND_MODEL, QueryIntent.FIND_MODEL, "target", "symbol", "NL")

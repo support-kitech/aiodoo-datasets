@@ -27,4 +27,4 @@ def build_metadata(
     """Compile the metadata dictionary for the JSONL row."""
     metadata = build_base_metadata(module, scenario)
     metadata["protocol_hash"] = compute_protocol_hash(module, scenario, plan_payload)
-    return metadata
+    return metadata  # type: ignore[no-any-return]

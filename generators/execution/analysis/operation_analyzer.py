@@ -5,7 +5,7 @@ from aiodoo_datasets.generators.execution.analysis.context import AnalysisContex
 from aiodoo_datasets.generators.execution.analysis.results.operation_result import OperationResult
 
 
-class OperationAnalyzer(BaseAnalyzer):
+class OperationAnalyzer(BaseAnalyzer):  # type: ignore[misc]
     """Extracts required CRUD actions targeting the discovered artifacts."""
 
     PRIORITY = 20

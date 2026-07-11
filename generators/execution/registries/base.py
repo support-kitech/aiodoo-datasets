@@ -7,8 +7,8 @@ class BaseRegistry(ABC):
     Abstract interface for all plugin registries (Builders, Factories).
     """
 
-    def __init__(self):
-        self._items = []
+    def __init__(self) -> None:
+        self._items: list[Any] = []
 
     def register(self, item: Any) -> None:
         """Registers a new item."""

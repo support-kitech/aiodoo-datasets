@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.execution.domain.execution_verification import E
 from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
 
 
-class VerificationFactory(BaseFactory):
+class VerificationFactory(BaseFactory):  # type: ignore[misc]
     SOURCE = VerificationKnowledge
     TARGET = ExecutionVerification
 

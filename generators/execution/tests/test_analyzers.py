@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.common.discovery.xml_parser import XMLKnowledge
 
 
 class TestAnalyzers(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.context = AnalysisContext(
             module=OdooModule(
                 name="test", path="", version="17.0", edition="community", manifest={}
@@ -17,12 +17,12 @@ class TestAnalyzers(unittest.TestCase):
             xml_knowledge=XMLKnowledge(),
         )
 
-    def test_artifact_analyzer(self):
+    def test_artifact_analyzer(self) -> None:
         analyzer = ArtifactAnalyzer()
         result = analyzer.analyze(self.context)
         self.assertTrue(result.is_successful)
 
-    def test_operation_analyzer(self):
+    def test_operation_analyzer(self) -> None:
         analyzer = OperationAnalyzer()
         result = analyzer.analyze(self.context)
         self.assertTrue(result.is_successful)

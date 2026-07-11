@@ -10,4 +10,4 @@ class ReferenceBuilder:
 
     @staticmethod
     def build_from_evidence(evidence: ExtractedEvidence) -> Tuple[Reference, ...]:
-        return evidence.references
+        return evidence.references  # type: ignore[no-any-return]

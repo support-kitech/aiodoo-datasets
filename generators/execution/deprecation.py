@@ -4,7 +4,7 @@ import warnings
 from typing import Any, Callable
 
 
-def deprecated(reason: str) -> Callable:
+def deprecated(reason: str) -> Callable:  # type: ignore[type-arg]
     """
     Decorator to mark functions or classes as deprecated.
 
@@ -12,7 +12,7 @@ def deprecated(reason: str) -> Callable:
         reason: Reason for deprecation and migration instructions.
     """
 
-    def decorator(func: Callable) -> Callable:
+    def decorator(func: Callable) -> Callable:  # type: ignore[type-arg]
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             warnings.warn(
                 f"{func.__name__} is deprecated: {reason}",

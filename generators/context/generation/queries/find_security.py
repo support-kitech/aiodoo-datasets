@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.generation.queries.base import BaseConte
 from types import MappingProxyType
 
 
-class FindSecurityQuery(BaseContextQuery):
+class FindSecurityQuery(BaseContextQuery):  # type: ignore[misc]
     """
     Generates queries asking which ACL or Record Rule protects a model.
 

@@ -6,12 +6,12 @@ from aiodoo_datasets.generators.execution.export.export_result import ExportResu
 
 
 class TestPipelineValidator(unittest.TestCase):
-    def test_validation_failure_no_export(self):
+    def test_validation_failure_no_export(self) -> None:
         result = PipelineResult(success=True, export_result=None)
         violations = PipelineValidator.validate(result)
         self.assertIn("Validation failed: Export was not successful.", violations)
 
-    def test_validation_success(self):
+    def test_validation_success(self) -> None:
         export_result = ExportResult(
             success=True, exported_files=(Path("test.jsonl"),), record_count=1
         )

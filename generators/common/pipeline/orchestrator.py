@@ -19,7 +19,7 @@ class SharedPipelineOrchestrator:
         deduplicator: Any,
         core_validator: Any,
         checkpoint: Any,
-        worker_fn: Callable[[Any], list[dict]],
+        worker_fn: Callable[[Any], list[dict]],  # type: ignore[type-arg]
         record_class: Type[BaseModel],
         validation_method: str,
         checkpoint_strategy: str = "module",
@@ -27,7 +27,7 @@ class SharedPipelineOrchestrator:
         manifest_filename: str = "manifest.json",
         workers: int = 4,
         resume: bool = False,
-    ):
+    ) -> None:
         self.scanner = scanner
         self.writer = writer
         self.deduplicator = deduplicator

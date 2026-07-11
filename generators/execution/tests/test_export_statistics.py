@@ -3,7 +3,7 @@ from aiodoo_datasets.generators.execution.export.export_statistics import Export
 
 
 class TestExportStatistics(unittest.TestCase):
-    def test_statistics(self):
+    def test_statistics(self) -> None:
         stats = ExportStatistics()
         stats.exported_files = 3
         stats.jsonl_records = 10

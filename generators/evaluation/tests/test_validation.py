@@ -10,7 +10,7 @@ from types import MappingProxyType
 class TestValidationFailures(unittest.TestCase):
     """Verifies that the pipeline and validators fail fast on invalid data."""
 
-    def test_pipeline_fail_fast_on_invalid_input(self):
+    def test_pipeline_fail_fast_on_invalid_input(self) -> None:
         """Ensure pipeline crashes immediately if invalid structures are produced."""
         context = PipelineContext(
             source_protocols=MappingProxyType({"coding": {"invalid": "data"}}),

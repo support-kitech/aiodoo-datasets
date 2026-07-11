@@ -22,7 +22,7 @@ from aiodoo_datasets.generators.context.ranking.rules import (
 
 
 class TestRankingRules(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.graph = ContextGraph()
 
         self.n_model = ContextNode(
@@ -91,7 +91,7 @@ class TestRankingRules(unittest.TestCase):
             ContextEdge(self.n_action.node_id, self.n_view.node_id, RelationshipType.TRIGGERS)
         )
 
-    def test_definition_rule(self):
+    def test_definition_rule(self) -> None:
         rule = DefinitionRule()
         query = Query(
             QueryType.FIND_MODEL, QueryIntent.FIND_MODEL, self.n_model.node_id, "sale.order", "NL"
@@ -102,7 +102,7 @@ class TestRankingRules(unittest.TestCase):
         self.assertEqual(results[0].score, RankingScore.DEFINITION)
         self.assertEqual(results[0].matched_rule, RankingRuleType.DEFINITION)
 
-    def test_inheritance_rule(self):
+    def test_inheritance_rule(self) -> None:
         rule = InheritanceRule()
         query = Query(
             QueryType.FIND_MODEL, QueryIntent.FIND_MODEL, self.n_model.node_id, "sale.order", "NL"
@@ -112,7 +112,7 @@ class TestRankingRules(unittest.TestCase):
         self.assertEqual(results[0].node_id, self.n_custom_model.node_id)
         self.assertEqual(results[0].score, RankingScore.INHERITANCE)
 
-    def test_dependency_rule(self):
+    def test_dependency_rule(self) -> None:
         rule = DependencyRule()
         query = Query(
             QueryType.FIND_DEPENDENCY,
@@ -126,7 +126,7 @@ class TestRankingRules(unittest.TestCase):
         self.assertEqual(results[0].node_id, self.n_manifest_stock.node_id)
         self.assertEqual(results[0].score, RankingScore.DEPENDENCY)
 
-    def test_view_rule(self):
+    def test_view_rule(self) -> None:
         rule = ViewRule()
         query = Query(
             QueryType.FIND_VIEW, QueryIntent.FIND_VIEW, self.n_field.node_id, "amount_total", "NL"
@@ -136,7 +136,7 @@ class TestRankingRules(unittest.TestCase):
         self.assertEqual(results[0].node_id, self.n_view.node_id)
         self.assertEqual(results[0].score, RankingScore.VIEW)
 
-    def test_security_rule(self):
+    def test_security_rule(self) -> None:
         rule = SecurityRule()
         query = Query(
             QueryType.FIND_SECURITY,
@@ -150,7 +150,7 @@ class TestRankingRules(unittest.TestCase):
         self.assertEqual(results[0].node_id, self.n_acl.node_id)
         self.assertEqual(results[0].score, RankingScore.SECURITY)
 
-    def test_action_rule(self):
+    def test_action_rule(self) -> None:
         rule = ActionRule()
         query = Query(
             QueryType.FIND_ACTION,

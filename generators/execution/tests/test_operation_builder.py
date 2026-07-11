@@ -7,7 +7,7 @@ from aiodoo_datasets.generators.execution.builders.results.operation_build_resul
 
 
 class TestOperationBuilder(unittest.TestCase):
-    def test_build_signature(self):
+    def test_build_signature(self) -> None:
         builder = OperationBuilder()
         ctx = Mock()
         ctx.statistics = Mock()

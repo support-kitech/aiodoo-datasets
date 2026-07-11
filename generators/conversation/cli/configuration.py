@@ -10,7 +10,7 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     """Build the pipeline context from CLI arguments."""
 
     # In a real environment, this would read actual protocols from args.source_dir
-    input_protocols = {}
+    input_protocols = {}  # type: ignore[var-annotated]
 
     metadata = MetadataBuilder.build(
         conversation_type=ConversationType.PLANNING, source_module=str(args.source_dir.name)

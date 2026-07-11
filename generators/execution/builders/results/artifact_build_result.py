@@ -4,7 +4,7 @@ from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
 
 
 @dataclass(frozen=True, slots=True)
-class ArtifactBuildResult(BaseBuildResult):
+class ArtifactBuildResult(BaseBuildResult):  # type: ignore[misc]
     """Result from the ArtifactBuilder."""
 
     artifacts: tuple[Artifact, ...]

@@ -7,10 +7,10 @@ from aiodoo_datasets.generators.conversation.protocol.domain.conversation_protoc
 )
 
 
-class ConversationStatistics(BaseStatistics):
+class ConversationStatistics(BaseStatistics):  # type: ignore[misc]
     """Tracks metrics for the Conversation Generator."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.conversations_generated = 0
         self.turns_generated = 0
@@ -42,4 +42,4 @@ class ConversationStatistics(BaseStatistics):
                 "conversation_types": self.conversation_types,
             }
         )
-        return summary
+        return summary  # type: ignore[no-any-return]

@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class CoreProtocolValidator:
     """Pluggable adapter for AIODOO Core V1 validation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # We don't strictly bind to the AIODOO Core Protocol Validator for Repair
         # because Repair uses a specialized protocol schema specifically for training.
         pass

@@ -30,9 +30,9 @@ class ExecutionOperation:
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, ExecutionOperation):
             return NotImplemented
-        return self.operation_id == other.operation_id
+        return self.operation_id == other.operation_id  # type: ignore[no-any-return]
 
     def __lt__(self, other: "ExecutionOperation") -> bool:
         if not isinstance(other, ExecutionOperation):
             return NotImplemented
-        return self.operation_id < other.operation_id
+        return self.operation_id < other.operation_id  # type: ignore[no-any-return]

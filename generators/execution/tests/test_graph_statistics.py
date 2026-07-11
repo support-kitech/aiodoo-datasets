@@ -49,7 +49,7 @@ class TestGraphStatistics(unittest.TestCase):
 
         return stats
 
-    def test_linear_graph(self):
+    def test_linear_graph(self) -> None:
         nodes = tuple(ExecutionNode(node_id=c, node_type=NodeType.STEP, payload=c) for c in "abc")
         edges = (
             ExecutionEdge(source_id="a", target_id="b", edge_type=EdgeType.DEPENDENCY),
@@ -65,7 +65,7 @@ class TestGraphStatistics(unittest.TestCase):
         self.assertEqual(stats.graph_depth, 2)
         self.assertEqual(stats.isolated_nodes, 0)
 
-    def test_diamond_graph(self):
+    def test_diamond_graph(self) -> None:
         nodes = tuple(ExecutionNode(node_id=c, node_type=NodeType.STEP, payload=c) for c in "abcd")
         edges = (
             ExecutionEdge(source_id="a", target_id="b", edge_type=EdgeType.DEPENDENCY),
@@ -81,7 +81,7 @@ class TestGraphStatistics(unittest.TestCase):
         self.assertEqual(stats.graph_width, 2)  # b and c at level 1
         self.assertEqual(stats.parallel_branches, 1)
 
-    def test_isolated_nodes(self):
+    def test_isolated_nodes(self) -> None:
         nodes = tuple(ExecutionNode(node_id=c, node_type=NodeType.STEP, payload=c) for c in "abc")
         graph = ExecutionGraph(nodes=nodes, edges=())
         stats = self._compute(graph)

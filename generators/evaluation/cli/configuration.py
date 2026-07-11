@@ -12,6 +12,6 @@ class Configuration:
         """Load configuration from a JSON file."""
         try:
             with open(config_path, "r", encoding="utf-8") as f:
-                return json.load(f)
+                return json.load(f)  # type: ignore[no-any-return]
         except Exception as e:
             raise RuntimeError(f"Failed to load configuration from {config_path}: {e}")

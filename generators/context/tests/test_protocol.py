@@ -20,7 +20,7 @@ from aiodoo_datasets.generators.context.protocol.enums import (
 
 
 class TestProtocol(unittest.TestCase):
-    def test_schema_instantiation(self):
+    def test_schema_instantiation(self) -> None:
         query = ProtocolQuery(
             query_id="q1",
             query_type=ProtocolQueryType.FIND_MODEL,
@@ -44,7 +44,7 @@ class TestProtocol(unittest.TestCase):
         self.assertEqual(task.id, "t1")
         self.assertEqual(task.metadata.protocol_version, CONTEXT_PROTOCOL_V1)
 
-    def test_missing_fields(self):
+    def test_missing_fields(self) -> None:
         with self.assertRaises(ValidationError):
             ProtocolQuery(
                 query_id="q1",
@@ -55,7 +55,7 @@ class TestProtocol(unittest.TestCase):
                 target_symbol="model",
             )
 
-    def test_protocol_equality_and_hashing(self):
+    def test_protocol_equality_and_hashing(self) -> None:
         # Test ProtocolArtifact
         a1 = ProtocolArtifact(
             node_id="n1",

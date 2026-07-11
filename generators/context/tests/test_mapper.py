@@ -21,7 +21,7 @@ from aiodoo_datasets.generators.context.protocol.mapper import ContextMapper
 
 
 class TestContextMapper(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.graph = ContextGraph()
         self.n_target = ContextNode(
             "sale.order", "sale", "models/sale.py", NodeType.MODEL, LanguageType.PYTHON
@@ -69,7 +69,7 @@ class TestContextMapper(unittest.TestCase):
 
         self.mapper = ContextMapper()
 
-    def test_mapper_subgraph_extraction(self):
+    def test_mapper_subgraph_extraction(self) -> None:
         task = self.mapper.map(self.query, self.results, self.graph)
 
         # Artifacts
@@ -92,7 +92,7 @@ class TestContextMapper(unittest.TestCase):
         self.assertEqual(task.metadata.relationship_count, 1)
         self.assertEqual(task.metadata.module, "sale")
 
-    def test_mapper_read_only(self):
+    def test_mapper_read_only(self) -> None:
         nodes_before = len(self.graph._nodes)
         edges_before = len(self.graph._edges)
 

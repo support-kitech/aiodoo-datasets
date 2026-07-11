@@ -12,7 +12,7 @@ from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
 from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
 
 
-class DefinitionRule(BaseRankingRule):
+class DefinitionRule(BaseRankingRule):  # type: ignore[misc]
     """
     Ranks direct structural definitions at the highest priority.
 
