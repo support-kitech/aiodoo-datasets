@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 
 from generators.coding.discovery import (
-    ModuleScanner,
+    ContextModuleScanner,
     OdooModule,
     OdooASTParser,
     OdooXMLParser,
@@ -103,13 +103,13 @@ class CodingPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
 
     def __init__(
         self,
-        sources_yaml: Path,
+        repository_context,
         output_dir: Path,
         workers: int = 4,
         resume: bool = False,
         reset_checkpoint: bool = False,
     ) -> None:
-        scanner = ModuleScanner(config_path=sources_yaml, cache_dir=output_dir / "cache")
+        scanner = ContextModuleScanner(repository_context)
         writer = DatasetWriter(
             output_dir=output_dir,
             stats=CodingStatistics(),

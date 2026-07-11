@@ -4,7 +4,7 @@ import logging
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
-from generators.common.discovery.scanner import ModuleScanner, OdooModule
+from generators.common.discovery.scanner import ContextModuleScanner, OdooModule
 from generators.common.discovery.ast_parser import OdooASTParser
 from generators.common.discovery.xml_parser import OdooXMLParser
 from generators.common.validation.deduplicator import Deduplicator
@@ -126,21 +126,21 @@ class ContextPipeline:
 
     def __init__(
         self,
-        config_path: str,
+        repository_context,
         output_dir: str,
         workers: int = 4,
         resume: bool = False,
         limit: int | None = None,
         target_module: str | None = None,
     ) -> None:
-        self.config_path = Path(config_path)
+        self.repository_context = repository_context
         self.output_dir = Path(output_dir)
         self.workers = workers
         self.resume = resume
         self.limit = limit
         self.target_module = target_module
 
-        self.scanner = ModuleScanner(self.config_path, self.output_dir / "cache")
+        self.scanner = ContextModuleScanner(self.repository_context)
         self.checkpoint = CheckpointManager(self.output_dir)
         self.stats = ContextStatistics()
         self.writer = DatasetWriter(

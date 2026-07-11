@@ -217,3 +217,62 @@ class ModuleScanner:
         module.module_hash = hasher.hexdigest()
         module.file_count = file_count
         module.last_modified = latest_mod
+
+
+class ContextModuleScanner:
+    """
+    Adapter that implements the discovery interface of ModuleScanner
+    but retrieves modules directly from the centralized RepositoryContext,
+    bypassing all filesystem and configuration parsing.
+    """
+
+    def __init__(self, repository_context: Any) -> None:
+        """Initialize with an already loaded RepositoryContext."""
+        self.repository_context = repository_context
+
+    def discover_modules(self) -> list[OdooModule]:
+        """Convert domain OdooModules to discovery OdooModules."""
+        modules = []
+        for repo in self.repository_context.repositories:
+            for domain_mod in repo.modules:
+                manifest_info = ManifestInfo(
+                    name=domain_mod.name,
+                    technical_name=domain_mod.technical_name,
+                    version=domain_mod.version,
+                    depends=list(domain_mod.depends),
+                    license=domain_mod.license,
+                    installable=domain_mod.installable,
+                    application=domain_mod.application,
+                    auto_install=domain_mod.auto_install,
+                    # We inject dummy values for unused UI fields since AIODOO doesn't care
+                    category="Uncategorized",
+                    summary="",
+                    description="",
+                    author="",
+                    website="",
+                    data=[],
+                    demo=[],
+                    assets={},
+                )
+                
+                mod = OdooModule(
+                    name=domain_mod.name,
+                    path=domain_mod.path,
+                    version=repo.version.value,
+                    edition=repo.repository_type.value,
+                    manifest=manifest_info,
+                    module_hash="",  # Cache hashing is now handled globally
+                    manifest_hash="",
+                    file_count=0,
+                    last_modified=0.0,
+                )
+                modules.append(mod)
+        return modules
+
+    def is_cached(self, module: OdooModule) -> bool:
+        """Caching is now transparently handled by RepositoryManager."""
+        return False
+
+    def update_cache(self, module: OdooModule) -> None:
+        """No-op. Global cache handles this."""
+        pass

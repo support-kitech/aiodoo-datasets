@@ -4,6 +4,7 @@ Discovery Layer for AIODOO Dataset Generator (Proxy).
 
 from generators.common.discovery.scanner import (
     ModuleScanner,
+    ContextModuleScanner,
     OdooModule,
     ManifestInfo,
 )
@@ -29,6 +30,7 @@ from generators.common.discovery.classifier import ScenarioClassifier, Scenario
 
 __all__ = [
     "ModuleScanner",
+    "ContextModuleScanner",
     "OdooModule",
     "ManifestInfo",
     "OdooASTParser",

@@ -26,12 +26,12 @@ class TestContextPipeline(unittest.TestCase):
         # Empty graph -> 0 queries -> 0 tasks
         self.assertEqual(len(tasks), 0)
 
-    @patch("generators.context.pipeline.ModuleScanner")
+    @patch("generators.context.pipeline.ContextModuleScanner")
     @patch("generators.context.pipeline.CheckpointManager")
     def test_pipeline_orchestration(self, mock_chkpt, mock_scanner):
         mock_scanner.return_value.discover_modules.return_value = []
 
-        pipeline = ContextPipeline(config_path="fake.yaml", output_dir="/tmp/out", workers=1)
+        pipeline = ContextPipeline(repository_context=MagicMock(), output_dir="/tmp/out", workers=1)
         pipeline.run()
 
         # Ensure it attempts discovery

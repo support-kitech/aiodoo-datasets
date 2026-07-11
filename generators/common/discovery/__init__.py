@@ -9,7 +9,7 @@ Features robust caching, strongly typed manifests, and deep multidimensional
 heuristics for production-grade dataset generation.
 """
 
-from .scanner import ModuleScanner, OdooModule, ManifestInfo
+from .scanner import ModuleScanner, ContextModuleScanner, OdooModule, ManifestInfo
 from .ast_parser import (
     OdooASTParser,
     PythonKnowledge,
@@ -32,6 +32,7 @@ from .classifier import ScenarioClassifier, Scenario
 
 __all__ = [
     "ModuleScanner",
+    "ContextModuleScanner",
     "OdooModule",
     "ManifestInfo",
     "OdooASTParser",

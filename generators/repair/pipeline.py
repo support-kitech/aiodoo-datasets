@@ -3,7 +3,7 @@
 import logging
 from pathlib import Path
 
-from generators.common.discovery.scanner import ModuleScanner, OdooModule
+from generators.common.discovery.scanner import ContextModuleScanner, OdooModule
 from generators.repair.analysis.analyzer import RepairAnalyzer
 from generators.repair.generation.instruction import generate_instruction
 from generators.repair.protocol.mapper import build_repair_payload
@@ -50,13 +50,13 @@ class RepairPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
 
     def __init__(
         self,
-        sources_yaml: Path,
+        repository_context,
         output_dir: Path,
         workers: int = 4,
         resume: bool = False,
         reset_checkpoint: bool = False,
     ) -> None:
-        scanner = ModuleScanner(config_path=sources_yaml, cache_dir=output_dir / "cache")
+        scanner = ContextModuleScanner(repository_context)
         stats = RepairStatistics()
         writer = DatasetWriter(
             output_dir=output_dir,

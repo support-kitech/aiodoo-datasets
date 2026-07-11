@@ -24,6 +24,6 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
         generator_config=gen_config,
         export_config=exp_config,
         runtime_config=rt_config,
-        discovery_result={"source_dir": args.source_dir},
+        discovery_result={"source_dir": args.source_dir, "repository_context": getattr(args, "repository_context", None)},
         pipeline_statistics=PipelineStatistics(),
     )

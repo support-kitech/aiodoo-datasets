@@ -2,7 +2,7 @@ import logging
 import unittest
 import tempfile
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from generators.context.pipeline import ContextPipeline
 from generators.common.discovery.scanner import OdooModule, ManifestInfo
@@ -58,13 +58,13 @@ class MockXMLParser:
 
 
 class TestEndToEnd(unittest.TestCase):
-    @patch("generators.context.pipeline.ModuleScanner", MockModuleScanner)
+    @patch("generators.context.pipeline.ContextModuleScanner", MockModuleScanner)
     @patch("generators.context.pipeline.OdooASTParser", MockASTParser)
     @patch("generators.context.pipeline.OdooXMLParser", MockXMLParser)
     def test_end_to_end_determinism(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             # Run 1
-            pipeline1 = ContextPipeline(config_path="fake.yaml", output_dir=tempdir, workers=1)
+            pipeline1 = ContextPipeline(repository_context=MagicMock(), output_dir=tempdir, workers=1)
             pipeline1.run()
 
             output_file = Path(tempdir) / "context_v1_0.jsonl"
@@ -77,7 +77,7 @@ class TestEndToEnd(unittest.TestCase):
             output_file.rename(Path(tempdir) / "context_v1_0_run1.jsonl")
 
             # Run 2
-            pipeline2 = ContextPipeline(config_path="fake.yaml", output_dir=tempdir, workers=1)
+            pipeline2 = ContextPipeline(repository_context=MagicMock(), output_dir=tempdir, workers=1)
             pipeline2.run()
 
             with open(output_file, "r") as f:

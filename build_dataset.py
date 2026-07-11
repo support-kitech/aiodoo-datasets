@@ -12,6 +12,9 @@ from generators.coding.pipeline import CodingPipeline
 from generators.repair.pipeline import RepairPipeline
 from generators.context.pipeline import ContextPipeline
 
+from sources.core.manager import RepositoryManager
+from sources.pipeline.pipeline_options import PipelineOptions
+
 from generators.execution.integration.pipeline import IntegrationPipeline as ExecutionPipeline
 from generators.execution.cli.configuration import build_pipeline_context as build_execution_context
 
@@ -106,11 +109,28 @@ def main() -> None:
     resume = False
     reset_checkpoint = True
 
+    # Initialize Sources Framework
+    cache_db_path = output_dir / "sources.sqlite"
+    repo_manager = RepositoryManager(cache_db_path)
+    
+    logger.info("Initializing RepositoryContext via Sources Framework...")
+    options = PipelineOptions()
+    pipeline_result = repo_manager.load(config_path, options)
+    
+    if not pipeline_result.success or pipeline_result.context is None:
+        logger.error("Failed to load RepositoryContext.")
+        for err in pipeline_result.errors:
+            logger.error(f"  - {err}")
+        sys.exit(1)
+        
+    repository_context = pipeline_result.context
+    logger.info(f"RepositoryContext loaded successfully. Repositories: {len(repository_context.repositories)}")
+
     # 1. Planner
     run_generator(
         "Planner",
         lambda: PlannerPipeline(
-            sources_yaml=config_path,
+            repository_context=repository_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -122,7 +142,7 @@ def main() -> None:
     run_generator(
         "Coding",
         lambda: CodingPipeline(
-            sources_yaml=config_path,
+            repository_context=repository_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -134,7 +154,7 @@ def main() -> None:
     run_generator(
         "Repair",
         lambda: RepairPipeline(
-            sources_yaml=config_path,
+            repository_context=repository_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -146,7 +166,7 @@ def main() -> None:
     run_generator(
         "Context",
         lambda: ContextPipeline(
-            config_path=config_path,
+            repository_context=repository_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -156,9 +176,9 @@ def main() -> None:
     )
 
     # Prepare namespace for subsequent generators
-    # Execution, Approval, Conversation expect source_dir to point to Odoo source modules
     common_ns = SimpleNamespace(
         source_dir=Path("sources"),
+        repository_context=repository_context,
         output_dir=output_dir,
         debug=False,
         fail_fast=True,
