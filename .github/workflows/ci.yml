@@ -25,23 +25,22 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install ruff mypy pyright coverage
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -e .[dev]
         
     - name: Run Ruff (Lint & Formatting)
       run: |
-        ruff check generators/execution/
-        ruff format --check generators/execution/
+        ruff check generators/
+        ruff format --check generators/
         
     - name: Run MyPy (Type Checking)
       run: |
-        mypy generators/execution/
+        mypy generators/
         
     - name: Run Pyright (Type Checking)
       run: |
-        pyright generators/execution/
+        pyright generators/
         
     - name: Run Tests with Coverage
       run: |
-        coverage run -m unittest discover -s generators/execution/tests -v
+        coverage run -m pytest generators/
         coverage report -m --fail-under=90

@@ -3,20 +3,26 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "aiodoo-execution-generator"
+name = "aiodoo-datasets"
 version = "1.0.0"
-description = "Deterministic AI dataset generator for Odoo execution graphs."
+description = "Deterministic AI dataset generators for Odoo."
 readme = "README.md"
 requires-python = ">=3.11"
 license = {file = "LICENSE"}
 authors = [
     {name = "AIODOO Team"}
 ]
-dependencies = []
+dependencies = [
+    "pydantic>=2.0.0"
+]
 
 [tool.setuptools]
 package-dir = {"aiodoo_datasets" = "."}
-packages = ["aiodoo_datasets", "aiodoo_datasets.generators", "aiodoo_datasets.tests"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["generators*", "tests*", "protocol*", "validation*", "statistics*", "cli*", "analysis*", "builders*", "domain*", "factories*", "registries*", "preprocessing*", "sources*", "config*"]
+namespaces = false
 
 [project.optional-dependencies]
 dev = [
@@ -28,7 +34,14 @@ dev = [
 ]
 
 [project.scripts]
+generate-planner = "aiodoo_datasets.generators.planner.cli.main:main"
+generate-coding = "aiodoo_datasets.generators.coding.cli.main:main"
+generate-repair = "aiodoo_datasets.generators.repair.cli.main:main"
+generate-context = "aiodoo_datasets.generators.context.cli.main:main"
 generate-execution = "aiodoo_datasets.generators.execution.cli.main:main"
+generate-approval = "aiodoo_datasets.generators.approval.cli.main:main"
+generate-conversation = "aiodoo_datasets.generators.conversation.cli.main:main"
+generate-evaluation = "aiodoo_datasets.generators.evaluation.cli.main:main"
 
 [tool.ruff]
 line-length = 100
@@ -50,13 +63,12 @@ markers = [
     "integration: marks tests as integration tests",
 ]
 testpaths = [
-    "generators/execution/tests",
-    "tests/integration",
+    "generators",
 ]
 
 [tool.coverage.run]
 branch = true
-source = ["generators/execution"]
+source = ["generators"]
 
 [tool.coverage.report]
 show_missing = true
