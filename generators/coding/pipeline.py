@@ -3,25 +3,25 @@
 import logging
 from pathlib import Path
 
-from aiodoo_datasets.generators.coding.discovery import (
+from generators.coding.discovery import (
     ModuleScanner,
     OdooModule,
     OdooASTParser,
     OdooXMLParser,
     ScenarioClassifier,
 )
-from aiodoo_datasets.generators.coding.generation.instruction import generate_instruction
-from aiodoo_datasets.generators.coding.generation.context_builder import build_context
-from aiodoo_datasets.generators.coding.generation.artifact_builder import build_artifacts
-from aiodoo_datasets.generators.coding.protocol.mapper import build_artifact_payload
-from aiodoo_datasets.generators.coding.validation.schema import CodingDatasetRecord, ArtifactPayload
-from aiodoo_datasets.generators.common.validation.deduplicator import Deduplicator
-from aiodoo_datasets.generators.coding.validation.core_validator import CoreProtocolValidator
-from aiodoo_datasets.generators.coding.export.metadata import build_metadata
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
-from aiodoo_datasets.generators.common.state.checkpoint import CheckpointManager
-from aiodoo_datasets.generators.coding.statistics.coding_statistics import CodingStatistics
-from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
+from generators.coding.generation.instruction import generate_instruction
+from generators.coding.generation.context_builder import build_context
+from generators.coding.generation.artifact_builder import build_artifacts
+from generators.coding.protocol.mapper import build_artifact_payload
+from generators.coding.validation.schema import CodingDatasetRecord, ArtifactPayload
+from generators.common.validation.deduplicator import Deduplicator
+from generators.coding.validation.core_validator import CoreProtocolValidator
+from generators.coding.export.metadata import build_metadata
+from generators.common.export.writer import DatasetWriter
+from generators.common.state.checkpoint import CheckpointManager
+from generators.coding.statistics.coding_statistics import CodingStatistics
+from generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
 
 logger = logging.getLogger(__name__)
 

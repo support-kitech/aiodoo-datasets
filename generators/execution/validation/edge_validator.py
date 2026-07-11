@@ -1,7 +1,7 @@
 """Edge integrity validator."""
 
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.results.validation_result import ValidationResult
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.results.validation_result import ValidationResult
 
 
 class EdgeValidator:

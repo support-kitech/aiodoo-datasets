@@ -6,8 +6,8 @@ from pathlib import Path
 from unittest.mock import patch
 import pytest
 
-from aiodoo_datasets.generators.repair.pipeline import RepairPipeline
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
+from generators.repair.pipeline import RepairPipeline
+from generators.common.discovery.scanner import OdooModule
 from .utils import verify_output_files
 
 @pytest.mark.integration
@@ -57,7 +57,7 @@ def test_repair_validation():
         dummy_yaml.write_text("sources: []", encoding="utf-8")
         
         # Mock scanner to return our mock module
-        with patch("aiodoo_datasets.generators.common.discovery.scanner.ModuleScanner.discover_modules") as mock_scan:
+        with patch("generators.common.discovery.scanner.ModuleScanner.discover_modules") as mock_scan:
             mock_scan.return_value = [mock_module]
             
             pipeline = RepairPipeline(
@@ -99,7 +99,7 @@ def test_repair_validation():
         output_dir_2 = tmp_path / "output_2"
         output_dir_2.mkdir()
         
-        with patch("aiodoo_datasets.generators.common.discovery.scanner.ModuleScanner.discover_modules") as mock_scan_2:
+        with patch("generators.common.discovery.scanner.ModuleScanner.discover_modules") as mock_scan_2:
             mock_scan_2.return_value = [mock_module]
             pipeline2 = RepairPipeline(
                 sources_yaml=dummy_yaml,

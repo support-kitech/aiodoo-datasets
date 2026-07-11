@@ -1,10 +1,10 @@
 """Query plugin to locate compute method logic."""
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType, RelationshipType
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
-from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.analysis.graph.enums import NodeType, RelationshipType
+from generators.context.generation.query import Query
+from generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.generation.queries.base import BaseContextQuery
 from types import MappingProxyType
 
 

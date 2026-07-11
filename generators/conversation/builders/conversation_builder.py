@@ -1,19 +1,19 @@
 """Conversation builder for Conversation Generator."""
 
 from typing import List
-from aiodoo_datasets.generators.conversation.analysis.result import AnalysisResult
-from aiodoo_datasets.generators.conversation.domain.conversation import Conversation
-from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
-from aiodoo_datasets.generators.conversation.domain.turn import Turn
-from aiodoo_datasets.generators.conversation.enums import Role
-from aiodoo_datasets.generators.conversation.builders.message_builder import MessageBuilder
-from aiodoo_datasets.generators.conversation.builders.turn_builder import TurnBuilder
-from aiodoo_datasets.generators.conversation.builders.reference_builder import ReferenceBuilder
-from aiodoo_datasets.generators.conversation.builders.attachment_builder import AttachmentBuilder
-from aiodoo_datasets.generators.conversation.factories.conversation_factory import (
+from generators.conversation.analysis.result import AnalysisResult
+from generators.conversation.domain.conversation import Conversation
+from generators.conversation.domain.metadata import ConversationMetadata
+from generators.conversation.domain.turn import Turn
+from generators.conversation.enums import Role
+from generators.conversation.builders.message_builder import MessageBuilder
+from generators.conversation.builders.turn_builder import TurnBuilder
+from generators.conversation.builders.reference_builder import ReferenceBuilder
+from generators.conversation.builders.attachment_builder import AttachmentBuilder
+from generators.conversation.factories.conversation_factory import (
     ConversationFactory,
 )
-from aiodoo_datasets.generators.conversation.factories.turn_factory import TurnFactory
+from generators.conversation.factories.turn_factory import TurnFactory
 
 
 class ConversationBuilder:

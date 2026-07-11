@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from typing import Optional
-from aiodoo_datasets.generators.evaluation.enums import AttachmentType
+from generators.evaluation.enums import AttachmentType
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,8 +1,8 @@
 """Repair-specific metrics accumulation subclass."""
 
 from collections import defaultdict
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.repair.validation.schema import RepairDatasetRecord
+from generators.common.statistics.base_statistics import BaseStatistics
+from generators.repair.validation.schema import RepairDatasetRecord
 from typing import Any
 
 

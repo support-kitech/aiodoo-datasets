@@ -1,7 +1,7 @@
 import unittest
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.builders.factories.metadata_factory import MetadataFactory
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.builders.factories.metadata_factory import MetadataFactory
+from generators.execution.builders.exceptions import FactoryError
 
 
 class TestMetadataFactory(unittest.TestCase):

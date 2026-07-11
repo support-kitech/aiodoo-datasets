@@ -1,9 +1,9 @@
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
-from aiodoo_datasets.generators.execution.analysis.knowledge.operation_knowledge import (
+from generators.execution.builders.factories.base import BaseFactory
+from generators.execution.analysis.knowledge.operation_knowledge import (
     OperationKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_operation import ExecutionOperation
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.domain.execution_operation import ExecutionOperation
+from generators.execution.builders.exceptions import FactoryError
 
 
 class OperationFactory(BaseFactory):  # type: ignore[misc]

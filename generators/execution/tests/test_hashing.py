@@ -1,16 +1,16 @@
 import unittest
-from aiodoo_datasets.generators.execution.artifacts.python_artifact import (
+from generators.execution.artifacts.python_artifact import (
     PythonArtifact,
     PythonArtifactType,
 )
-from aiodoo_datasets.generators.execution.domain.enums import OperationAction
-from aiodoo_datasets.generators.execution.domain.execution_operation import ExecutionOperation
-from aiodoo_datasets.generators.execution.domain.execution_step import ExecutionStep
-from aiodoo_datasets.generators.execution.domain.execution_plan import ExecutionPlan
-from aiodoo_datasets.generators.execution.domain.execution_metadata import ExecutionMetadata
-from aiodoo_datasets.generators.execution.environment.environment import ExecutionEnvironment
-from aiodoo_datasets.generators.execution.environment.edition import OdooEdition
-from aiodoo_datasets.generators.execution.environment.version import OdooVersion
+from generators.execution.domain.enums import OperationAction
+from generators.execution.domain.execution_operation import ExecutionOperation
+from generators.execution.domain.execution_step import ExecutionStep
+from generators.execution.domain.execution_plan import ExecutionPlan
+from generators.execution.domain.execution_metadata import ExecutionMetadata
+from generators.execution.environment.environment import ExecutionEnvironment
+from generators.execution.environment.edition import OdooEdition
+from generators.execution.environment.version import OdooVersion
 
 
 class TestHashing(unittest.TestCase):

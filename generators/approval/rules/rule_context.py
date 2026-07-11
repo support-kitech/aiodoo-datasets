@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass, field
 from typing import Tuple, Dict, Any
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.domain.evidence import Evidence
+from generators.approval.domain.metadata import ReviewMetadata
 
 
 @dataclass(frozen=True, slots=True)

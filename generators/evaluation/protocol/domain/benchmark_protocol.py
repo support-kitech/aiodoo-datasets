@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.protocol.domain.evaluation_protocol import (
+from generators.evaluation.protocol.domain.evaluation_protocol import (
     EvaluationCaseProtocol,
     MetadataProtocol,
 )

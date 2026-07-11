@@ -5,9 +5,9 @@ from pathlib import Path
 import yaml
 import pytest
 
-from aiodoo_datasets.generators.coding.pipeline import CodingPipeline
-from aiodoo_datasets.generators.coding.validation.schema import CodingDatasetRecord
-from aiodoo_datasets.generators.coding.state.checkpoint import CheckpointManager
+from generators.coding.pipeline import CodingPipeline
+from generators.coding.validation.schema import CodingDatasetRecord
+from generators.coding.state.checkpoint import CheckpointManager
 
 def setup_mock_odoo(tmp_path: Path) -> Path:
     sources_dir = tmp_path / "sources"

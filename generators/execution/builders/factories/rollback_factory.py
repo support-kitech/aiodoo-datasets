@@ -1,9 +1,9 @@
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
-from aiodoo_datasets.generators.execution.analysis.knowledge.rollback_knowledge import (
+from generators.execution.builders.factories.base import BaseFactory
+from generators.execution.analysis.knowledge.rollback_knowledge import (
     RollbackKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_rollback import ExecutionRollback
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.domain.execution_rollback import ExecutionRollback
+from generators.execution.builders.exceptions import FactoryError
 
 
 class RollbackFactory(BaseFactory):  # type: ignore[misc]

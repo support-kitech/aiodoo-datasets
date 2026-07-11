@@ -1,7 +1,7 @@
 import unittest
 import tempfile
 from pathlib import Path
-from aiodoo_datasets.generators.execution.cli.commands import run_pipeline
+from generators.execution.cli.commands import run_pipeline
 
 
 class TestEndToEnd(unittest.TestCase):

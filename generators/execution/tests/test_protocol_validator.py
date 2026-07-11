@@ -1,10 +1,10 @@
 import unittest
-from aiodoo_datasets.generators.execution.validation.protocol_validator import ProtocolValidator
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.validation.protocol_validator import ProtocolValidator
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
-from aiodoo_datasets.generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
+from generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
+from generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
 
 
 class TestProtocolValidator(unittest.TestCase):

@@ -2,8 +2,8 @@
 
 import json
 from pathlib import Path
-from aiodoo_datasets.generators.planner.statistics.planner_statistics import PlannerStatistics
-from aiodoo_datasets.generators.planner.validation.schema import PlannerDatasetRecord, PlanPayload, Analysis, TaskSpec, PlanAction
+from generators.planner.statistics.planner_statistics import PlannerStatistics
+from generators.planner.validation.schema import PlannerDatasetRecord, PlanPayload, Analysis, TaskSpec, PlanAction
 
 def test_planner_statistics_aggregation(tmp_path):
     stats = PlannerStatistics()

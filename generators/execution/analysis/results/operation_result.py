@@ -1,7 +1,7 @@
 """Operation result container."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.analysis.knowledge.operation_knowledge import (
+from generators.execution.analysis.knowledge.operation_knowledge import (
     OperationKnowledge,
 )
 

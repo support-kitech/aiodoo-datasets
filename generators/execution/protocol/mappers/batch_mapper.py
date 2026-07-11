@@ -1,9 +1,9 @@
 """Mapper for execution batches."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_batch import ExecutionBatch
-from aiodoo_datasets.generators.execution.protocol.domain.batch_protocol import BatchProtocol
-from aiodoo_datasets.generators.execution.protocol.mappers.phase_mapper import PhaseMapper
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.planning.domain.execution_batch import ExecutionBatch
+from generators.execution.protocol.domain.batch_protocol import BatchProtocol
+from generators.execution.protocol.mappers.phase_mapper import PhaseMapper
+from generators.execution.protocol.protocol_context import ProtocolContext
 
 
 class BatchMapper:

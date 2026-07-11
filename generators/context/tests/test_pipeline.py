@@ -2,13 +2,13 @@ import unittest
 from unittest.mock import patch, MagicMock
 from pathlib import Path
 
-from aiodoo_datasets.generators.context.pipeline import ContextPipeline, process_module
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule, ManifestInfo
+from generators.context.pipeline import ContextPipeline, process_module
+from generators.common.discovery.scanner import OdooModule, ManifestInfo
 
 
 class TestContextPipeline(unittest.TestCase):
-    @patch("aiodoo_datasets.generators.context.pipeline.OdooASTParser")
-    @patch("aiodoo_datasets.generators.context.pipeline.OdooXMLParser")
+    @patch("generators.context.pipeline.OdooASTParser")
+    @patch("generators.context.pipeline.OdooXMLParser")
     def test_process_module_empty(self, mock_xml, mock_ast):
         # Setup mocks to return empty knowledge
         mock_ast.return_value.parse_module.return_value = MagicMock(files={})
@@ -26,8 +26,8 @@ class TestContextPipeline(unittest.TestCase):
         # Empty graph -> 0 queries -> 0 tasks
         self.assertEqual(len(tasks), 0)
 
-    @patch("aiodoo_datasets.generators.context.pipeline.ModuleScanner")
-    @patch("aiodoo_datasets.generators.context.pipeline.CheckpointManager")
+    @patch("generators.context.pipeline.ModuleScanner")
+    @patch("generators.context.pipeline.CheckpointManager")
     def test_pipeline_orchestration(self, mock_chkpt, mock_scanner):
         mock_scanner.return_value.discover_modules.return_value = []
 

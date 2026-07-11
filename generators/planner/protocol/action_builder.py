@@ -1,6 +1,6 @@
 """Generates Protocol V1 PlanAction objects."""
 
-from aiodoo_datasets.generators.planner.validation.schema import TaskSpec, PlanAction
+from generators.planner.validation.schema import TaskSpec, PlanAction
 
 
 def build_actions(tasks: list[TaskSpec]) -> list[PlanAction]:

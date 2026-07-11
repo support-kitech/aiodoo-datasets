@@ -2,10 +2,10 @@
 
 from dataclasses import dataclass
 from typing import Any
-from aiodoo_datasets.generators.execution.config.generator_config import GeneratorConfig
-from aiodoo_datasets.generators.execution.config.export_config import ExportConfig
-from aiodoo_datasets.generators.execution.config.runtime_config import RuntimeConfig
-from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
+from generators.execution.config.generator_config import GeneratorConfig
+from generators.execution.config.export_config import ExportConfig
+from generators.execution.config.runtime_config import RuntimeConfig
+from generators.execution.integration.pipeline_statistics import PipelineStatistics
 
 
 @dataclass(frozen=True, slots=True)

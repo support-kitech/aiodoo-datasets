@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.registries.graph_registry import GraphRegistry
+from generators.execution.registries.graph_registry import GraphRegistry
 
 
 class DummyA:

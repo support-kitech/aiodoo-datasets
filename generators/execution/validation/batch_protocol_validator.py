@@ -1,7 +1,7 @@
 """Validator for batch protocol."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.batch_protocol import BatchProtocol
-from aiodoo_datasets.generators.execution.validation.phase_protocol_validator import (
+from generators.execution.protocol.domain.batch_protocol import BatchProtocol
+from generators.execution.validation.phase_protocol_validator import (
     PhaseProtocolValidator,
 )
 

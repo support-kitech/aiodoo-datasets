@@ -1,8 +1,8 @@
 """Execution protocol serialization model."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
-from aiodoo_datasets.generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
+from generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
+from generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
 
 
 @dataclass(frozen=True, slots=True)

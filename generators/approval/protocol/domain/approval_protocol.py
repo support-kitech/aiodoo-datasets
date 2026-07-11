@@ -2,11 +2,11 @@
 
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional
-from aiodoo_datasets.generators.approval.protocol.domain.finding_protocol import (
+from generators.approval.protocol.domain.finding_protocol import (
     FindingProtocol,
     RecommendationProtocol,
 )
-from aiodoo_datasets.generators.approval.protocol.domain.decision_protocol import DecisionProtocol
+from generators.approval.protocol.domain.decision_protocol import DecisionProtocol
 
 
 @dataclass(frozen=True, slots=True)

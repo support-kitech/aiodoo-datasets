@@ -1,6 +1,6 @@
 """Before export hook."""
 
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
+from generators.execution.export.export_context import ExportContext
 
 
 class BeforeExportHook:

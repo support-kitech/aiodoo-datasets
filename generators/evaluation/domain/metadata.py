@@ -1,7 +1,7 @@
 """Metadata domain model for Evaluation Generator."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.evaluation.enums import EvaluationType, DifficultyLevel
+from generators.evaluation.enums import EvaluationType, DifficultyLevel
 
 
 @dataclass(frozen=True, slots=True)

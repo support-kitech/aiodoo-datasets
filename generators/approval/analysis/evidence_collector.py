@@ -1,9 +1,9 @@
 """Evidence Collector for the Approval Generator."""
 
 from typing import List, Mapping, Any
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import ParserRegistry
-from aiodoo_datasets.generators.approval.analysis.parsers import (
+from generators.approval.domain.evidence import Evidence
+from generators.approval.analysis.parsers.parser_registry import ParserRegistry
+from generators.approval.analysis.parsers import (
     coding_parser,
     execution_parser,
     planner_parser,

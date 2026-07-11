@@ -1,6 +1,6 @@
 import unittest
 from pydantic import ValidationError
-from aiodoo_datasets.generators.context.protocol.schema import (
+from generators.context.protocol.schema import (
     ContextTask,
     ProtocolQuery,
     ProtocolMetadata,
@@ -9,8 +9,8 @@ from aiodoo_datasets.generators.context.protocol.schema import (
     ProtocolNode,
     ProtocolEdge,
 )
-from aiodoo_datasets.generators.context.protocol.constants import CONTEXT_PROTOCOL_V1
-from aiodoo_datasets.generators.context.protocol.enums import (
+from generators.context.protocol.constants import CONTEXT_PROTOCOL_V1
+from generators.context.protocol.enums import (
     ProtocolQueryType,
     ProtocolIntent,
     ProtocolNodeType,

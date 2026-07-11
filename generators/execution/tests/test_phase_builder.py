@@ -1,13 +1,13 @@
 import unittest
-from aiodoo_datasets.generators.execution.planning.builders.stage_builder import StageBuilder
-from aiodoo_datasets.generators.execution.planning.builders.phase_builder import PhaseBuilder
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
-from aiodoo_datasets.generators.execution.planning.enums import PlanningStrategyType
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.enums import NodeType
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
+from generators.execution.planning.builders.stage_builder import StageBuilder
+from generators.execution.planning.builders.phase_builder import PhaseBuilder
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.planning_statistics import PlanningStatistics
+from generators.execution.planning.enums import PlanningStrategyType
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.enums import NodeType
+from generators.execution.graph.statistics import GraphStatistics
 from types import MappingProxyType
 
 

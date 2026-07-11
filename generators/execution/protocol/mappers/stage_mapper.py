@@ -1,8 +1,8 @@
 """Mapper for execution stages."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
-from aiodoo_datasets.generators.execution.protocol.domain.stage_protocol import StageProtocol
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.planning.domain.execution_stage import ExecutionStage
+from generators.execution.protocol.domain.stage_protocol import StageProtocol
+from generators.execution.protocol.protocol_context import ProtocolContext
 
 
 class StageMapper:

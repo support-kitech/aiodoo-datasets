@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
+from generators.approval.domain.evidence import Evidence
 
 
 class BaseParser(ABC):

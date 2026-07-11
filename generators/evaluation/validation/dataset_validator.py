@@ -1,8 +1,8 @@
 """Dataset Validator for Evaluation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidationError
-from aiodoo_datasets.generators.evaluation.domain.evaluation import Evaluation
+from generators.evaluation.exceptions import EvaluationValidationError
+from generators.evaluation.domain.evaluation import Evaluation
 
 
 class DatasetValidator:

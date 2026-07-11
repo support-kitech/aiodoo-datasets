@@ -1,9 +1,9 @@
 """Evaluation Builder for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.domain.evaluation import Evaluation
-from aiodoo_datasets.generators.evaluation.domain.metadata import EvaluationMetadata
-from aiodoo_datasets.generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
-from aiodoo_datasets.generators.evaluation.factories.evaluation_factory import EvaluationFactory
+from generators.evaluation.domain.evaluation import Evaluation
+from generators.evaluation.domain.metadata import EvaluationMetadata
+from generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
+from generators.evaluation.factories.evaluation_factory import EvaluationFactory
 
 
 class EvaluationBuilder:

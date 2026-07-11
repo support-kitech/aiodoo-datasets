@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
-from aiodoo_datasets.generators.execution.builders.pipeline_executor import PipelineExecutor
-from aiodoo_datasets.generators.execution.builders.build_pipeline_context import (
+from generators.execution.builders.pipeline_executor import PipelineExecutor
+from generators.execution.builders.build_pipeline_context import (
     BuildPipelineContext,
 )
 

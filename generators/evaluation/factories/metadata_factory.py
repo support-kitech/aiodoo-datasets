@@ -1,8 +1,8 @@
 """Metadata Factory for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.domain.metadata import EvaluationMetadata
-from aiodoo_datasets.generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
-from aiodoo_datasets.generators.evaluation.enums import (
+from generators.evaluation.domain.metadata import EvaluationMetadata
+from generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
+from generators.evaluation.enums import (
     EvaluationType,
     BenchmarkCategory,
     DifficultyLevel,

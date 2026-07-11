@@ -1,10 +1,10 @@
 import unittest
 from pathlib import Path
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.export.writers.jsonl_writer import JSONLWriter
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
-from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
-from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
+from generators.execution.export.writers.jsonl_writer import JSONLWriter
+from generators.execution.export.export_context import ExportContext
+from generators.execution.export.export_statistics import ExportStatistics
+from generators.execution.protocol.protocol_result import ProtocolResult
 
 
 class TestJSONLWriter(unittest.TestCase):

@@ -1,12 +1,12 @@
-from aiodoo_datasets.generators.execution.builders.base import BaseBuilder
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.results.artifact_build_result import (
+from generators.execution.builders.base import BaseBuilder
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.results.artifact_build_result import (
     ArtifactBuildResult,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.artifact_knowledge import (
+from generators.execution.analysis.knowledge.artifact_knowledge import (
     ArtifactKnowledge,
 )
-from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
+from generators.execution.artifacts.artifact import Artifact
 
 
 class ArtifactBuilder(BaseBuilder):  # type: ignore[misc]

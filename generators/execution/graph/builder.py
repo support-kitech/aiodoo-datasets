@@ -1,13 +1,13 @@
 """Converts Phase 1 domain objects into an ExecutionGraph."""
 
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.edge import ExecutionEdge
-from aiodoo_datasets.generators.execution.graph.enums import NodeType, EdgeType
-from aiodoo_datasets.generators.execution.graph.context import GraphContext
-from aiodoo_datasets.generators.execution.graph.results.graph_build_result import GraphBuildResult
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
-from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnostics import (
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.edge import ExecutionEdge
+from generators.execution.graph.enums import NodeType, EdgeType
+from generators.execution.graph.context import GraphContext
+from generators.execution.graph.results.graph_build_result import GraphBuildResult
+from generators.execution.graph.statistics import GraphStatistics
+from generators.execution.builders.diagnostics.builder_diagnostics import (
     BuilderDiagnostics,
 )
 
@@ -20,7 +20,8 @@ class GraphBuilder:
     Never performs planning. Never sorts. Only builds the graph structure.
     """
 
-    def build(self, context: GraphContext) -> GraphBuildResult:
+    @staticmethod
+    def build(context: GraphContext) -> GraphBuildResult:
         """Deterministically builds a graph from domain steps and dependencies."""
         nodes = []
         edges = []

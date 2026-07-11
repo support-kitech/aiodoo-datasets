@@ -3,8 +3,8 @@
 from dataclasses import dataclass
 from typing import Tuple, Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.conversation.domain.reference import Reference
-from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
+from generators.conversation.domain.reference import Reference
+from generators.conversation.domain.attachment import Attachment
 
 
 @dataclass(frozen=True, slots=True)

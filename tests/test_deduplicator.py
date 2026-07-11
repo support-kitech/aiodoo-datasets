@@ -1,11 +1,11 @@
 """Tests for Planner Dataset Deduplication."""
 
 from pathlib import Path
-from aiodoo_datasets.generators.planner.validation.deduplicator import Deduplicator
-from aiodoo_datasets.generators.planner.export.metadata import compute_protocol_hash
-from aiodoo_datasets.generators.planner.discovery.scanner import OdooModule, ManifestInfo
-from aiodoo_datasets.generators.planner.discovery.classifier import Scenario
-from aiodoo_datasets.generators.planner.validation.schema import PlanPayload, Analysis, TaskSpec, PlanAction
+from generators.planner.validation.deduplicator import Deduplicator
+from generators.planner.export.metadata import compute_protocol_hash
+from generators.planner.discovery.scanner import OdooModule, ManifestInfo
+from generators.planner.discovery.classifier import Scenario
+from generators.planner.validation.schema import PlanPayload, Analysis, TaskSpec, PlanAction
 
 def test_protocol_hash_determinism():
     mod = OdooModule(

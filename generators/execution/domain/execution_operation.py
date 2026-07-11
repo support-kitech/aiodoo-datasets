@@ -2,9 +2,9 @@
 
 from dataclasses import dataclass
 from typing import Any
-from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
-from aiodoo_datasets.generators.execution.domain.enums import OperationAction
-from aiodoo_datasets.generators.execution.domain.types import OperationId
+from generators.execution.artifacts.artifact import Artifact
+from generators.execution.domain.enums import OperationAction
+from generators.execution.domain.types import OperationId
 
 
 @dataclass(frozen=True)

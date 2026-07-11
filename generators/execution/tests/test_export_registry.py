@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.registries.export_registry import ExportRegistry
-from aiodoo_datasets.generators.execution.export.writers.jsonl_writer import JSONLWriter
+from generators.execution.registries.export_registry import ExportRegistry
+from generators.execution.export.writers.jsonl_writer import JSONLWriter
 
 
 class TestExportRegistry(unittest.TestCase):

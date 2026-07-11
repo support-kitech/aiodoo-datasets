@@ -1,9 +1,9 @@
 import unittest
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.edge import ExecutionEdge
-from aiodoo_datasets.generators.execution.graph.enums import NodeType, EdgeType, TraversalStrategy
-from aiodoo_datasets.generators.execution.graph.traversal import GraphTraversal
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.edge import ExecutionEdge
+from generators.execution.graph.enums import NodeType, EdgeType, TraversalStrategy
+from generators.execution.graph.traversal import GraphTraversal
 
 
 class TestGraphTraversal(unittest.TestCase):

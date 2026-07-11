@@ -1,9 +1,9 @@
 """Base interface for Ranking Rules."""
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.generation.query import Query, QueryType
-from aiodoo_datasets.generators.context.ranking.enums import RankingRuleType
-from aiodoo_datasets.generators.context.ranking.result import RankingResult
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.generation.query import Query, QueryType
+from generators.context.ranking.enums import RankingRuleType
+from generators.context.ranking.result import RankingResult
 
 
 class BaseRankingRule:

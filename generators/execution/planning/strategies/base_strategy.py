@@ -1,8 +1,8 @@
 """Base interface for planning strategies."""
 
 import abc
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.planning_result import PlanningResult
 
 
 class BasePlanningStrategy(abc.ABC):

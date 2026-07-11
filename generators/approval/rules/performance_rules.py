@@ -1,9 +1,9 @@
 """Performance rules for the Approval Generator."""
 
-from aiodoo_datasets.generators.approval.rules.base_rule import BaseRule
-from aiodoo_datasets.generators.approval.rules.rule_context import RuleContext
-from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
-from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
+from generators.approval.rules.base_rule import BaseRule
+from generators.approval.rules.rule_context import RuleContext
+from generators.approval.rules.rule_result import RuleResult
+from generators.approval.enums import RuleCategory, Severity
 
 
 class NPlusOneQueryRule(BaseRule):  # type: ignore[misc]

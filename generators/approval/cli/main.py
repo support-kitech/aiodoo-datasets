@@ -1,7 +1,7 @@
 """Main CLI entrypoint."""
 
 import sys
-from aiodoo_datasets.generators.approval.cli.commands import run_pipeline
+from generators.approval.cli.commands import run_pipeline
 
 
 def main() -> int:

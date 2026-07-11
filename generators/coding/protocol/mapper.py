@@ -1,9 +1,9 @@
 """Assembles the final Artifact Protocol V1 payload."""
 
-from aiodoo_datasets.generators.coding.discovery import OdooModule, Scenario
-from aiodoo_datasets.generators.coding.validation.schema import ArtifactPayload
-from aiodoo_datasets.generators.coding.protocol.operation_builder import build_operations
-from aiodoo_datasets.generators.coding.protocol.validation_mapper import build_validation_actions
+from generators.coding.discovery import OdooModule, Scenario
+from generators.coding.validation.schema import ArtifactPayload
+from generators.coding.protocol.operation_builder import build_operations
+from generators.coding.protocol.validation_mapper import build_validation_actions
 
 
 def build_artifact_payload(  # type: ignore[no-untyped-def]

@@ -2,8 +2,8 @@
 
 import hashlib
 from typing import Optional
-from aiodoo_datasets.generators.evaluation.domain.attachment import EvaluationAttachment
-from aiodoo_datasets.generators.evaluation.enums import AttachmentType
+from generators.evaluation.domain.attachment import EvaluationAttachment
+from generators.evaluation.enums import AttachmentType
 
 
 class AttachmentFactory:

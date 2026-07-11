@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.enums import BenchmarkCategory
+from generators.evaluation.enums import BenchmarkCategory
 
 
 @dataclass(frozen=True, slots=True)

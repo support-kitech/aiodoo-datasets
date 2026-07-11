@@ -2,11 +2,11 @@
 
 import json
 from dataclasses import asdict
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.results.serializer_result import SerializerResult
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.results.serializer_result import SerializerResult
 
 
 class ProtocolSerializer:

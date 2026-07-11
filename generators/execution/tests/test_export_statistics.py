@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
+from generators.execution.export.export_statistics import ExportStatistics
 
 
 class TestExportStatistics(unittest.TestCase):

@@ -1,7 +1,7 @@
 """Determinism Tests for Evaluation Generator."""
 
 import unittest
-from aiodoo_datasets.generators.evaluation import api
+from generators.evaluation import api
 
 
 class TestEvaluationDeterminism(unittest.TestCase):
@@ -22,12 +22,12 @@ class TestEvaluationDeterminism(unittest.TestCase):
         # Run 1
         result1 = api.generate(config)
         dataset1_dump = [proto.model_dump() for proto in result1.dataset]
-        stats1_dump = dict(result1.statistics)
-
+        stats1_dump = {k: v.get_export_stats() if hasattr(v, "get_export_stats") else dict(v) for k, v in result1.statistics.items()}
+    
         # Run 2
         result2 = api.generate(config)
         dataset2_dump = [proto.model_dump() for proto in result2.dataset]
-        stats2_dump = dict(result2.statistics)
+        stats2_dump = {k: v.get_export_stats() if hasattr(v, "get_export_stats") else dict(v) for k, v in result2.statistics.items()}
 
         # Verify deterministic IDs, orderings, and content
         self.assertEqual(dataset1_dump, dataset2_dump)

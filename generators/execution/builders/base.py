@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.results.base import BaseBuildResult
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.results.base import BaseBuildResult
 
 
 class BaseBuilder(ABC):

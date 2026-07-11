@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.builders.results.base import BaseBuildResult
-from aiodoo_datasets.generators.execution.domain.execution_constraint import ExecutionConstraint
+from generators.execution.builders.results.base import BaseBuildResult
+from generators.execution.domain.execution_constraint import ExecutionConstraint
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,8 +1,8 @@
 """CLI commands for Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.cli.arguments import parse_args
-from aiodoo_datasets.generators.conversation.cli.configuration import build_pipeline_context
-from aiodoo_datasets.generators.conversation.pipeline import ConversationPipeline
+from generators.conversation.cli.arguments import parse_args
+from generators.conversation.cli.configuration import build_pipeline_context
+from generators.conversation.pipeline import ConversationPipeline
 
 
 def run_pipeline(args: list[str] | None = None) -> int:

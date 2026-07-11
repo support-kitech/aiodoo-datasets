@@ -1,7 +1,7 @@
 """DFS-based cycle detection for ExecutionGraph."""
 
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.exceptions import CycleDetectedError
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.exceptions import CycleDetectedError
 
 
 class CycleDetector:

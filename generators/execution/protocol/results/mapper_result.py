@@ -1,7 +1,7 @@
 """Mapper result objects."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
 

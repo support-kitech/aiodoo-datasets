@@ -1,10 +1,10 @@
 """Non-mutating graph traversal supporting multiple strategies."""
 
 from collections import deque
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode, NodeId
-from aiodoo_datasets.generators.execution.graph.enums import TraversalStrategy, EdgeType
-from aiodoo_datasets.generators.execution.graph.results.traversal_result import TraversalResult
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode, NodeId
+from generators.execution.graph.enums import TraversalStrategy, EdgeType
+from generators.execution.graph.results.traversal_result import TraversalResult
 
 
 class GraphTraversal:

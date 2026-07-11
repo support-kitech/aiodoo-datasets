@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
-from aiodoo_datasets.generators.execution.builders.dependency_builder import DependencyBuilder
-from aiodoo_datasets.generators.execution.builders.results.dependency_build_result import (
+from generators.execution.builders.dependency_builder import DependencyBuilder
+from generators.execution.builders.results.dependency_build_result import (
     DependencyBuildResult,
 )
 

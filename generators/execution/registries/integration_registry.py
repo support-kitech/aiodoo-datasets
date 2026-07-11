@@ -1,6 +1,6 @@
 """Static registry for integration pipeline components."""
 
-from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
+from generators.execution.registries.base import BaseRegistry
 
 
 class IntegrationRegistry(BaseRegistry):  # type: ignore[misc]

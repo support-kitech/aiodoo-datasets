@@ -1,7 +1,7 @@
 """Validator for phase protocol."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.phase_protocol import PhaseProtocol
-from aiodoo_datasets.generators.execution.validation.stage_protocol_validator import (
+from generators.execution.protocol.domain.phase_protocol import PhaseProtocol
+from generators.execution.validation.stage_protocol_validator import (
     StageProtocolValidator,
 )
 

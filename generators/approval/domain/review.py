@@ -2,11 +2,11 @@
 
 from dataclasses import dataclass, field
 from typing import Tuple
-from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.domain.recommendation import Recommendation
-from aiodoo_datasets.generators.approval.domain.decision import Decision
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.domain.finding import Finding
+from generators.approval.domain.recommendation import Recommendation
+from generators.approval.domain.decision import Decision
+from generators.approval.domain.evidence import Evidence
+from generators.approval.domain.metadata import ReviewMetadata
 
 
 @dataclass(frozen=True, slots=True)

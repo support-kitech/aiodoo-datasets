@@ -1,6 +1,6 @@
 import unittest
 
-from aiodoo_datasets.generators.context.analysis.graph import (
+from generators.context.analysis.graph import (
     ContextNode,
     ContextEdge,
     ContextGraph,
@@ -8,16 +8,16 @@ from aiodoo_datasets.generators.context.analysis.graph import (
     LanguageType,
     RelationshipType,
 )
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
-from aiodoo_datasets.generators.context.ranking.enums import (
+from generators.context.generation.query import Query
+from generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.ranking.enums import (
     RankingRuleType,
     RankingScore,
     RankingReason,
 )
-from aiodoo_datasets.generators.context.ranking.result import RankingResult
-from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
-from aiodoo_datasets.generators.context.protocol.mapper import ContextMapper
+from generators.context.ranking.result import RankingResult
+from generators.context.ranking.utils import freeze_metadata
+from generators.context.protocol.mapper import ContextMapper
 
 
 class TestContextMapper(unittest.TestCase):

@@ -1,8 +1,8 @@
 """Constraint Analyzer implementation."""
 
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.results.constraint_result import ConstraintResult
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.results.constraint_result import ConstraintResult
 
 
 class ConstraintAnalyzer(BaseAnalyzer):  # type: ignore[misc]

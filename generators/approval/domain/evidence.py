@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
+from generators.approval.domain.source_generator import SourceGenerator
 
 
 @dataclass(frozen=True, slots=True)

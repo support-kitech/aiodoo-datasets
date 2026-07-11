@@ -1,7 +1,7 @@
 """Planning validator."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_plan import PlannedExecution
-from aiodoo_datasets.generators.execution.validation.schedule_validator import ScheduleValidator
+from generators.execution.planning.domain.execution_plan import PlannedExecution
+from generators.execution.validation.schedule_validator import ScheduleValidator
 
 
 class PlanningValidator:

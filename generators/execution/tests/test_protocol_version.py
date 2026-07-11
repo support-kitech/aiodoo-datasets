@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.protocol import version
+from generators.execution.protocol import version
 
 
 class TestProtocolVersion(unittest.TestCase):

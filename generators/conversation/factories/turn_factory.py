@@ -2,9 +2,9 @@
 
 import hashlib
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.domain.turn import Turn
-from aiodoo_datasets.generators.conversation.domain.message import Message
-from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
+from generators.conversation.domain.turn import Turn
+from generators.conversation.domain.message import Message
+from generators.conversation.domain.attachment import Attachment
 
 
 class TurnFactory:

@@ -1,7 +1,7 @@
 """Reference Validator for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidationError
-from aiodoo_datasets.generators.evaluation.domain.reference import Reference
+from generators.evaluation.exceptions import EvaluationValidationError
+from generators.evaluation.domain.reference import Reference
 
 
 class ReferenceValidator:

@@ -1,18 +1,18 @@
 """Unit tests for ApprovalStatistics."""
 
 import unittest
-from aiodoo_datasets.generators.approval.statistics.approval_statistics import ApprovalStatistics
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.domain.decision import Decision
-from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.enums import (
+from generators.approval.statistics.approval_statistics import ApprovalStatistics
+from generators.approval.domain.review import Review
+from generators.approval.domain.decision import Decision
+from generators.approval.domain.finding import Finding
+from generators.approval.enums import (
     DecisionEnum,
     ConfidenceLevel,
     RuleCategory,
     Severity,
 )
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.rules.rule_set import RuleSet
 
 
 class TestApprovalStatistics(unittest.TestCase):

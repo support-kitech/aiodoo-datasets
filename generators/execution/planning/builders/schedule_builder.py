@@ -1,9 +1,9 @@
 """Schedule builder."""
 
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.results.batch_result import BatchResult
-from aiodoo_datasets.generators.execution.planning.results.schedule_result import ScheduleResult
-from aiodoo_datasets.generators.execution.planning.domain.execution_schedule import (
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.results.batch_result import BatchResult
+from generators.execution.planning.results.schedule_result import ScheduleResult
+from generators.execution.planning.domain.execution_schedule import (
     ExecutionSchedule,
 )
 

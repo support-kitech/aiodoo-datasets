@@ -1,8 +1,8 @@
 """Criteria Builder for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.domain.success_criteria import SuccessCriteria
-from aiodoo_datasets.generators.evaluation.domain.failure_criteria import FailureCriteria
-from aiodoo_datasets.generators.evaluation.factories.criteria_factory import CriteriaFactory
+from generators.evaluation.domain.success_criteria import SuccessCriteria
+from generators.evaluation.domain.failure_criteria import FailureCriteria
+from generators.evaluation.factories.criteria_factory import CriteriaFactory
 
 
 class CriteriaBuilder:

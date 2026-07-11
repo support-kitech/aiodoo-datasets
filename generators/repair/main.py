@@ -1,8 +1,8 @@
 """CLI Entrypoint for the Repair Generator."""
 
 import sys
-from aiodoo_datasets.generators.common.cli.arguments import build_parser
-from aiodoo_datasets.generators.repair.pipeline import RepairPipeline
+from generators.common.cli.arguments import build_parser
+from generators.repair.pipeline import RepairPipeline
 
 
 def main():  # type: ignore[no-untyped-def]

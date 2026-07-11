@@ -1,10 +1,10 @@
 """CLI configuration builder."""
 
 import argparse
-from aiodoo_datasets.generators.approval.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.approval.config.approval_config import ApprovalConfig
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.rules.registry import RuleRegistry
+from generators.approval.pipeline_context import PipelineContext
+from generators.approval.config.approval_config import ApprovalConfig
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.rules.registry import RuleRegistry
 
 
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:

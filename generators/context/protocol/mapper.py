@@ -3,11 +3,11 @@
 import hashlib
 import logging
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.ranking.result import RankingResult
-from aiodoo_datasets.generators.context.protocol.schema import ContextTask, ProtocolGraph
-from aiodoo_datasets.generators.context.protocol.mapping import (
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.generation.query import Query
+from generators.context.ranking.result import RankingResult
+from generators.context.protocol.schema import ContextTask, ProtocolGraph
+from generators.context.protocol.mapping import (
     map_query,
     map_artifact,
     map_node,

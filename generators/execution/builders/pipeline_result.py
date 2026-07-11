@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.builders.results.base import BaseBuildResult
-from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnostics import (
+from generators.execution.builders.results.base import BaseBuildResult
+from generators.execution.builders.diagnostics.builder_diagnostics import (
     BuilderDiagnostics,
 )
-from aiodoo_datasets.generators.execution.statistics.builder_statistics import BuilderStatistics
+from generators.execution.statistics.builder_statistics import BuilderStatistics
 
 
 @dataclass(frozen=True, slots=True)

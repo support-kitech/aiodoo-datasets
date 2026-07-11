@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.context.statistics.context_statistics import ContextStatistics
-from aiodoo_datasets.generators.context.protocol.schema import (
+from generators.context.statistics.context_statistics import ContextStatistics
+from generators.context.protocol.schema import (
     ContextTask,
     ProtocolQuery,
     ProtocolArtifact,
@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.context.protocol.schema import (
     ProtocolGraph,
     ProtocolMetadata,
 )
-from aiodoo_datasets.generators.context.protocol.enums import (
+from generators.context.protocol.enums import (
     ProtocolQueryType,
     ProtocolIntent,
     ProtocolNodeType,

@@ -5,8 +5,8 @@ import random
 from pathlib import Path
 import yaml
 
-from aiodoo_datasets.generators.planner.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.planner.discovery.classifier import Scenario
+from generators.common.discovery.scanner import OdooModule
+from generators.common.discovery.classifier import Scenario
 
 logger = logging.getLogger(__name__)
 

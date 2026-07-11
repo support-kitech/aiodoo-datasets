@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from pathlib import Path
-from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
+from generators.execution.export.export_statistics import ExportStatistics
 
 
 @dataclass(frozen=True, slots=True)

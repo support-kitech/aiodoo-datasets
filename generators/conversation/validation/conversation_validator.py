@@ -1,9 +1,9 @@
 """Conversation validator for Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.exceptions import ConversationValidationError
-from aiodoo_datasets.generators.conversation.domain.conversation import Conversation
-from aiodoo_datasets.generators.conversation.validation.message_validator import MessageValidator
-from aiodoo_datasets.generators.conversation.validation.reference_validator import (
+from generators.conversation.exceptions import ConversationValidationError
+from generators.conversation.domain.conversation import Conversation
+from generators.conversation.validation.message_validator import MessageValidator
+from generators.conversation.validation.reference_validator import (
     ReferenceValidator,
 )
 

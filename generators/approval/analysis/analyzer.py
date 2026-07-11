@@ -1,8 +1,8 @@
 """Analyzer for the Approval Generator."""
 
-from aiodoo_datasets.generators.approval.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.approval.analysis.result import AnalysisResult
-from aiodoo_datasets.generators.approval.analysis.evidence_collector import EvidenceCollector
+from generators.approval.analysis.context import AnalysisContext
+from generators.approval.analysis.result import AnalysisResult
+from generators.approval.analysis.evidence_collector import EvidenceCollector
 
 
 class ApprovalAnalyzer:

@@ -7,8 +7,8 @@ from typing import Generic, TypeVar
 
 import hashlib
 from pydantic import BaseModel
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.common.export.manifest import generate_manifest
+from generators.common.statistics.base_statistics import BaseStatistics
+from generators.common.export.manifest import generate_manifest
 
 logger = logging.getLogger(__name__)
 

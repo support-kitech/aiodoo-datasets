@@ -1,23 +1,23 @@
 """Mapping utilities for Context Protocol V1."""
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.ranking.result import RankingResult
-from aiodoo_datasets.generators.context.protocol.schema import (
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.generation.query import Query
+from generators.context.ranking.result import RankingResult
+from generators.context.protocol.schema import (
     ProtocolQuery,
     ProtocolArtifact,
     ProtocolNode,
     ProtocolEdge,
     ProtocolMetadata,
 )
-from aiodoo_datasets.generators.context.protocol.enums import (
+from generators.context.protocol.enums import (
     ProtocolQueryType,
     ProtocolIntent,
     ProtocolNodeType,
     ProtocolLanguage,
     ProtocolRankingReason,
 )
-from aiodoo_datasets.generators.context.protocol.constants import (
+from generators.context.protocol.constants import (
     CONTEXT_PROTOCOL_V1,
     GENERATOR_NAME,
 )

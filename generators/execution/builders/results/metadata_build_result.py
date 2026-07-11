@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Any
-from aiodoo_datasets.generators.execution.builders.results.base import BaseBuildResult
+from generators.execution.builders.results.base import BaseBuildResult
 
 
 @dataclass(frozen=True, slots=True)

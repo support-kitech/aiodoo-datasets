@@ -1,8 +1,8 @@
 """Dependency Analyzer implementation."""
 
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.results.dependency_result import DependencyResult
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.results.dependency_result import DependencyResult
 
 
 class DependencyAnalyzer(BaseAnalyzer):  # type: ignore[misc]

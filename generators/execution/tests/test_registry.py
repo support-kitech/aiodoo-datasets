@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
-from aiodoo_datasets.generators.execution.registries.analyzer_registry import AnalyzerRegistry
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
+from generators.execution.registries.analyzer_registry import AnalyzerRegistry
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.context import AnalysisContext
 
 
 class DummyAnalyzer1(BaseAnalyzer):
@@ -34,7 +34,7 @@ class TestAnalyzerRegistry(unittest.TestCase):
         self.assertEqual(priorities, sorted(priorities))
 
     @patch(
-        "aiodoo_datasets.generators.execution.registries.analyzer_registry._REGISTERED_ANALYZERS",
+        "generators.execution.registries.analyzer_registry._REGISTERED_ANALYZERS",
         (DummyAnalyzer1, DummyAnalyzer2),
     )
     def test_duplicate_priority_rejected(self) -> None:
@@ -42,7 +42,7 @@ class TestAnalyzerRegistry(unittest.TestCase):
             AnalyzerRegistry.get_analyzers()
 
     @patch(
-        "aiodoo_datasets.generators.execution.registries.analyzer_registry._REGISTERED_ANALYZERS",
+        "generators.execution.registries.analyzer_registry._REGISTERED_ANALYZERS",
         (DummyAnalyzer3,),
     )
     def test_missing_priority_rejected(self) -> None:

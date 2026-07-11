@@ -4,8 +4,8 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from aiodoo_datasets.generators.context.pipeline import ContextPipeline
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule, ManifestInfo
+from generators.context.pipeline import ContextPipeline
+from generators.common.discovery.scanner import OdooModule, ManifestInfo
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -31,7 +31,7 @@ class MockModuleScanner:
 
 class MockASTParser:
     def parse_module(self, path):
-        from aiodoo_datasets.generators.common.discovery.ast_parser import (
+        from generators.common.discovery.ast_parser import (
             ModuleKnowledgeList,
             PythonKnowledge,
             OdooModelDef,
@@ -45,7 +45,7 @@ class MockASTParser:
 
 class MockXMLParser:
     def parse_module(self, path):
-        from aiodoo_datasets.generators.common.discovery.xml_parser import (
+        from generators.common.discovery.xml_parser import (
             ModuleKnowledgeList,
             XMLKnowledge,
             OdooViewDef,
@@ -58,9 +58,9 @@ class MockXMLParser:
 
 
 class TestEndToEnd(unittest.TestCase):
-    @patch("aiodoo_datasets.generators.context.pipeline.ModuleScanner", MockModuleScanner)
-    @patch("aiodoo_datasets.generators.context.pipeline.OdooASTParser", MockASTParser)
-    @patch("aiodoo_datasets.generators.context.pipeline.OdooXMLParser", MockXMLParser)
+    @patch("generators.context.pipeline.ModuleScanner", MockModuleScanner)
+    @patch("generators.context.pipeline.OdooASTParser", MockASTParser)
+    @patch("generators.context.pipeline.OdooXMLParser", MockXMLParser)
     def test_end_to_end_determinism(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             # Run 1

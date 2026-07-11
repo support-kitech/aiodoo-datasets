@@ -5,7 +5,7 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
 
-from aiodoo_datasets.generators.repair.validation.schema import RepairSeverity, ArtifactType
+from generators.repair.validation.schema import RepairSeverity, ArtifactType
 
 
 @dataclass

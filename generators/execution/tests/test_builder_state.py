@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.builders.builder_state import BuilderState
+from generators.execution.builders.builder_state import BuilderState
 
 
 class TestBuilderState(unittest.TestCase):

@@ -1,26 +1,26 @@
 """Integration pipeline orchestrator."""
 
 import time
-from aiodoo_datasets.generators.execution.integration.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.execution.integration.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
-from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
-from aiodoo_datasets.generators.execution.export.exporter import Exporter
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
-from aiodoo_datasets.generators.execution.protocol.protocol import Protocol
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
-from aiodoo_datasets.generators.execution.planning.planner import Planner
-from aiodoo_datasets.generators.execution.graph.context import GraphContext
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
-from aiodoo_datasets.generators.execution.graph.builder import GraphBuilder
-from aiodoo_datasets.generators.execution.builders.build_pipeline_context import (
+from generators.execution.integration.pipeline_context import PipelineContext
+from generators.execution.integration.pipeline_result import PipelineResult
+from generators.execution.export.export_context import ExportContext
+from generators.execution.export.export_statistics import ExportStatistics
+from generators.execution.export.exporter import Exporter
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.protocol.protocol import Protocol
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.planning_statistics import PlanningStatistics
+from generators.execution.planning.planner import Planner
+from generators.execution.graph.context import GraphContext
+from generators.execution.graph.statistics import GraphStatistics
+from generators.execution.graph.builder import GraphBuilder
+from generators.execution.builders.build_pipeline_context import (
     BuildPipelineContext,
 )
-from aiodoo_datasets.generators.execution.builders.build_pipeline import BuildPipeline
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.execution_analyzer import ExecutionAnalyzer
+from generators.execution.builders.build_pipeline import BuildPipeline
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.execution_analyzer import ExecutionAnalyzer
 
 
 class IntegrationPipeline:
@@ -59,6 +59,7 @@ class IntegrationPipeline:
 
         # 3. Builders
         build_start = time.time()
+        build_ctx = None
         try:
             build_ctx = BuildPipelineContext(
                 execution_knowledge=analysis_result.knowledge if analysis_result else None,
@@ -79,8 +80,10 @@ class IntegrationPipeline:
         graph_start = time.time()
         try:
             graph_ctx = GraphContext(
-                build_result=build_result,
-                configuration=context.generator_config.custom_settings,
+                builder_context=build_ctx,
+                domain_steps=build_result.steps if build_result and hasattr(build_result, "steps") else (),
+                domain_dependencies=build_result.dependencies if build_result and hasattr(build_result, "dependencies") else (),
+                config=dict(context.generator_config.custom_settings),
                 statistics=GraphStatistics(),
             )
             graph_result = GraphBuilder.build(graph_ctx)
@@ -91,17 +94,20 @@ class IntegrationPipeline:
                     statistics=context.pipeline_statistics,
                 )
         except Exception:
+            import traceback
+            traceback.print_exc()
             graph_result = None
         context.pipeline_statistics.phase_execution_times["GRAPH"] = time.time() - graph_start
 
         # 5. Planning
         planning_start = time.time()
         try:
+            from generators.execution.planning.enums import PlanningStrategyType
             planning_ctx = PlanningContext(
-                execution_graph=graph_result.graph if graph_result else None,
+                graph=graph_result.graph if graph_result else None,
                 graph_statistics=graph_result.statistics if graph_result else None,
                 configuration=context.generator_config.custom_settings,
-                planning_strategy="sequential",
+                strategy=PlanningStrategyType.SEQUENTIAL,
                 planning_statistics=PlanningStatistics(),
             )
             planning_result = Planner.plan(planning_ctx)
@@ -112,7 +118,9 @@ class IntegrationPipeline:
                     statistics=context.pipeline_statistics,
                 )
         except Exception:
-            from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
+            import traceback
+            traceback.print_exc()
+            from generators.execution.planning.planning_result import PlanningResult
 
             planning_result = PlanningResult(success=True)
         context.pipeline_statistics.phase_execution_times["PLANNING"] = time.time() - planning_start
@@ -137,7 +145,7 @@ class IntegrationPipeline:
                     statistics=context.pipeline_statistics,
                 )
         except Exception:
-            from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
+            from generators.execution.protocol.protocol_result import ProtocolResult
 
             protocol_result = ProtocolResult(success=True)
         context.pipeline_statistics.phase_execution_times["PROTOCOL"] = time.time() - protocol_start
@@ -164,7 +172,7 @@ class IntegrationPipeline:
                     statistics=context.pipeline_statistics,
                 )
         except Exception:
-            from aiodoo_datasets.generators.execution.export.export_result import ExportResult
+            from generators.execution.export.export_result import ExportResult
 
             export_result = ExportResult(success=True)
         context.pipeline_statistics.phase_execution_times["EXPORT"] = time.time() - export_start
@@ -184,7 +192,7 @@ class IntegrationPipeline:
         )
 
         # Validate End-to-End
-        from aiodoo_datasets.generators.execution.validation.pipeline_validator import (
+        from generators.execution.validation.pipeline_validator import (
             PipelineValidator,
         )
 

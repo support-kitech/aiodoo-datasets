@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any
 
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.generation.enums import QueryType, QueryIntent
 
 
 @dataclass(frozen=True)

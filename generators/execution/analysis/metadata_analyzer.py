@@ -1,7 +1,7 @@
 """Metadata Analyzer implementation."""
 
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.context import AnalysisContext
 from typing import Any
 
 

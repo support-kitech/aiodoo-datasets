@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from typing import Dict, Any
-from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
+from generators.conversation.domain.metadata import ConversationMetadata
 
 
 @dataclass(frozen=True)

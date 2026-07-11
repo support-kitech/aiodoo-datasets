@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.evaluation_case import EvaluationCase
+from generators.evaluation.domain.evaluation_case import EvaluationCase
 
 
 @dataclass(frozen=True, slots=True)

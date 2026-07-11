@@ -1,10 +1,10 @@
 """Coding parser for the Approval Generator."""
 
 from typing import Dict, Any, List
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
-from aiodoo_datasets.generators.approval.analysis.parsers.base_parser import BaseParser
-from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import ParserRegistry
+from generators.approval.domain.evidence import Evidence
+from generators.approval.domain.source_generator import SourceGenerator
+from generators.approval.analysis.parsers.base_parser import BaseParser
+from generators.approval.analysis.parsers.parser_registry import ParserRegistry
 
 
 @ParserRegistry.register("coding_data")

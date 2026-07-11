@@ -1,7 +1,7 @@
 """Immutable representation of the final execution plan from the Planning Engine."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.planning.domain.execution_schedule import (
+from generators.execution.planning.domain.execution_schedule import (
     ExecutionSchedule,
 )
 

@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.registries.planning_registry import PlanningRegistry
-from aiodoo_datasets.generators.execution.planning.builders.stage_builder import StageBuilder
+from generators.execution.registries.planning_registry import PlanningRegistry
+from generators.execution.planning.builders.stage_builder import StageBuilder
 
 
 class TestPlanningRegistry(unittest.TestCase):

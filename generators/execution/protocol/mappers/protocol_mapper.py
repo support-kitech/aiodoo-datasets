@@ -1,12 +1,12 @@
 """Mapper for execution protocol."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.protocol.mappers.schedule_mapper import ScheduleMapper
-from aiodoo_datasets.generators.execution.protocol.mappers.metadata_mapper import MetadataMapper
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.results.mapper_result import MapperResult
+from generators.execution.protocol.mappers.schedule_mapper import ScheduleMapper
+from generators.execution.protocol.mappers.metadata_mapper import MetadataMapper
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.results.mapper_result import MapperResult
 
 
 class ProtocolMapper:

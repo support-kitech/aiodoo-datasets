@@ -1,8 +1,8 @@
 """Expected Output Builder for Evaluation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.expected_output import ExpectedOutput
-from aiodoo_datasets.generators.evaluation.factories.expected_output_factory import (
+from generators.evaluation.domain.expected_output import ExpectedOutput
+from generators.evaluation.factories.expected_output_factory import (
     ExpectedOutputFactory,
 )
 

@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any
 
-from aiodoo_datasets.generators.context.ranking.enums import (
+from generators.context.ranking.enums import (
     RankingRuleType,
     RankingScore,
     RankingReason,

@@ -1,8 +1,8 @@
 """Ground Truth Builder for Evaluation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.ground_truth import GroundTruth
-from aiodoo_datasets.generators.evaluation.factories.ground_truth_factory import GroundTruthFactory
+from generators.evaluation.domain.ground_truth import GroundTruth
+from generators.evaluation.factories.ground_truth_factory import GroundTruthFactory
 
 
 class GroundTruthBuilder:

@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 from typing import Tuple, Mapping, Any
-from aiodoo_datasets.generators.approval.domain.finding import Finding
+from generators.approval.domain.finding import Finding
 from types import MappingProxyType
 
 

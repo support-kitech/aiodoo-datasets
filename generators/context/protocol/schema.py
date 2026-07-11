@@ -3,11 +3,11 @@
 from typing import Any
 from pydantic import BaseModel, Field
 
-from aiodoo_datasets.generators.context.protocol.constants import (
+from generators.context.protocol.constants import (
     CONTEXT_PROTOCOL_V1,
     GENERATOR_NAME,
 )
-from aiodoo_datasets.generators.context.protocol.enums import (
+from generators.context.protocol.enums import (
     ProtocolQueryType,
     ProtocolIntent,
     ProtocolNodeType,

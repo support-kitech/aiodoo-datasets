@@ -1,9 +1,9 @@
 """Schedule validator."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_schedule import (
+from generators.execution.planning.domain.execution_schedule import (
     ExecutionSchedule,
 )
-from aiodoo_datasets.generators.execution.validation.batch_validator import BatchValidator
+from generators.execution.validation.batch_validator import BatchValidator
 
 
 class ScheduleValidator:

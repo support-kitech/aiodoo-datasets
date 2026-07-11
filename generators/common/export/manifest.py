@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 from datetime import datetime
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
+from generators.common.statistics.base_statistics import BaseStatistics
 
 
 def generate_manifest(

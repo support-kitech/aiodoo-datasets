@@ -1,6 +1,6 @@
 import unittest
 
-from aiodoo_datasets.generators.context.analysis.graph import (
+from generators.context.analysis.graph import (
     ContextNode,
     ContextEdge,
     ContextGraph,

@@ -1,10 +1,10 @@
 """Protocol pipeline orchestrator."""
 
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
-from aiodoo_datasets.generators.execution.protocol.mappers.protocol_mapper import ProtocolMapper
-from aiodoo_datasets.generators.execution.validation.protocol_validator import ProtocolValidator
-from aiodoo_datasets.generators.execution.protocol.serializer import ProtocolSerializer
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.protocol_result import ProtocolResult
+from generators.execution.protocol.mappers.protocol_mapper import ProtocolMapper
+from generators.execution.validation.protocol_validator import ProtocolValidator
+from generators.execution.protocol.serializer import ProtocolSerializer
 
 
 class Protocol:

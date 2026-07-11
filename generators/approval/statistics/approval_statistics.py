@@ -2,9 +2,9 @@
 
 from typing import Mapping, Any, Tuple
 from types import MappingProxyType
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
+from generators.approval.domain.review import Review
+from generators.approval.rules.rule_set import RuleSet
+from generators.approval.domain.evidence import Evidence
 
 
 class ApprovalStatistics:

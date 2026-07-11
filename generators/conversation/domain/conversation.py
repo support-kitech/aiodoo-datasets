@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
-from aiodoo_datasets.generators.conversation.domain.turn import Turn
+from generators.conversation.domain.metadata import ConversationMetadata
+from generators.conversation.domain.turn import Turn
 
 
 @dataclass(frozen=True, slots=True)

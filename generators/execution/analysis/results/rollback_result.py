@@ -1,7 +1,7 @@
 """Rollback result container."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.analysis.knowledge.rollback_knowledge import (
+from generators.execution.analysis.knowledge.rollback_knowledge import (
     RollbackKnowledge,
 )
 

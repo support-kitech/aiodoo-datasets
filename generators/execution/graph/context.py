@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass, field
 from typing import Any
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.graph.statistics import GraphStatistics
 
 
 @dataclass(frozen=True, slots=True)

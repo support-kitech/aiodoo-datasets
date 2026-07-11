@@ -1,11 +1,11 @@
 import unittest
-from aiodoo_datasets.generators.execution.artifacts.python_artifact import (
+from generators.execution.artifacts.python_artifact import (
     PythonArtifact,
     PythonArtifactType,
 )
-from aiodoo_datasets.generators.execution.domain.enums import OperationAction
-from aiodoo_datasets.generators.execution.domain.execution_operation import ExecutionOperation
-from aiodoo_datasets.generators.execution.domain.execution_step import ExecutionStep
+from generators.execution.domain.enums import OperationAction
+from generators.execution.domain.execution_operation import ExecutionOperation
+from generators.execution.domain.execution_step import ExecutionStep
 
 
 class TestOrdering(unittest.TestCase):

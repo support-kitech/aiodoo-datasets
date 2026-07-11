@@ -1,4 +1,4 @@
-from aiodoo_datasets.generators.execution.builders.results.rollback_build_result import (
+from generators.execution.builders.results.rollback_build_result import (
     RollbackBuildResult,
 )
 

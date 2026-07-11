@@ -1,14 +1,14 @@
 import unittest
 from types import MappingProxyType
 import json
-from aiodoo_datasets.generators.execution.protocol.serializer import ProtocolSerializer
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.protocol.serializer import ProtocolSerializer
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
-from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
+from generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.planning.planning_result import PlanningResult
 
 
 class TestProtocolSerializer(unittest.TestCase):

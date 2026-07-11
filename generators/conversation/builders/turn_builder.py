@@ -1,10 +1,10 @@
 """Turn builder for Conversation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.domain.turn import Turn
-from aiodoo_datasets.generators.conversation.domain.message import Message
-from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
-from aiodoo_datasets.generators.conversation.factories.turn_factory import TurnFactory
+from generators.conversation.domain.turn import Turn
+from generators.conversation.domain.message import Message
+from generators.conversation.domain.attachment import Attachment
+from generators.conversation.factories.turn_factory import TurnFactory
 
 
 class TurnBuilder:

@@ -1,11 +1,11 @@
 import unittest
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.edge import ExecutionEdge
-from aiodoo_datasets.generators.execution.graph.enums import NodeType, EdgeType
-from aiodoo_datasets.generators.execution.validation.graph_validator import GraphValidator
-from aiodoo_datasets.generators.execution.validation.node_validator import NodeValidator
-from aiodoo_datasets.generators.execution.validation.edge_validator import EdgeValidator
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.edge import ExecutionEdge
+from generators.execution.graph.enums import NodeType, EdgeType
+from generators.execution.validation.graph_validator import GraphValidator
+from generators.execution.validation.node_validator import NodeValidator
+from generators.execution.validation.edge_validator import EdgeValidator
 
 
 class TestGraphValidator(unittest.TestCase):

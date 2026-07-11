@@ -1,9 +1,9 @@
 """Domain model for the Context Graph orchestrating nodes and edges."""
 
 from typing import Any
-from aiodoo_datasets.generators.context.analysis.graph.node import ContextNode
-from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
-from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType, RelationshipType
+from generators.context.analysis.graph.node import ContextNode
+from generators.context.analysis.graph.edge import ContextEdge
+from generators.context.analysis.graph.enums import NodeType, RelationshipType
 
 
 class ContextGraph:

@@ -1,9 +1,9 @@
 """Validator for execution protocol."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.validation.schedule_protocol_validator import (
+from generators.execution.validation.schedule_protocol_validator import (
     ScheduleProtocolValidator,
 )
 

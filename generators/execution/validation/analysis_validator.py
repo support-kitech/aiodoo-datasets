@@ -1,6 +1,6 @@
 """Analysis validation."""
 
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.context import AnalysisContext
 
 
 class AnalysisValidator:

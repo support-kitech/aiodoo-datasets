@@ -1,9 +1,9 @@
 """CLI Main Entrypoint for Evaluation Generator."""
 
 import sys
-from aiodoo_datasets.generators.evaluation.cli.arguments import get_parser
-from aiodoo_datasets.generators.evaluation.cli.configuration import Configuration
-from aiodoo_datasets.generators.evaluation.cli.commands import Commands
+from generators.evaluation.cli.arguments import get_parser
+from generators.evaluation.cli.configuration import Configuration
+from generators.evaluation.cli.commands import Commands
 
 
 def main() -> None:

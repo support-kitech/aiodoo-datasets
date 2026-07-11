@@ -1,18 +1,18 @@
 import unittest
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.protocol.mappers.protocol_mapper import ProtocolMapper
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
-from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
-from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
-from aiodoo_datasets.generators.execution.planning.domain.execution_plan import PlannedExecution
-from aiodoo_datasets.generators.execution.planning.domain.execution_schedule import (
+from generators.execution.protocol.mappers.protocol_mapper import ProtocolMapper
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.planning.planning_result import PlanningResult
+from generators.execution.planning.planning_statistics import PlanningStatistics
+from generators.execution.planning.domain.execution_plan import PlannedExecution
+from generators.execution.planning.domain.execution_schedule import (
     ExecutionSchedule,
 )
-from aiodoo_datasets.generators.execution.planning.domain.execution_batch import ExecutionBatch
-from aiodoo_datasets.generators.execution.planning.domain.execution_phase import ExecutionPhase
-from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
-from aiodoo_datasets.generators.execution.planning.enums import StageType
+from generators.execution.planning.domain.execution_batch import ExecutionBatch
+from generators.execution.planning.domain.execution_phase import ExecutionPhase
+from generators.execution.planning.domain.execution_stage import ExecutionStage
+from generators.execution.planning.enums import StageType
 
 
 class TestProtocolMapper(unittest.TestCase):

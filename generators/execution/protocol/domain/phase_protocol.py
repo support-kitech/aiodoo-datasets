@@ -1,7 +1,7 @@
 """Phase protocol serialization model."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.protocol.domain.stage_protocol import StageProtocol
+from generators.execution.protocol.domain.stage_protocol import StageProtocol
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,8 +1,8 @@
 """Tests for the Evidence Collector."""
 
 import unittest
-from aiodoo_datasets.generators.approval.analysis.evidence_collector import EvidenceCollector
-from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
+from generators.approval.analysis.evidence_collector import EvidenceCollector
+from generators.approval.domain.source_generator import SourceGenerator
 
 
 class TestEvidenceCollector(unittest.TestCase):

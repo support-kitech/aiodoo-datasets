@@ -1,7 +1,7 @@
 """Protocol Validator for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidationError
-from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import (
+from generators.evaluation.exceptions import EvaluationValidationError
+from generators.evaluation.protocol.domain.benchmark_protocol import (
     EvaluationProtocol,
 )
 

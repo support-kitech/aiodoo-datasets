@@ -2,10 +2,10 @@
 
 import pytest
 from pathlib import Path
-from aiodoo_datasets.generators.planner.export.metadata import build_metadata
-from aiodoo_datasets.generators.planner.discovery.scanner import OdooModule, ManifestInfo
-from aiodoo_datasets.generators.planner.discovery.classifier import Scenario
-from aiodoo_datasets.generators.planner.validation.schema import PlanPayload, Analysis
+from generators.planner.export.metadata import build_metadata
+from generators.planner.discovery.scanner import OdooModule, ManifestInfo
+from generators.planner.discovery.classifier import Scenario
+from generators.planner.validation.schema import PlanPayload, Analysis
 
 def test_build_metadata_provenance(tmp_path):
     # Mock module path with some fake files

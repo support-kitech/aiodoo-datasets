@@ -1,10 +1,10 @@
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.builders.base import BaseBuilder
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.results.metadata_build_result import (
+from generators.execution.builders.base import BaseBuilder
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.results.metadata_build_result import (
     MetadataBuildResult,
 )
-from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
+from generators.execution.builders.operation_builder import OperationBuilder
 
 
 class MetadataBuilder(BaseBuilder):  # type: ignore[misc]

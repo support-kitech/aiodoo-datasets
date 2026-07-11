@@ -1,9 +1,9 @@
 """Batch builder."""
 
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.results.phase_result import PhaseResult
-from aiodoo_datasets.generators.execution.planning.results.batch_result import BatchResult
-from aiodoo_datasets.generators.execution.planning.domain.execution_batch import ExecutionBatch
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.results.phase_result import PhaseResult
+from generators.execution.planning.results.batch_result import BatchResult
+from generators.execution.planning.domain.execution_batch import ExecutionBatch
 
 
 class BatchBuilder:

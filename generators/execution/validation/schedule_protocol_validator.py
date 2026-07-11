@@ -1,7 +1,7 @@
 """Validator for schedule protocol."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
-from aiodoo_datasets.generators.execution.validation.batch_protocol_validator import (
+from generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
+from generators.execution.validation.batch_protocol_validator import (
     BatchProtocolValidator,
 )
 

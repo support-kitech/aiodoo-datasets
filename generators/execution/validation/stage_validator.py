@@ -1,6 +1,6 @@
 """Stage validator."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
+from generators.execution.planning.domain.execution_stage import ExecutionStage
 
 
 class StageValidator:

@@ -1,8 +1,8 @@
 """Python engineering artifact."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
-from aiodoo_datasets.generators.execution.artifacts.enums import PythonArtifactType
+from generators.execution.artifacts.artifact import Artifact
+from generators.execution.artifacts.enums import PythonArtifactType
 
 
 @dataclass(frozen=True, eq=True)

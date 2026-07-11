@@ -1,13 +1,13 @@
 """Assembles the full Planning Protocol V1 payload."""
 
 from typing import Sequence
-from aiodoo_datasets.generators.planner.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.planner.discovery.ast_parser import PythonKnowledge
-from aiodoo_datasets.generators.planner.discovery.xml_parser import XMLKnowledge
-from aiodoo_datasets.generators.planner.discovery.classifier import Scenario
-from aiodoo_datasets.generators.planner.validation.schema import PlanPayload, Analysis
-from aiodoo_datasets.generators.planner.protocol.task_builder import build_tasks
-from aiodoo_datasets.generators.planner.protocol.action_builder import build_actions
+from generators.common.discovery.scanner import OdooModule
+from generators.common.discovery.ast_parser import PythonKnowledge
+from generators.common.discovery.xml_parser import XMLKnowledge
+from generators.common.discovery.classifier import Scenario
+from generators.planner.validation.schema import PlanPayload, Analysis
+from generators.planner.protocol.task_builder import build_tasks
+from generators.planner.protocol.action_builder import build_actions
 
 
 def build_plan_payload(

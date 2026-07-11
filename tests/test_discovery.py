@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
-from aiodoo_datasets.generators.planner.discovery import (
+from generators.planner.discovery import (
     ModuleScanner, OdooASTParser, OdooXMLParser, ScenarioClassifier, OdooModule, ManifestInfo
 )
 

@@ -1,20 +1,20 @@
 """Tests for the Protocol Mapper."""
 
 import unittest
-from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.domain.recommendation import Recommendation
-from aiodoo_datasets.generators.approval.domain.decision import Decision
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.enums import (
+from generators.approval.domain.source_generator import SourceGenerator
+from generators.approval.domain.evidence import Evidence
+from generators.approval.domain.finding import Finding
+from generators.approval.domain.recommendation import Recommendation
+from generators.approval.domain.decision import Decision
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.domain.review import Review
+from generators.approval.enums import (
     DecisionEnum,
     ConfidenceLevel,
     Severity,
     RuleCategory,
 )
-from aiodoo_datasets.generators.approval.protocol.mapper import ProtocolMapper
+from generators.approval.protocol.mapper import ProtocolMapper
 
 
 class TestProtocolMapper(unittest.TestCase):

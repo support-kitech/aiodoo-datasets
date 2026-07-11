@@ -1,8 +1,8 @@
 """Planner Parser for Evaluation Generator."""
 
 from typing import Dict, Any
-from aiodoo_datasets.generators.evaluation.analysis.parsers.base_parser import BaseParser
-from aiodoo_datasets.generators.evaluation.registries.parser_registry import ParserRegistry
+from generators.evaluation.analysis.parsers.base_parser import BaseParser
+from generators.evaluation.registries.parser_registry import ParserRegistry
 
 
 class PlannerParser(BaseParser):  # type: ignore[misc]

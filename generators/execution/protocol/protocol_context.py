@@ -3,9 +3,9 @@
 from dataclasses import dataclass
 from typing import Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
-from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
-from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.planning.planning_result import PlanningResult
+from generators.execution.planning.planning_statistics import PlanningStatistics
+from generators.execution.protocol.protocol_statistics import ProtocolStatistics
 
 
 @dataclass(frozen=True, slots=True)

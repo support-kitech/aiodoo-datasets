@@ -1,13 +1,13 @@
-from aiodoo_datasets.generators.execution.builders.base import BaseBuilder
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.results.constraint_build_result import (
+from generators.execution.builders.base import BaseBuilder
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.results.constraint_build_result import (
     ConstraintBuildResult,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.constraint_knowledge import (
+from generators.execution.analysis.knowledge.constraint_knowledge import (
     ConstraintKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_constraint import ExecutionConstraint
-from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
+from generators.execution.domain.execution_constraint import ExecutionConstraint
+from generators.execution.builders.operation_builder import OperationBuilder
 
 
 class ConstraintBuilder(BaseBuilder):  # type: ignore[misc]

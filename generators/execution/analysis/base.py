@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Any
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.context import AnalysisContext
 
 
 class BaseAnalyzer(ABC):

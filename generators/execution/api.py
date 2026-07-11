@@ -1,23 +1,23 @@
 """Public API for the Execution Generator."""
 
-from aiodoo_datasets.generators.execution.version import __version__
-from aiodoo_datasets.generators.execution.integration.pipeline import (
+from generators.execution.version import __version__
+from generators.execution.integration.pipeline import (
     IntegrationPipeline as _IntegrationPipeline,
 )
-from aiodoo_datasets.generators.execution.integration.pipeline_context import (
+from generators.execution.integration.pipeline_context import (
     PipelineContext as _PipelineContext,
 )
-from aiodoo_datasets.generators.execution.integration.pipeline_result import (
+from generators.execution.integration.pipeline_result import (
     PipelineResult as _PipelineResult,
 )
-from aiodoo_datasets.generators.execution.validation.pipeline_validator import (
+from generators.execution.validation.pipeline_validator import (
     PipelineValidator as _PipelineValidator,
 )
-from aiodoo_datasets.generators.execution.export.exporter import Exporter as _Exporter
-from aiodoo_datasets.generators.execution.export.export_context import (
+from generators.execution.export.exporter import Exporter as _Exporter
+from generators.execution.export.export_context import (
     ExportContext as _ExportContext,
 )
-from aiodoo_datasets.generators.execution.export.export_result import ExportResult as _ExportResult
+from generators.execution.export.export_result import ExportResult as _ExportResult
 
 
 def generate(context: _PipelineContext) -> _PipelineResult:

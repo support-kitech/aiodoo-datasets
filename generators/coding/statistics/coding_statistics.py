@@ -2,8 +2,8 @@
 
 from collections import defaultdict
 from typing import Any
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.coding.validation.schema import CodingDatasetRecord
+from generators.common.statistics.base_statistics import BaseStatistics
+from generators.coding.validation.schema import CodingDatasetRecord
 
 
 class CodingStatistics(BaseStatistics):  # type: ignore[misc]

@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.registries.factory_registry import FactoryRegistry
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
+from generators.execution.registries.factory_registry import FactoryRegistry
+from generators.execution.builders.factories.base import BaseFactory
 
 
 class DummyFactoryA(BaseFactory):

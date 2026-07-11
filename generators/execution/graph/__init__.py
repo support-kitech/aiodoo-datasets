@@ -1,14 +1,14 @@
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.edge import ExecutionEdge
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.enums import NodeType, EdgeType, TraversalStrategy
-from aiodoo_datasets.generators.execution.graph.builder import GraphBuilder
-from aiodoo_datasets.generators.execution.graph.detector import CycleDetector
-from aiodoo_datasets.generators.execution.graph.sorter import TopologicalSorter
-from aiodoo_datasets.generators.execution.graph.traversal import GraphTraversal
-from aiodoo_datasets.generators.execution.graph.serializer import GraphSerializer
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
-from aiodoo_datasets.generators.execution.graph.exceptions import (
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.edge import ExecutionEdge
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.enums import NodeType, EdgeType, TraversalStrategy
+from generators.execution.graph.builder import GraphBuilder
+from generators.execution.graph.detector import CycleDetector
+from generators.execution.graph.sorter import TopologicalSorter
+from generators.execution.graph.traversal import GraphTraversal
+from generators.execution.graph.serializer import GraphSerializer
+from generators.execution.graph.statistics import GraphStatistics
+from generators.execution.graph.exceptions import (
     GraphError,
     CycleDetectedError,
     InvalidEdgeError,

@@ -1,6 +1,6 @@
 """Static registry for query plugins."""
 
-from aiodoo_datasets.generators.context.generation.queries import (
+from generators.context.generation.queries import (
     FindModelQuery,
     FindFieldQuery,
     FindComputeQuery,

@@ -60,3 +60,6 @@ venv.bak/
 # AIODOO specific test workspaces
 aiodoo_workspace/
 
+.fresh_venv/
+
+datasets/

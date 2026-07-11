@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.registries.builder_registry import BuilderRegistry
-from aiodoo_datasets.generators.execution.builders.base import BaseBuilder
+from generators.execution.registries.builder_registry import BuilderRegistry
+from generators.execution.builders.base import BaseBuilder
 
 
 class DummyBuilderA(BaseBuilder):

@@ -1,10 +1,10 @@
 """Query plugin to locate Field definitions."""
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
-from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.analysis.graph.enums import NodeType
+from generators.context.generation.query import Query
+from generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.generation.queries.base import BaseContextQuery
 from types import MappingProxyType
 
 

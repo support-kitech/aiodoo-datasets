@@ -2,7 +2,7 @@
 
 import hashlib
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.expected_output import ExpectedOutput
+from generators.evaluation.domain.expected_output import ExpectedOutput
 
 
 class ExpectedOutputFactory:

@@ -1,12 +1,12 @@
 """Protocol validator orchestrator."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.validation.execution_protocol_validator import (
+from generators.execution.validation.execution_protocol_validator import (
     ExecutionProtocolValidator,
 )
-from aiodoo_datasets.generators.execution.protocol.results.validation_result import ValidationResult
+from generators.execution.protocol.results.validation_result import ValidationResult
 
 
 class ProtocolValidator:

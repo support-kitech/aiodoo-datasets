@@ -1,9 +1,9 @@
 """Validation and Failure Tests for Evaluation Generator."""
 
 import unittest
-from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidationError
-from aiodoo_datasets.generators.evaluation.pipeline.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.evaluation.pipeline.pipeline import EvaluationPipeline
+from generators.evaluation.exceptions import EvaluationValidationError
+from generators.evaluation.pipeline.pipeline_context import PipelineContext
+from generators.evaluation.pipeline.pipeline import EvaluationPipeline
 from types import MappingProxyType
 
 

@@ -1,22 +1,22 @@
 """Execution knowledge container."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.analysis.knowledge.operation_knowledge import (
+from generators.execution.analysis.knowledge.operation_knowledge import (
     OperationKnowledge,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.dependency_knowledge import (
+from generators.execution.analysis.knowledge.dependency_knowledge import (
     DependencyKnowledge,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.constraint_knowledge import (
+from generators.execution.analysis.knowledge.constraint_knowledge import (
     ConstraintKnowledge,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.verification_knowledge import (
+from generators.execution.analysis.knowledge.verification_knowledge import (
     VerificationKnowledge,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.rollback_knowledge import (
+from generators.execution.analysis.knowledge.rollback_knowledge import (
     RollbackKnowledge,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.artifact_knowledge import (
+from generators.execution.analysis.knowledge.artifact_knowledge import (
     ArtifactKnowledge,
 )
 

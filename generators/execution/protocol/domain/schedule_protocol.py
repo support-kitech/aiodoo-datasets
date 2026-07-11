@@ -1,7 +1,7 @@
 """Schedule protocol serialization model."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.protocol.domain.batch_protocol import BatchProtocol
+from generators.execution.protocol.domain.batch_protocol import BatchProtocol
 
 
 @dataclass(frozen=True, slots=True)

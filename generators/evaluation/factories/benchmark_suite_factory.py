@@ -2,9 +2,9 @@
 
 import hashlib
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
-from aiodoo_datasets.generators.evaluation.domain.evaluation_case import EvaluationCase
-from aiodoo_datasets.generators.evaluation.enums import BenchmarkCategory
+from generators.evaluation.domain.benchmark_suite import BenchmarkSuite
+from generators.evaluation.domain.evaluation_case import EvaluationCase
+from generators.evaluation.enums import BenchmarkCategory
 
 
 class BenchmarkSuiteFactory:

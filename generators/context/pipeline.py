@@ -4,21 +4,21 @@ import logging
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
-from aiodoo_datasets.generators.common.discovery.scanner import ModuleScanner, OdooModule
-from aiodoo_datasets.generators.common.discovery.ast_parser import OdooASTParser
-from aiodoo_datasets.generators.common.discovery.xml_parser import OdooXMLParser
-from aiodoo_datasets.generators.common.validation.deduplicator import Deduplicator
-from aiodoo_datasets.generators.context.analysis.knowledge import ContextKnowledge
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.analysis.graph_builder import GraphBuilder
-from aiodoo_datasets.generators.context.generation.query_generator import QueryGenerator
-from aiodoo_datasets.generators.context.ranking.ranking_engine import RankingEngine
-from aiodoo_datasets.generators.context.protocol.mapper import ContextMapper
-from aiodoo_datasets.generators.context.validation.registry import REGISTERED_VALIDATORS
-from aiodoo_datasets.generators.context.statistics.context_statistics import ContextStatistics
-from aiodoo_datasets.generators.context.state.checkpoint import CheckpointManager
-from aiodoo_datasets.generators.context.export.writer import DatasetWriter
-from aiodoo_datasets.generators.context.protocol.schema import ContextTask
+from generators.common.discovery.scanner import ModuleScanner, OdooModule
+from generators.common.discovery.ast_parser import OdooASTParser
+from generators.common.discovery.xml_parser import OdooXMLParser
+from generators.common.validation.deduplicator import Deduplicator
+from generators.context.analysis.knowledge import ContextKnowledge
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.analysis.graph_builder import GraphBuilder
+from generators.context.generation.query_generator import QueryGenerator
+from generators.context.ranking.ranking_engine import RankingEngine
+from generators.context.protocol.mapper import ContextMapper
+from generators.context.validation.registry import REGISTERED_VALIDATORS
+from generators.context.statistics.context_statistics import ContextStatistics
+from generators.context.state.checkpoint import CheckpointManager
+from generators.context.export.writer import DatasetWriter
+from generators.context.protocol.schema import ContextTask
 
 logger = logging.getLogger(__name__)
 
@@ -56,8 +56,8 @@ def process_module(module: OdooModule) -> list[ContextTask]:
         graph = ContextGraph()
 
         # Populate nodes from ContextKnowledge
-        from aiodoo_datasets.generators.context.analysis.graph.graph import ContextNode
-        from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType, LanguageType
+        from generators.context.analysis.graph.graph import ContextNode
+        from generators.context.analysis.graph.enums import NodeType, LanguageType
 
         for file_path, k in knowledge.python_files.items():
             for model_name, model_def in k.models.items():

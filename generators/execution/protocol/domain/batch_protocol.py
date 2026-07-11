@@ -1,7 +1,7 @@
 """Batch protocol serialization model."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.protocol.domain.phase_protocol import PhaseProtocol
+from generators.execution.protocol.domain.phase_protocol import PhaseProtocol
 
 
 @dataclass(frozen=True, slots=True)

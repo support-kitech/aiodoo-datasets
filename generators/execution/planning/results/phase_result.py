@@ -1,7 +1,7 @@
 """Phase build result."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.planning.domain.execution_phase import ExecutionPhase
+from generators.execution.planning.domain.execution_phase import ExecutionPhase
 
 
 @dataclass(frozen=True, slots=True)

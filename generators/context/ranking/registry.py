@@ -1,6 +1,6 @@
 """Static registry for ranking rules."""
 
-from aiodoo_datasets.generators.context.ranking.rules import (
+from generators.context.ranking.rules import (
     DefinitionRule,
     InheritanceRule,
     DependencyRule,

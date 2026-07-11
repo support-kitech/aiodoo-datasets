@@ -1,20 +1,20 @@
 import unittest
 from dataclasses import FrozenInstanceError
 
-from aiodoo_datasets.generators.execution.artifacts.python_artifact import (
+from generators.execution.artifacts.python_artifact import (
     PythonArtifact,
     PythonArtifactType,
 )
-from aiodoo_datasets.generators.execution.environment.environment import ExecutionEnvironment
-from aiodoo_datasets.generators.execution.environment.edition import OdooEdition
-from aiodoo_datasets.generators.execution.environment.version import OdooVersion
+from generators.execution.environment.environment import ExecutionEnvironment
+from generators.execution.environment.edition import OdooEdition
+from generators.execution.environment.version import OdooVersion
 
-from aiodoo_datasets.generators.execution.domain.execution_operation import (
+from generators.execution.domain.execution_operation import (
     ExecutionOperation,
     OperationAction,
 )
-from aiodoo_datasets.generators.execution.domain.execution_step import ExecutionStep
-from aiodoo_datasets.generators.execution.domain.execution_plan import ExecutionPlan
+from generators.execution.domain.execution_step import ExecutionStep
+from generators.execution.domain.execution_plan import ExecutionPlan
 
 
 class TestDomainModels(unittest.TestCase):

@@ -1,8 +1,8 @@
 """Unit tests for ApprovalValidator."""
 
 import unittest
-from aiodoo_datasets.generators.approval.validation.approval_validator import ApprovalValidator
-from aiodoo_datasets.generators.approval.exceptions import ApprovalValidationError
+from generators.approval.validation.approval_validator import ApprovalValidator
+from generators.approval.exceptions import ApprovalValidationError
 
 
 class TestApprovalValidator(unittest.TestCase):

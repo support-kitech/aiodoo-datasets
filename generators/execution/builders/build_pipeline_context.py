@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnostics import (
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.diagnostics.builder_diagnostics import (
     BuilderDiagnostics,
 )
 

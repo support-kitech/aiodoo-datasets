@@ -1,8 +1,8 @@
 """Benchmark Validator for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidationError
-from aiodoo_datasets.generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
-from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
+from generators.evaluation.exceptions import EvaluationValidationError
+from generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
+from generators.evaluation.domain.benchmark_suite import BenchmarkSuite
 
 
 class BenchmarkValidator:

@@ -1,9 +1,9 @@
 """Attachment Builder for Evaluation Generator."""
 
 from typing import Optional
-from aiodoo_datasets.generators.evaluation.domain.attachment import EvaluationAttachment
-from aiodoo_datasets.generators.evaluation.factories.attachment_factory import AttachmentFactory
-from aiodoo_datasets.generators.evaluation.enums import AttachmentType
+from generators.evaluation.domain.attachment import EvaluationAttachment
+from generators.evaluation.factories.attachment_factory import AttachmentFactory
+from generators.evaluation.enums import AttachmentType
 
 
 class AttachmentBuilder:

@@ -1,7 +1,7 @@
 """Deterministic graph serialization."""
 
 import json
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.graph import ExecutionGraph
 
 
 class GraphSerializer:

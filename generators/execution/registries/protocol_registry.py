@@ -1,6 +1,6 @@
 """Static registry for protocol components."""
 
-from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
+from generators.execution.registries.base import BaseRegistry
 
 
 class ProtocolRegistry(BaseRegistry):  # type: ignore[misc]

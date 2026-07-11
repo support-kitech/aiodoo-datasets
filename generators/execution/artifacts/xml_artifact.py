@@ -1,8 +1,8 @@
 """XML engineering artifact."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
-from aiodoo_datasets.generators.execution.artifacts.enums import XMLArtifactType
+from generators.execution.artifacts.artifact import Artifact
+from generators.execution.artifacts.enums import XMLArtifactType
 
 
 @dataclass(frozen=True, eq=True)

@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass
 from typing import Any
-from aiodoo_datasets.generators.execution.graph.enums import EdgeType
-from aiodoo_datasets.generators.execution.graph.node import NodeId
+from generators.execution.graph.enums import EdgeType
+from generators.execution.graph.node import NodeId
 
 
 @dataclass(frozen=True)

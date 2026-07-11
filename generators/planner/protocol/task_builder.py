@@ -2,9 +2,9 @@
 
 from typing import Sequence
 
-from aiodoo_datasets.generators.planner.validation.schema import TaskSpec
-from aiodoo_datasets.generators.planner.discovery.ast_parser import PythonKnowledge
-from aiodoo_datasets.generators.planner.discovery.xml_parser import XMLKnowledge
+from generators.planner.validation.schema import TaskSpec
+from generators.common.discovery.ast_parser import PythonKnowledge
+from generators.common.discovery.xml_parser import XMLKnowledge
 
 
 def build_tasks(

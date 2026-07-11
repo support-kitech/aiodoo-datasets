@@ -1,9 +1,9 @@
 """Deterministic topological sort with secondary alphanumeric ordering."""
 
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.detector import CycleDetector
-from aiodoo_datasets.generators.execution.graph.results.sort_result import SortResult
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.detector import CycleDetector
+from generators.execution.graph.results.sort_result import SortResult
 
 
 class TopologicalSorter:

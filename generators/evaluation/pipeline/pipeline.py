@@ -2,48 +2,48 @@
 
 from types import MappingProxyType
 
-from aiodoo_datasets.generators.evaluation.pipeline.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.evaluation.pipeline.pipeline_result import PipelineResult
+from generators.evaluation.pipeline.pipeline_context import PipelineContext
+from generators.evaluation.pipeline.pipeline_result import PipelineResult
 
-from aiodoo_datasets.generators.evaluation.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.evaluation.analysis.evidence_extractor import EvidenceExtractor
-from aiodoo_datasets.generators.evaluation.analysis.ground_truth_extractor import (
+from generators.evaluation.analysis.context import AnalysisContext
+from generators.evaluation.analysis.evidence_extractor import EvidenceExtractor
+from generators.evaluation.analysis.ground_truth_extractor import (
     GroundTruthExtractor,
 )
-from aiodoo_datasets.generators.evaluation.analysis.difficulty_estimator import DifficultyEstimator
-from aiodoo_datasets.generators.evaluation.analysis.complexity_estimator import ComplexityEstimator
+from generators.evaluation.analysis.difficulty_estimator import DifficultyEstimator
+from generators.evaluation.analysis.complexity_estimator import ComplexityEstimator
 
-from aiodoo_datasets.generators.evaluation.builders.evaluation_builder import EvaluationBuilder
-from aiodoo_datasets.generators.evaluation.builders.benchmark_catalog_builder import (
+from generators.evaluation.builders.evaluation_builder import EvaluationBuilder
+from generators.evaluation.builders.benchmark_catalog_builder import (
     BenchmarkCatalogBuilder,
 )
-from aiodoo_datasets.generators.evaluation.builders.benchmark_suite_builder import (
+from generators.evaluation.builders.benchmark_suite_builder import (
     BenchmarkSuiteBuilder,
 )
-from aiodoo_datasets.generators.evaluation.builders.evaluation_case_builder import (
+from generators.evaluation.builders.evaluation_case_builder import (
     EvaluationCaseBuilder,
 )
-from aiodoo_datasets.generators.evaluation.builders.metadata_builder import MetadataBuilder
-from aiodoo_datasets.generators.evaluation.builders.expected_output_builder import (
+from generators.evaluation.builders.metadata_builder import MetadataBuilder
+from generators.evaluation.builders.expected_output_builder import (
     ExpectedOutputBuilder,
 )
-from aiodoo_datasets.generators.evaluation.builders.ground_truth_builder import GroundTruthBuilder
+from generators.evaluation.builders.ground_truth_builder import GroundTruthBuilder
 
-from aiodoo_datasets.generators.evaluation.protocol.mapper import ProtocolMapper
-from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import (
+from generators.evaluation.protocol.mapper import ProtocolMapper
+from generators.evaluation.protocol.domain.benchmark_protocol import (
     EvaluationProtocol,
 )
 
-from aiodoo_datasets.generators.evaluation.validation.protocol_validator import ProtocolValidator
+from generators.evaluation.validation.protocol_validator import ProtocolValidator
 
-from aiodoo_datasets.generators.evaluation.statistics.evaluation_statistics import (
+from generators.evaluation.statistics.evaluation_statistics import (
     EvaluationStatistics,
 )
-from aiodoo_datasets.generators.evaluation.statistics.benchmark_statistics import (
+from generators.evaluation.statistics.benchmark_statistics import (
     BenchmarkStatistics,
 )
 
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
+from generators.common.export.writer import DatasetWriter
 
 
 class EvaluationPipeline:
@@ -171,20 +171,28 @@ class EvaluationPipeline:
     @staticmethod
     def export(result: PipelineResult, output_dir: str) -> PipelineResult:
         """Export result using shared DatasetWriter."""
-        writer = DatasetWriter(output_dir)
-
-        # Export logic delegates completely to the shared DatasetWriter
-        # We assume dataset_writer can take an iterable of BaseModel.model_dump() and write them deterministically.
-        records = [p.model_dump() for p in result.dataset]
-        writer.write_dataset(filename="evaluation_dataset.jsonl", records=records)
-        writer.write_statistics(filename="statistics.json", stats=dict(result.statistics))
-        writer.write_manifest(
-            filename="dataset_manifest.json",
-            metadata={"record_count": len(records), "dataset_type": "evaluation"},
+        from pathlib import Path
+        from generators.evaluation.statistics.evaluation_statistics import EvaluationStatistics
+        
+        stats = result.statistics.get("evaluation")
+        if not isinstance(stats, EvaluationStatistics):
+            stats = EvaluationStatistics()
+            
+        writer = DatasetWriter(
+            output_dir=Path(output_dir),
+            stats=stats,
+            filename="evaluation_dataset.jsonl",
+            dataset_name="Evaluation Dataset"
         )
 
+        for proto in result.dataset:
+            writer.write_record(proto)
+
+        writer.export_statistics(filename="statistics.json")
+        writer.export_manifest(filename="dataset_manifest.json")
+
         export_metadata = MappingProxyType(
-            {"output_dir": output_dir, "exported_records": len(records)}
+            {"output_dir": output_dir, "exported_records": len(result.dataset)}
         )
 
         return PipelineResult(

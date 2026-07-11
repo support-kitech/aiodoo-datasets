@@ -3,8 +3,8 @@
 Public entry point for the AIODOO Execution Dataset Generator.
 """
 
-from aiodoo_datasets.generators.execution.api import generate, validate, export
-from aiodoo_datasets.generators.execution.version import __version__
+from generators.execution.api import generate, validate, export
+from generators.execution.version import __version__
 
 __all__ = [
     "generate",

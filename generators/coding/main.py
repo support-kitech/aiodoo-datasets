@@ -1,8 +1,8 @@
 """CLI Entrypoint for the AIODOO Coding Dataset Generator."""
 
 from pathlib import Path
-from aiodoo_datasets.generators.coding.pipeline import CodingPipeline
-from aiodoo_datasets.generators.common.cli.arguments import build_base_parser, setup_logging
+from generators.coding.pipeline import CodingPipeline
+from generators.common.cli.arguments import build_base_parser, setup_logging
 
 
 def main() -> None:

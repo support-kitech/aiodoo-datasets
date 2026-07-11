@@ -1,9 +1,9 @@
 """Stage builder."""
 
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.results.stage_result import StageResult
-from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
-from aiodoo_datasets.generators.execution.planning.enums import StageType
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.results.stage_result import StageResult
+from generators.execution.planning.domain.execution_stage import ExecutionStage
+from generators.execution.planning.enums import StageType
 
 
 class StageBuilder:
@@ -18,7 +18,12 @@ class StageBuilder:
         """
         # In a real implementation, this would use the strategy to partition nodes.
         # For now, deterministic simple grouping.
+        if context.graph is None:
+            return StageResult(success=False, diagnostics=("No valid execution graph provided.",))
+
         nodes = context.graph.nodes
+        if not nodes:
+            return StageResult(success=False, diagnostics=("Graph contains no nodes.",))
         stage = ExecutionStage(
             stage_id=f"stage_{context.graph_statistics.node_count}",
             stage_type=StageType.EXECUTION,

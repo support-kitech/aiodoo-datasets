@@ -1,6 +1,6 @@
 """Static registry for planning components."""
 
-from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
+from generators.execution.registries.base import BaseRegistry
 
 
 class PlanningRegistry(BaseRegistry):  # type: ignore[misc]

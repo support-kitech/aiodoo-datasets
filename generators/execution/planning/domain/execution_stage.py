@@ -1,8 +1,8 @@
 """Immutable representation of an execution stage."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.planning.enums import StageType
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.planning.enums import StageType
 
 
 @dataclass(frozen=True, slots=True)

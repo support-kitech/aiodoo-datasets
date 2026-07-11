@@ -1,7 +1,7 @@
 """Reference validator for Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.exceptions import ConversationValidationError
-from aiodoo_datasets.generators.conversation.domain.reference import Reference
+from generators.conversation.exceptions import ConversationValidationError
+from generators.conversation.domain.reference import Reference
 
 
 class ReferenceValidator:

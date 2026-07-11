@@ -1,7 +1,7 @@
 """Main CLI entrypoint for Conversation Generator."""
 
 import sys
-from aiodoo_datasets.generators.conversation.cli.commands import run_pipeline
+from generators.conversation.cli.commands import run_pipeline
 
 
 def main() -> int:

@@ -1,13 +1,13 @@
 """Protocol mapper for the Approval Generator."""
 
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.protocol.domain.finding_protocol import (
+from generators.approval.domain.review import Review
+from generators.approval.protocol.domain.finding_protocol import (
     FindingProtocol,
     RecommendationProtocol,
     EvidenceProtocol,
 )
-from aiodoo_datasets.generators.approval.protocol.domain.decision_protocol import DecisionProtocol
-from aiodoo_datasets.generators.approval.protocol.domain.approval_protocol import (
+from generators.approval.protocol.domain.decision_protocol import DecisionProtocol
+from generators.approval.protocol.domain.approval_protocol import (
     ApprovalProtocol,
     ReviewMetadataProtocol,
 )

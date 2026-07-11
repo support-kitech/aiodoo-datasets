@@ -1,10 +1,10 @@
 """Benchmark Catalog Builder for Evaluation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
-from aiodoo_datasets.generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
-from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
-from aiodoo_datasets.generators.evaluation.factories.benchmark_catalog_factory import (
+from generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
+from generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
+from generators.evaluation.domain.benchmark_suite import BenchmarkSuite
+from generators.evaluation.factories.benchmark_catalog_factory import (
     BenchmarkCatalogFactory,
 )
 

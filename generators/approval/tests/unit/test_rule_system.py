@@ -1,13 +1,13 @@
 """Tests for the Rule System."""
 
 import unittest
-from aiodoo_datasets.generators.approval.rules.security_rules import SQLInjectionRule
-from aiodoo_datasets.generators.approval.rules.style_rules import Pep8ComplianceRule
-from aiodoo_datasets.generators.approval.rules.rule_context import RuleContext
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.enums import Severity
+from generators.approval.rules.security_rules import SQLInjectionRule
+from generators.approval.rules.style_rules import Pep8ComplianceRule
+from generators.approval.rules.rule_context import RuleContext
+from generators.approval.domain.evidence import Evidence
+from generators.approval.domain.source_generator import SourceGenerator
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.enums import Severity
 
 
 class TestRuleSystem(unittest.TestCase):

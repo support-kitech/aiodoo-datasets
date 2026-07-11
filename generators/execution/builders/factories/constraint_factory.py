@@ -1,9 +1,9 @@
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
-from aiodoo_datasets.generators.execution.analysis.knowledge.constraint_knowledge import (
+from generators.execution.builders.factories.base import BaseFactory
+from generators.execution.analysis.knowledge.constraint_knowledge import (
     ConstraintKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_constraint import ExecutionConstraint
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.domain.execution_constraint import ExecutionConstraint
+from generators.execution.builders.exceptions import FactoryError
 
 
 class ConstraintFactory(BaseFactory):  # type: ignore[misc]

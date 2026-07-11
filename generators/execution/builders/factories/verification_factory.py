@@ -1,9 +1,9 @@
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
-from aiodoo_datasets.generators.execution.analysis.knowledge.verification_knowledge import (
+from generators.execution.builders.factories.base import BaseFactory
+from generators.execution.analysis.knowledge.verification_knowledge import (
     VerificationKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_verification import ExecutionVerification
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.domain.execution_verification import ExecutionVerification
+from generators.execution.builders.exceptions import FactoryError
 
 
 class VerificationFactory(BaseFactory):  # type: ignore[misc]

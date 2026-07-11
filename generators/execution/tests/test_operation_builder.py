@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
-from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
-from aiodoo_datasets.generators.execution.builders.results.operation_build_result import (
+from generators.execution.builders.operation_builder import OperationBuilder
+from generators.execution.builders.results.operation_build_result import (
     OperationBuildResult,
 )
 

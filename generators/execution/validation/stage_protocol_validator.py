@@ -1,6 +1,6 @@
 """Validator for stage protocol."""
 
-from aiodoo_datasets.generators.execution.protocol.domain.stage_protocol import StageProtocol
+from generators.execution.protocol.domain.stage_protocol import StageProtocol
 
 
 class StageProtocolValidator:

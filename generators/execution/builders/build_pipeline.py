@@ -1,7 +1,7 @@
-from aiodoo_datasets.generators.execution.builders.build_pipeline_context import (
+from generators.execution.builders.build_pipeline_context import (
     BuildPipelineContext,
 )
-from aiodoo_datasets.generators.execution.builders.pipeline_result import PipelineResult
+from generators.execution.builders.pipeline_result import PipelineResult
 
 
 class BuildPipeline:

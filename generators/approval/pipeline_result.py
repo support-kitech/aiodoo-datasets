@@ -1,9 +1,15 @@
 """Pipeline result for the Approval Generator."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass, field
-from typing import Tuple, Mapping, Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
+from typing import TYPE_CHECKING, Any, Mapping, Tuple
+
+from generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
+
+if TYPE_CHECKING:
+    from generators.common.pipeline.status import PipelineStatus
 
 
 @dataclass(frozen=True, slots=True)
@@ -12,6 +18,18 @@ class PipelineResult:
 
     success: bool
     approval_protocol: ApprovalProtocol
-    statistics: Mapping[str, Any] = field(default_factory=lambda: MappingProxyType({}))
+    statistics: Mapping[str, Any] = field(
+        default_factory=lambda: MappingProxyType({})
+    )
     diagnostics: Tuple[str, ...] = field(default_factory=tuple)
     exported_files: Tuple[str, ...] = field(default_factory=tuple)
+
+    @property
+    def status(self) -> PipelineStatus:
+        from generators.common.pipeline.status import PipelineStatus
+
+        return (
+            PipelineStatus.SUCCESS
+            if self.success
+            else PipelineStatus.FAILED
+        )

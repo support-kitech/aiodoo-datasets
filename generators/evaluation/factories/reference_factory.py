@@ -1,6 +1,6 @@
 """Reference Factory for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.domain.reference import Reference
+from generators.evaluation.domain.reference import Reference
 
 
 class ReferenceFactory:

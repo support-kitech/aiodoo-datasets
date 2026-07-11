@@ -1,7 +1,7 @@
 """Batch build result."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.planning.domain.execution_batch import ExecutionBatch
+from generators.execution.planning.domain.execution_batch import ExecutionBatch
 
 
 @dataclass(frozen=True, slots=True)

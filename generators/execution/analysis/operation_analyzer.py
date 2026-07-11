@@ -1,8 +1,8 @@
 """Operation Analyzer implementation."""
 
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.results.operation_result import OperationResult
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.results.operation_result import OperationResult
 
 
 class OperationAnalyzer(BaseAnalyzer):  # type: ignore[misc]

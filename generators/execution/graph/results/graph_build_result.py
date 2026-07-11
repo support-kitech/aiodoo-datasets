@@ -1,11 +1,11 @@
 """Graph build result."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnostics import (
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.builders.diagnostics.builder_diagnostics import (
     BuilderDiagnostics,
 )
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
+from generators.execution.graph.statistics import GraphStatistics
 
 
 @dataclass(frozen=True, slots=True)

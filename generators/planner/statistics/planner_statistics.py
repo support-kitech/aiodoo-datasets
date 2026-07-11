@@ -1,8 +1,8 @@
 """Streaming statistics aggregation for the Planner Dataset."""
 
 from typing import Any
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.planner.validation.schema import PlannerDatasetRecord
+from generators.common.statistics.base_statistics import BaseStatistics
+from generators.planner.validation.schema import PlannerDatasetRecord
 
 
 class PlannerStatistics(BaseStatistics):  # type: ignore[misc]

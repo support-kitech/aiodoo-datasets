@@ -1,8 +1,8 @@
 import unittest
 from pathlib import Path
-from aiodoo_datasets.generators.execution.validation.pipeline_validator import PipelineValidator
-from aiodoo_datasets.generators.execution.integration.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.execution.export.export_result import ExportResult
+from generators.execution.validation.pipeline_validator import PipelineValidator
+from generators.execution.integration.pipeline_result import PipelineResult
+from generators.execution.export.export_result import ExportResult
 
 
 class TestPipelineValidator(unittest.TestCase):

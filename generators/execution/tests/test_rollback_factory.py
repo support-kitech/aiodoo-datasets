@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.builders.factories.rollback_factory import RollbackFactory
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.builders.factories.rollback_factory import RollbackFactory
+from generators.execution.builders.exceptions import FactoryError
 
 
 class TestRollbackFactory(unittest.TestCase):

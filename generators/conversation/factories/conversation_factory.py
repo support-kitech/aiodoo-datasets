@@ -2,9 +2,9 @@
 
 import hashlib
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.domain.conversation import Conversation
-from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
-from aiodoo_datasets.generators.conversation.domain.turn import Turn
+from generators.conversation.domain.conversation import Conversation
+from generators.conversation.domain.metadata import ConversationMetadata
+from generators.conversation.domain.turn import Turn
 
 
 class ConversationFactory:

@@ -1,8 +1,8 @@
 import unittest
-from aiodoo_datasets.generators.execution.builders.factories.operation_factory import (
+from generators.execution.builders.factories.operation_factory import (
     OperationFactory,
 )
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.builders.exceptions import FactoryError
 
 
 class TestOperationFactory(unittest.TestCase):

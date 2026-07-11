@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
+from generators.execution.planning.planning_statistics import PlanningStatistics
 
 
 class TestPlanningStatistics(unittest.TestCase):

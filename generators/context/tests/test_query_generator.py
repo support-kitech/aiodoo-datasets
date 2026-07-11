@@ -1,12 +1,12 @@
 import unittest
 import logging
 
-from aiodoo_datasets.generators.context.analysis.graph import ContextGraph, NodeType
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
-from aiodoo_datasets.generators.context.generation.query_generator import QueryGenerator
-from aiodoo_datasets.generators.context.generation.registry import REGISTERED_QUERY_PLUGINS
-from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
+from generators.context.analysis.graph import ContextGraph, NodeType
+from generators.context.generation.query import Query
+from generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.generation.query_generator import QueryGenerator
+from generators.context.generation.registry import REGISTERED_QUERY_PLUGINS
+from generators.context.generation.queries.base import BaseContextQuery
 
 
 class MockCrashingPlugin(BaseContextQuery):
@@ -30,7 +30,7 @@ class MockDuplicatePlugin(BaseContextQuery):
 
 class TestQueryGenerator(unittest.TestCase):
     def setUp(self) -> None:
-        logging.getLogger("aiodoo_datasets.generators.context.generation.query_generator").setLevel(
+        logging.getLogger("generators.context.generation.query_generator").setLevel(
             logging.CRITICAL
         )
         self.graph = ContextGraph()

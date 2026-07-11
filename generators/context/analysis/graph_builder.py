@@ -2,9 +2,9 @@
 
 import logging
 
-from aiodoo_datasets.generators.context.analysis.knowledge import ContextKnowledge
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.analysis.relationships import (
+from generators.context.analysis.knowledge import ContextKnowledge
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.analysis.relationships import (
     ComputesRelationship,
     ContainsRelationship,
     DisplaysRelationship,

@@ -1,8 +1,8 @@
 """CLI commands."""
 
-from aiodoo_datasets.generators.execution.cli.arguments import parse_args
-from aiodoo_datasets.generators.execution.cli.configuration import build_pipeline_context
-from aiodoo_datasets.generators.execution.integration.pipeline import IntegrationPipeline
+from generators.execution.cli.arguments import parse_args
+from generators.execution.cli.configuration import build_pipeline_context
+from generators.execution.integration.pipeline import IntegrationPipeline
 
 
 def run_pipeline(args: list[str] | None = None) -> int:

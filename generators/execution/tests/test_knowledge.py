@@ -1,9 +1,9 @@
 import unittest
 from dataclasses import FrozenInstanceError
-from aiodoo_datasets.generators.execution.analysis.knowledge.execution_knowledge import (
+from generators.execution.analysis.knowledge.execution_knowledge import (
     ExecutionKnowledge,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.operation_knowledge import (
+from generators.execution.analysis.knowledge.operation_knowledge import (
     OperationKnowledge,
 )
 

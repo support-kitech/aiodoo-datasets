@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass, field
 from typing import Tuple
-from aiodoo_datasets.generators.approval.enums import Severity, RuleCategory
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
+from generators.approval.enums import Severity, RuleCategory
+from generators.approval.domain.evidence import Evidence
 
 
 @dataclass(frozen=True, slots=True)

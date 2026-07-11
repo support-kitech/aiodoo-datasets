@@ -1,6 +1,6 @@
 """Knowledge validation."""
 
-from aiodoo_datasets.generators.execution.analysis.knowledge.execution_knowledge import (
+from generators.execution.analysis.knowledge.execution_knowledge import (
     ExecutionKnowledge,
 )
 

@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.builders.factories.artifact_factory import ArtifactFactory
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.builders.factories.artifact_factory import ArtifactFactory
+from generators.execution.builders.exceptions import FactoryError
 
 
 class TestArtifactFactory(unittest.TestCase):

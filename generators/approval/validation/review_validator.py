@@ -1,8 +1,8 @@
 """Review validator for the Approval Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.exceptions import ValidationException
+from generators.approval.domain.review import Review
+from generators.approval.exceptions import ValidationException
 
 
 class ReviewValidator:

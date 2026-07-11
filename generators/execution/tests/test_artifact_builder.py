@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
-from aiodoo_datasets.generators.execution.builders.artifact_builder import ArtifactBuilder
-from aiodoo_datasets.generators.execution.builders.results.artifact_build_result import (
+from generators.execution.builders.artifact_builder import ArtifactBuilder
+from generators.execution.builders.results.artifact_build_result import (
     ArtifactBuildResult,
 )
 

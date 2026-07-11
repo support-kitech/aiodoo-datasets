@@ -2,7 +2,7 @@
 
 import hashlib
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.ground_truth import GroundTruth
+from generators.evaluation.domain.ground_truth import GroundTruth
 
 
 class GroundTruthFactory:

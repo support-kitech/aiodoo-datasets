@@ -1,10 +1,10 @@
 """Extracts inheritance relationships."""
 
-from aiodoo_datasets.generators.context.analysis.knowledge import ContextKnowledge
-from aiodoo_datasets.generators.context.analysis.relationships.base import BaseRelationshipExtractor
-from aiodoo_datasets.generators.context.analysis.graph.enums import RelationshipType, LanguageType
-from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
+from generators.context.analysis.knowledge import ContextKnowledge
+from generators.context.analysis.relationships.base import BaseRelationshipExtractor
+from generators.context.analysis.graph.enums import RelationshipType, LanguageType
+from generators.context.analysis.graph.edge import ContextEdge
+from generators.context.analysis.graph.graph import ContextGraph
 
 
 class InheritsRelationship(BaseRelationshipExtractor):  # type: ignore[misc]

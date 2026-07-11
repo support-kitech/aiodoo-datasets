@@ -1,10 +1,10 @@
 import unittest
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.edge import ExecutionEdge
-from aiodoo_datasets.generators.execution.graph.enums import NodeType, EdgeType
-from aiodoo_datasets.generators.execution.graph.detector import CycleDetector
-from aiodoo_datasets.generators.execution.graph.exceptions import CycleDetectedError
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.edge import ExecutionEdge
+from generators.execution.graph.enums import NodeType, EdgeType
+from generators.execution.graph.detector import CycleDetector
+from generators.execution.graph.exceptions import CycleDetectedError
 
 
 class TestCycleDetector(unittest.TestCase):

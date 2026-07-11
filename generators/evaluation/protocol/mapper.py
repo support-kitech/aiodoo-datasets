@@ -1,20 +1,20 @@
 """Protocol Mapper for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.domain.evaluation import Evaluation
-from aiodoo_datasets.generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
-from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
-from aiodoo_datasets.generators.evaluation.domain.evaluation_case import EvaluationCase
-from aiodoo_datasets.generators.evaluation.domain.expected_output import ExpectedOutput
-from aiodoo_datasets.generators.evaluation.domain.ground_truth import GroundTruth
-from aiodoo_datasets.generators.evaluation.domain.evaluation_rule import EvaluationRule
-from aiodoo_datasets.generators.evaluation.domain.success_criteria import SuccessCriteria
-from aiodoo_datasets.generators.evaluation.domain.failure_criteria import FailureCriteria
-from aiodoo_datasets.generators.evaluation.domain.reference import Reference
-from aiodoo_datasets.generators.evaluation.domain.attachment import EvaluationAttachment
-from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
-from aiodoo_datasets.generators.evaluation.domain.metadata import EvaluationMetadata
-from aiodoo_datasets.generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
-from aiodoo_datasets.generators.evaluation.protocol.domain.evaluation_protocol import (
+from generators.evaluation.domain.evaluation import Evaluation
+from generators.evaluation.domain.benchmark_catalog import BenchmarkCatalog
+from generators.evaluation.domain.benchmark_suite import BenchmarkSuite
+from generators.evaluation.domain.evaluation_case import EvaluationCase
+from generators.evaluation.domain.expected_output import ExpectedOutput
+from generators.evaluation.domain.ground_truth import GroundTruth
+from generators.evaluation.domain.evaluation_rule import EvaluationRule
+from generators.evaluation.domain.success_criteria import SuccessCriteria
+from generators.evaluation.domain.failure_criteria import FailureCriteria
+from generators.evaluation.domain.reference import Reference
+from generators.evaluation.domain.attachment import EvaluationAttachment
+from generators.evaluation.domain.score import EvaluationScore
+from generators.evaluation.domain.metadata import EvaluationMetadata
+from generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
+from generators.evaluation.protocol.domain.evaluation_protocol import (
     MetadataProtocol,
     ExpectedOutputProtocol,
     GroundTruthProtocol,
@@ -26,7 +26,7 @@ from aiodoo_datasets.generators.evaluation.protocol.domain.evaluation_protocol i
     ScoreProtocol,
     EvaluationCaseProtocol,
 )
-from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import (
+from generators.evaluation.protocol.domain.benchmark_protocol import (
     BenchmarkMetadataProtocol,
     BenchmarkSuiteProtocol,
     BenchmarkCatalogProtocol,

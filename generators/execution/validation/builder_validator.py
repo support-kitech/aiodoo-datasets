@@ -1,4 +1,4 @@
-from aiodoo_datasets.generators.execution.builders.pipeline_result import PipelineResult
+from generators.execution.builders.pipeline_result import PipelineResult
 
 
 class BuilderValidator:

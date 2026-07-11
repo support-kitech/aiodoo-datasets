@@ -1,12 +1,12 @@
 """Rule registry for the Approval Generator."""
 
 from typing import Dict, List, Type, TYPE_CHECKING
-from aiodoo_datasets.generators.approval.rules.base_rule import BaseRule
-from aiodoo_datasets.generators.approval.exceptions import ValidationException
-from aiodoo_datasets.generators.approval.enums import RuleCategory
+from generators.approval.rules.base_rule import BaseRule
+from generators.approval.exceptions import ValidationException
+from generators.approval.enums import RuleCategory
 
 if TYPE_CHECKING:
-    from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
+    from generators.approval.rules.rule_set import RuleSet
 
 
 class RuleRegistry:
@@ -56,7 +56,7 @@ class RuleRegistry:
     @classmethod
     def compile(cls) -> "RuleSet":
         """Compile the registry into an immutable RuleSet."""
-        from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
+        from generators.approval.rules.rule_set import RuleSet
 
         rules = cls.get_all_rules()
         return RuleSet(rules=tuple(rules))

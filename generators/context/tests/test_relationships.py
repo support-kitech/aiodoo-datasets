@@ -1,18 +1,18 @@
 import unittest
 
-from aiodoo_datasets.generators.context.analysis.graph import (
+from generators.context.analysis.graph import (
     ContextGraph,
     LanguageType,
     RelationshipType,
 )
-from aiodoo_datasets.generators.context.analysis.relationships import (
+from generators.context.analysis.relationships import (
     ContainsRelationship,
     InheritsRelationship,
     ComputesRelationship,
     DisplaysRelationship,
     TriggersRelationship,
 )
-from aiodoo_datasets.generators.context.analysis.knowledge import ContextKnowledge
+from generators.context.analysis.knowledge import ContextKnowledge
 
 
 class TestRelationshipExtractors(unittest.TestCase):

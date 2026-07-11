@@ -1,6 +1,6 @@
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.builders.factories.base import BaseFactory
+from generators.execution.builders.exceptions import FactoryError
 
 
 class MetadataFactory(BaseFactory):  # type: ignore[misc]

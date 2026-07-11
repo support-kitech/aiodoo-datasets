@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
-from aiodoo_datasets.generators.execution.cli.arguments import parse_args
-from aiodoo_datasets.generators.execution.cli.configuration import build_pipeline_context
+from generators.execution.cli.arguments import parse_args
+from generators.execution.cli.configuration import build_pipeline_context
 
 
 class TestCLI(unittest.TestCase):

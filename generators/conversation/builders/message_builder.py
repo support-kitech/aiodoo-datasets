@@ -1,10 +1,10 @@
 """Message builder for Conversation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.domain.message import Message
-from aiodoo_datasets.generators.conversation.enums import Role
-from aiodoo_datasets.generators.conversation.domain.reference import Reference
-from aiodoo_datasets.generators.conversation.factories.message_factory import MessageFactory
+from generators.conversation.domain.message import Message
+from generators.conversation.enums import Role
+from generators.conversation.domain.reference import Reference
+from generators.conversation.factories.message_factory import MessageFactory
 
 
 class MessageBuilder:

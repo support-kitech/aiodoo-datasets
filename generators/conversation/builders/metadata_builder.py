@@ -1,7 +1,7 @@
 """Metadata builder for Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
-from aiodoo_datasets.generators.conversation.enums import ConversationType
+from generators.conversation.domain.metadata import ConversationMetadata
+from generators.conversation.enums import ConversationType
 
 
 class MetadataBuilder:
@@ -14,7 +14,7 @@ class MetadataBuilder:
         language: str = "en",
         complexity: int = 1,
     ) -> ConversationMetadata:
-        from aiodoo_datasets.generators.conversation.version import __version__, SCHEMA_VERSION
+        from generators.conversation.version import __version__, SCHEMA_VERSION
 
         return ConversationMetadata(
             generator_version=__version__,

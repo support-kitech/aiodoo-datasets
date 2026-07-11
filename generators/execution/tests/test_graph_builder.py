@@ -1,13 +1,13 @@
 import unittest
-from aiodoo_datasets.generators.execution.graph.builder import GraphBuilder
-from aiodoo_datasets.generators.execution.graph.context import GraphContext
-from aiodoo_datasets.generators.execution.graph.enums import EdgeType
-from aiodoo_datasets.generators.execution.domain.execution_step import ExecutionStep
-from aiodoo_datasets.generators.execution.domain.execution_operation import ExecutionOperation
-from aiodoo_datasets.generators.execution.domain.execution_dependency import ExecutionDependency
-from aiodoo_datasets.generators.execution.domain.enums import OperationAction
-from aiodoo_datasets.generators.execution.artifacts.python_artifact import PythonArtifact
-from aiodoo_datasets.generators.execution.artifacts.enums import PythonArtifactType
+from generators.execution.graph.builder import GraphBuilder
+from generators.execution.graph.context import GraphContext
+from generators.execution.graph.enums import EdgeType
+from generators.execution.domain.execution_step import ExecutionStep
+from generators.execution.domain.execution_operation import ExecutionOperation
+from generators.execution.domain.execution_dependency import ExecutionDependency
+from generators.execution.domain.enums import OperationAction
+from generators.execution.artifacts.python_artifact import PythonArtifact
+from generators.execution.artifacts.enums import PythonArtifactType
 from unittest.mock import Mock
 
 

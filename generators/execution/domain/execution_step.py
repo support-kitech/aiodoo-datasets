@@ -2,14 +2,14 @@
 
 from dataclasses import dataclass, field
 from typing import Any
-from aiodoo_datasets.generators.execution.domain.execution_operation import ExecutionOperation
-from aiodoo_datasets.generators.execution.domain.execution_dependency import ExecutionDependency
-from aiodoo_datasets.generators.execution.domain.execution_constraint import ExecutionConstraint
-from aiodoo_datasets.generators.execution.domain.execution_verification import ExecutionVerification
-from aiodoo_datasets.generators.execution.domain.execution_rollback import ExecutionRollback
-from aiodoo_datasets.generators.execution.domain.execution_metadata import ExecutionMetadata
-from aiodoo_datasets.generators.execution.domain.types import StepId
-from aiodoo_datasets.generators.execution.domain.constants import (
+from generators.execution.domain.execution_operation import ExecutionOperation
+from generators.execution.domain.execution_dependency import ExecutionDependency
+from generators.execution.domain.execution_constraint import ExecutionConstraint
+from generators.execution.domain.execution_verification import ExecutionVerification
+from generators.execution.domain.execution_rollback import ExecutionRollback
+from generators.execution.domain.execution_metadata import ExecutionMetadata
+from generators.execution.domain.types import StepId
+from generators.execution.domain.constants import (
     DEFAULT_PRIORITY,
     EMPTY_DEPENDENCIES,
     EMPTY_CONSTRAINTS,

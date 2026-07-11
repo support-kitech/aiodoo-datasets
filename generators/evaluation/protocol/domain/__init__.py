@@ -1,6 +1,6 @@
 """Protocol models for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.protocol.domain.evaluation_protocol import (
+from generators.evaluation.protocol.domain.evaluation_protocol import (
     MetadataProtocol,
     ExpectedOutputProtocol,
     GroundTruthProtocol,
@@ -12,7 +12,7 @@ from aiodoo_datasets.generators.evaluation.protocol.domain.evaluation_protocol i
     ScoreProtocol,
     EvaluationCaseProtocol,
 )
-from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import (
+from generators.evaluation.protocol.domain.benchmark_protocol import (
     BenchmarkMetadataProtocol,
     BenchmarkSuiteProtocol,
     BenchmarkCatalogProtocol,

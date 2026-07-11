@@ -1,8 +1,8 @@
 """Registry Freeze Tests for Evaluation Generator."""
 
 import unittest
-from aiodoo_datasets.generators.evaluation.registries.factory_registry import FactoryRegistry
-from aiodoo_datasets.generators.evaluation.registries.parser_registry import ParserRegistry
+from generators.evaluation.registries.factory_registry import FactoryRegistry
+from generators.evaluation.registries.parser_registry import ParserRegistry
 
 
 class TestRegistryFreeze(unittest.TestCase):

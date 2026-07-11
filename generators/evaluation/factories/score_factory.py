@@ -1,7 +1,7 @@
 """Score Factory for Evaluation Generator."""
 
 import hashlib
-from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
+from generators.evaluation.domain.score import EvaluationScore
 
 
 class ScoreFactory:

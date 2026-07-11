@@ -1,9 +1,9 @@
 """Decision validator for the Approval Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.enums import DecisionEnum, Severity
-from aiodoo_datasets.generators.approval.exceptions import ValidationException
+from generators.approval.domain.review import Review
+from generators.approval.enums import DecisionEnum, Severity
+from generators.approval.exceptions import ValidationException
 
 
 class DecisionValidator:

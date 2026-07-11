@@ -1,21 +1,21 @@
 """Pipeline orchestrator for Conversation Generator."""
 
 from types import MappingProxyType
-from aiodoo_datasets.generators.conversation.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.conversation.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.conversation.exceptions import ConversationValidationError
-from aiodoo_datasets.generators.conversation.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.conversation.analysis.evidence_extractor import EvidenceExtractor
-from aiodoo_datasets.generators.conversation.builders.conversation_builder import (
+from generators.conversation.pipeline_context import PipelineContext
+from generators.conversation.pipeline_result import PipelineResult
+from generators.conversation.exceptions import ConversationValidationError
+from generators.conversation.analysis.context import AnalysisContext
+from generators.conversation.analysis.evidence_extractor import EvidenceExtractor
+from generators.conversation.builders.conversation_builder import (
     ConversationBuilder,
 )
-from aiodoo_datasets.generators.conversation.protocol.mapper import ProtocolMapper
-from aiodoo_datasets.generators.conversation.validation.conversation_validator import (
+from generators.conversation.protocol.mapper import ProtocolMapper
+from generators.conversation.validation.conversation_validator import (
     ConversationValidator,
 )
-from aiodoo_datasets.generators.conversation.validation.protocol_validator import ProtocolValidator
-from aiodoo_datasets.generators.conversation.validation.dataset_validator import DatasetValidator
-from aiodoo_datasets.generators.conversation.statistics.conversation_statistics import (
+from generators.conversation.validation.protocol_validator import ProtocolValidator
+from generators.conversation.validation.dataset_validator import DatasetValidator
+from generators.conversation.statistics.conversation_statistics import (
     ConversationStatistics,
 )
 
@@ -26,7 +26,6 @@ class ConversationPipeline:
     @staticmethod
     def generate(context: PipelineContext) -> PipelineResult:
         """Execute the full pipeline."""
-        result = PipelineResult(success=False)
         stats = ConversationStatistics()
 
         try:
@@ -56,12 +55,11 @@ class ConversationPipeline:
                 # Dataset validation is a single item here, but could be extended to validate against history if needed.
                 DatasetValidator.validate_all([protocol])
 
-            # 6. Statistics
-            stats.add_sample(protocol)
+            # 6. Statistics (handled by DatasetWriter below)
 
             # 7. Export Layer
             from pathlib import Path
-            from aiodoo_datasets.generators.common.export.writer import DatasetWriter
+            from generators.common.export.writer import DatasetWriter
 
             writer = DatasetWriter(
                 output_dir=Path(context.output_dir),
@@ -73,12 +71,9 @@ class ConversationPipeline:
             writer.export_manifest()
             writer.export_statistics()
 
-            result.success = True
-            result.statistics = stats
+            return PipelineResult(success=True, statistics=stats)
 
         except ConversationValidationError as e:
-            result.diagnostics.append(f"Validation failed: {str(e)}")
+            return PipelineResult(success=False, diagnostics=[f"Validation failed: {str(e)}"])
         except Exception as e:
-            result.diagnostics.append(f"Pipeline failed: {str(e)}")
-
-        return result
+            return PipelineResult(success=False, diagnostics=[f"Pipeline failed: {str(e)}"])

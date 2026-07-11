@@ -1,6 +1,6 @@
 """Validator for JSONL export context."""
 
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
+from generators.execution.export.export_context import ExportContext
 
 
 class JSONLValidator:

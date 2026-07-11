@@ -1,7 +1,7 @@
 """Pipeline Integration Tests for Evaluation Generator."""
 
 import unittest
-from aiodoo_datasets.generators.evaluation import api
+from generators.evaluation import api
 
 
 class TestEvaluationPipeline(unittest.TestCase):

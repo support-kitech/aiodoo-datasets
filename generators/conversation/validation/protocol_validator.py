@@ -1,7 +1,7 @@
 """Protocol validator for Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.exceptions import ConversationValidationError
-from aiodoo_datasets.generators.conversation.protocol.domain.conversation_protocol import (
+from generators.conversation.exceptions import ConversationValidationError
+from generators.conversation.protocol.domain.conversation_protocol import (
     ConversationProtocol,
 )
 

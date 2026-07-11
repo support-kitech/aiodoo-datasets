@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
-from aiodoo_datasets.generators.execution.builders.constraint_builder import ConstraintBuilder
-from aiodoo_datasets.generators.execution.builders.results.constraint_build_result import (
+from generators.execution.builders.constraint_builder import ConstraintBuilder
+from generators.execution.builders.results.constraint_build_result import (
     ConstraintBuildResult,
 )
 

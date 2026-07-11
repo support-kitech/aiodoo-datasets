@@ -1,10 +1,10 @@
 """Public API for the Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.pipeline import ConversationPipeline
-from aiodoo_datasets.generators.conversation.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.conversation.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.conversation.validation.dataset_validator import DatasetValidator
-from aiodoo_datasets.generators.conversation.protocol.domain.conversation_protocol import (
+from generators.conversation.pipeline import ConversationPipeline
+from generators.conversation.pipeline_context import PipelineContext
+from generators.conversation.pipeline_result import PipelineResult
+from generators.conversation.validation.dataset_validator import DatasetValidator
+from generators.conversation.protocol.domain.conversation_protocol import (
     ConversationProtocol,
 )
 from typing import List

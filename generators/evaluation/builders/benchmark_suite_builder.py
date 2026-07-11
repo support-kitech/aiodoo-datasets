@@ -1,10 +1,10 @@
 """Benchmark Suite Builder for Evaluation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
-from aiodoo_datasets.generators.evaluation.domain.evaluation_case import EvaluationCase
-from aiodoo_datasets.generators.evaluation.enums import BenchmarkCategory
-from aiodoo_datasets.generators.evaluation.factories.benchmark_suite_factory import (
+from generators.evaluation.domain.benchmark_suite import BenchmarkSuite
+from generators.evaluation.domain.evaluation_case import EvaluationCase
+from generators.evaluation.enums import BenchmarkCategory
+from generators.evaluation.factories.benchmark_suite_factory import (
     BenchmarkSuiteFactory,
 )
 

@@ -1,7 +1,7 @@
 """Batch validator."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_batch import ExecutionBatch
-from aiodoo_datasets.generators.execution.validation.phase_validator import PhaseValidator
+from generators.execution.planning.domain.execution_batch import ExecutionBatch
+from generators.execution.validation.phase_validator import PhaseValidator
 
 
 class BatchValidator:

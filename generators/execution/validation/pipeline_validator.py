@@ -1,6 +1,6 @@
 """Validator for complete pipeline execution."""
 
-from aiodoo_datasets.generators.execution.integration.pipeline_result import PipelineResult
+from generators.execution.integration.pipeline_result import PipelineResult
 
 
 class PipelineValidator:

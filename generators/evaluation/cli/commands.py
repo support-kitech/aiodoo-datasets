@@ -2,7 +2,7 @@
 
 import sys
 from typing import Dict, Any
-from aiodoo_datasets.generators.evaluation import api
+from generators.evaluation import api
 
 
 class Commands:

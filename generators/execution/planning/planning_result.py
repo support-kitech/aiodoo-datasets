@@ -1,7 +1,7 @@
 """Planning result."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.planning.domain.execution_plan import PlannedExecution
+from generators.execution.planning.domain.execution_plan import PlannedExecution
 
 
 @dataclass(frozen=True, slots=True)

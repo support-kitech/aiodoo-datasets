@@ -2,8 +2,8 @@
 
 from typing import Tuple, Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.evaluation.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.evaluation.registries.parser_registry import ParserRegistry
+from generators.evaluation.analysis.context import AnalysisContext
+from generators.evaluation.registries.parser_registry import ParserRegistry
 
 
 class EvidenceExtractor:

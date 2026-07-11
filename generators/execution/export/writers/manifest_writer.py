@@ -2,9 +2,9 @@
 
 import json
 import hashlib
-from aiodoo_datasets.generators.execution.export.writers.base_writer import BaseWriter
-from aiodoo_datasets.generators.execution.export.enums import WriterType
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
+from generators.execution.export.writers.base_writer import BaseWriter
+from generators.execution.export.enums import WriterType
+from generators.execution.export.export_context import ExportContext
 
 
 class ManifestWriter(BaseWriter):  # type: ignore[misc]

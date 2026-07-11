@@ -1,16 +1,16 @@
 """View Ranking Rule."""
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.analysis.graph.enums import RelationshipType, NodeType
-from aiodoo_datasets.generators.context.generation.query import Query, QueryType
-from aiodoo_datasets.generators.context.ranking.enums import (
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.analysis.graph.enums import RelationshipType, NodeType
+from generators.context.generation.query import Query, QueryType
+from generators.context.ranking.enums import (
     RankingRuleType,
     RankingScore,
     RankingReason,
 )
-from aiodoo_datasets.generators.context.ranking.result import RankingResult
-from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
-from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
+from generators.context.ranking.result import RankingResult
+from generators.context.ranking.base import BaseRankingRule
+from generators.context.ranking.utils import freeze_metadata
 
 
 class ViewRule(BaseRankingRule):  # type: ignore[misc]

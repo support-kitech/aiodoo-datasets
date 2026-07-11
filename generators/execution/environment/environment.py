@@ -1,9 +1,9 @@
 """Execution environment context."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.environment.edition import OdooEdition
-from aiodoo_datasets.generators.execution.environment.version import OdooVersion
-from aiodoo_datasets.generators.execution.environment.dependencies import (
+from generators.execution.environment.edition import OdooEdition
+from generators.execution.environment.version import OdooVersion
+from generators.execution.environment.dependencies import (
     PythonDependency,
     SystemDependency,
     DatabaseDependency,

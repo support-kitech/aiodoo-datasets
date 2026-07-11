@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
+from generators.execution.integration.pipeline_statistics import PipelineStatistics
 
 
 class TestPipelineStatistics(unittest.TestCase):

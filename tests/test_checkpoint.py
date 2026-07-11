@@ -1,6 +1,6 @@
 """Tests for Dataset Checkpoint Manager."""
 
-from aiodoo_datasets.generators.planner.state.checkpoint import CheckpointManager
+from generators.planner.state.checkpoint import CheckpointManager
 
 def test_checkpoint_lifecycle(tmp_path):
     output_dir = tmp_path / "output"

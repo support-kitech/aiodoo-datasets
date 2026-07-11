@@ -13,16 +13,13 @@ authors = [
     {name = "AIODOO Team"}
 ]
 dependencies = [
-    "pydantic>=2.0.0"
+    "pydantic>=2.0.0",
+    "PyYAML>=6.0",
 ]
 
 [tool.setuptools]
-package-dir = {"aiodoo_datasets" = "."}
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["generators*", "tests*", "protocol*", "validation*", "statistics*", "cli*", "analysis*", "builders*", "domain*", "factories*", "registries*", "preprocessing*", "sources*", "config*"]
-namespaces = true
+
 
 [project.optional-dependencies]
 dev = [
@@ -30,16 +27,6 @@ dev = [
     "pytest",
     "coverage",
 ]
-
-[project.scripts]
-generate-planner = "aiodoo_datasets.generators.planner.cli.main:main"
-generate-coding = "aiodoo_datasets.generators.coding.cli.main:main"
-generate-repair = "aiodoo_datasets.generators.repair.cli.main:main"
-generate-context = "aiodoo_datasets.generators.context.cli.main:main"
-generate-execution = "aiodoo_datasets.generators.execution.cli.main:main"
-generate-approval = "aiodoo_datasets.generators.approval.cli.main:main"
-generate-conversation = "aiodoo_datasets.generators.conversation.cli.main:main"
-generate-evaluation = "aiodoo_datasets.generators.evaluation.cli.main:main"
 
 [tool.ruff]
 line-length = 100

@@ -3,18 +3,18 @@
 import logging
 from pathlib import Path
 
-from aiodoo_datasets.generators.common.discovery.scanner import ModuleScanner, OdooModule
-from aiodoo_datasets.generators.repair.analysis.analyzer import RepairAnalyzer
-from aiodoo_datasets.generators.repair.generation.instruction import generate_instruction
-from aiodoo_datasets.generators.repair.protocol.mapper import build_repair_payload
-from aiodoo_datasets.generators.repair.validation.schema import RepairDatasetRecord
-from aiodoo_datasets.generators.common.validation.deduplicator import Deduplicator
-from aiodoo_datasets.generators.repair.validation.core_validator import CoreProtocolValidator
-from aiodoo_datasets.generators.repair.export.metadata import build_metadata
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
-from aiodoo_datasets.generators.common.state.checkpoint import CheckpointManager
-from aiodoo_datasets.generators.repair.statistics.repair_statistics import RepairStatistics
-from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
+from generators.common.discovery.scanner import ModuleScanner, OdooModule
+from generators.repair.analysis.analyzer import RepairAnalyzer
+from generators.repair.generation.instruction import generate_instruction
+from generators.repair.protocol.mapper import build_repair_payload
+from generators.repair.validation.schema import RepairDatasetRecord
+from generators.common.validation.deduplicator import Deduplicator
+from generators.repair.validation.core_validator import CoreProtocolValidator
+from generators.repair.export.metadata import build_metadata
+from generators.common.export.writer import DatasetWriter
+from generators.common.state.checkpoint import CheckpointManager
+from generators.repair.statistics.repair_statistics import RepairStatistics
+from generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
 
 logger = logging.getLogger(__name__)
 

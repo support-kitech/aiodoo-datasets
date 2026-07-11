@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 import hashlib
 
-from aiodoo_datasets.generators.coding.discovery import OdooModule, Scenario
+from generators.coding.discovery import OdooModule, Scenario
 
 
 class InstructionEngine:

@@ -1,8 +1,8 @@
 """Tests for the Protocol Task Dependency Graph Builder."""
 
-from aiodoo_datasets.generators.planner.protocol.task_builder import build_tasks
-from aiodoo_datasets.generators.planner.discovery.ast_parser import PythonKnowledge, OdooModelDef, OdooFieldDef, OdooMethodDef
-from aiodoo_datasets.generators.planner.discovery.xml_parser import XMLKnowledge, OdooViewDef, OdooActionDef, OdooMenuDef, OdooSecurityDef
+from generators.planner.protocol.task_builder import build_tasks
+from generators.planner.discovery.ast_parser import PythonKnowledge, OdooModelDef, OdooFieldDef, OdooMethodDef
+from generators.planner.discovery.xml_parser import XMLKnowledge, OdooViewDef, OdooActionDef, OdooMenuDef, OdooSecurityDef
 
 def test_task_topological_graph():
     # Setup mock data simulating a full module

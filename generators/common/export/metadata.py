@@ -3,8 +3,8 @@
 import datetime
 from typing import Any
 
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.common.discovery.classifier import Scenario
+from generators.common.discovery.scanner import OdooModule
+from generators.common.discovery.classifier import Scenario
 
 _GIT_CACHE: dict[str, str] = {}
 

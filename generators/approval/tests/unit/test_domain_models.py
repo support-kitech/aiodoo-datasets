@@ -2,12 +2,12 @@
 
 import unittest
 from dataclasses import FrozenInstanceError
-from aiodoo_datasets.generators.approval.domain.evidence import Evidence
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.domain.decision import Decision
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.enums import (
+from generators.approval.domain.evidence import Evidence
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.domain.finding import Finding
+from generators.approval.domain.decision import Decision
+from generators.approval.domain.review import Review
+from generators.approval.enums import (
     DecisionEnum,
     ConfidenceLevel,
     Severity,
@@ -19,7 +19,7 @@ class TestDomainModels(unittest.TestCase):
     """Test immutability and initialization of domain models."""
 
     def test_evidence_immutability(self) -> None:
-        from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
+        from generators.approval.domain.source_generator import SourceGenerator
 
         evidence = Evidence(
             evidence_id="e1", source_generator=SourceGenerator.CODING, source_reference="node1"
@@ -28,7 +28,7 @@ class TestDomainModels(unittest.TestCase):
             evidence.description = "new description"
 
     def test_finding_immutability(self) -> None:
-        from aiodoo_datasets.generators.approval.domain.source_generator import SourceGenerator
+        from generators.approval.domain.source_generator import SourceGenerator
 
         evidence = Evidence(
             evidence_id="e1", source_generator=SourceGenerator.CODING, source_reference="node1"

@@ -1,8 +1,8 @@
 """CLI commands."""
 
-from aiodoo_datasets.generators.approval.cli.arguments import parse_args
-from aiodoo_datasets.generators.approval.cli.configuration import build_pipeline_context
-from aiodoo_datasets.generators.approval.pipeline import ApprovalPipeline
+from generators.approval.cli.arguments import parse_args
+from generators.approval.cli.configuration import build_pipeline_context
+from generators.approval.pipeline import ApprovalPipeline
 
 
 def run_pipeline(args: list[str] | None = None) -> int:

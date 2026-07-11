@@ -2,8 +2,8 @@
 
 import json
 from pathlib import Path
-from aiodoo_datasets.generators.planner.export.manifest import generate_manifest
-from aiodoo_datasets.generators.planner.statistics.planner_statistics import PlannerStatistics
+from generators.planner.export.manifest import generate_manifest
+from generators.planner.statistics.planner_statistics import PlannerStatistics
 
 def test_manifest_generation(tmp_path):
     stats = PlannerStatistics()

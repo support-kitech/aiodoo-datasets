@@ -2,12 +2,12 @@
 Discovery Layer for AIODOO Dataset Generator (Proxy).
 """
 
-from aiodoo_datasets.generators.common.discovery.scanner import (
+from generators.common.discovery.scanner import (
     ModuleScanner,
     OdooModule,
     ManifestInfo,
 )
-from aiodoo_datasets.generators.common.discovery.ast_parser import (
+from generators.common.discovery.ast_parser import (
     OdooASTParser,
     PythonKnowledge,
     OdooModelDef,
@@ -15,7 +15,7 @@ from aiodoo_datasets.generators.common.discovery.ast_parser import (
     OdooMethodDef,
     OdooRouteDef,
 )
-from aiodoo_datasets.generators.common.discovery.xml_parser import (
+from generators.common.discovery.xml_parser import (
     OdooXMLParser,
     XMLKnowledge,
     OdooViewDef,
@@ -25,7 +25,7 @@ from aiodoo_datasets.generators.common.discovery.xml_parser import (
     OdooAssetDef,
     OdooDataRecordDef,
 )
-from aiodoo_datasets.generators.common.discovery.classifier import ScenarioClassifier, Scenario
+from generators.common.discovery.classifier import ScenarioClassifier, Scenario
 
 __all__ = [
     "ModuleScanner",

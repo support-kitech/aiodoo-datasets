@@ -1,9 +1,9 @@
-from aiodoo_datasets.generators.execution.builders.factories.base import BaseFactory
-from aiodoo_datasets.generators.execution.analysis.knowledge.artifact_knowledge import (
+from generators.execution.builders.factories.base import BaseFactory
+from generators.execution.analysis.knowledge.artifact_knowledge import (
     ArtifactKnowledge,
 )
-from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.artifacts.artifact import Artifact
+from generators.execution.builders.exceptions import FactoryError
 
 
 class ArtifactFactory(BaseFactory):  # type: ignore[misc]

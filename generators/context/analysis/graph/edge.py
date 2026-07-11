@@ -4,7 +4,7 @@ import hashlib
 from dataclasses import dataclass, field
 from typing import Any
 
-from aiodoo_datasets.generators.context.analysis.graph.enums import RelationshipType
+from generators.context.analysis.graph.enums import RelationshipType
 
 
 @dataclass

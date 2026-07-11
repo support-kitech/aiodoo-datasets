@@ -1,8 +1,8 @@
 """Attachment builder for Conversation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.analysis.result import ExtractedEvidence
-from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
+from generators.conversation.analysis.result import ExtractedEvidence
+from generators.conversation.domain.attachment import Attachment
 
 
 class AttachmentBuilder:

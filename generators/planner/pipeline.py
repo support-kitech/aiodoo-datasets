@@ -3,7 +3,7 @@
 import logging
 from pathlib import Path
 
-from aiodoo_datasets.generators.planner.discovery import (
+from generators.common.discovery import (
     ModuleScanner,
     OdooModule,
     OdooASTParser,
@@ -11,17 +11,17 @@ from aiodoo_datasets.generators.planner.discovery import (
     ScenarioClassifier,
 )
 
-from aiodoo_datasets.generators.planner.synthetics.instruction import generate_instruction
-from aiodoo_datasets.generators.planner.synthetics.context_builder import build_context
-from aiodoo_datasets.generators.planner.protocol.mapper import build_plan_payload
-from aiodoo_datasets.generators.planner.validation.schema import PlannerDatasetRecord
-from aiodoo_datasets.generators.common.validation.deduplicator import Deduplicator
-from aiodoo_datasets.generators.planner.validation.core_validator import CoreProtocolValidator
-from aiodoo_datasets.generators.planner.export.metadata import build_metadata
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
-from aiodoo_datasets.generators.common.state.checkpoint import CheckpointManager
-from aiodoo_datasets.generators.planner.statistics.planner_statistics import PlannerStatistics
-from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
+from generators.planner.synthetics.instruction import generate_instruction
+from generators.planner.synthetics.context_builder import build_context
+from generators.planner.protocol.mapper import build_plan_payload
+from generators.planner.validation.schema import PlannerDatasetRecord
+from generators.common.validation.deduplicator import Deduplicator
+from generators.planner.validation.core_validator import CoreProtocolValidator
+from generators.planner.export.metadata import build_metadata
+from generators.common.export.writer import DatasetWriter
+from generators.common.state.checkpoint import CheckpointManager
+from generators.planner.statistics.planner_statistics import PlannerStatistics
+from generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
 
 logger = logging.getLogger(__name__)
 

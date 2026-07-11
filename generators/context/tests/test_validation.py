@@ -1,7 +1,7 @@
 import unittest
 import logging
 
-from aiodoo_datasets.generators.context.protocol.schema import (
+from generators.context.protocol.schema import (
     ContextTask,
     ProtocolQuery,
     ProtocolArtifact,
@@ -10,31 +10,31 @@ from aiodoo_datasets.generators.context.protocol.schema import (
     ProtocolGraph,
     ProtocolMetadata,
 )
-from aiodoo_datasets.generators.context.protocol.enums import (
+from generators.context.protocol.enums import (
     ProtocolQueryType,
     ProtocolIntent,
     ProtocolNodeType,
     ProtocolLanguage,
     ProtocolRankingReason,
 )
-from aiodoo_datasets.generators.context.validation import (
+from generators.context.validation import (
     SchemaValidator,
     ProtocolValidator,
     CoreValidator,
 )
-from aiodoo_datasets.generators.context.validation.registry import REGISTERED_VALIDATORS
-from aiodoo_datasets.generators.context.validation.result import ValidationResult
+from generators.context.validation.registry import REGISTERED_VALIDATORS
+from generators.context.validation.result import ValidationResult
 
 
 class TestValidation(unittest.TestCase):
     def setUp(self) -> None:
         logging.getLogger(
-            "aiodoo_datasets.generators.context.validation.schema_validator"
+            "generators.context.validation.schema_validator"
         ).setLevel(logging.CRITICAL)
         logging.getLogger(
-            "aiodoo_datasets.generators.context.validation.protocol_validator"
+            "generators.context.validation.protocol_validator"
         ).setLevel(logging.CRITICAL)
-        logging.getLogger("aiodoo_datasets.generators.context.validation.core_validator").setLevel(
+        logging.getLogger("generators.context.validation.core_validator").setLevel(
             logging.CRITICAL
         )
 

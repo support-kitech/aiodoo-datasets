@@ -3,9 +3,9 @@
 import pytest
 from pathlib import Path
 
-from aiodoo_datasets.generators.planner.synthetics.instruction import InstructionEngine
-from aiodoo_datasets.generators.planner.discovery.scanner import OdooModule, ManifestInfo
-from aiodoo_datasets.generators.planner.discovery.classifier import Scenario
+from generators.planner.synthetics.instruction import InstructionEngine
+from generators.planner.discovery.scanner import OdooModule, ManifestInfo
+from generators.planner.discovery.classifier import Scenario
 
 
 @pytest.fixture

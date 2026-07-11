@@ -2,9 +2,9 @@
 
 import logging
 
-from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.registry import REGISTERED_QUERY_PLUGINS
+from generators.context.analysis.graph.graph import ContextGraph
+from generators.context.generation.query import Query
+from generators.context.generation.registry import REGISTERED_QUERY_PLUGINS
 
 logger = logging.getLogger(__name__)
 

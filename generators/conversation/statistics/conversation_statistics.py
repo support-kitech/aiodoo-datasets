@@ -1,10 +1,7 @@
 """Statistics tracking for Conversation Generator."""
 
 from typing import Dict, Any
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.conversation.protocol.domain.conversation_protocol import (
-    ConversationProtocol,
-)
+from generators.common.statistics.base_statistics import BaseStatistics
 
 
 class ConversationStatistics(BaseStatistics):  # type: ignore[misc]
@@ -17,8 +14,9 @@ class ConversationStatistics(BaseStatistics):  # type: ignore[misc]
         self.messages_generated = 0
         self.conversation_types: Dict[str, int] = {}
 
-    def add_sample(self, protocol: ConversationProtocol) -> None:
+    def add_sample(self, protocol: Any, json_str: str) -> None:
         """Add metrics from a generated protocol."""
+        self._add_base_sample(protocol, json_str)
         self.conversations_generated += 1
 
         c_type = protocol.metadata.conversation_type.value

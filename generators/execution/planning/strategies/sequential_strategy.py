@@ -1,10 +1,10 @@
 """Sequential planning strategy."""
 
-from aiodoo_datasets.generators.execution.planning.strategies.base_strategy import (
+from generators.execution.planning.strategies.base_strategy import (
     BasePlanningStrategy,
 )
-from aiodoo_datasets.generators.execution.planning.planning_context import PlanningContext
-from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
+from generators.execution.planning.planning_context import PlanningContext
+from generators.execution.planning.planning_result import PlanningResult
 
 
 class SequentialStrategy(BasePlanningStrategy):  # type: ignore[misc]

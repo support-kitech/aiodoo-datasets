@@ -3,10 +3,10 @@
 from dataclasses import dataclass
 from typing import Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
-from aiodoo_datasets.generators.execution.planning.enums import PlanningStrategyType
-from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.statistics import GraphStatistics
+from generators.execution.planning.enums import PlanningStrategyType
+from generators.execution.planning.planning_statistics import PlanningStatistics
 
 
 @dataclass(frozen=True, slots=True)

@@ -3,10 +3,10 @@
 from dataclasses import dataclass, field
 from typing import Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.domain.execution_step import ExecutionStep
-from aiodoo_datasets.generators.execution.environment.environment import ExecutionEnvironment
-from aiodoo_datasets.generators.execution.domain.execution_metadata import ExecutionMetadata
-from aiodoo_datasets.generators.execution.domain.types import PlanId
+from generators.execution.domain.execution_step import ExecutionStep
+from generators.execution.environment.environment import ExecutionEnvironment
+from generators.execution.domain.execution_metadata import ExecutionMetadata
+from generators.execution.domain.types import PlanId
 
 
 @dataclass(frozen=True)

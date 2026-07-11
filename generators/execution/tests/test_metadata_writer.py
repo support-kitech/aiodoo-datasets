@@ -2,14 +2,14 @@ import unittest
 import json
 from pathlib import Path
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.export.writers.metadata_writer import MetadataWriter
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
-from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
-from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
-from aiodoo_datasets.generators.execution.protocol.domain.execution_protocol import (
+from generators.execution.export.writers.metadata_writer import MetadataWriter
+from generators.execution.export.export_context import ExportContext
+from generators.execution.export.export_statistics import ExportStatistics
+from generators.execution.protocol.protocol_result import ProtocolResult
+from generators.execution.protocol.domain.execution_protocol import (
     ExecutionProtocol,
 )
-from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.protocol.protocol_statistics import ProtocolStatistics
 
 
 class TestMetadataWriter(unittest.TestCase):

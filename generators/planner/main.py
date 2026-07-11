@@ -1,8 +1,8 @@
 """CLI Entrypoint for the AIODOO Planner Dataset Generator."""
 
 from pathlib import Path
-from aiodoo_datasets.generators.planner.pipeline import PlannerPipeline
-from aiodoo_datasets.generators.common.cli.arguments import build_base_parser, setup_logging
+from generators.planner.pipeline import PlannerPipeline
+from generators.common.cli.arguments import build_base_parser, setup_logging
 
 
 def main():  # type: ignore[no-untyped-def]

@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.graph.enums import NodeType
+from generators.execution.graph.enums import NodeType
 
 
 NodeId = str

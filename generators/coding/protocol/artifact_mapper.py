@@ -1,7 +1,7 @@
 """Maps raw extracted implementation data into Artifact Protocol objects."""
 
 import hashlib
-from aiodoo_datasets.generators.coding.validation.schema import GeneratedArtifact
+from generators.coding.validation.schema import GeneratedArtifact
 
 
 def map_to_artifact(

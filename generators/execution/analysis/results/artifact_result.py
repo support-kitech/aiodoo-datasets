@@ -1,7 +1,7 @@
 """Artifact result container."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.analysis.knowledge.artifact_knowledge import (
+from generators.execution.analysis.knowledge.artifact_knowledge import (
     ArtifactKnowledge,
 )
 

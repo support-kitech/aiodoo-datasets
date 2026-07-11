@@ -2,9 +2,9 @@
 
 from dataclasses import dataclass
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
+from generators.evaluation.domain.benchmark_suite import BenchmarkSuite
 
-from aiodoo_datasets.generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
+from generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
 
 
 @dataclass(frozen=True, slots=True)

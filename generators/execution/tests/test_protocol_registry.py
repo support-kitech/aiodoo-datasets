@@ -1,6 +1,6 @@
 import unittest
-from aiodoo_datasets.generators.execution.registries.protocol_registry import ProtocolRegistry
-from aiodoo_datasets.generators.execution.protocol.mappers.stage_mapper import StageMapper
+from generators.execution.registries.protocol_registry import ProtocolRegistry
+from generators.execution.protocol.mappers.stage_mapper import StageMapper
 
 
 class TestProtocolRegistry(unittest.TestCase):

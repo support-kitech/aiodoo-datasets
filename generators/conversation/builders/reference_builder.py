@@ -1,8 +1,8 @@
 """Reference builder for Conversation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.analysis.result import ExtractedEvidence
-from aiodoo_datasets.generators.conversation.domain.reference import Reference
+from generators.conversation.analysis.result import ExtractedEvidence
+from generators.conversation.domain.reference import Reference
 
 
 class ReferenceBuilder:

@@ -1,8 +1,8 @@
 """Recommendation builder for the Approval Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.domain.recommendation import Recommendation
+from generators.approval.domain.finding import Finding
+from generators.approval.domain.recommendation import Recommendation
 
 
 class RecommendationBuilder:

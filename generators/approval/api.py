@@ -1,9 +1,9 @@
 """Public API for the Approval Generator."""
 
-from aiodoo_datasets.generators.approval.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.approval.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.approval.pipeline import ApprovalPipeline
-from aiodoo_datasets.generators.approval.protocol.version import __version__ as protocol_version
+from generators.approval.pipeline_context import PipelineContext
+from generators.approval.pipeline_result import PipelineResult
+from generators.approval.pipeline import ApprovalPipeline
+from generators.approval.protocol.version import __version__ as protocol_version
 
 
 def generate(context: PipelineContext) -> PipelineResult:

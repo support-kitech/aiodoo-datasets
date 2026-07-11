@@ -1,7 +1,7 @@
 """Score Builder for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
-from aiodoo_datasets.generators.evaluation.factories.score_factory import ScoreFactory
+from generators.evaluation.domain.score import EvaluationScore
+from generators.evaluation.factories.score_factory import ScoreFactory
 
 
 class ScoreBuilder:

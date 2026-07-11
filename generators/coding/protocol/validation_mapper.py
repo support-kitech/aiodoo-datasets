@@ -1,8 +1,8 @@
 """Generates expected validation actions for the Artifact Protocol."""
 
-from aiodoo_datasets.generators.coding.validation.schema import ValidationAction, GeneratedArtifact
+from generators.coding.validation.schema import ValidationAction, GeneratedArtifact
 
-from aiodoo_datasets.generators.coding.discovery import PythonKnowledge, XMLKnowledge, OdooModule
+from generators.coding.discovery import PythonKnowledge, XMLKnowledge, OdooModule
 
 
 def build_validation_actions(

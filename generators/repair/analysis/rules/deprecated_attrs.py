@@ -1,12 +1,12 @@
 """Rule to detect deprecated attrs in XML views."""
 
 import hashlib
-from aiodoo_datasets.generators.repair.analysis.rules.base import (
+from generators.repair.analysis.rules.base import (
     BaseRepairRule,
     AnalyzeContext,
     RepairOpportunity,
 )
-from aiodoo_datasets.generators.repair.validation.schema import RepairSeverity, ArtifactType
+from generators.repair.validation.schema import RepairSeverity, ArtifactType
 
 
 class DeprecatedAttrsRule(BaseRepairRule):  # type: ignore[misc]

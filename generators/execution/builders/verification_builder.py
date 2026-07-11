@@ -1,13 +1,13 @@
-from aiodoo_datasets.generators.execution.builders.base import BaseBuilder
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.results.verification_build_result import (
+from generators.execution.builders.base import BaseBuilder
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.results.verification_build_result import (
     VerificationBuildResult,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.verification_knowledge import (
+from generators.execution.analysis.knowledge.verification_knowledge import (
     VerificationKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_verification import ExecutionVerification
-from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
+from generators.execution.domain.execution_verification import ExecutionVerification
+from generators.execution.builders.operation_builder import OperationBuilder
 
 
 class VerificationBuilder(BaseBuilder):  # type: ignore[misc]

@@ -1,7 +1,7 @@
 """Constraint result container."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.analysis.knowledge.constraint_knowledge import (
+from generators.execution.analysis.knowledge.constraint_knowledge import (
     ConstraintKnowledge,
 )
 

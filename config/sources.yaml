@@ -17,17 +17,17 @@ repositories:
 
   enterprise:
     "17.0":
-      root: "/home/yagnesh-borad/workspace/enterprise17"
+      root: "/home/yagnesh-borad/workspace/odoo17/enterprise17"
       addons:
         - "."
 
     "18.0":
-      root: "/home/yagnesh-borad/workspace/enterprise18"
+      root: "/home/yagnesh-borad/workspace/odoo18/enterprise18"
       addons:
         - "."
 
     "19.0":
-      root: "/home/yagnesh-borad/workspace/enterprise19.3"
+      root: "/home/yagnesh-borad/workspace/odoo19.3/enterprise19.3"
       addons:
         - "."
 

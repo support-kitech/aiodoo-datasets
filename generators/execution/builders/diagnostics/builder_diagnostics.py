@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.builders.diagnostics.warning import Warning
-from aiodoo_datasets.generators.execution.builders.diagnostics.error import Error
-from aiodoo_datasets.generators.execution.builders.diagnostics.skipped_item import SkippedItem
+from generators.execution.builders.diagnostics.warning import Warning
+from generators.execution.builders.diagnostics.error import Error
+from generators.execution.builders.diagnostics.skipped_item import SkippedItem
 
 
 @dataclass(frozen=True, slots=True)

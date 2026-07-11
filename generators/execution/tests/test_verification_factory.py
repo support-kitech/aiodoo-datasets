@@ -1,8 +1,8 @@
 import unittest
-from aiodoo_datasets.generators.execution.builders.factories.verification_factory import (
+from generators.execution.builders.factories.verification_factory import (
     VerificationFactory,
 )
-from aiodoo_datasets.generators.execution.builders.exceptions import FactoryError
+from generators.execution.builders.exceptions import FactoryError
 
 
 class TestVerificationFactory(unittest.TestCase):

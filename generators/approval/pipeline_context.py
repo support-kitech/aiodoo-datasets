@@ -2,11 +2,11 @@
 
 from dataclasses import dataclass
 from typing import Mapping, Any
-from aiodoo_datasets.generators.approval.config.approval_config import ApprovalConfig
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
-from aiodoo_datasets.generators.approval.rules.registry import RuleRegistry
-from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import ParserRegistry
+from generators.approval.config.approval_config import ApprovalConfig
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.rules.rule_set import RuleSet
+from generators.approval.rules.registry import RuleRegistry
+from generators.approval.analysis.parsers.parser_registry import ParserRegistry
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,6 +1,6 @@
 """Builds minimal input context for the Planner model."""
 
-from aiodoo_datasets.generators.planner.discovery.scanner import OdooModule
+from generators.common.discovery.scanner import OdooModule
 
 
 def build_context(module: OdooModule) -> str:

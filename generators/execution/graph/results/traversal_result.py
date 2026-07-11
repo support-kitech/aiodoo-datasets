@@ -1,8 +1,8 @@
 """Traversal result."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
-from aiodoo_datasets.generators.execution.graph.enums import TraversalStrategy
+from generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.enums import TraversalStrategy
 
 
 @dataclass(frozen=True, slots=True)

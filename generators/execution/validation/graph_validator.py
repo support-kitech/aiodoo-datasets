@@ -1,9 +1,9 @@
 """Graph validation orchestrator."""
 
-from aiodoo_datasets.generators.execution.graph.graph import ExecutionGraph
-from aiodoo_datasets.generators.execution.graph.results.validation_result import ValidationResult
-from aiodoo_datasets.generators.execution.validation.node_validator import NodeValidator
-from aiodoo_datasets.generators.execution.validation.edge_validator import EdgeValidator
+from generators.execution.graph.graph import ExecutionGraph
+from generators.execution.graph.results.validation_result import ValidationResult
+from generators.execution.validation.node_validator import NodeValidator
+from generators.execution.validation.edge_validator import EdgeValidator
 
 
 class GraphValidator:

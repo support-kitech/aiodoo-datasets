@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.knowledge.execution_knowledge import (
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.knowledge.execution_knowledge import (
     ExecutionKnowledge,
 )
-from aiodoo_datasets.generators.execution.statistics.builder_statistics import BuilderStatistics
+from generators.execution.statistics.builder_statistics import BuilderStatistics
 
 
 @dataclass(frozen=True, slots=True)

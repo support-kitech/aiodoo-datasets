@@ -1,8 +1,8 @@
 """Verification Analyzer implementation."""
 
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.results.verification_result import (
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.results.verification_result import (
     VerificationResult,
 )
 

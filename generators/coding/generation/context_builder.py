@@ -1,14 +1,14 @@
 """Builds minimal context required for the Coding Model implementation."""
 
 from typing import Any
-from aiodoo_datasets.generators.coding.discovery import (
+from generators.coding.discovery import (
     OdooModule,
     Scenario,
     PythonKnowledge,
     XMLKnowledge,
 )
 
-from aiodoo_datasets.generators.coding.validation.schema import ArtifactPayload
+from generators.coding.validation.schema import ArtifactPayload
 
 
 def build_context(

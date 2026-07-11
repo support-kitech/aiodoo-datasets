@@ -1,5 +1,5 @@
 import unittest
-from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.protocol.protocol_statistics import ProtocolStatistics
 
 
 class TestProtocolStatistics(unittest.TestCase):

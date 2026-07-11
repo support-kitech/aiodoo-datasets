@@ -1,8 +1,8 @@
 """Scoring logic for the Decision Engine."""
 
 from typing import List, Tuple
-from aiodoo_datasets.generators.approval.enums import DecisionEnum, ConfidenceLevel, Severity
-from aiodoo_datasets.generators.approval.domain.finding import Finding
+from generators.approval.enums import DecisionEnum, ConfidenceLevel, Severity
+from generators.approval.domain.finding import Finding
 
 
 class DecisionScorer:

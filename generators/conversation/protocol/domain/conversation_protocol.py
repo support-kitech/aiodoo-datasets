@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from aiodoo_datasets.generators.conversation.enums import Role, AttachmentType, ConversationType
+from generators.conversation.enums import Role, AttachmentType, ConversationType
 
 
 class ReferenceProtocol(BaseModel):

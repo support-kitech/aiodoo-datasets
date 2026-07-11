@@ -1,13 +1,13 @@
 """Static registry for all analysis plugins."""
 
-from aiodoo_datasets.generators.execution.analysis.base import BaseAnalyzer
-from aiodoo_datasets.generators.execution.analysis.artifact_analyzer import ArtifactAnalyzer
-from aiodoo_datasets.generators.execution.analysis.operation_analyzer import OperationAnalyzer
-from aiodoo_datasets.generators.execution.analysis.dependency_analyzer import DependencyAnalyzer
-from aiodoo_datasets.generators.execution.analysis.constraint_analyzer import ConstraintAnalyzer
-from aiodoo_datasets.generators.execution.analysis.verification_analyzer import VerificationAnalyzer
-from aiodoo_datasets.generators.execution.analysis.rollback_analyzer import RollbackAnalyzer
-from aiodoo_datasets.generators.execution.analysis.metadata_analyzer import MetadataAnalyzer
+from generators.execution.analysis.base import BaseAnalyzer
+from generators.execution.analysis.artifact_analyzer import ArtifactAnalyzer
+from generators.execution.analysis.operation_analyzer import OperationAnalyzer
+from generators.execution.analysis.dependency_analyzer import DependencyAnalyzer
+from generators.execution.analysis.constraint_analyzer import ConstraintAnalyzer
+from generators.execution.analysis.verification_analyzer import VerificationAnalyzer
+from generators.execution.analysis.rollback_analyzer import RollbackAnalyzer
+from generators.execution.analysis.metadata_analyzer import MetadataAnalyzer
 
 # Statically registered analyzers in execution order
 _REGISTERED_ANALYZERS: tuple[type[BaseAnalyzer], ...] = (

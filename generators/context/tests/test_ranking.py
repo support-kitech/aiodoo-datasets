@@ -1,6 +1,6 @@
 import unittest
 
-from aiodoo_datasets.generators.context.analysis.graph import (
+from generators.context.analysis.graph import (
     ContextNode,
     ContextEdge,
     ContextGraph,
@@ -8,10 +8,10 @@ from aiodoo_datasets.generators.context.analysis.graph import (
     LanguageType,
     RelationshipType,
 )
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
-from aiodoo_datasets.generators.context.ranking.enums import RankingRuleType, RankingScore
-from aiodoo_datasets.generators.context.ranking.rules import (
+from generators.context.generation.query import Query
+from generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.ranking.enums import RankingRuleType, RankingScore
+from generators.context.ranking.rules import (
     DefinitionRule,
     InheritanceRule,
     DependencyRule,

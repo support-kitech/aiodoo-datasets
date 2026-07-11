@@ -2,10 +2,10 @@
 
 from dataclasses import dataclass, field
 from typing import Any
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.common.discovery.ast_parser import PythonKnowledge
-from aiodoo_datasets.generators.common.discovery.xml_parser import XMLKnowledge
-from aiodoo_datasets.generators.execution.statistics.analysis_statistics import AnalysisStatistics
+from generators.common.discovery.scanner import OdooModule
+from generators.common.discovery.ast_parser import PythonKnowledge
+from generators.common.discovery.xml_parser import XMLKnowledge
+from generators.execution.statistics.analysis_statistics import AnalysisStatistics
 
 
 @dataclass(frozen=True, eq=True)

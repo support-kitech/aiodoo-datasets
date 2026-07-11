@@ -1,7 +1,7 @@
 import unittest
-from aiodoo_datasets.generators.execution.validation.planning_validator import PlanningValidator
-from aiodoo_datasets.generators.execution.planning.domain.execution_plan import PlannedExecution
-from aiodoo_datasets.generators.execution.planning.domain.execution_schedule import (
+from generators.execution.validation.planning_validator import PlanningValidator
+from generators.execution.planning.domain.execution_plan import PlannedExecution
+from generators.execution.planning.domain.execution_schedule import (
     ExecutionSchedule,
 )
 

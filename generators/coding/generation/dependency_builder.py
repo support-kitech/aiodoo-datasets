@@ -6,7 +6,7 @@ from dataclasses import dataclass
 import re
 import ast
 from pathlib import Path
-from aiodoo_datasets.generators.coding.discovery import OdooModule
+from generators.coding.discovery import OdooModule
 
 
 def _extract_python_deps(file_path: Path) -> set[str]:

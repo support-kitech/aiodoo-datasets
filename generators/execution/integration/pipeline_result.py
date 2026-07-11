@@ -2,14 +2,14 @@
 
 from dataclasses import dataclass
 from typing import Any
-from aiodoo_datasets.generators.execution.builders.pipeline_result import (
+from generators.execution.builders.pipeline_result import (
     PipelineResult as BuildPipelineResult,
 )
-from aiodoo_datasets.generators.execution.graph.results.graph_build_result import GraphBuildResult
-from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
-from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
-from aiodoo_datasets.generators.execution.export.export_result import ExportResult
-from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
+from generators.execution.graph.results.graph_build_result import GraphBuildResult
+from generators.execution.planning.planning_result import PlanningResult
+from generators.execution.protocol.protocol_result import ProtocolResult
+from generators.execution.export.export_result import ExportResult
+from generators.execution.integration.pipeline_statistics import PipelineStatistics
 
 
 @dataclass(frozen=True, slots=True)
@@ -38,3 +38,10 @@ class PipelineResult:
     export_result: ExportResult | None = None
     statistics: PipelineStatistics | None = None
     diagnostics: tuple[str, ...] = tuple()
+    
+    @property
+    def status(self) -> "Any":
+        from generators.common.pipeline.status import PipelineStatus
+        if not self.success and any(d == "Graph contains no nodes." for d in self.diagnostics):
+            return PipelineStatus.SKIPPED
+        return PipelineStatus.SUCCESS if self.success else PipelineStatus.FAILED

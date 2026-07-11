@@ -1,18 +1,18 @@
 """Pipeline orchestrator for the Approval Generator."""
 
-from aiodoo_datasets.generators.approval.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.approval.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.approval.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.approval.analysis.analyzer import ApprovalAnalyzer
-from aiodoo_datasets.generators.approval.engine.engine_context import EngineContext
-from aiodoo_datasets.generators.approval.engine.decision_engine import DecisionEngine
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.protocol.mapper import ProtocolMapper
-from aiodoo_datasets.generators.approval.validation.approval_validator import ApprovalValidator
-from aiodoo_datasets.generators.approval.statistics.approval_statistics import ApprovalStatistics
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.approval.exceptions import ApprovalPipelineError
+from generators.approval.pipeline_context import PipelineContext
+from generators.approval.pipeline_result import PipelineResult
+from generators.approval.analysis.context import AnalysisContext
+from generators.approval.analysis.analyzer import ApprovalAnalyzer
+from generators.approval.engine.engine_context import EngineContext
+from generators.approval.engine.decision_engine import DecisionEngine
+from generators.approval.domain.review import Review
+from generators.approval.protocol.mapper import ProtocolMapper
+from generators.approval.validation.approval_validator import ApprovalValidator
+from generators.approval.statistics.approval_statistics import ApprovalStatistics
+from generators.common.export.writer import DatasetWriter
+from generators.common.statistics.base_statistics import BaseStatistics
+from generators.approval.exceptions import ApprovalPipelineError
 import hashlib
 
 

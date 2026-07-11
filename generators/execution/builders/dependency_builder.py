@@ -1,13 +1,13 @@
-from aiodoo_datasets.generators.execution.builders.base import BaseBuilder
-from aiodoo_datasets.generators.execution.builders.builder_context import BuilderContext
-from aiodoo_datasets.generators.execution.builders.results.dependency_build_result import (
+from generators.execution.builders.base import BaseBuilder
+from generators.execution.builders.builder_context import BuilderContext
+from generators.execution.builders.results.dependency_build_result import (
     DependencyBuildResult,
 )
-from aiodoo_datasets.generators.execution.analysis.knowledge.dependency_knowledge import (
+from generators.execution.analysis.knowledge.dependency_knowledge import (
     DependencyKnowledge,
 )
-from aiodoo_datasets.generators.execution.domain.execution_dependency import ExecutionDependency
-from aiodoo_datasets.generators.execution.builders.operation_builder import OperationBuilder
+from generators.execution.domain.execution_dependency import ExecutionDependency
+from generators.execution.builders.operation_builder import OperationBuilder
 
 
 class DependencyBuilder(BaseBuilder):  # type: ignore[misc]

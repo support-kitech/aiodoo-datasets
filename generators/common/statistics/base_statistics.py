@@ -32,22 +32,32 @@ class BaseStatistics:
     def _add_base_sample(self, record: Any, json_str: str) -> None:
         self.total_samples += 1
 
-        module_name = record.metadata.get("module", "unknown")
+        metadata = record.metadata
+        if isinstance(metadata, dict):
+            module_name = metadata.get("module", "unknown")
+            version = metadata.get("odoo_version") or metadata.get("version", "unknown")
+            edition = metadata.get("edition", "unknown")
+            scenario = metadata.get("scenario", [])
+            difficulty = metadata.get("difficulty", 1)
+        else:
+            module_name = getattr(metadata, "module", getattr(metadata, "source_module", "unknown"))
+            version = getattr(metadata, "odoo_version", getattr(metadata, "version", "unknown"))
+            edition = getattr(metadata, "edition", "unknown")
+            scenario = getattr(metadata, "scenario", [])
+            difficulty = getattr(metadata, "difficulty", 1)
+
         if module_name not in self._seen_modules:
             self._seen_modules.add(module_name)
             self.total_modules = len(self._seen_modules)
 
-        version = record.metadata.get("odoo_version") or record.metadata.get("version", "unknown")
         self.version_distribution[version] += 1
-
-        edition = record.metadata.get("edition", "unknown")
         self.edition_distribution[edition] += 1
 
-        scenario = record.metadata.get("scenario", [])
         if scenario:
-            self.scenario_distribution[scenario[0]] += 1
+            # Handle scenario string vs list gracefully
+            scenario_val = scenario[0] if isinstance(scenario, list) else scenario
+            self.scenario_distribution[scenario_val] += 1
 
-        difficulty = record.metadata.get("difficulty", 1)
         self.difficulty_distribution[difficulty] += 1
 
         self.total_tokens += len(json_str) // 4

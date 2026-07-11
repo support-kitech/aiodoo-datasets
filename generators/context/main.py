@@ -2,8 +2,8 @@
 
 import sys
 import logging
-from aiodoo_datasets.generators.common.cli.arguments import build_base_parser, setup_logging
-from aiodoo_datasets.generators.context.pipeline import ContextPipeline
+from generators.common.cli.arguments import build_base_parser, setup_logging
+from generators.context.pipeline import ContextPipeline
 
 logger = logging.getLogger(__name__)
 

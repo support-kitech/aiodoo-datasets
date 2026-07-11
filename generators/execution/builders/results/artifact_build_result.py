@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from aiodoo_datasets.generators.execution.builders.results.base import BaseBuildResult
-from aiodoo_datasets.generators.execution.artifacts.artifact import Artifact
+from generators.execution.builders.results.base import BaseBuildResult
+from generators.execution.artifacts.artifact import Artifact
 
 
 @dataclass(frozen=True, slots=True)

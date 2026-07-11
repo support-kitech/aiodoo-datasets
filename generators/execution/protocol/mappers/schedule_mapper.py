@@ -1,11 +1,11 @@
 """Mapper for execution schedules."""
 
-from aiodoo_datasets.generators.execution.planning.domain.execution_schedule import (
+from generators.execution.planning.domain.execution_schedule import (
     ExecutionSchedule,
 )
-from aiodoo_datasets.generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
-from aiodoo_datasets.generators.execution.protocol.mappers.batch_mapper import BatchMapper
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.domain.schedule_protocol import ScheduleProtocol
+from generators.execution.protocol.mappers.batch_mapper import BatchMapper
+from generators.execution.protocol.protocol_context import ProtocolContext
 
 
 class ScheduleMapper:

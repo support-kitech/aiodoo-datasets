@@ -1,4 +1,4 @@
-from aiodoo_datasets.generators.execution.registries.base import BaseRegistry
+from generators.execution.registries.base import BaseRegistry
 
 
 class BuilderRegistry(BaseRegistry):  # type: ignore[misc]

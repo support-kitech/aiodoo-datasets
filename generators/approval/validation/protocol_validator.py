@@ -1,8 +1,8 @@
 """Protocol validator for the Approval Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
-from aiodoo_datasets.generators.approval.exceptions import ValidationException
+from generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
+from generators.approval.exceptions import ValidationException
 
 
 class ProtocolValidator:

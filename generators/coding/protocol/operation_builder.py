@@ -1,7 +1,7 @@
 """Generates file operations matching AIODOO Protocol V1."""
 
-from aiodoo_datasets.generators.coding.discovery import PythonKnowledge, XMLKnowledge
-from aiodoo_datasets.generators.coding.validation.schema import FileOperation, GeneratedArtifact
+from generators.coding.discovery import PythonKnowledge, XMLKnowledge
+from generators.coding.validation.schema import FileOperation, GeneratedArtifact
 
 
 def build_operations(

@@ -2,10 +2,10 @@
 
 import unittest
 from types import MappingProxyType
-from aiodoo_datasets.generators.evaluation.statistics.evaluation_statistics import (
+from generators.evaluation.statistics.evaluation_statistics import (
     EvaluationStatistics,
 )
-from aiodoo_datasets.generators.evaluation.analysis.context import AnalysisContext
+from generators.evaluation.analysis.context import AnalysisContext
 
 
 class TestImmutability(unittest.TestCase):
@@ -24,8 +24,10 @@ class TestImmutability(unittest.TestCase):
         """Ensure EvaluationStatistics outputs are strictly immutable."""
         # Empty dataset for testing
         stats = EvaluationStatistics.compute(())
-
-        self.assertIsInstance(stats, MappingProxyType)
+        self.assertTrue(hasattr(stats, "get_export_stats"))
+        # As it's now a BaseStatistics instance, we verify its export dictionary is correct.
+        export_dict = stats.get_export_stats()
+        self.assertIsInstance(export_dict, dict)
         with self.assertRaises(TypeError):
             stats["total_evaluations"] = 9999
 

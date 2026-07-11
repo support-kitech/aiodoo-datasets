@@ -5,8 +5,8 @@ from pathlib import Path
 import yaml
 import pytest
 
-from aiodoo_datasets.generators.planner.pipeline import PlannerPipeline
-from aiodoo_datasets.generators.planner.validation.schema import PlannerDatasetRecord
+from generators.planner.pipeline import PlannerPipeline
+from generators.planner.validation.schema import PlannerDatasetRecord
 
 def test_end_to_end_planner_pipeline(tmp_path):
     """

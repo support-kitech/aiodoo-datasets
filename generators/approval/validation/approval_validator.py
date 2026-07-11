@@ -1,12 +1,12 @@
 """Master validation orchestrator for the Approval Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
-from aiodoo_datasets.generators.approval.validation.review_validator import ReviewValidator
-from aiodoo_datasets.generators.approval.validation.protocol_validator import ProtocolValidator
-from aiodoo_datasets.generators.approval.validation.dataset_validator import DatasetValidator
-from aiodoo_datasets.generators.approval.exceptions import ApprovalValidationError
+from generators.approval.domain.review import Review
+from generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
+from generators.approval.validation.review_validator import ReviewValidator
+from generators.approval.validation.protocol_validator import ProtocolValidator
+from generators.approval.validation.dataset_validator import DatasetValidator
+from generators.approval.exceptions import ApprovalValidationError
 
 
 class ApprovalValidator:

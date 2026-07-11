@@ -3,8 +3,8 @@
 import logging
 from pydantic import ValidationError
 
-from aiodoo_datasets.generators.context.protocol.schema import ContextTask
-from aiodoo_datasets.generators.context.validation.result import ValidationResult
+from generators.context.protocol.schema import ContextTask
+from generators.context.validation.result import ValidationResult
 
 logger = logging.getLogger(__name__)
 

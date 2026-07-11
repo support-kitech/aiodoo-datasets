@@ -1,8 +1,8 @@
 """Maps repair scenarios to the Repair Protocol V1 JSON Schema."""
 
 from pathlib import Path
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.repair.validation.schema import (
+from generators.common.discovery.scanner import OdooModule
+from generators.repair.validation.schema import (
     RepairTask,
     Problem,
     RootCause,
@@ -10,7 +10,7 @@ from aiodoo_datasets.generators.repair.validation.schema import (
     ExpectedOutcome,
     RepairPayload,
 )
-from aiodoo_datasets.generators.repair.analysis.rules.base import RepairOpportunity
+from generators.repair.analysis.rules.base import RepairOpportunity
 
 
 def build_repair_task(opp: RepairOpportunity, base_path: Path) -> RepairTask:

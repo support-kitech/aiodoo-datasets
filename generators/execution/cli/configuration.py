@@ -2,11 +2,11 @@
 
 import argparse
 from types import MappingProxyType
-from aiodoo_datasets.generators.execution.config.generator_config import GeneratorConfig
-from aiodoo_datasets.generators.execution.config.export_config import ExportConfig
-from aiodoo_datasets.generators.execution.config.runtime_config import RuntimeConfig
-from aiodoo_datasets.generators.execution.integration.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
+from generators.execution.config.generator_config import GeneratorConfig
+from generators.execution.config.export_config import ExportConfig
+from generators.execution.config.runtime_config import RuntimeConfig
+from generators.execution.integration.pipeline_context import PipelineContext
+from generators.execution.integration.pipeline_statistics import PipelineStatistics
 
 
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:

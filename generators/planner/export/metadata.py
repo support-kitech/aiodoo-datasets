@@ -2,10 +2,10 @@ import hashlib
 import json
 from typing import Any
 
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.common.discovery.classifier import Scenario
-from aiodoo_datasets.generators.planner.validation.schema import PlanPayload
-from aiodoo_datasets.generators.common.export.metadata import build_base_metadata
+from generators.common.discovery.scanner import OdooModule
+from generators.common.discovery.classifier import Scenario
+from generators.planner.validation.schema import PlanPayload
+from generators.common.export.metadata import build_base_metadata
 
 
 def compute_protocol_hash(module: OdooModule, scenario: Scenario, plan_payload: PlanPayload) -> str:

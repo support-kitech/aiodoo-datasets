@@ -1,19 +1,19 @@
 import unittest
 import logging
 
-from aiodoo_datasets.generators.context.analysis.graph import ContextGraph
-from aiodoo_datasets.generators.context.generation.query import Query
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
-from aiodoo_datasets.generators.context.ranking.enums import (
+from generators.context.analysis.graph import ContextGraph
+from generators.context.generation.query import Query
+from generators.context.generation.enums import QueryType, QueryIntent
+from generators.context.ranking.enums import (
     RankingRuleType,
     RankingScore,
     RankingReason,
 )
-from aiodoo_datasets.generators.context.ranking.result import RankingResult
-from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
-from aiodoo_datasets.generators.context.ranking.registry import REGISTERED_RANKING_RULES
-from aiodoo_datasets.generators.context.ranking.ranking_engine import RankingEngine
-from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
+from generators.context.ranking.result import RankingResult
+from generators.context.ranking.base import BaseRankingRule
+from generators.context.ranking.registry import REGISTERED_RANKING_RULES
+from generators.context.ranking.ranking_engine import RankingEngine
+from generators.context.ranking.utils import freeze_metadata
 
 
 class MockCrashingRule(BaseRankingRule):
@@ -106,7 +106,7 @@ class MockTieRule1(BaseRankingRule):
 
 class TestRankingEngine(unittest.TestCase):
     def setUp(self) -> None:
-        logging.getLogger("aiodoo_datasets.generators.context.ranking.ranking_engine").setLevel(
+        logging.getLogger("generators.context.ranking.ranking_engine").setLevel(
             logging.CRITICAL
         )
         self.graph = ContextGraph()

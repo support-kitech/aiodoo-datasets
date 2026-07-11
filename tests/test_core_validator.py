@@ -2,7 +2,7 @@
 
 import pytest
 from typing import Any
-from aiodoo_datasets.generators.planner.validation.core_validator import CoreProtocolValidator
+from generators.planner.validation.core_validator import CoreProtocolValidator
 
 
 def test_core_protocol_validator_initialization():

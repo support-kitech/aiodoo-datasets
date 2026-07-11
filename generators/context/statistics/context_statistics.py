@@ -3,8 +3,8 @@
 from collections import defaultdict
 from typing import Any
 
-from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
-from aiodoo_datasets.generators.context.protocol.schema import ContextTask
+from generators.common.statistics.base_statistics import BaseStatistics
+from generators.context.protocol.schema import ContextTask
 
 
 class ContextStatistics(BaseStatistics):  # type: ignore[misc]

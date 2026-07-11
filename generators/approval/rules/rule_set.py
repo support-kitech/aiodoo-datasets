@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass
 from typing import Tuple
-from aiodoo_datasets.generators.approval.rules.base_rule import BaseRule
-from aiodoo_datasets.generators.approval.exceptions import ValidationException
+from generators.approval.rules.base_rule import BaseRule
+from generators.approval.exceptions import ValidationException
 
 
 @dataclass(frozen=True, slots=True)

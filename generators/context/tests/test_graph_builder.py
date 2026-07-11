@@ -1,7 +1,7 @@
 import unittest
 import logging
 
-from aiodoo_datasets.generators.context.analysis.graph import (
+from generators.context.analysis.graph import (
     ContextNode,
     ContextEdge,
     ContextGraph,
@@ -9,9 +9,9 @@ from aiodoo_datasets.generators.context.analysis.graph import (
     LanguageType,
     RelationshipType,
 )
-from aiodoo_datasets.generators.context.analysis.graph_builder import GraphBuilder
-from aiodoo_datasets.generators.context.analysis.relationships.base import BaseRelationshipExtractor
-from aiodoo_datasets.generators.context.analysis.knowledge import ContextKnowledge
+from generators.context.analysis.graph_builder import GraphBuilder
+from generators.context.analysis.relationships.base import BaseRelationshipExtractor
+from generators.context.analysis.knowledge import ContextKnowledge
 
 
 class MockCrashingExtractor(BaseRelationshipExtractor):
@@ -56,7 +56,7 @@ class MockMissingNodeExtractor(BaseRelationshipExtractor):
 class TestGraphBuilder(unittest.TestCase):
     def setUp(self) -> None:
         # Disable logging for the duration of the tests to keep console clean
-        logging.getLogger("aiodoo_datasets.generators.context.analysis.graph_builder").setLevel(
+        logging.getLogger("generators.context.analysis.graph_builder").setLevel(
             logging.CRITICAL
         )
 

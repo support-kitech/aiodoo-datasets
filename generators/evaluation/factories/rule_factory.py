@@ -2,7 +2,7 @@
 
 import hashlib
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.domain.evaluation_rule import EvaluationRule
+from generators.evaluation.domain.evaluation_rule import EvaluationRule
 
 
 class RuleFactory:

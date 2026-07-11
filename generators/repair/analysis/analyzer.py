@@ -4,13 +4,13 @@ import ast
 import logging
 from pathlib import Path
 
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.repair.validation.schema import ArtifactType
+from generators.common.discovery.scanner import OdooModule
+from generators.repair.validation.schema import ArtifactType
 
-from aiodoo_datasets.generators.repair.analysis.rules.base import AnalyzeContext, RepairOpportunity
-from aiodoo_datasets.generators.repair.analysis.rules.missing_sudo import MissingSudoRule
-from aiodoo_datasets.generators.repair.analysis.rules.api_multi import ApiMultiRule
-from aiodoo_datasets.generators.repair.analysis.rules.deprecated_attrs import DeprecatedAttrsRule
+from generators.repair.analysis.rules.base import AnalyzeContext, RepairOpportunity
+from generators.repair.analysis.rules.missing_sudo import MissingSudoRule
+from generators.repair.analysis.rules.api_multi import ApiMultiRule
+from generators.repair.analysis.rules.deprecated_attrs import DeprecatedAttrsRule
 
 logger = logging.getLogger(__name__)
 

@@ -1,10 +1,10 @@
 """Execution Analyzer orchestrator."""
 
-from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
-from aiodoo_datasets.generators.execution.analysis.knowledge.execution_knowledge import (
+from generators.execution.analysis.context import AnalysisContext
+from generators.execution.analysis.knowledge.execution_knowledge import (
     ExecutionKnowledge,
 )
-from aiodoo_datasets.generators.execution.registries.analyzer_registry import AnalyzerRegistry
+from generators.execution.registries.analyzer_registry import AnalyzerRegistry
 from typing import Any
 
 

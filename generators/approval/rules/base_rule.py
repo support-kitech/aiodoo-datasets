@@ -2,9 +2,9 @@
 
 from abc import ABC, abstractmethod
 from typing import ClassVar
-from aiodoo_datasets.generators.approval.rules.rule_context import RuleContext
-from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
-from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
+from generators.approval.rules.rule_context import RuleContext
+from generators.approval.rules.rule_result import RuleResult
+from generators.approval.enums import RuleCategory, Severity
 
 
 class BaseRule(ABC):

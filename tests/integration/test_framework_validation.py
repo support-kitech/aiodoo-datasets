@@ -7,14 +7,14 @@ import pytest
 
 # Inject legacy planner discovery submodules because Planner has not been internally migrated yet
 import sys
-from aiodoo_datasets.generators.common.discovery import scanner, ast_parser, xml_parser, classifier
-sys.modules['aiodoo_datasets.generators.planner.discovery.scanner'] = scanner
-sys.modules['aiodoo_datasets.generators.planner.discovery.ast_parser'] = ast_parser
-sys.modules['aiodoo_datasets.generators.planner.discovery.xml_parser'] = xml_parser
-sys.modules['aiodoo_datasets.generators.planner.discovery.classifier'] = classifier
+from generators.common.discovery import scanner, ast_parser, xml_parser, classifier
+sys.modules['generators.planner.discovery.scanner'] = scanner
+sys.modules['generators.planner.discovery.ast_parser'] = ast_parser
+sys.modules['generators.planner.discovery.xml_parser'] = xml_parser
+sys.modules['generators.planner.discovery.classifier'] = classifier
 
-from aiodoo_datasets.generators.planner.pipeline import PlannerPipeline
-from aiodoo_datasets.generators.coding.pipeline import CodingPipeline
+from generators.planner.pipeline import PlannerPipeline
+from generators.coding.pipeline import CodingPipeline
 from .utils import verify_output_files, verify_jsonl_records
 
 @pytest.mark.integration

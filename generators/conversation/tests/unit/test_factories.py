@@ -1,9 +1,9 @@
 """Unit tests for factories in Conversation Generator."""
 
-from aiodoo_datasets.generators.conversation.factories.message_factory import MessageFactory
-from aiodoo_datasets.generators.conversation.enums import Role, ConversationType
-from aiodoo_datasets.generators.conversation.factories.turn_factory import TurnFactory
-from aiodoo_datasets.generators.conversation.factories.conversation_factory import (
+from generators.conversation.factories.message_factory import MessageFactory
+from generators.conversation.enums import Role, ConversationType
+from generators.conversation.factories.turn_factory import TurnFactory
+from generators.conversation.factories.conversation_factory import (
     ConversationFactory,
 )
 

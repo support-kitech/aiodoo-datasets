@@ -1,9 +1,9 @@
 """Unit tests for the DecisionScorer."""
 
 import unittest
-from aiodoo_datasets.generators.approval.engine.scoring import DecisionScorer
-from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.enums import (
+from generators.approval.engine.scoring import DecisionScorer
+from generators.approval.domain.finding import Finding
+from generators.approval.enums import (
     RuleCategory,
     Severity,
     DecisionEnum,

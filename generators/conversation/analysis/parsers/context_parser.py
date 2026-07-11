@@ -2,10 +2,10 @@
 
 from typing import Dict, Any
 from types import MappingProxyType
-from aiodoo_datasets.generators.conversation.analysis.parsers.base_parser import BaseParser
-from aiodoo_datasets.generators.conversation.registries.parser_registry import ParserRegistry
-from aiodoo_datasets.generators.conversation.analysis.result import ExtractedEvidence
-from aiodoo_datasets.generators.conversation.domain.reference import Reference
+from generators.conversation.analysis.parsers.base_parser import BaseParser
+from generators.conversation.registries.parser_registry import ParserRegistry
+from generators.conversation.analysis.result import ExtractedEvidence
+from generators.conversation.domain.reference import Reference
 
 
 @ParserRegistry.register("context_protocol")

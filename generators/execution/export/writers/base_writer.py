@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 import os
 import tempfile
 from pathlib import Path
-from aiodoo_datasets.generators.execution.export.export_context import ExportContext
+from generators.execution.export.export_context import ExportContext
 
 
 class BaseWriter(ABC):
@@ -35,7 +35,7 @@ class BaseWriter(ABC):
         Raises:
             WriterError: If writing fails.
         """
-        from aiodoo_datasets.generators.execution.export.exceptions import WriterError
+        from generators.execution.export.exceptions import WriterError
 
         content = self.generate_content(context)
         content_bytes = content.encode("utf-8")

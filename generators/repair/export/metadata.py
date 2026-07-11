@@ -4,8 +4,8 @@ import hashlib
 import json
 from typing import Any
 
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.repair.validation.schema import RepairPayload
+from generators.common.discovery.scanner import OdooModule
+from generators.repair.validation.schema import RepairPayload
 
 
 def compute_protocol_hash(payload: RepairPayload) -> str:

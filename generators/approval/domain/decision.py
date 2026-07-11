@@ -1,7 +1,7 @@
 """Decision domain model."""
 
 from dataclasses import dataclass
-from aiodoo_datasets.generators.approval.enums import DecisionEnum, ConfidenceLevel
+from generators.approval.enums import DecisionEnum, ConfidenceLevel
 
 
 @dataclass(frozen=True, slots=True)

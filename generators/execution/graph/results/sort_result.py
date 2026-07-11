@@ -1,7 +1,7 @@
 """Sort result."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode
+from generators.execution.graph.node import ExecutionNode
 
 
 @dataclass(frozen=True, slots=True)

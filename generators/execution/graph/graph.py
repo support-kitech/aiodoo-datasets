@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass, field
 from typing import Optional
-from aiodoo_datasets.generators.execution.graph.node import ExecutionNode, NodeId
-from aiodoo_datasets.generators.execution.graph.edge import ExecutionEdge
+from generators.execution.graph.node import ExecutionNode, NodeId
+from generators.execution.graph.edge import ExecutionEdge
 
 
 @dataclass(frozen=True)

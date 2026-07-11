@@ -1,7 +1,7 @@
 """Generates instructions for the dataset row."""
 
-from aiodoo_datasets.generators.common.discovery.scanner import OdooModule
-from aiodoo_datasets.generators.repair.analysis.rules.base import RepairOpportunity
+from generators.common.discovery.scanner import OdooModule
+from generators.repair.analysis.rules.base import RepairOpportunity
 
 
 def generate_instruction(module: OdooModule, opportunities: list[RepairOpportunity]) -> str:

@@ -3,12 +3,12 @@
 import unittest
 from pathlib import Path
 import tempfile
-from aiodoo_datasets.generators.approval.pipeline import ApprovalPipeline
-from aiodoo_datasets.generators.approval.pipeline_context import PipelineContext
-from aiodoo_datasets.generators.approval.config.approval_config import ApprovalConfig
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
-from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
-from aiodoo_datasets.generators.approval.rules.security_rules import SQLInjectionRule
+from generators.approval.pipeline import ApprovalPipeline
+from generators.approval.pipeline_context import PipelineContext
+from generators.approval.config.approval_config import ApprovalConfig
+from generators.approval.domain.metadata import ReviewMetadata
+from generators.approval.rules.rule_set import RuleSet
+from generators.approval.rules.security_rules import SQLInjectionRule
 
 
 class TestApprovalPipeline(unittest.TestCase):

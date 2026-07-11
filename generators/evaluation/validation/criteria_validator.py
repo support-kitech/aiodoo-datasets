@@ -1,9 +1,9 @@
 """Criteria Validator for Evaluation Generator."""
 
 from typing import Tuple
-from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidationError
-from aiodoo_datasets.generators.evaluation.domain.success_criteria import SuccessCriteria
-from aiodoo_datasets.generators.evaluation.domain.failure_criteria import FailureCriteria
+from generators.evaluation.exceptions import EvaluationValidationError
+from generators.evaluation.domain.success_criteria import SuccessCriteria
+from generators.evaluation.domain.failure_criteria import FailureCriteria
 
 
 class CriteriaValidator:

@@ -1,8 +1,8 @@
 """Mapper for metadata."""
 
-from aiodoo_datasets.generators.execution.protocol.protocol_context import ProtocolContext
-from aiodoo_datasets.generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
-from aiodoo_datasets.generators.execution.protocol import version
+from generators.execution.protocol.protocol_context import ProtocolContext
+from generators.execution.protocol.domain.metadata_protocol import MetadataProtocol
+from generators.execution.protocol import version
 
 
 class MetadataMapper:

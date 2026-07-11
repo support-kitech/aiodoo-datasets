@@ -2,8 +2,8 @@
 
 from dataclasses import dataclass
 from typing import Tuple
-from aiodoo_datasets.generators.conversation.domain.message import Message
-from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
+from generators.conversation.domain.message import Message
+from generators.conversation.domain.attachment import Attachment
 
 
 @dataclass(frozen=True, slots=True)

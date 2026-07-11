@@ -1,7 +1,7 @@
 """Immutable representation of an execution phase."""
 
 from dataclasses import dataclass, field
-from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
+from generators.execution.planning.domain.execution_stage import ExecutionStage
 
 
 @dataclass(frozen=True, slots=True)

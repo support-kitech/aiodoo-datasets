@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
-from aiodoo_datasets.generators.planner.pipeline import PlannerPipeline
+from generators.planner.pipeline import PlannerPipeline
 
 @pytest.fixture
 def temp_workspace(tmp_path):

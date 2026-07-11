@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
-from aiodoo_datasets.generators.execution.builders.metadata_builder import MetadataBuilder
-from aiodoo_datasets.generators.execution.builders.results.metadata_build_result import (
+from generators.execution.builders.metadata_builder import MetadataBuilder
+from generators.execution.builders.results.metadata_build_result import (
     MetadataBuildResult,
 )
 

@@ -1,7 +1,7 @@
 """Protocol Layer for Evaluation Generator."""
 
-from aiodoo_datasets.generators.evaluation.protocol.mapper import ProtocolMapper
-from aiodoo_datasets.generators.evaluation.protocol.domain import (
+from generators.evaluation.protocol.mapper import ProtocolMapper
+from generators.evaluation.protocol.domain import (
     MetadataProtocol,
     ExpectedOutputProtocol,
     GroundTruthProtocol,

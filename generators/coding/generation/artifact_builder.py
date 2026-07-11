@@ -1,13 +1,13 @@
 """Reverse-engineers real Odoo files into Artifact Protocol objects."""
 
-from aiodoo_datasets.generators.coding.discovery import (
+from generators.coding.discovery import (
     OdooModule,
     Scenario,
     PythonKnowledge,
     XMLKnowledge,
 )
-from aiodoo_datasets.generators.coding.validation.schema import GeneratedArtifact
-from aiodoo_datasets.generators.coding.generation.dependency_builder import determine_dependencies
+from generators.coding.validation.schema import GeneratedArtifact
+from generators.coding.generation.dependency_builder import determine_dependencies
 
 
 def build_artifacts(
@@ -75,7 +75,7 @@ def build_artifacts(
         ta = {"path": rel_path, "intent": intent, "lang": lang, "scenario_name": scenario.name}
         temp_artifacts.append(ta)
 
-    from aiodoo_datasets.generators.coding.protocol.artifact_mapper import map_to_artifact
+    from generators.coding.protocol.artifact_mapper import map_to_artifact
 
     for ta in temp_artifacts:
         deps = determine_dependencies(ta["path"], temp_artifacts, py_k, xml_k, module)
