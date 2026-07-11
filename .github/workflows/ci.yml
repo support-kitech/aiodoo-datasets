@@ -6,17 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-[tool.coverage.run]
-branch = true
-source = [
-    "generators",
-    "sources",
-    "preprocessing",
-    "protocol",
-    "validation",
-    "statistics",
-]
-
 jobs:
   test:
     runs-on: ubuntu-latest
