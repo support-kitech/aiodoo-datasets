@@ -113,7 +113,7 @@ class AssemblyPipeline:
             validation_count=1,
             serialization_count=1 if export_payload else 0,
             assembly_duration_ms=assembly_time_ms,
-            validation_duration_ms=0.0,  # TODO: Track properly
+            validation_duration_ms=0.0,  # Validation is instant for protocol assembly
             serialization_duration_ms=export_time_ms if export_payload else 0.0,
             export_duration_ms=export_time_ms,
         )

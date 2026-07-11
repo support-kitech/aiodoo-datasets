@@ -1,0 +1,11 @@
+"""Framework-level constants for the Validation Framework."""
+
+VALIDATION_FRAMEWORK_VERSION = "1.0.0"
+
+# Rule priority constants. Lower values execute first.
+SCHEMA_RULE_PRIORITY = 10
+METADATA_RULE_PRIORITY = 20
+INTEGRITY_RULE_PRIORITY = 30
+REFERENCE_RULE_PRIORITY = 40
+SERIALIZATION_RULE_PRIORITY = 50
+GENERATOR_RULE_PRIORITY = 60

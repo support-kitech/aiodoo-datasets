@@ -260,8 +260,36 @@ def main() -> None:
         lambda: EvalCommands.run_generate(eval_config, str(output_dir)),
     )
 
+    # 9. Validation Framework
     logger.info("=" * 60)
-    logger.info("All pipelines executed successfully.")
+    logger.info("Starting Validation Framework...")
+    logger.info("=" * 60)
+
+    from validation.core.manager import ValidationManager
+    from validation.pipeline.pipeline_options import ValidationOptions
+    from validation.domain.enums import ReportFormat
+    from validation.reports.console_reporter import ConsoleReporter
+
+    val_manager = ValidationManager()
+    val_result = val_manager.validate(
+        dataset_dir=output_dir,
+        options=ValidationOptions(
+            fail_fast=False,
+            parallel=False,
+            workers=workers,
+            report_format=ReportFormat.CONSOLE,
+        ),
+        protocol_context=protocol_context,
+    )
+
+    ConsoleReporter().report(val_result.report, output_dir)
+
+    if not val_result.success:
+        logger.error("Validation FAILED. See report above for details.")
+        sys.exit(2)
+
+    logger.info("=" * 60)
+    logger.info("All pipelines executed and validated successfully.")
     logger.info(f"Final datasets are available in: {output_dir}")
     logger.info("=" * 60)
     sys.exit(0)

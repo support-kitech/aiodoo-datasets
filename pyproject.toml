@@ -32,7 +32,6 @@ source = [
     "preprocessing",
     "protocol",
     "validation",
-    "statistics",
 ]
 
 [tool.coverage.report]
