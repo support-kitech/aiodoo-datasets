@@ -13,7 +13,10 @@ from generators.repair.pipeline import RepairPipeline
 from generators.context.pipeline import ContextPipeline
 
 from sources.core.manager import RepositoryManager
-from sources.pipeline.pipeline_options import PipelineOptions
+from sources.pipeline.pipeline_options import PipelineOptions as SourcesOptions
+
+from preprocessing.core.manager import PreprocessingManager
+from preprocessing.pipeline.pipeline_options import PipelineOptions as PreprocessingOptions
 
 from generators.execution.integration.pipeline import IntegrationPipeline as ExecutionPipeline
 from generators.execution.cli.configuration import build_pipeline_context as build_execution_context
@@ -53,21 +56,22 @@ def run_generator(name: str, func, *args, **kwargs) -> None:
             if not result:
                 raise RuntimeError(f"{name} pipeline returned False indicating failure.")
                 
-        if hasattr(result, "status"):
-            from generators.common.pipeline.status import PipelineStatus
-            if result.status == PipelineStatus.FAILED:
-                diagnostics = getattr(result, "diagnostics", [])
-                raise RuntimeError(f"{name} pipeline failed. Diagnostics: {diagnostics}")
-            elif result.status == PipelineStatus.SKIPPED:
-                logger.info(f"{name} Generator skipped execution (expected without full upstream data).")
-            else:
+        if not isinstance(result, bool):
+            if hasattr(result, "status"):
+                from generators.common.pipeline.status import PipelineStatus
+                if result.status == PipelineStatus.FAILED:
+                    diagnostics = getattr(result, "diagnostics", [])
+                    raise RuntimeError(f"{name} pipeline failed. Diagnostics: {diagnostics}")
+                elif result.status == PipelineStatus.SKIPPED:
+                    logger.info(f"{name} Generator skipped execution (expected without full upstream data).")
+                else:
+                    logger.info(f"{name} Generator completed successfully.")
+            elif hasattr(result, "success"):
+                if not getattr(result, "success"):
+                    diagnostics = getattr(result, "diagnostics", [])
+                    error_msg = f"{name} pipeline failed. Diagnostics: {diagnostics}"
+                    raise RuntimeError(error_msg)
                 logger.info(f"{name} Generator completed successfully.")
-        elif hasattr(result, "success"):
-            if not getattr(result, "success"):
-                diagnostics = getattr(result, "diagnostics", [])
-                error_msg = f"{name} pipeline failed. Diagnostics: {diagnostics}"
-                raise RuntimeError(error_msg)
-            logger.info(f"{name} Generator completed successfully.")
     except Exception as e:
         logger.error(f"Fatal error in {name} Generator: {e}")
         logger.error("Stopping immediately.")
@@ -114,7 +118,7 @@ def main() -> None:
     repo_manager = RepositoryManager(cache_db_path)
     
     logger.info("Initializing RepositoryContext via Sources Framework...")
-    options = PipelineOptions()
+    options = SourcesOptions()
     pipeline_result = repo_manager.load(config_path, options)
     
     if not pipeline_result.success or pipeline_result.context is None:
@@ -126,11 +130,24 @@ def main() -> None:
     repository_context = pipeline_result.context
     logger.info(f"RepositoryContext loaded successfully. Repositories: {len(repository_context.repositories)}")
 
+    # Initialize Preprocessing Framework
+    logger.info("Initializing PreprocessedRepositoryContext via Preprocessing Framework...")
+    prep_manager = PreprocessingManager(output_dir / "preprocessing_cache.sqlite")
+    prep_result = prep_manager.normalize(repository_context, PreprocessingOptions())
+    
+    if not prep_result.success or prep_result.context is None:
+        logger.error("Failed to normalize RepositoryContext.")
+        logger.error(f"  - {prep_result.error_message}")
+        sys.exit(1)
+        
+    preprocessed_context = prep_result.context
+    logger.info(f"PreprocessedRepositoryContext loaded successfully. Cache Hit: {prep_result.statistics.cache_hit}")
+
     # 1. Planner
     run_generator(
         "Planner",
         lambda: PlannerPipeline(
-            repository_context=repository_context,
+            repository_context=preprocessed_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -142,7 +159,7 @@ def main() -> None:
     run_generator(
         "Coding",
         lambda: CodingPipeline(
-            repository_context=repository_context,
+            repository_context=preprocessed_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -154,7 +171,7 @@ def main() -> None:
     run_generator(
         "Repair",
         lambda: RepairPipeline(
-            repository_context=repository_context,
+            repository_context=preprocessed_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -166,8 +183,8 @@ def main() -> None:
     run_generator(
         "Context",
         lambda: ContextPipeline(
-            repository_context=repository_context,
-            output_dir=output_dir,
+            repository_context=preprocessed_context,
+            output_dir=str(output_dir),
             workers=workers,
             resume=resume,
             limit=None,
@@ -176,9 +193,9 @@ def main() -> None:
     )
 
     # Prepare namespace for subsequent generators
-    common_ns = SimpleNamespace(
+    common_ns = argparse.Namespace(
         source_dir=Path("sources"),
-        repository_context=repository_context,
+        repository_context=preprocessed_context,
         output_dir=output_dir,
         debug=False,
         fail_fast=True,

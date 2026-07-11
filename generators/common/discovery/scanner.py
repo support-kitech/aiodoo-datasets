@@ -222,13 +222,13 @@ class ModuleScanner:
 class ContextModuleScanner:
     """
     Adapter that implements the discovery interface of ModuleScanner
-    but retrieves modules directly from the centralized RepositoryContext,
-    bypassing all filesystem and configuration parsing.
+    but retrieves modules directly from the centralized PreprocessedRepositoryContext,
+    bypassing the filesystem.
     """
 
-    def __init__(self, repository_context: Any) -> None:
-        """Initialize with an already loaded RepositoryContext."""
-        self.repository_context = repository_context
+    def __init__(self, context: Any) -> None:
+        """Initialize with an already loaded PreprocessedRepositoryContext."""
+        self.repository_context = context
 
     def discover_modules(self) -> list[OdooModule]:
         """Convert domain OdooModules to discovery OdooModules."""
