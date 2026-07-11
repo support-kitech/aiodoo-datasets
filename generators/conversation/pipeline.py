@@ -1,10 +1,9 @@
 """Pipeline orchestrator for Conversation Generator."""
 
-from typing import List
 from types import MappingProxyType
 from aiodoo_datasets.generators.conversation.pipeline_context import PipelineContext
 from aiodoo_datasets.generators.conversation.pipeline_result import PipelineResult
-from aiodoo_datasets.generators.conversation.exceptions import ConversationPipelineError, ConversationValidationError
+from aiodoo_datasets.generators.conversation.exceptions import ConversationValidationError
 from aiodoo_datasets.generators.conversation.analysis.context import AnalysisContext
 from aiodoo_datasets.generators.conversation.analysis.evidence_extractor import EvidenceExtractor
 from aiodoo_datasets.generators.conversation.builders.conversation_builder import ConversationBuilder
@@ -13,7 +12,6 @@ from aiodoo_datasets.generators.conversation.validation.conversation_validator i
 from aiodoo_datasets.generators.conversation.validation.protocol_validator import ProtocolValidator
 from aiodoo_datasets.generators.conversation.validation.dataset_validator import DatasetValidator
 from aiodoo_datasets.generators.conversation.statistics.conversation_statistics import ConversationStatistics
-from aiodoo_datasets.generators.conversation.protocol.domain.conversation_protocol import ConversationProtocol
 
 class ConversationPipeline:
     """Orchestrates the conversation generation process."""

@@ -3,10 +3,9 @@
 from typing import List, Mapping, Any
 from aiodoo_datasets.generators.approval.domain.evidence import Evidence
 from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import ParserRegistry
-# Import all parsers so they register themselves
-import aiodoo_datasets.generators.approval.analysis.parsers.planner_parser
 import aiodoo_datasets.generators.approval.analysis.parsers.coding_parser
 import aiodoo_datasets.generators.approval.analysis.parsers.execution_parser
+import aiodoo_datasets.generators.approval.analysis.parsers.planner_parser
 import aiodoo_datasets.generators.approval.analysis.parsers.repair_parser
 
 class EvidenceCollector:

@@ -2,7 +2,6 @@
 
 from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
 from aiodoo_datasets.generators.conversation.enums import ConversationType
-import json
 
 class MetadataBuilder:
     """Builds standard conversation metadata from generator environment."""

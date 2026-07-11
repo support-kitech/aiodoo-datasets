@@ -1,7 +1,7 @@
 """Pipeline Context for Evaluation Generator."""
 
 from dataclasses import dataclass
-from typing import Dict, Any
+from typing import Any
 from types import MappingProxyType
 
 @dataclass(frozen=True, slots=True)

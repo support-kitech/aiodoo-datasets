@@ -2,7 +2,6 @@
 
 from aiodoo_datasets.generators.coding.discovery import OdooModule, Scenario
 from aiodoo_datasets.generators.coding.validation.schema import ArtifactPayload
-from aiodoo_datasets.generators.coding.generation.artifact_builder import build_artifacts
 from aiodoo_datasets.generators.coding.protocol.operation_builder import build_operations
 from aiodoo_datasets.generators.coding.protocol.validation_mapper import build_validation_actions
 

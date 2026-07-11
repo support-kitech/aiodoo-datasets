@@ -1,10 +1,8 @@
 """Decision engine for the Approval Generator."""
 
-from typing import List
 from aiodoo_datasets.generators.approval.engine.engine_context import EngineContext
 from aiodoo_datasets.generators.approval.engine.engine_result import EngineResult
 from aiodoo_datasets.generators.approval.engine.scoring import DecisionScorer
-from aiodoo_datasets.generators.approval.rules.registry import RuleRegistry
 from aiodoo_datasets.generators.approval.engine.recommendation_builder import RecommendationBuilder
 from aiodoo_datasets.generators.approval.engine.decision_builder import DecisionBuilder
 

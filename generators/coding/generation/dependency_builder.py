@@ -5,7 +5,6 @@ from typing import Any
 import re
 import ast
 from pathlib import Path
-from typing import Any
 from aiodoo_datasets.generators.coding.discovery import OdooModule
 
 def _extract_python_deps(file_path: Path) -> set[str]:
@@ -54,7 +53,7 @@ def _extract_xml_deps(file_path: Path) -> set[str]:
         pass
     return deps
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 @dataclass
 class DependencyNode:

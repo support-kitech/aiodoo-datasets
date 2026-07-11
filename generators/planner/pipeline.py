@@ -1,9 +1,7 @@
 """The ETL Pipeline Orchestrator for the Planner Dataset Generator."""
 
 import logging
-from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
-from typing import Sequence
 
 from aiodoo_datasets.generators.planner.discovery import ModuleScanner, OdooModule, OdooASTParser, OdooXMLParser, ScenarioClassifier
 

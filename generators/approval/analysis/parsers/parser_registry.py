@@ -1,6 +1,6 @@
 """Parser registry for the Approval Generator."""
 
-from typing import Dict, Type, List
+from typing import Dict, Type
 from aiodoo_datasets.generators.approval.analysis.parsers.base_parser import BaseParser
 
 class ParserRegistry:

@@ -1,8 +1,6 @@
 """Custom exceptions for Evaluation Generator."""
 
-from aiodoo_datasets.generators.common.exceptions import AiodooGeneratorError
-
-class EvaluationGeneratorError(AiodooGeneratorError):
+class EvaluationGeneratorError(Exception):
     """Base exception for all Evaluation Generator errors."""
     pass
 

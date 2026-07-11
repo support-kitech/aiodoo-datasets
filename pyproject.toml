@@ -7,7 +7,7 @@ name = "aiodoo-datasets"
 version = "1.0.0"
 description = "Deterministic AI dataset generators for Odoo."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = {file = "LICENSE"}
 authors = [
     {name = "AIODOO Team"}
@@ -45,20 +45,22 @@ generate-evaluation = "aiodoo_datasets.generators.evaluation.cli.main:main"
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 strict = true
 ignore_missing_imports = true
+explicit_package_bases = true
+namespace_packages = true
 
 [tool.pyright]
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 typeCheckingMode = "strict"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q"
+addopts = "-ra -q --import-mode=importlib"
 markers = [
     "integration: marks tests as integration tests",
 ]

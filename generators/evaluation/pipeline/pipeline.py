@@ -1,6 +1,5 @@
 """Pipeline for Evaluation Generator."""
 
-from typing import Tuple, Dict, Any
 from types import MappingProxyType
 
 from aiodoo_datasets.generators.evaluation.pipeline.pipeline_context import PipelineContext
@@ -23,13 +22,12 @@ from aiodoo_datasets.generators.evaluation.builders.ground_truth_builder import 
 from aiodoo_datasets.generators.evaluation.protocol.mapper import ProtocolMapper
 from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import EvaluationProtocol
 
-from aiodoo_datasets.generators.evaluation.validation.dataset_validator import DatasetValidator
 from aiodoo_datasets.generators.evaluation.validation.protocol_validator import ProtocolValidator
 
 from aiodoo_datasets.generators.evaluation.statistics.evaluation_statistics import EvaluationStatistics
 from aiodoo_datasets.generators.evaluation.statistics.benchmark_statistics import BenchmarkStatistics
 
-from aiodoo_datasets.export.dataset_writer import DatasetWriter
+from aiodoo_datasets.generators.common.export.writer import DatasetWriter
 
 class EvaluationPipeline:
     """Orchestrates the complete deterministic evaluation generation flow."""
@@ -88,7 +86,7 @@ class EvaluationPipeline:
                 keywords=truth.get("keywords", ())
             )
             # Use deterministic suite_id reference internally
-            temp_suite_id = f"SUITE-TMP"
+            temp_suite_id = "SUITE-TMP"
             case = EvaluationCaseBuilder.build(
                 suite_id=temp_suite_id,
                 sequence_index=idx,

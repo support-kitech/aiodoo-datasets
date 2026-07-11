@@ -1,11 +1,9 @@
 """CLI configuration for Conversation Generator."""
 
 import argparse
-from pathlib import Path
 from aiodoo_datasets.generators.conversation.pipeline_context import PipelineContext
 from aiodoo_datasets.generators.conversation.builders.metadata_builder import MetadataBuilder
 from aiodoo_datasets.generators.conversation.enums import ConversationType
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
 
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     """Build the pipeline context from CLI arguments."""

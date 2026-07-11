@@ -1,6 +1,6 @@
 """Pydantic V2 Schemas for Context Protocol V1."""
 
-from typing import Optional, Any
+from typing import Any
 from pydantic import BaseModel, Field
 
 from aiodoo_datasets.generators.context.protocol.constants import CONTEXT_PROTOCOL_V1, GENERATOR_NAME

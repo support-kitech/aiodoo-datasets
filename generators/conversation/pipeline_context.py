@@ -1,9 +1,8 @@
 """Pipeline context for Conversation Generator."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, Any
 from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
 
 @dataclass(frozen=True)
 class PipelineContext:

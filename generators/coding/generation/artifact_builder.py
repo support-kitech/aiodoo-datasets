@@ -1,7 +1,5 @@
 """Reverse-engineers real Odoo files into Artifact Protocol objects."""
 
-import hashlib
-from typing import Any
 from aiodoo_datasets.generators.coding.discovery import OdooModule, Scenario, PythonKnowledge, XMLKnowledge
 from aiodoo_datasets.generators.coding.validation.schema import GeneratedArtifact
 from aiodoo_datasets.generators.coding.generation.dependency_builder import determine_dependencies

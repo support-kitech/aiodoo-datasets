@@ -1,7 +1,6 @@
 """The ETL Pipeline Orchestrator for the Coding Dataset Generator."""
 
 import logging
-from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from aiodoo_datasets.generators.coding.discovery import ModuleScanner, OdooModule, OdooASTParser, OdooXMLParser, ScenarioClassifier

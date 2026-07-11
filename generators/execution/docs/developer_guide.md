@@ -1,7 +1,7 @@
 # Developer Guide
 
 ## Environment Setup
-1. Use Python 3.11 or 3.12.
+1. Use Python 3.12.
 2. Install dependencies via `pip install .[dev]`.
 
 ## Adding Features

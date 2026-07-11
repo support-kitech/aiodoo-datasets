@@ -6,7 +6,6 @@ from aiodoo_datasets.generators.approval.domain.evidence import Evidence
 from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
 from aiodoo_datasets.generators.approval.domain.finding import Finding
 from aiodoo_datasets.generators.approval.domain.decision import Decision
-from aiodoo_datasets.generators.approval.domain.recommendation import Recommendation
 from aiodoo_datasets.generators.approval.domain.review import Review
 from aiodoo_datasets.generators.approval.enums import DecisionEnum, ConfidenceLevel, Severity, RuleCategory
 

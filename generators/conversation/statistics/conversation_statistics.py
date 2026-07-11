@@ -1,6 +1,6 @@
 """Statistics tracking for Conversation Generator."""
 
-from typing import Dict, Any, List
+from typing import Dict, Any
 from aiodoo_datasets.generators.common.statistics.base_statistics import BaseStatistics
 from aiodoo_datasets.generators.conversation.protocol.domain.conversation_protocol import ConversationProtocol
 

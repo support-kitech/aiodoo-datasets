@@ -106,7 +106,7 @@ class ContextMapper:
                 metadata=proto_metadata
             )
 
-        except Exception as e:
+        except Exception:
             # Task 7 - Mapper Logging
             artifact_count = len(results)
             logger.exception(

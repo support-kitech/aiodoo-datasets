@@ -4,7 +4,6 @@ import logging
 from aiodoo_datasets.generators.context.protocol.schema import (
     ContextTask, ProtocolQuery, ProtocolArtifact, ProtocolNode, ProtocolEdge, ProtocolGraph, ProtocolMetadata
 )
-from aiodoo_datasets.generators.context.protocol.constants import CONTEXT_PROTOCOL_V1, GENERATOR_NAME
 from aiodoo_datasets.generators.context.protocol.enums import (
     ProtocolQueryType, ProtocolIntent, ProtocolNodeType, ProtocolLanguage, ProtocolRankingReason
 )

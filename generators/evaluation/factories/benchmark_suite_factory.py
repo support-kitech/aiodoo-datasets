@@ -12,7 +12,8 @@ class BenchmarkSuiteFactory:
     @staticmethod
     def generate_id(catalog_id: str, suite_category: BenchmarkCategory) -> str:
         """Generate a deterministic suite ID."""
-        hash_input = f"SUITE:{catalog_id}:{suite_category.value}"
+        category_val = suite_category.value if hasattr(suite_category, 'value') else suite_category
+        hash_input = f"SUITE:{catalog_id}:{category_val}"
         suite_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
         return f"SUITE-{suite_hash}"
     

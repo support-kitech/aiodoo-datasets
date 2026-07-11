@@ -1,10 +1,8 @@
 """Analyzer for the Approval Generator."""
 
-from typing import Tuple
 from aiodoo_datasets.generators.approval.analysis.context import AnalysisContext
 from aiodoo_datasets.generators.approval.analysis.result import AnalysisResult
 from aiodoo_datasets.generators.approval.analysis.evidence_collector import EvidenceCollector
-from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
 
 class ApprovalAnalyzer:
     """Ingests protocol outputs and orchestrates evidence collection."""

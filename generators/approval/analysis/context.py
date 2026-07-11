@@ -1,6 +1,6 @@
 """Analysis context for the Approval Generator."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Mapping, Any
 
 @dataclass(frozen=True, slots=True)

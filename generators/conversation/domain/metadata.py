@@ -1,7 +1,6 @@
 """Metadata domain model for Conversation Generator."""
 
 from dataclasses import dataclass
-from typing import Optional
 from aiodoo_datasets.generators.conversation.enums import ConversationType
 
 @dataclass(frozen=True, slots=True)

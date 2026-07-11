@@ -1,7 +1,7 @@
 import unittest
 
 from aiodoo_datasets.generators.context.analysis.graph import (
-    ContextNode, ContextGraph, NodeType, LanguageType, RelationshipType
+    ContextGraph, LanguageType, RelationshipType
 )
 from aiodoo_datasets.generators.context.analysis.relationships import (
     ContainsRelationship, InheritsRelationship, ComputesRelationship,

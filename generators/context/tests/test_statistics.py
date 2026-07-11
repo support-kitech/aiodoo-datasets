@@ -1,5 +1,4 @@
 import unittest
-import json
 from aiodoo_datasets.generators.context.statistics.context_statistics import ContextStatistics
 from aiodoo_datasets.generators.context.protocol.schema import (
     ContextTask, ProtocolQuery, ProtocolArtifact, ProtocolNode, ProtocolEdge, ProtocolGraph, ProtocolMetadata

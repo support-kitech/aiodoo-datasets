@@ -1,7 +1,7 @@
 """Pipeline Result for Evaluation Generator."""
 
 from dataclasses import dataclass
-from typing import Tuple, Dict, Any, Optional
+from typing import Tuple, Any, Optional
 from types import MappingProxyType
 from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import EvaluationProtocol
 

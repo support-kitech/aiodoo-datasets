@@ -1,6 +1,5 @@
 """Protocol mapper for Conversation Generator."""
 
-from typing import List
 from aiodoo_datasets.generators.conversation.domain.conversation import Conversation
 from aiodoo_datasets.generators.conversation.domain.turn import Turn
 from aiodoo_datasets.generators.conversation.domain.message import Message

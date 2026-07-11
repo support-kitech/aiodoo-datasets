@@ -13,7 +13,7 @@ def run_pipeline(args: list[str] | None = None) -> int:
         result = ApprovalPipeline.generate(context)
         
         if result.success and result.statistics:
-            print(f"Pipeline execution completed successfully.")
+            print("Pipeline execution completed successfully.")
             return 0
         else:
             print("Pipeline execution failed:")

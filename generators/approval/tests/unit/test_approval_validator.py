@@ -2,8 +2,6 @@
 
 import unittest
 from aiodoo_datasets.generators.approval.validation.approval_validator import ApprovalValidator
-from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
 from aiodoo_datasets.generators.approval.exceptions import ApprovalValidationError
 
 class TestApprovalValidator(unittest.TestCase):

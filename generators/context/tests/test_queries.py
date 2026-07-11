@@ -3,7 +3,7 @@ import unittest
 from aiodoo_datasets.generators.context.analysis.graph import (
     ContextNode, ContextEdge, ContextGraph, NodeType, LanguageType, RelationshipType
 )
-from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent
+from aiodoo_datasets.generators.context.generation.enums import QueryType
 from aiodoo_datasets.generators.context.generation.queries import (
     FindModelQuery, FindFieldQuery, FindComputeQuery, FindViewQuery,
     FindActionQuery, FindMenuQuery, FindSecurityQuery, FindDependencyQuery

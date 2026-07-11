@@ -107,7 +107,7 @@ def process_module(module: OdooModule) -> list[ContextTask]:
                 try:
                     task = mapper.map(query, results, graph)
                     tasks.append(task)
-                except Exception as e:
+                except Exception:
                     # Logging already handled inside mapper
                     pass
 

@@ -1,12 +1,10 @@
 """Integration tests for pipeline in Conversation Generator."""
 
-import pytest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from aiodoo_datasets.generators.conversation.pipeline_context import PipelineContext
 from aiodoo_datasets.generators.conversation.builders.metadata_builder import MetadataBuilder
 from aiodoo_datasets.generators.conversation.enums import ConversationType
-from aiodoo_datasets.generators.common.export.writer import DatasetWriter
 from aiodoo_datasets.generators.conversation.pipeline import ConversationPipeline
 
 def test_pipeline_generate():

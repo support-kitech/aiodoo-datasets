@@ -1,8 +1,6 @@
 """Orchestrates query evaluation and artifact ranking."""
 
 import logging
-from dataclasses import replace
-from types import MappingProxyType
 
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 from aiodoo_datasets.generators.context.generation.query import Query

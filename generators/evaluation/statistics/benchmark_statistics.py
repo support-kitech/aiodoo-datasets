@@ -1,6 +1,6 @@
 """Benchmark Statistics for Evaluation Generator."""
 
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict
 from collections import defaultdict
 from types import MappingProxyType
 from aiodoo_datasets.generators.evaluation.protocol.domain.benchmark_protocol import EvaluationProtocol

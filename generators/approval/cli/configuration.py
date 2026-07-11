@@ -1,13 +1,10 @@
 """CLI configuration builder."""
 
-import json
-from pathlib import Path
 import argparse
 from aiodoo_datasets.generators.approval.pipeline_context import PipelineContext
 from aiodoo_datasets.generators.approval.config.approval_config import ApprovalConfig
 from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
 from aiodoo_datasets.generators.approval.rules.registry import RuleRegistry
-from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
 
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     """Build the pipeline context from CLI arguments."""

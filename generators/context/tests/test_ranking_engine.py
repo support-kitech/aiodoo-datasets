@@ -1,9 +1,8 @@
 import unittest
 import logging
-from types import MappingProxyType
 
 from aiodoo_datasets.generators.context.analysis.graph import (
-    ContextNode, ContextEdge, ContextGraph, NodeType, LanguageType, RelationshipType
+    ContextGraph
 )
 from aiodoo_datasets.generators.context.generation.query import Query
 from aiodoo_datasets.generators.context.generation.enums import QueryType, QueryIntent

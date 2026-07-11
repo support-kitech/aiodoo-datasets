@@ -1,6 +1,6 @@
 """Enums for the Approval Generator."""
 
-from enum import Enum, auto
+from enum import Enum
 
 class DecisionEnum(str, Enum):
     """The final verdict for a generated implementation."""

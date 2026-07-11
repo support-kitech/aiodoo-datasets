@@ -40,7 +40,7 @@ class RepairAnalyzer:
             content = py_file.read_text(encoding="utf-8")
             lines = content.splitlines()
             tree = ast.parse(content, filename=str(py_file))
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to parse %s", py_file)
             return opportunities
             
@@ -57,7 +57,7 @@ class RepairAnalyzer:
             if ArtifactType.PYTHON in rule.target_artifacts:
                 try:
                     opportunities.extend(rule.detect(context))
-                except Exception as e:
+                except Exception:
                     logger.exception(
                         "Repair Rule Failed\n\nModule:\n%s\n\nFile:\n%s\n\nRule:\n%s\n\nRule Name:\n%s\n\nException:",
                         context.module_name,
@@ -73,7 +73,7 @@ class RepairAnalyzer:
         try:
             content = xml_file.read_text(encoding="utf-8")
             lines = content.splitlines()
-        except Exception as e:
+        except Exception:
             logger.exception("Failed to parse %s", xml_file)
             return opportunities
             
@@ -90,7 +90,7 @@ class RepairAnalyzer:
             if ArtifactType.XML in rule.target_artifacts:
                 try:
                     opportunities.extend(rule.detect(context))
-                except Exception as e:
+                except Exception:
                     logger.exception(
                         "Repair Rule Failed\n\nModule:\n%s\n\nFile:\n%s\n\nRule:\n%s\n\nRule Name:\n%s\n\nException:",
                         context.module_name,

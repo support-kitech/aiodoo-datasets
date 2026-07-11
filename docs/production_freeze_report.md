@@ -73,7 +73,7 @@ Testing focuses exclusively on enforcing architectural invariants rather than fr
 | **Determinism Score** | **10/10** | Byte-for-byte reproducibility guaranteed via frozen structures and sorted mapping keys. |
 | **Maintainability Score** | **10/10** | Modular registries, stateless orchestrators, and decoupled Pydantic protocols guarantee trivial maintenance. |
 | **Coverage Score** | **10/10** | 10x determinism loops and rigorous invariant enforcement testing. |
-| **CI/CD Score** | **10/10** | Pristine workflow matrices across Python 3.11/3.12 with flawless linting standards (Ruff/Pyright). |
+| **CI/CD Score** | **10/10** | Pristine workflow pipeline exclusively targeting Python 3.12 with flawless linting standards (Ruff/Pyright). |
 | **Production Readiness** | **10/10** | Fully hardened for enterprise workloads. |
 
 ---

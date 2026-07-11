@@ -28,7 +28,6 @@ def test_message_factory_determinism():
 
 from aiodoo_datasets.generators.conversation.factories.turn_factory import TurnFactory
 from aiodoo_datasets.generators.conversation.factories.conversation_factory import ConversationFactory
-from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
 from aiodoo_datasets.generators.conversation.enums import ConversationType
 
 def test_turn_factory_determinism():

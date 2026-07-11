@@ -1,12 +1,11 @@
 """Conversation builder for Conversation Generator."""
 
-from typing import Tuple, List
+from typing import List
 from aiodoo_datasets.generators.conversation.analysis.result import AnalysisResult
 from aiodoo_datasets.generators.conversation.domain.conversation import Conversation
 from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
 from aiodoo_datasets.generators.conversation.domain.turn import Turn
-from aiodoo_datasets.generators.conversation.domain.message import Message
-from aiodoo_datasets.generators.conversation.enums import Role, ConversationType
+from aiodoo_datasets.generators.conversation.enums import Role
 from aiodoo_datasets.generators.conversation.builders.message_builder import MessageBuilder
 from aiodoo_datasets.generators.conversation.builders.turn_builder import TurnBuilder
 from aiodoo_datasets.generators.conversation.builders.reference_builder import ReferenceBuilder

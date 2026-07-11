@@ -9,7 +9,7 @@ from aiodoo_datasets.generators.context.protocol.schema import (
     ProtocolNode,
     ProtocolEdge
 )
-from aiodoo_datasets.generators.context.protocol.constants import CONTEXT_PROTOCOL_V1, GENERATOR_NAME
+from aiodoo_datasets.generators.context.protocol.constants import CONTEXT_PROTOCOL_V1
 from aiodoo_datasets.generators.context.protocol.enums import (
     ProtocolQueryType, ProtocolIntent, ProtocolNodeType, ProtocolLanguage, ProtocolRankingReason
 )

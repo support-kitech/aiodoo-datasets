@@ -16,4 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Public API:** `execution.generate`, `execution.validate`, and `execution.export` entry points exposed.
 - **Packaging:** Full `pyproject.toml` support for dependency and CLI entry point management.
 - **Documentation:** Architecture, Pipeline, Developer, and Extension guides provided in the `docs/` folder.
-- **CI/CD:** Matrix testing pipeline for Python 3.11 and 3.12 with Ruff, MyPy, and Coverage gates.
+- **CI/CD:** Testing pipeline for Python 3.12 with Ruff, MyPy, and Coverage gates.

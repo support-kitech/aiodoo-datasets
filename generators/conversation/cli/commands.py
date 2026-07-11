@@ -13,7 +13,7 @@ def run_pipeline(args: list[str] | None = None) -> int:
         result = ConversationPipeline.generate(context)
         
         if result.success and result.statistics:
-            print(f"Pipeline execution completed successfully.")
+            print("Pipeline execution completed successfully.")
             print(result.statistics.get_summary())
             return 0
         else:

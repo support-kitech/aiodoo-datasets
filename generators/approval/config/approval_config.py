@@ -1,7 +1,6 @@
 """Approval config module."""
 
 from dataclasses import dataclass
-from typing import Optional
 
 @dataclass(frozen=True, slots=True)
 class ApprovalConfig:

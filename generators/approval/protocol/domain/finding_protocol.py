@@ -1,7 +1,7 @@
 """Finding protocol model."""
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional
+from typing import List, Optional
 
 @dataclass(frozen=True, slots=True)
 class EvidenceProtocol:
