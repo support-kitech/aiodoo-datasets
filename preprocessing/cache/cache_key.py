@@ -12,10 +12,10 @@ class CacheKey:
     Immutable representation of a cache key.
     Combines the Source RepositoryContext hash with the Preprocessing framework version.
     """
-    
+
     source_context_hash: str
     framework_version: str = PREPROCESSING_FRAMEWORK_VERSION
-    
+
     @property
     def value(self) -> str:
         """Deterministic cache key string."""

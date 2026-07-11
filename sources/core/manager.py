@@ -20,11 +20,11 @@ class RepositoryManager:
     def load(self, config_path: Path, options: PipelineOptions | None = None) -> PipelineResult:
         """
         Load the repository context using the provided configuration.
-        
+
         Args:
             config_path: Path to the YAML configuration.
             options: Execution options (force_rescan, etc.)
-            
+
         Returns:
             PipelineResult containing the full execution outcome.
         """
@@ -35,10 +35,10 @@ class RepositoryManager:
     def scan(self, config_path: Path) -> PipelineResult:
         """
         Force a fresh scan of the repositories, ignoring the cache.
-        
+
         Args:
             config_path: Path to the YAML configuration.
-            
+
         Returns:
             PipelineResult containing the full execution outcome.
         """
@@ -48,10 +48,10 @@ class RepositoryManager:
     def refresh_cache(self, config_path: Path) -> PipelineResult:
         """
         Clear the existing cache and rebuild it from a fresh scan.
-        
+
         Args:
             config_path: Path to the YAML configuration.
-            
+
         Returns:
             PipelineResult containing the full execution outcome.
         """

@@ -21,7 +21,7 @@ class RepositoryInterpreter:
 
         Returns:
             An InterpretedModule containing the extracted fields.
-            
+
         Raises:
             ScannerError: If the manifest cannot be parsed as a valid Python dictionary.
         """
@@ -29,14 +29,10 @@ class RepositoryInterpreter:
             # Odoo manifests are Python dict literals.
             manifest_dict = ast.literal_eval(discovered.raw_manifest)
         except (SyntaxError, ValueError) as e:
-            raise ScannerError(
-                f"Malformed manifest in {discovered.manifest_path}: {e}"
-            )
+            raise ScannerError(f"Malformed manifest in {discovered.manifest_path}: {e}")
 
         if not isinstance(manifest_dict, dict):
-            raise ScannerError(
-                f"Manifest is not a dictionary in {discovered.manifest_path}"
-            )
+            raise ScannerError(f"Manifest is not a dictionary in {discovered.manifest_path}")
 
         # Extract dependencies
         depends_raw = manifest_dict.get("depends", [])

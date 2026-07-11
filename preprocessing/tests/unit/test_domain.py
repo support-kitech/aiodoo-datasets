@@ -10,7 +10,7 @@ from preprocessing.domain.stats import TransformationStatistics
 
 class TestDomainModels(unittest.TestCase):
     """Test immutability and basic properties of domain models."""
-    
+
     def test_normalized_file_immutability(self):
         """Ensure NormalizedFile is frozen."""
         file_node = NormalizedFile(
@@ -21,14 +21,14 @@ class TestDomainModels(unittest.TestCase):
             normalized_content="print('hello')",
             duplicate_status=DuplicateStatus.UNIQUE,
         )
-        
+
         with self.assertRaises(FrozenInstanceError):
             file_node.language = "ruby"  # type: ignore
 
     def test_stats_immutability(self):
         """Ensure TransformationStatistics is frozen."""
         stats = TransformationStatistics()
-        
+
         with self.assertRaises(FrozenInstanceError):
             stats.whitespace_removed_bytes = 10  # type: ignore
 

@@ -6,7 +6,7 @@ from preprocessing.processors.base import BaseProcessor, ProcessorContext
 
 class MarkdownProcessor(BaseProcessor):
     """Normalizes Markdown syntax."""
-    
+
     @property
     def priority(self) -> int:
         return SYNTAX_PROCESSOR_PRIORITY

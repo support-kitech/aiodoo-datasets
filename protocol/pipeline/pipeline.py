@@ -91,7 +91,9 @@ class AssemblyPipeline:
                     export_payload=None,
                 )
         else:
-            validation_result = DatasetValidator.validate(dataset) # Still validate structurally but maybe ignore?
+            validation_result = DatasetValidator.validate(
+                dataset
+            )  # Still validate structurally but maybe ignore?
             # For structural validation we always validate
             validation_result = DatasetValidator.validate(dataset)
 
@@ -111,7 +113,7 @@ class AssemblyPipeline:
             validation_count=1,
             serialization_count=1 if export_payload else 0,
             assembly_duration_ms=assembly_time_ms,
-            validation_duration_ms=0.0, # TODO: Track properly
+            validation_duration_ms=0.0,  # TODO: Track properly
             serialization_duration_ms=export_time_ms if export_payload else 0.0,
             export_duration_ms=export_time_ms,
         )

@@ -20,8 +20,9 @@ class JSONLWriter(BaseWriter):  # type: ignore[misc]
         """
         import json
         import dataclasses
+
         context.export_statistics.jsonl_records += 1
-        
+
         data = {}
         if context.planning_result and context.planning_result.planned_execution:
             data = dataclasses.asdict(context.planning_result.planned_execution)

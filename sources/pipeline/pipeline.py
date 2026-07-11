@@ -55,38 +55,38 @@ class SourcesPipeline:
                 f"{addons_str}"
             )
             config_reprs.append(config_repr)
-            
+
         combined_input = "|".join(sorted(config_reprs))
         return hashlib.sha256(combined_input.encode("utf-8")).hexdigest()
 
     def _build_context_from_filesystem(self, config_set: ConfigurationSet) -> RepositoryContext:
         """Scan and build the complete repository context from scratch."""
         built_repositories = []
-        
+
         for config in config_set.configurations:
             # 1. Scan filesystem
             discovered_modules = self._scanner_cls.scan(config)
-            
+
             # 2. Interpret manifests
             interpreted_modules = []
             for discovered in discovered_modules:
                 interpreted = self._interpreter_cls.interpret(discovered)
                 interpreted_modules.append(interpreted)
-                
+
             # 3. Create domain objects
             odoo_modules = []
             for interpreted in interpreted_modules:
                 odoo_module = ModuleFactory.create(interpreted)
                 odoo_modules.append(odoo_module)
-                
+
             # 4. Assemble Repository
             repo = RepositoryBuilder.build(config, tuple(odoo_modules))
             built_repositories.append(repo)
-            
+
         # 5. Build Global Index
         repo_tuple = tuple(built_repositories)
         index = RepositoryIndex(repo_tuple)
-        
+
         return RepositoryContext(
             repositories=repo_tuple,
             repository_index=index.repositories,
@@ -112,7 +112,7 @@ class SourcesPipeline:
         t0 = time.time()
         warnings: list[str] = []
         errors: list[str] = []
-        
+
         stats = {
             "repositories_loaded": 0,
             "repositories_scanned": 0,
@@ -128,19 +128,19 @@ class SourcesPipeline:
             # Stage 1: Load Configuration
             config_set = self._loader_cls.load_sources(config_path)
             stats["repositories_loaded"] = len(config_set.configurations)
-            
+
             config_hash = self._generate_configuration_hash(config_set)
-            
+
             # Stage 2: Cache Check
             cache_key = CacheKey(
                 repository_name="all",
                 configuration_hash=config_hash,
-                repository_hash="", # Not known before hit
+                repository_hash="",  # Not known before hit
                 framework_version=SOURCES_FRAMEWORK_VERSION,
                 python_version=CacheInvalidator.get_python_version(),
                 cache_schema_version=CACHE_SCHEMA_VERSION,
             )
-            
+
             context: Optional[RepositoryContext] = None
             cache_val = None
 
@@ -148,7 +148,7 @@ class SourcesPipeline:
             if not options.skip_cache and not options.force_rescan:
                 try:
                     cached_context, metadata = self._cache_store.load()
-                    
+
                     # Update key to include the expected repository hash from metadata to validate fully
                     cache_key = CacheKey(
                         repository_name=cache_key.repository_name,
@@ -158,20 +158,20 @@ class SourcesPipeline:
                         python_version=cache_key.python_version,
                         cache_schema_version=cache_key.cache_schema_version,
                     )
-                    
+
                     cache_val = CacheInvalidator.validate(cache_key, metadata)
-                    
+
                     if cache_val.is_valid:
                         context = cached_context
                         stats["cache_hit"] = True
-                        
+
                         # Populate remaining stats
                         stats["repositories_scanned"] = metadata.repository_count
                         stats["modules_discovered"] = metadata.module_count
                         stats["modules_loaded"] = metadata.module_count
                     else:
                         stats["cache_miss"] = True
-                        
+
                 except SourcesError as e:
                     stats["cache_miss"] = True
                     warnings.append(f"Cache miss or load failure: {e}")
@@ -184,13 +184,13 @@ class SourcesPipeline:
             t_scan_start = time.time()
             if context is None:
                 context = self._build_context_from_filesystem(config_set)
-                
+
                 # Update stats
                 stats["repositories_scanned"] = len(context.repositories)
                 total_modules = sum(len(repo.modules) for repo in context.repositories)
                 stats["modules_discovered"] = total_modules
                 stats["modules_loaded"] = total_modules
-                
+
                 # Stage 4: Persist Cache
                 if not options.skip_cache:
                     repo_hash = self._compute_repository_hash(context)
@@ -211,7 +211,7 @@ class SourcesPipeline:
                         warnings.append(f"Failed to save cache: {e}")
 
             stats["scan_duration"] = time.time() - t_scan_start
-            
+
             pipeline_stats = PipelineStatistics(
                 repositories_loaded=stats["repositories_loaded"],
                 repositories_scanned=stats["repositories_scanned"],
@@ -237,13 +237,13 @@ class SourcesPipeline:
 
         except SourcesError as e:
             errors.append(str(e))
-            
+
             pipeline_stats = PipelineStatistics(
                 total_duration=time.time() - t0,
                 warnings=len(warnings),
                 errors=len(errors),
             )
-            
+
             return PipelineResult(
                 success=False,
                 context=None,

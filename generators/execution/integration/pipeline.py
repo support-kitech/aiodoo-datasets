@@ -6,6 +6,7 @@ from generators.execution.integration.pipeline_result import PipelineResult
 from generators.execution.export.export_context import ExportContext
 from generators.execution.export.export_statistics import ExportStatistics
 from generators.execution.export.exporter import Exporter
+
 # Removed protocol imports
 from generators.execution.planning.planning_context import PlanningContext
 from generators.execution.planning.planning_statistics import PlanningStatistics
@@ -79,8 +80,12 @@ class IntegrationPipeline:
         try:
             graph_ctx = GraphContext(
                 builder_context=build_ctx,
-                domain_steps=build_result.steps if build_result and hasattr(build_result, "steps") else (),
-                domain_dependencies=build_result.dependencies if build_result and hasattr(build_result, "dependencies") else (),
+                domain_steps=build_result.steps
+                if build_result and hasattr(build_result, "steps")
+                else (),
+                domain_dependencies=build_result.dependencies
+                if build_result and hasattr(build_result, "dependencies")
+                else (),
                 config=dict(context.generator_config.custom_settings),
                 statistics=GraphStatistics(),
             )
@@ -93,6 +98,7 @@ class IntegrationPipeline:
                 )
         except Exception:
             import traceback
+
             traceback.print_exc()
             graph_result = None
         context.pipeline_statistics.phase_execution_times["GRAPH"] = time.time() - graph_start
@@ -101,6 +107,7 @@ class IntegrationPipeline:
         planning_start = time.time()
         try:
             from generators.execution.planning.enums import PlanningStrategyType
+
             planning_ctx = PlanningContext(
                 graph=graph_result.graph if graph_result else None,
                 graph_statistics=graph_result.statistics if graph_result else None,
@@ -117,6 +124,7 @@ class IntegrationPipeline:
                 )
         except Exception:
             import traceback
+
             traceback.print_exc()
             from generators.execution.planning.planning_result import PlanningResult
 
@@ -137,11 +145,13 @@ class IntegrationPipeline:
                 output_directory=context.export_config.output_directory,
                 export_statistics=ExportStatistics(),
             )
-            
+
             # Inject protocol_context dynamically to export context
             if hasattr(context, "protocol_context"):
                 # Dynamically set it so exporter can access it
-                object.__setattr__(export_ctx, "protocol_context", getattr(context, "protocol_context"))
+                object.__setattr__(
+                    export_ctx, "protocol_context", getattr(context, "protocol_context")
+                )
 
             export_result = Exporter.export(export_ctx)
             if not export_result.success:

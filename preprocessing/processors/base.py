@@ -16,7 +16,7 @@ class ProcessorContext:
     Immutable state passed sequentially between processors.
     Processors never mutate this object, but return a new instance using `dataclasses.replace`.
     """
-    
+
     file_path: Path
     normalized_path: Path
     language: Language
@@ -25,7 +25,7 @@ class ProcessorContext:
     metadata: Mapping[str, object] = field(default_factory=lambda: MappingProxyType({}))
     warnings: tuple[str, ...] = field(default_factory=tuple)
     statistics: TransformationStatistics = field(default_factory=TransformationStatistics)
-    
+
     def with_update(self, **kwargs) -> "ProcessorContext":
         """Helper to create a new immutable context with updated fields."""
         if "metadata" in kwargs:
@@ -42,7 +42,7 @@ class BaseProcessor(abc.ABC):
     Abstract base class for all Preprocessing Processors.
     Processors must be stateless and pure.
     """
-    
+
     @property
     @abc.abstractmethod
     def priority(self) -> int:
@@ -51,7 +51,7 @@ class BaseProcessor(abc.ABC):
         e.g., 10 for Whitespace, 20 for Syntax, 90 for Analysis.
         """
         pass
-        
+
     @abc.abstractmethod
     def process(self, context: ProcessorContext) -> ProcessorContext:
         """

@@ -77,7 +77,9 @@ class Serializer:
             "dependencies": [Serializer.reference_to_dict(d) for d in manifest.dependencies],
         }
         if manifest.statistics_reference is not None:
-            result["statistics_reference"] = Serializer.reference_to_dict(manifest.statistics_reference)
+            result["statistics_reference"] = Serializer.reference_to_dict(
+                manifest.statistics_reference
+            )
         else:
             result["statistics_reference"] = None
         return result

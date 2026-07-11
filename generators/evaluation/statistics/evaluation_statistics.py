@@ -1,6 +1,7 @@
 """Evaluation Statistics for Evaluation Generator."""
 
 from typing import Tuple, Any
+
 # removed EvaluationProtocol import
 from generators.common.statistics.base_statistics import BaseStatistics
 
@@ -26,9 +27,9 @@ class EvaluationStatistics(BaseStatistics):
         # Ensure base counters still increment.
         self.total_samples += 1
         self.total_tokens += len(json_str) // 4
-        
+
         # Now process the specific Evaluation payload
-        if not hasattr(record, 'catalog'):
+        if not hasattr(record, "catalog"):
             return
 
         self.total_evaluations += 1
@@ -64,5 +65,5 @@ class EvaluationStatistics(BaseStatistics):
         """Backwards compatibility for compute() pattern."""
         stats = EvaluationStatistics()
         for record in dataset:
-            stats.add_sample(record, "{}") # Dummy string for json size
+            stats.add_sample(record, "{}")  # Dummy string for json size
         return stats

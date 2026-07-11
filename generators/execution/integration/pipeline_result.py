@@ -7,6 +7,7 @@ from generators.execution.builders.pipeline_result import (
 )
 from generators.execution.graph.results.graph_build_result import GraphBuildResult
 from generators.execution.planning.planning_result import PlanningResult
+
 # removed ProtocolResult
 from generators.execution.export.export_result import ExportResult
 from generators.execution.integration.pipeline_statistics import PipelineStatistics
@@ -38,10 +39,11 @@ class PipelineResult:
     export_result: ExportResult | None = None
     statistics: PipelineStatistics | None = None
     diagnostics: tuple[str, ...] = tuple()
-    
+
     @property
     def status(self) -> "Any":
         from generators.common.pipeline.status import PipelineStatus
+
         if not self.success and any(d == "Graph contains no nodes." for d in self.diagnostics):
             return PipelineStatus.SKIPPED
         return PipelineStatus.SUCCESS if self.success else PipelineStatus.FAILED

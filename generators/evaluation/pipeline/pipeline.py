@@ -156,10 +156,10 @@ class EvaluationPipeline:
         )
 
         return PipelineResult(
-            dataset=dataset, 
-            statistics=stats, 
+            dataset=dataset,
+            statistics=stats,
             validation_passed=True,
-            protocol_context=getattr(context, "protocol_context", None)
+            protocol_context=getattr(context, "protocol_context", None),
         )
 
     @staticmethod
@@ -167,16 +167,16 @@ class EvaluationPipeline:
         """Export result using shared DatasetWriter."""
         from pathlib import Path
         from generators.evaluation.statistics.evaluation_statistics import EvaluationStatistics
-        
+
         stats = result.statistics.get("evaluation")
         if not isinstance(stats, EvaluationStatistics):
             stats = EvaluationStatistics()
-            
+
         writer = DatasetWriter(
             output_dir=Path(output_dir),
             stats=stats,
             filename="evaluation_dataset.jsonl",
-            dataset_name="Evaluation Dataset"
+            dataset_name="Evaluation Dataset",
         )
 
         for obj in result.dataset:

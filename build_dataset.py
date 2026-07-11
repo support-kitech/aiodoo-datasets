@@ -24,7 +24,9 @@ from generators.approval.pipeline import ApprovalPipeline
 from generators.approval.cli.configuration import build_pipeline_context as build_approval_context
 
 from generators.conversation.pipeline import ConversationPipeline
-from generators.conversation.cli.configuration import build_pipeline_context as build_conversation_context
+from generators.conversation.cli.configuration import (
+    build_pipeline_context as build_conversation_context,
+)
 
 from generators.evaluation.cli.configuration import Configuration as EvalConfig
 from generators.evaluation.cli.commands import Commands as EvalCommands
@@ -49,15 +51,18 @@ def run_generator(name: str, func, *args, **kwargs) -> None:
     if isinstance(result, bool):
         if not result:
             raise RuntimeError(f"{name} pipeline returned False indicating failure.")
-            
+
     if not isinstance(result, bool):
         if hasattr(result, "status"):
             from generators.common.pipeline.status import PipelineStatus
+
             if result.status == PipelineStatus.FAILED:
                 diagnostics = getattr(result, "diagnostics", [])
                 raise RuntimeError(f"{name} pipeline failed. Diagnostics: {diagnostics}")
             elif result.status == PipelineStatus.SKIPPED:
-                logger.info(f"{name} Generator skipped execution (expected without full upstream data).")
+                logger.info(
+                    f"{name} Generator skipped execution (expected without full upstream data)."
+                )
             else:
                 logger.info(f"{name} Generator completed successfully.")
         elif hasattr(result, "success"):
@@ -81,7 +86,7 @@ def main() -> None:
 
     config_path = args.config
     output_dir = Path("datasets")
-    
+
     # Ensure standard config files are referenced properly based on the base path
     config_dir = config_path.parent
     eval_config_path = config_dir / "generator.yaml"
@@ -89,9 +94,11 @@ def main() -> None:
     if not config_path.exists():
         logger.error(f"Configuration file not found: {config_path}")
         sys.exit(1)
-        
+
     if not eval_config_path.exists():
-        logger.warning(f"Evaluation configuration not found at {eval_config_path}. Evaluation may fail if required.")
+        logger.warning(
+            f"Evaluation configuration not found at {eval_config_path}. Evaluation may fail if required."
+        )
 
     logger.info(f"Initializing AIODOO Dataset build sequence using config: {config_path}")
     logger.info(f"Output directory set to: {output_dir}")
@@ -106,53 +113,61 @@ def main() -> None:
     # Initialize Sources Framework
     cache_db_path = output_dir / "sources.sqlite"
     repo_manager = RepositoryManager(cache_db_path)
-    
+
     logger.info("Initializing RepositoryContext via Sources Framework...")
     options = SourcesOptions()
     pipeline_result = repo_manager.load(config_path, options)
-    
+
     if not pipeline_result.success or pipeline_result.context is None:
         logger.error("Failed to load RepositoryContext.")
         for err in pipeline_result.errors:
             logger.error(f"  - {err}")
         sys.exit(1)
-        
+
     repository_context = pipeline_result.context
-    logger.info(f"RepositoryContext loaded successfully. Repositories: {len(repository_context.repositories)}")
+    logger.info(
+        f"RepositoryContext loaded successfully. Repositories: {len(repository_context.repositories)}"
+    )
 
     # Initialize Preprocessing Framework
     logger.info("Initializing PreprocessedRepositoryContext via Preprocessing Framework...")
     prep_manager = PreprocessingManager(output_dir / "preprocessing_cache.sqlite")
     prep_result = prep_manager.normalize(repository_context, PreprocessingOptions())
-    
+
     if not prep_result.success or prep_result.context is None:
         logger.error("Failed to normalize RepositoryContext.")
         logger.error(f"  - {prep_result.error_message}")
         sys.exit(1)
-        
+
     preprocessed_context = prep_result.context
-    logger.info(f"PreprocessedRepositoryContext loaded successfully. Cache Hit: {prep_result.statistics.cache_hit}")
+    logger.info(
+        f"PreprocessedRepositoryContext loaded successfully. Cache Hit: {prep_result.statistics.cache_hit}"
+    )
 
     # Initialize Protocol Framework
     logger.info("Assembling ProtocolContext via Protocol Framework...")
     from protocol.core.manager import ProtocolManager
     from protocol.pipeline.assembly_options import AssemblyOptions as ProtocolOptions
-    
+
     protocol_manager = ProtocolManager()
-    protocol_result = protocol_manager.assemble(preprocessed_context, ProtocolOptions(validate_schema=True))
-    
+    protocol_result = protocol_manager.assemble(
+        preprocessed_context, ProtocolOptions(validate_schema=True)
+    )
+
     if not protocol_result.validation_result.valid:
         logger.error("Failed to assemble ProtocolContext.")
         for err in protocol_result.validation_result.errors:
             logger.error(f"  - {err}")
         sys.exit(1)
-        
+
     protocol_context = protocol_result.protocol_context
     if protocol_context is None:
         logger.error("ProtocolContext is None.")
         sys.exit(1)
-        
-    logger.info(f"ProtocolContext assembled successfully. Objects created: {protocol_result.statistics.objects_created}")
+
+    logger.info(
+        f"ProtocolContext assembled successfully. Objects created: {protocol_result.statistics.objects_created}"
+    )
 
     # 1. Planner
     run_generator(
@@ -242,9 +257,7 @@ def main() -> None:
 
     run_generator(
         "Evaluation",
-        lambda: EvalCommands.run_generate(
-            eval_config, str(output_dir)
-        ),
+        lambda: EvalCommands.run_generate(eval_config, str(output_dir)),
     )
 
     logger.info("=" * 60)

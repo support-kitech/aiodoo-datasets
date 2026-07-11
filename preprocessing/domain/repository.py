@@ -11,7 +11,7 @@ from preprocessing.domain.file import NormalizedFile
 @dataclass(frozen=True, slots=True)
 class PreprocessedModule:
     """Immutable representation of a preprocessed Odoo module."""
-    
+
     name: str
     files: tuple[NormalizedFile, ...]
     metadata: Mapping[str, object] = MappingProxyType({})
@@ -29,7 +29,7 @@ class PreprocessedModule:
 @dataclass(frozen=True, slots=True)
 class PreprocessedRepository:
     """Immutable representation of a preprocessed repository."""
-    
+
     name: str
     odoo_version: OdooVersion
     repository_type: RepositoryType
@@ -37,7 +37,13 @@ class PreprocessedRepository:
     metadata: Mapping[str, object] = MappingProxyType({})
 
     def __getstate__(self):
-        return (self.name, self.odoo_version, self.repository_type, self.modules, dict(self.metadata))
+        return (
+            self.name,
+            self.odoo_version,
+            self.repository_type,
+            self.modules,
+            dict(self.metadata),
+        )
 
     def __setstate__(self, state):
         name, odoo_version, repository_type, modules, metadata_dict = state

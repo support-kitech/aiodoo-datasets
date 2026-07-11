@@ -171,6 +171,7 @@ class TestContextGraph(unittest.TestCase):
         self.graph.add_edge(self.edge1)
 
         self.assertEqual(self.graph.edge_count(), 1)
+
         def test_missing_node_edge_prevention(self) -> None:
             # Adding edge before adding nodes
             with self.assertRaises(ValueError):

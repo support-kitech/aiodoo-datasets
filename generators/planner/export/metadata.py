@@ -8,7 +8,9 @@ from generators.planner.validation.schema import PlanPayload
 from generators.common.export.metadata import build_base_metadata
 
 
-def compute_protocol_hash(module: PreprocessedModule, scenario: Scenario, plan_payload: PlanPayload) -> str:
+def compute_protocol_hash(
+    module: PreprocessedModule, scenario: Scenario, plan_payload: PlanPayload
+) -> str:
     """Compute a deterministic SHA256 hash identifying the exact protocol execution logic."""
     core_data = {
         "scenario": scenario.name,

@@ -9,7 +9,7 @@ class DocstringProcessor(BaseProcessor):
     Normalizes docstrings without rewriting meaning.
     Currently acts as a pass-through.
     """
-    
+
     @property
     def priority(self) -> int:
         return SEMANTIC_PROCESSOR_PRIORITY

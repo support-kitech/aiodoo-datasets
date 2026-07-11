@@ -6,7 +6,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True, slots=True)
 class TransformationStatistics:
     """Observational statistics for transformations applied to a file or module."""
-    
+
     whitespace_removed_bytes: int = 0
     comments_normalized: int = 0
     tokens_estimated: int = 0
@@ -24,7 +24,5 @@ class TransformationStatistics:
             if k in current_dict:
                 current_dict[k] += v
         from dataclasses import replace
+
         return replace(self, **current_dict)
-
-
-

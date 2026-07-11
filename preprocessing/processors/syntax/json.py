@@ -7,7 +7,7 @@ from preprocessing.processors.base import BaseProcessor, ProcessorContext
 
 class JSONProcessor(BaseProcessor):
     """Normalizes JSON syntax (e.g., standard indentation)."""
-    
+
     @property
     def priority(self) -> int:
         return SYNTAX_PROCESSOR_PRIORITY
@@ -16,7 +16,7 @@ class JSONProcessor(BaseProcessor):
         original = context.current_content
         if not original.strip():
             return context
-            
+
         try:
             data = json.loads(original)
             normalized = json.dumps(data, indent=2, ensure_ascii=False) + "\n"

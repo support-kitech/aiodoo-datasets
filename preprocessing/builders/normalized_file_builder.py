@@ -6,7 +6,7 @@ from preprocessing.domain.file import NormalizedFile, DuplicateStatus
 
 class NormalizedFileBuilder:
     """Builds an immutable NormalizedFile from a final ProcessorContext."""
-    
+
     @staticmethod
     def build(context: ProcessorContext) -> NormalizedFile:
         dup_status_str = str(context.metadata.get("duplicate_status", "UNIQUE"))
@@ -14,7 +14,7 @@ class NormalizedFileBuilder:
             dup_status = DuplicateStatus(dup_status_str)
         except ValueError:
             dup_status = DuplicateStatus.UNIQUE
-            
+
         return NormalizedFile(
             file_path=context.file_path,
             normalized_path=context.normalized_path,
@@ -24,5 +24,5 @@ class NormalizedFileBuilder:
             duplicate_status=dup_status,
             metadata=context.metadata,
             warnings=context.warnings,
-            statistics=context.statistics
+            statistics=context.statistics,
         )

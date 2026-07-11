@@ -37,8 +37,7 @@ class ConfigValidator:
             except ValueError:
                 valid_types = [t.value for t in RepositoryType]
                 raise ConfigurationError(
-                    f"Invalid repository type '{repo_type_str}'. "
-                    f"Must be one of {valid_types}."
+                    f"Invalid repository type '{repo_type_str}'. Must be one of {valid_types}."
                 )
 
             if not isinstance(versions_config, dict):
@@ -71,7 +70,7 @@ class ConfigValidator:
                     raise ConfigurationError(
                         f"'root' path for '{repo_type_str}' version '{version_str}' must be a string."
                     )
-                
+
                 if "addons" in repo_details:
                     if not isinstance(repo_details["addons"], list):
                         raise ConfigurationError(

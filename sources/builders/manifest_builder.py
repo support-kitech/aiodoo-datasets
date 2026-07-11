@@ -12,8 +12,7 @@ class ManifestBuilder:
 
     @staticmethod
     def build(
-        config: RepositoryConfiguration,
-        modules: tuple[OdooModule, ...]
+        config: RepositoryConfiguration, modules: tuple[OdooModule, ...]
     ) -> RepositoryManifest:
         """
         Build the immutable manifest for the repository.
@@ -30,7 +29,7 @@ class ManifestBuilder:
         for mod in sorted(modules, key=lambda m: m.technical_name):
             mod_repr = f"{mod.technical_name}:{mod.version}:{','.join(mod.depends)}"
             module_hashes.append(mod_repr)
-            
+
         manifest_hash_input = "|".join(module_hashes)
         manifest_hash = hashlib.sha256(manifest_hash_input.encode("utf-8")).hexdigest()
 

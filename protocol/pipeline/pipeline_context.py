@@ -13,7 +13,7 @@ class PipelineContext:
     Immutable context object passed through the assembly pipeline.
     Contains inputs, configuration, and registry.
     """
-    
+
     # We use Any here to avoid coupling Protocol Framework directly to Preprocessing Framework
     # It will be a PreprocessedRepositoryContext at runtime
     input_context: Any

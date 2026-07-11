@@ -10,7 +10,7 @@ from preprocessing.pipeline.pipeline_statistics import PipelineStatistics
 @dataclass(frozen=True, slots=True)
 class PipelineResult:
     """Immutable result of a PreprocessingPipeline execution."""
-    
+
     success: bool
     context: Optional[PreprocessedRepositoryContext]
     statistics: PipelineStatistics

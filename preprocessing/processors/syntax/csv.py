@@ -6,7 +6,7 @@ from preprocessing.processors.base import BaseProcessor, ProcessorContext
 
 class CSVProcessor(BaseProcessor):
     """Normalizes CSV syntax."""
-    
+
     @property
     def priority(self) -> int:
         return SYNTAX_PROCESSOR_PRIORITY

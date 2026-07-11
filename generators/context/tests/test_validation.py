@@ -28,15 +28,13 @@ from generators.context.validation.result import ValidationResult
 
 class TestValidation(unittest.TestCase):
     def setUp(self) -> None:
-        logging.getLogger(
-            "generators.context.validation.schema_validator"
-        ).setLevel(logging.CRITICAL)
-        logging.getLogger(
-            "generators.context.validation.protocol_validator"
-        ).setLevel(logging.CRITICAL)
-        logging.getLogger("generators.context.validation.core_validator").setLevel(
+        logging.getLogger("generators.context.validation.schema_validator").setLevel(
             logging.CRITICAL
         )
+        logging.getLogger("generators.context.validation.protocol_validator").setLevel(
+            logging.CRITICAL
+        )
+        logging.getLogger("generators.context.validation.core_validator").setLevel(logging.CRITICAL)
 
         query = ProtocolQuery(
             query_id="q1",
@@ -71,7 +69,7 @@ class TestValidation(unittest.TestCase):
                 module="m",
                 query_type=ProtocolQueryType.FIND_MODEL,
                 artifact_count=1,
-            protocol_hash="test_hash",
+                protocol_hash="test_hash",
                 relationship_count=1,
             ),
         )

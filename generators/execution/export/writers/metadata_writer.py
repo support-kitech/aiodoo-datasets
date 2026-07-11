@@ -18,8 +18,10 @@ class MetadataWriter(BaseWriter):  # type: ignore[misc]
 
         planning_result = context.planning_result
         planned_execution = planning_result.planned_execution if planning_result else None
-        plan_id = planned_execution.plan_id if hasattr(planned_execution, 'plan_id') else "unknown"
-        graph_id = planned_execution.graph_id if hasattr(planned_execution, 'graph_id') else "unknown"
+        plan_id = planned_execution.plan_id if hasattr(planned_execution, "plan_id") else "unknown"
+        graph_id = (
+            planned_execution.graph_id if hasattr(planned_execution, "graph_id") else "unknown"
+        )
 
         metadata_data = {
             "name": f"aiodoo-execution-dataset-{plan_id}",
@@ -28,7 +30,7 @@ class MetadataWriter(BaseWriter):  # type: ignore[misc]
             "source_graph": graph_id,
             "statistics": {},
         }
-        
+
         if hasattr(context, "protocol_context") and context.protocol_context:
             metadata_data["protocol_hash"] = context.protocol_context.dataset.identifier.hash_value
 

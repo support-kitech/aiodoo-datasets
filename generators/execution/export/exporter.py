@@ -32,7 +32,7 @@ class Exporter:
 
         planning_result = context.planning_result
         planned_execution = planning_result.planned_execution if planning_result else None
-        plan_id = planned_execution.plan_id if hasattr(planned_execution, 'plan_id') else "unknown"
+        plan_id = planned_execution.plan_id if hasattr(planned_execution, "plan_id") else "unknown"
 
         # Paths
         jsonl_path = context.output_directory / f"{plan_id}.jsonl"

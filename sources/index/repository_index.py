@@ -28,11 +28,11 @@ class RepositoryIndex:
 
         for repo in repositories:
             repo_by_name[repo.name] = repo
-            
+
             if repo.version not in repo_by_version:
                 repo_by_version[repo.version] = []
             repo_by_version[repo.version].append(repo)
-            
+
             if repo.repository_type not in repo_by_type:
                 repo_by_type[repo.repository_type] = []
             repo_by_type[repo.repository_type].append(repo)
@@ -44,11 +44,11 @@ class RepositoryIndex:
 
         # Freeze into MappingProxyTypes for internal use and properties
         self._repo_by_name: MappingProxyType[str, Repository] = MappingProxyType(repo_by_name)
-        self._repo_by_version: MappingProxyType[OdooVersion, tuple[Repository, ...]] = MappingProxyType(
-            {k: tuple(v) for k, v in repo_by_version.items()}
+        self._repo_by_version: MappingProxyType[OdooVersion, tuple[Repository, ...]] = (
+            MappingProxyType({k: tuple(v) for k, v in repo_by_version.items()})
         )
-        self._repo_by_type: MappingProxyType[RepositoryType, tuple[Repository, ...]] = MappingProxyType(
-            {k: tuple(v) for k, v in repo_by_type.items()}
+        self._repo_by_type: MappingProxyType[RepositoryType, tuple[Repository, ...]] = (
+            MappingProxyType({k: tuple(v) for k, v in repo_by_type.items()})
         )
         self._module_by_name: MappingProxyType[str, tuple[OdooModule, ...]] = MappingProxyType(
             {k: tuple(v) for k, v in module_by_name.items()}

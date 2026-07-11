@@ -5,6 +5,7 @@ from generators.approval.pipeline_result import PipelineResult
 from generators.approval.pipeline import ApprovalPipeline
 # removed protocol_version
 
+
 def generate(context: PipelineContext) -> PipelineResult:
     """Generate an approval review based on input protocols."""
     return ApprovalPipeline.generate(context)

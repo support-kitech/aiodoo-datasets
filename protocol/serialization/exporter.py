@@ -17,7 +17,9 @@ class Exporter:
     """
 
     @staticmethod
-    def export(context: ProtocolContext, fmt: ExportFormat = ExportFormat.JSON) -> str | dict[str, Any]:
+    def export(
+        context: ProtocolContext, fmt: ExportFormat = ExportFormat.JSON
+    ) -> str | dict[str, Any]:
         """
         Export a ProtocolContext in the specified format.
 

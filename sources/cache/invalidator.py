@@ -38,7 +38,7 @@ class CacheInvalidator:
 
         if metadata.configuration_hash != key.configuration_hash:
             return CacheValidationResult(False, CacheValidationReason.CONFIGURATION_CHANGED)
-            
+
         if metadata.repository_hash != key.repository_hash:
             return CacheValidationResult(False, CacheValidationReason.REPOSITORY_CHANGED)
 

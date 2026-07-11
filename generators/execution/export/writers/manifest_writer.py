@@ -18,17 +18,18 @@ class ManifestWriter(BaseWriter):  # type: ignore[misc]
         """Generate deterministic manifest content."""
 
         import dataclasses
+
         planning_result = context.planning_result
         planned_execution = planning_result.planned_execution if planning_result else None
-        
+
         data = dataclasses.asdict(planned_execution) if planned_execution else {}
         if hasattr(context, "protocol_context") and context.protocol_context:
             data["protocol_hash"] = context.protocol_context.dataset.identifier.hash_value
-            
+
         data_bytes = json.dumps(data).encode("utf-8")
         checksum = hashlib.sha256(data_bytes).hexdigest()
 
-        plan_id = planned_execution.plan_id if hasattr(planned_execution, 'plan_id') else "unknown"
+        plan_id = planned_execution.plan_id if hasattr(planned_execution, "plan_id") else "unknown"
 
         manifest_data = {
             "dataset_version": "1.0.0",

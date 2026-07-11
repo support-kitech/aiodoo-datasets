@@ -9,7 +9,7 @@ class PythonProcessor(BaseProcessor):
     Normalizes Python syntax.
     Currently acts as a pass-through to avoid stripping comments via AST.
     """
-    
+
     @property
     def priority(self) -> int:
         return SYNTAX_PROCESSOR_PRIORITY

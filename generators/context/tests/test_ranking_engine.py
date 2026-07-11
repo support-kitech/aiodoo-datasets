@@ -106,9 +106,7 @@ class MockTieRule1(BaseRankingRule):
 
 class TestRankingEngine(unittest.TestCase):
     def setUp(self) -> None:
-        logging.getLogger("generators.context.ranking.ranking_engine").setLevel(
-            logging.CRITICAL
-        )
+        logging.getLogger("generators.context.ranking.ranking_engine").setLevel(logging.CRITICAL)
         self.graph = ContextGraph()
 
     def test_registry_validation(self) -> None:

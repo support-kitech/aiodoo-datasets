@@ -24,7 +24,6 @@ from protocol.validation.base import ValidationResult
 
 
 class TestValidationResult(unittest.TestCase):
-
     def test_success(self) -> None:
         r = ValidationResult.success()
         self.assertTrue(r.valid)
@@ -49,14 +48,12 @@ class TestValidationResult(unittest.TestCase):
 
 
 class TestMetadataValidator(unittest.TestCase):
-
     def test_valid(self) -> None:
         meta = MetadataBuilder.build({"k": "v"}, identifier_components=("t",))
         self.assertTrue(MetadataValidator.validate(meta).valid)
 
 
 class TestReferenceValidator(unittest.TestCase):
-
     def test_valid(self) -> None:
         ref = ReferenceBuilder.build(ReferenceType.MODULE, "sale")
         self.assertTrue(ReferenceValidator.validate(ref).valid)
@@ -73,7 +70,6 @@ class TestReferenceValidator(unittest.TestCase):
 
 
 class TestRelationshipValidator(unittest.TestCase):
-
     def test_valid(self) -> None:
         src = ReferenceBuilder.build(ReferenceType.MODULE, "sale")
         tgt = ReferenceBuilder.build(ReferenceType.MODULE, "account")
@@ -93,14 +89,12 @@ class TestRelationshipValidator(unittest.TestCase):
 
 
 class TestSchemaValidator(unittest.TestCase):
-
     def test_valid(self) -> None:
         schema = SchemaBuilder.build("1.0.0")
         self.assertTrue(SchemaValidator.validate(schema).valid)
 
 
 class TestManifestValidator(unittest.TestCase):
-
     def test_valid(self) -> None:
         ver = ProtocolVersion(
             identifier=IdentifierFactory.for_version("v1"),
@@ -115,7 +109,6 @@ class TestManifestValidator(unittest.TestCase):
 
 
 class TestDatasetValidator(unittest.TestCase):
-
     def test_valid(self) -> None:
         ver = ProtocolVersion(
             identifier=IdentifierFactory.for_version("v1"),

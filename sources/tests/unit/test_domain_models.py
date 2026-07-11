@@ -27,7 +27,7 @@ def test_odoo_module_immutability():
     )
     assert module.name == "test_module"
     assert module.installable is True
-    
+
     with pytest.raises(FrozenInstanceError):
         module.name = "new_name"  # type: ignore
 
@@ -35,12 +35,10 @@ def test_odoo_module_immutability():
 def test_repository_fingerprint_immutability():
     """Test RepositoryFingerprint is immutable and uses deterministic hashes."""
     fingerprint = RepositoryFingerprint(
-        configuration_hash="abc",
-        manifest_hash="def",
-        repository_hash="ghi"
+        configuration_hash="abc", manifest_hash="def", repository_hash="ghi"
     )
     assert fingerprint.configuration_hash == "abc"
-    
+
     with pytest.raises(FrozenInstanceError):
         fingerprint.configuration_hash = "new_hash"  # type: ignore
 
@@ -56,9 +54,9 @@ def test_repository_manifest_immutability():
         repository_version="17.0",
         module_count=5,
         addons_count=1,
-        fingerprint=fingerprint
+        fingerprint=fingerprint,
     )
-    
+
     assert manifest.module_count == 5
     with pytest.raises(FrozenInstanceError):
         manifest.module_count = 10  # type: ignore
@@ -73,7 +71,7 @@ def test_repository_configuration_immutability():
         root_path=Path("/tmp/enterprise"),
         addons_paths=(Path("/tmp/enterprise/addons"),),
     )
-    
+
     assert config.repo_type == RepositoryType.ENTERPRISE
     assert config.version == OdooVersion.V17
     with pytest.raises(FrozenInstanceError):
@@ -96,22 +94,28 @@ def test_repository_properties_and_immutability():
         repository_version="18.0",
         module_count=1,
         addons_count=1,
-        fingerprint=fingerprint
+        fingerprint=fingerprint,
     )
     module = OdooModule(
-        name="base", technical_name="base", path=Path("/tmp/base"),
+        name="base",
+        technical_name="base",
+        path=Path("/tmp/base"),
         manifest_path=Path("/tmp/base/__manifest__.py"),
-        version="18.0", depends=(), license="LGPL-3",
-        installable=True, application=True, auto_install=False
+        version="18.0",
+        depends=(),
+        license="LGPL-3",
+        installable=True,
+        application=True,
+        auto_install=False,
     )
-    
+
     repo = Repository(
         name="community",
         configuration=config,
         modules=(module,),
         manifest=manifest,
     )
-    
+
     assert repo.name == "community"
     assert len(repo.modules) == 1
     # Test convenience properties
@@ -141,11 +145,12 @@ def test_repository_context_immutability():
             repository_name="community",
             repository_type=RepositoryType.COMMUNITY,
             repository_version="18.0",
-            module_count=0, addons_count=1,
-            fingerprint=RepositoryFingerprint("a", "b", "c")
+            module_count=0,
+            addons_count=1,
+            fingerprint=RepositoryFingerprint("a", "b", "c"),
         ),
     )
-    
+
     context = RepositoryContext(
         repositories=(repo,),
         repository_index={"community_18.0": repo},

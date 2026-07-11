@@ -7,7 +7,7 @@ from preprocessing.processors.base import BaseProcessor, ProcessorContext
 
 class TokenizerProvider(abc.ABC):
     """Abstract provider for tokenizer implementation."""
-    
+
     @abc.abstractmethod
     def estimate(self, text: str) -> int:
         """Estimate the number of tokens in the given text."""
@@ -16,7 +16,7 @@ class TokenizerProvider(abc.ABC):
 
 class OpenAITokenizer(TokenizerProvider):
     """Tokenizer provider using cl100k_base approximation."""
-    
+
     def estimate(self, text: str) -> int:
         if not text:
             return 0
@@ -25,10 +25,10 @@ class OpenAITokenizer(TokenizerProvider):
 
 class TokenEstimatorProcessor(BaseProcessor):
     """Processor that applies a TokenizerProvider to calculate statistics."""
-    
+
     def __init__(self, provider: TokenizerProvider | None = None):
         self.provider = provider or OpenAITokenizer()
-        
+
     @property
     def priority(self) -> int:
         return ANALYSIS_PROCESSOR_PRIORITY

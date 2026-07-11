@@ -7,8 +7,10 @@ import copyreg
 from types import MappingProxyType
 from pydantic import BaseModel
 
+
 def _pickle_mappingproxy(mp: MappingProxyType) -> tuple:
     return MappingProxyType, (dict(mp),)
+
 
 copyreg.pickle(MappingProxyType, _pickle_mappingproxy)
 

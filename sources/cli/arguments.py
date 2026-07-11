@@ -10,20 +10,20 @@ def build_parser() -> argparse.ArgumentParser:
         description="AIODOO Sources Framework CLI",
         formatter_class=argparse.RawTextHelpFormatter,
     )
-    
+
     parser.add_argument(
         "command",
         choices=["scan", "validate", "summary", "cache-info", "cache-clear", "refresh-cache"],
         help="Command to execute",
     )
-    
+
     parser.add_argument(
         "--config",
         type=Path,
         default=Path("config/sources.yaml"),
         help="Path to the primary sources configuration file",
     )
-    
+
     parser.add_argument(
         "--versions",
         type=Path,
@@ -54,13 +54,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Output results in JSON format",
     )
-    
+
     parser.add_argument(
         "--verbose",
         action="store_true",
         help="Enable verbose output",
     )
-    
+
     parser.add_argument(
         "--quiet",
         action="store_true",

@@ -34,7 +34,6 @@ class TestIdentifierFactory(unittest.TestCase):
 
 
 class TestMetadataBuilder(unittest.TestCase):
-
     def test_build_returns_frozen(self) -> None:
         meta = MetadataBuilder.build({"key": "value"}, identifier_components=("test",))
         self.assertEqual(meta.properties["key"], "value")
@@ -49,7 +48,6 @@ class TestMetadataBuilder(unittest.TestCase):
 
 
 class TestReferenceBuilder(unittest.TestCase):
-
     def test_build(self) -> None:
         ref = ReferenceBuilder.build(ReferenceType.MODULE, "sale_management")
         self.assertEqual(ref.protocol_type, ProtocolType.REFERENCE)
@@ -62,7 +60,6 @@ class TestReferenceBuilder(unittest.TestCase):
 
 
 class TestRelationshipBuilder(unittest.TestCase):
-
     def test_build(self) -> None:
         src = ReferenceBuilder.build(ReferenceType.MODULE, "sale")
         tgt = ReferenceBuilder.build(ReferenceType.MODULE, "account")
@@ -73,7 +70,6 @@ class TestRelationshipBuilder(unittest.TestCase):
 
 
 class TestSchemaBuilder(unittest.TestCase):
-
     def test_build(self) -> None:
         schema = SchemaBuilder.build("1.0.0", {"type": "object"})
         self.assertEqual(schema.protocol_type, ProtocolType.SCHEMA)
@@ -86,7 +82,6 @@ class TestSchemaBuilder(unittest.TestCase):
 
 
 class TestManifestBuilder(unittest.TestCase):
-
     def _make_version(self) -> ProtocolVersion:
         return ProtocolVersion(
             identifier=IdentifierFactory.for_version("v1"),
@@ -107,7 +102,6 @@ class TestManifestBuilder(unittest.TestCase):
 
 
 class TestDatasetBuilder(unittest.TestCase):
-
     def test_build(self) -> None:
         ver = ProtocolVersion(
             identifier=IdentifierFactory.for_version("v1"),
@@ -125,7 +119,6 @@ class TestDatasetBuilder(unittest.TestCase):
 
 
 class TestContextBuilder(unittest.TestCase):
-
     def test_build_minimal(self) -> None:
         ver = ProtocolVersion(
             identifier=IdentifierFactory.for_version("v"),

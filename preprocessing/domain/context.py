@@ -13,6 +13,6 @@ class PreprocessedRepositoryContext:
     Immutable representation of all repositories after preprocessing.
     This is the ultimate output of the Preprocessing Framework.
     """
-    
+
     repositories: tuple[PreprocessedRepository, ...]
     metadata: Mapping[str, object] = MappingProxyType({})

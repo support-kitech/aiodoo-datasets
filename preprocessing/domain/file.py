@@ -11,7 +11,7 @@ from preprocessing.domain.stats import TransformationStatistics
 
 class DuplicateStatus(Enum):
     """Classification for duplicate file detection."""
-    
+
     UNIQUE = "UNIQUE"
     DUPLICATE = "DUPLICATE"
     REFERENCE = "REFERENCE"
@@ -19,7 +19,7 @@ class DuplicateStatus(Enum):
 
 class Language(Enum):
     """Supported file languages."""
-    
+
     PYTHON = "PYTHON"
     XML = "XML"
     JSON = "JSON"
@@ -35,7 +35,7 @@ class NormalizedFile:
     Immutable representation of a preprocessed file.
     No domain objects should mutate once instantiated.
     """
-    
+
     file_path: Path
     normalized_path: Path
     language: "Language"

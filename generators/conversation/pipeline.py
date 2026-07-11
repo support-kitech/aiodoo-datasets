@@ -63,7 +63,7 @@ class ConversationPipeline:
                 protocol_hash = context.protocol_context.dataset.identifier.hash_value
                 if hasattr(conversation, "metadata"):
                     conversation.metadata.protocol_hash = protocol_hash
-            
+
             # Write the domain object directly
             writer.write_record(conversation)
             writer.export_manifest()

@@ -13,7 +13,7 @@ class PipelineResult:
     """
     Immutable result of the protocol assembly pipeline.
     """
-    
+
     protocol_context: ProtocolContext | None
     validation_result: ValidationResult
     statistics: PipelineStatistics

@@ -8,7 +8,7 @@ class LineEndingProcessor(BaseProcessor):
     """
     Normalizes line endings to Unix style (LF).
     """
-    
+
     @property
     def priority(self) -> int:
         return TEXT_PROCESSOR_PRIORITY
@@ -17,8 +17,8 @@ class LineEndingProcessor(BaseProcessor):
         original = context.current_content
         if not original:
             return context
-            
+
         # Replace CRLF and CR with LF
         normalized_content = original.replace("\r\n", "\n").replace("\r", "\n")
-        
+
         return context.with_update(current_content=normalized_content)

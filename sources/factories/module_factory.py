@@ -20,7 +20,7 @@ class ModuleFactory:
         """
         # Ensure depends is sorted deterministically
         depends = tuple(sorted(interpreted.depends))
-        
+
         # Name defaults to technical_name if not provided in raw_metadata
         name = interpreted.raw_metadata.get("name", interpreted.technical_name)
 

@@ -7,12 +7,12 @@ from preprocessing.domain.repository import PreprocessedRepository
 
 class ContextBuilder:
     """Builds an immutable PreprocessedRepositoryContext."""
-    
+
     @staticmethod
-    def build(source_context: RepositoryContext, repositories: tuple[PreprocessedRepository, ...]) -> PreprocessedRepositoryContext:
+    def build(
+        source_context: RepositoryContext, repositories: tuple[PreprocessedRepository, ...]
+    ) -> PreprocessedRepositoryContext:
         """Constructs the context ensuring deterministic ordering of repositories."""
         sorted_repos = tuple(sorted(repositories, key=lambda r: r.name))
-        
-        return PreprocessedRepositoryContext(
-            repositories=sorted_repos
-        )
+
+        return PreprocessedRepositoryContext(repositories=sorted_repos)

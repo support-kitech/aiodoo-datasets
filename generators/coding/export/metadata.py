@@ -10,7 +10,9 @@ from generators.coding.validation.schema import ArtifactPayload
 from generators.common.export.metadata import build_base_metadata
 
 
-def compute_protocol_hash(module: PreprocessedModule, scenario: Scenario, payload: ArtifactPayload) -> str:
+def compute_protocol_hash(
+    module: PreprocessedModule, scenario: Scenario, payload: ArtifactPayload
+) -> str:
     """Compute a deterministic SHA256 hash identifying the exact protocol execution logic."""
     canonical_repr = {
         "goal": payload.goal,

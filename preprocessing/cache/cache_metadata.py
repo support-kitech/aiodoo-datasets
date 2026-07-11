@@ -8,7 +8,7 @@ from types import MappingProxyType
 @dataclass(frozen=True, slots=True)
 class CacheMetadata:
     """Immutable metadata tracking execution timing and cache entry properties."""
-    
+
     cache_key: str
     created_at_iso: str
     framework_version: str

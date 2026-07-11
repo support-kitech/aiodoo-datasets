@@ -26,7 +26,12 @@ class TestContextPipeline(unittest.TestCase):
     @patch("generators.context.pipeline.CheckpointManager")
     def test_pipeline_orchestration(self, mock_chkpt):
 
-        pipeline = ContextPipeline(repository_context=MagicMock(), protocol_context=MagicMock(), output_dir="/tmp/out", workers=1)
+        pipeline = ContextPipeline(
+            repository_context=MagicMock(),
+            protocol_context=MagicMock(),
+            output_dir="/tmp/out",
+            workers=1,
+        )
         pipeline.run()
 
         # Should initialize gracefully

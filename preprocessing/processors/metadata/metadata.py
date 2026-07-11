@@ -8,7 +8,7 @@ class MetadataProcessor(BaseProcessor):
     """
     Attaches deterministic metadata.
     """
-    
+
     @property
     def priority(self) -> int:
         return METADATA_PROCESSOR_PRIORITY
@@ -16,6 +16,7 @@ class MetadataProcessor(BaseProcessor):
     def process(self, context: ProcessorContext) -> ProcessorContext:
         new_meta = dict(context.metadata)
         new_meta["processed_by_framework"] = True
-        
+
         from types import MappingProxyType
+
         return context.with_update(metadata=MappingProxyType(new_meta))

@@ -5,6 +5,7 @@ from typing import Tuple, Any, Optional
 from types import MappingProxyType
 # Protocol imports removed
 
+
 @dataclass(frozen=True, slots=True)
 class PipelineResult:
     """Immutable output container for the evaluation pipeline."""

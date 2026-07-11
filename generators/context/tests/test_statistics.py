@@ -55,7 +55,7 @@ class TestContextStatistics(unittest.TestCase):
                 module="m",
                 query_type=ProtocolQueryType.FIND_MODEL,
                 artifact_count=1,
-            protocol_hash="test_hash",
+                protocol_hash="test_hash",
                 relationship_count=1,
             ),
         )

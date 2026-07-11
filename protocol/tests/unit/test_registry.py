@@ -8,7 +8,6 @@ from protocol.registry.registry import ProtocolRegistry
 
 
 class TestProtocolRegistry(unittest.TestCase):
-
     def test_register_and_lookup(self) -> None:
         reg = ProtocolRegistry()
         reg.register_protocol_type("dataset", ProtocolType.DATASET)

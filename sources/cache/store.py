@@ -24,10 +24,7 @@ class CacheStore:
         try:
             with sqlite3.connect(self.db_path) as conn:
                 conn.execute(
-                    "CREATE TABLE IF NOT EXISTS metadata ("
-                    "    key TEXT PRIMARY KEY,"
-                    "    value TEXT"
-                    ")"
+                    "CREATE TABLE IF NOT EXISTS metadata (    key TEXT PRIMARY KEY,    value TEXT)"
                 )
                 conn.execute(
                     "CREATE TABLE IF NOT EXISTS repositories ("
@@ -53,7 +50,7 @@ class CacheStore:
         Args:
             context: The fully built RepositoryContext.
             metadata: The CacheMetadata to save alongside it.
-            
+
         Raises:
             CacheError: If serialization or database write fails.
         """
@@ -73,8 +70,7 @@ class CacheStore:
                 }
                 for k, v in meta_dict.items():
                     conn.execute(
-                        "INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)",
-                        (k, str(v))
+                        "INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", (k, str(v))
                     )
 
                 # Store Repositories
@@ -83,7 +79,7 @@ class CacheStore:
                 for repo_name, repo_json in serialized_repos:
                     conn.execute(
                         "INSERT INTO repositories (name, data) VALUES (?, ?)",
-                        (repo_name, repo_json)
+                        (repo_name, repo_json),
                     )
         except (sqlite3.Error, TypeError) as e:
             raise CacheError(f"Failed to save cache: {e}")
@@ -94,7 +90,7 @@ class CacheStore:
 
         Returns:
             Tuple containing the restored RepositoryContext and CacheMetadata.
-            
+
         Raises:
             CacheError: If the cache is missing, corrupted, or unreadable.
         """
@@ -104,13 +100,13 @@ class CacheStore:
         try:
             with sqlite3.connect(self.db_path) as conn:
                 conn.row_factory = sqlite3.Row
-                
+
                 # Load Metadata
                 cur = conn.execute("SELECT key, value FROM metadata")
                 meta_rows = cur.fetchall()
                 if not meta_rows:
                     raise CacheError("Cache metadata is empty or corrupted.")
-                
+
                 meta_dict = {row["key"]: row["value"] for row in meta_rows}
                 metadata = CacheMetadata(
                     sources_framework_version=meta_dict.get("sources_framework_version", ""),
@@ -127,7 +123,7 @@ class CacheStore:
                 # Load Repositories
                 cur = conn.execute("SELECT name, data FROM repositories ORDER BY name")
                 repo_rows = cur.fetchall()
-                
+
                 repositories = []
                 for row in repo_rows:
                     json_str = row["data"]
@@ -139,7 +135,7 @@ class CacheStore:
         # Rebuild the Index and Context exactly as if scanned
         repo_tuple = tuple(repositories)
         index = RepositoryIndex(repo_tuple)
-        
+
         context = RepositoryContext(
             repositories=repo_tuple,
             repository_index=index.repositories,

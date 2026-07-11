@@ -75,9 +75,7 @@ class Deserializer:
         if data.get("statistics_reference") is not None:
             stats_ref = Deserializer.reference_from_dict(data["statistics_reference"])
 
-        deps = tuple(
-            Deserializer.reference_from_dict(d) for d in data.get("dependencies", [])
-        )
+        deps = tuple(Deserializer.reference_from_dict(d) for d in data.get("dependencies", []))
 
         return ProtocolManifest(
             identifier=Deserializer.identifier_from_dict(data["identifier"]),
@@ -101,9 +99,7 @@ class Deserializer:
         relationships = tuple(
             Deserializer.relationship_from_dict(r) for r in data.get("relationships", [])
         )
-        references = tuple(
-            Deserializer.reference_from_dict(r) for r in data.get("references", [])
-        )
+        references = tuple(Deserializer.reference_from_dict(r) for r in data.get("references", []))
         return ProtocolContext(
             dataset=Deserializer.dataset_from_dict(data["dataset"]),
             relationships=relationships,

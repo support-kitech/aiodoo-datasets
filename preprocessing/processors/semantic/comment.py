@@ -9,7 +9,7 @@ class CommentProcessor(BaseProcessor):
     Normalizes comments without rewriting meaning.
     Currently acts as a pass-through until specific comment styles are standardized.
     """
-    
+
     @property
     def priority(self) -> int:
         return SEMANTIC_PROCESSOR_PRIORITY

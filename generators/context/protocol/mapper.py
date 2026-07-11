@@ -25,7 +25,9 @@ class ContextMapper:
     Extracts the minimal subgraph required to explain the ranked artifacts.
     """
 
-    def map(self, query: Query, results: list[RankingResult], graph: ContextGraph, protocol_hash: str) -> ContextTask:
+    def map(
+        self, query: Query, results: list[RankingResult], graph: ContextGraph, protocol_hash: str
+    ) -> ContextTask:
         """
         Transforms Query + RankingResults + ContextGraph into ContextTask.
 

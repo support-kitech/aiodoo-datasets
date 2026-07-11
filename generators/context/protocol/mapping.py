@@ -80,7 +80,11 @@ def map_edge(edge) -> ProtocolEdge:  # type: ignore[no-untyped-def]
 
 
 def map_metadata(
-    module: str, query_type_value: str, artifact_count: int, relationship_count: int, protocol_hash: str
+    module: str,
+    query_type_value: str,
+    artifact_count: int,
+    relationship_count: int,
+    protocol_hash: str,
 ) -> ProtocolMetadata:
     """Creates a ProtocolMetadata object."""
     return ProtocolMetadata(

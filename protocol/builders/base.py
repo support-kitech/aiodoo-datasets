@@ -55,4 +55,5 @@ class BaseBuilder:
     builder operations. Business logic is strictly prohibited. Builders
     must remain stateless.
     """
+
     pass

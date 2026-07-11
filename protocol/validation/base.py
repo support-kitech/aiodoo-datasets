@@ -28,7 +28,9 @@ class ValidationResult:
         return ValidationResult(valid=True, summary=summary)
 
     @staticmethod
-    def failure(*errors: str, warnings: tuple[str, ...] = (), summary: str = "") -> "ValidationResult":
+    def failure(
+        *errors: str, warnings: tuple[str, ...] = (), summary: str = ""
+    ) -> "ValidationResult":
         """Create a failing validation result with error messages."""
         return ValidationResult(valid=False, errors=errors, warnings=warnings, summary=summary)
 

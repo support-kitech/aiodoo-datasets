@@ -14,19 +14,16 @@ class DummyInputContext:
 
 
 class TestPipeline(unittest.TestCase):
-
     def test_pipeline_assemble(self):
         pipeline = AssemblyPipeline()
         registry = ProtocolRegistry()
         registry.freeze()
         options = AssemblyOptions()
-        
+
         ctx = PipelineContext(
-            input_context=DummyInputContext("test_repo"),
-            options=options,
-            registry=registry
+            input_context=DummyInputContext("test_repo"), options=options, registry=registry
         )
-        
+
         result = pipeline.assemble(ctx)
         self.assertIsNotNone(result.protocol_context)
         self.assertTrue(result.validation_result.valid)
@@ -38,13 +35,11 @@ class TestPipeline(unittest.TestCase):
         registry = ProtocolRegistry()
         registry.freeze()
         options = AssemblyOptions(export_format="")
-        
+
         ctx = PipelineContext(
-            input_context=DummyInputContext("test_repo"),
-            options=options,
-            registry=registry
+            input_context=DummyInputContext("test_repo"), options=options, registry=registry
         )
-        
+
         result = pipeline.assemble(ctx)
         self.assertIsNotNone(result.protocol_context)
         self.assertTrue(result.validation_result.valid)

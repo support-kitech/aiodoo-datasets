@@ -9,10 +9,7 @@ class RepositoryBuilder:
     """Assembles full Repository objects."""
 
     @staticmethod
-    def build(
-        config: RepositoryConfiguration,
-        modules: tuple[OdooModule, ...]
-    ) -> Repository:
+    def build(config: RepositoryConfiguration, modules: tuple[OdooModule, ...]) -> Repository:
         """
         Build the immutable Repository object.
 

@@ -16,8 +16,10 @@ logger = logging.getLogger(__name__)
 
 TRecord = TypeVar("TRecord")
 
+
 class AdaptiveJSONEncoder(json.JSONEncoder):
     """Encodes standard structures, dataclasses, MappingProxies, and Enums."""
+
     def default(self, obj):
         if dataclasses.is_dataclass(obj):
             return dataclasses.asdict(obj)

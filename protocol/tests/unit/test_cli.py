@@ -10,7 +10,6 @@ from protocol.core.manager import ProtocolManager
 
 
 class TestCLI(unittest.TestCase):
-
     def setUp(self):
         self.parser = build_parser()
         self.manager = ProtocolManager()

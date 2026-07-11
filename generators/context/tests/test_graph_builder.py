@@ -56,9 +56,7 @@ class MockMissingNodeExtractor(BaseRelationshipExtractor):
 class TestGraphBuilder(unittest.TestCase):
     def setUp(self) -> None:
         # Disable logging for the duration of the tests to keep console clean
-        logging.getLogger("generators.context.analysis.graph_builder").setLevel(
-            logging.CRITICAL
-        )
+        logging.getLogger("generators.context.analysis.graph_builder").setLevel(logging.CRITICAL)
 
         self.graph = ContextGraph()
         self.node1 = ContextNode(

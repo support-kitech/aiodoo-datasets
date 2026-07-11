@@ -12,6 +12,7 @@ _GIT_CACHE: dict[str, str] = {}
 def get_git_commit(module: PreprocessedModule) -> str:
     """Retrieve and cache the git commit for the repository."""
     from pathlib import Path
+
     repo_path = str(Path(str(module.metadata["path"])).parent.absolute())
     if repo_path in _GIT_CACHE:
         return _GIT_CACHE[repo_path]
@@ -75,9 +76,14 @@ def build_base_metadata(module: PreprocessedModule, scenario: Scenario) -> dict[
     )
 
     from pathlib import Path
+
     module_path = Path(str(module.metadata["path"]))
-    python_files = sorted([str(f.normalized_path) for f in module.files if str(f.normalized_path).endswith('.py')])
-    xml_files = sorted([str(f.normalized_path) for f in module.files if str(f.normalized_path).endswith('.xml')])
+    python_files = sorted(
+        [str(f.normalized_path) for f in module.files if str(f.normalized_path).endswith(".py")]
+    )
+    xml_files = sorted(
+        [str(f.normalized_path) for f in module.files if str(f.normalized_path).endswith(".xml")]
+    )
 
     git_commit = get_git_commit(module)
 

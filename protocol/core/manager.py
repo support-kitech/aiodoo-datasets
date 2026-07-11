@@ -23,7 +23,9 @@ class ProtocolManager:
             self.registry.freeze()
         self.pipeline = AssemblyPipeline()
 
-    def assemble(self, input_context: Any, options: AssemblyOptions | None = None) -> PipelineResult:
+    def assemble(
+        self, input_context: Any, options: AssemblyOptions | None = None
+    ) -> PipelineResult:
         """
         Assemble a ProtocolContext from an input context.
         """
@@ -35,11 +37,14 @@ class ProtocolManager:
         )
         return self.pipeline.assemble(ctx)
 
-    def export(self, context: ProtocolContext, fmt: ExportFormat = ExportFormat.JSON) -> str | dict[str, Any]:
+    def export(
+        self, context: ProtocolContext, fmt: ExportFormat = ExportFormat.JSON
+    ) -> str | dict[str, Any]:
         """
         Export a ProtocolContext to the specified format.
         """
         from protocol.serialization.exporter import Exporter
+
         return Exporter.export(context, fmt=fmt)
 
     def validate(self, context: ProtocolContext) -> Any:
@@ -47,6 +52,7 @@ class ProtocolManager:
         Validate a ProtocolContext structurally.
         """
         from protocol.validation.dataset_validator import DatasetValidator
+
         return DatasetValidator.validate(context.dataset)
 
     def summary(self) -> dict[str, Any]:
@@ -54,6 +60,7 @@ class ProtocolManager:
         Return a summary of the protocol framework and registry state.
         """
         from protocol.constants.framework import PROTOCOL_FRAMEWORK_VERSION, SERIALIZER_VERSION
+
         return {
             "framework_version": PROTOCOL_FRAMEWORK_VERSION,
             "serializer_version": SERIALIZER_VERSION,

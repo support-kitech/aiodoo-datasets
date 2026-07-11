@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 class CacheValidationReason(Enum):
     """Reasons for cache validation outcomes."""
-    
+
     CACHE_HIT = "CACHE_HIT"
     CACHE_MISSING = "CACHE_MISSING"
     SCHEMA_CHANGED = "SCHEMA_CHANGED"
@@ -20,6 +20,6 @@ class CacheValidationReason(Enum):
 @dataclass(frozen=True, slots=True)
 class CacheValidationResult:
     """The outcome of cache validation."""
-    
+
     is_valid: bool
     reason: CacheValidationReason

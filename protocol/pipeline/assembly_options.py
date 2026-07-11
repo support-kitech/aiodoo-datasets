@@ -8,7 +8,7 @@ class AssemblyOptions:
     """
     Immutable configuration options for protocol assembly.
     """
-    
+
     validate_schema: bool = True
     export_format: str = "json"
     verbose: bool = False

@@ -24,8 +24,10 @@ from generators.context.protocol.schema import ContextTask
 
 logger = logging.getLogger(__name__)
 
+
 def _pickle_mappingproxy(mp: MappingProxyType) -> tuple:
     return MappingProxyType, (dict(mp),)
+
 
 copyreg.pickle(MappingProxyType, _pickle_mappingproxy)
 
@@ -43,7 +45,10 @@ def process_module(module: PreprocessedModule, protocol_hash: str) -> list[Conte
         # We need to construct ContextKnowledge correctly
         manifest_dict = {}
         if module.metadata:
-            manifest_dict = {"depends": module.metadata.get("depends", []), "data": module.metadata.get("data", [])}
+            manifest_dict = {
+                "depends": module.metadata.get("depends", []),
+                "data": module.metadata.get("data", []),
+            }
 
         security_dict = {}
         if hasattr(xml_knowledge, "files"):
@@ -149,7 +154,7 @@ class ContextPipeline:
         self.limit = limit
         self.target_module = target_module
 
-        self.scanner = None # Removed legacy scanner
+        self.scanner = None  # Removed legacy scanner
         self.checkpoint = CheckpointManager(self.output_dir)
         self.stats = ContextStatistics()
         self.writer = DatasetWriter(
@@ -185,12 +190,11 @@ class ContextPipeline:
 
         with ProcessPoolExecutor(max_workers=self.workers) as executor:
             import functools
+
             protocol_hash = self.protocol_context.dataset.identifier.hash_value
             worker_fn = functools.partial(process_module, protocol_hash=protocol_hash)
 
-            future_to_module = {
-                executor.submit(worker_fn, mod): mod for mod in modules_to_process
-            }
+            future_to_module = {executor.submit(worker_fn, mod): mod for mod in modules_to_process}
 
             for future in as_completed(future_to_module):
                 mod = future_to_module[future]

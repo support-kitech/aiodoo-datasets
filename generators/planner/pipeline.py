@@ -55,7 +55,12 @@ def process_module(module: PreprocessedModule, protocol_hash: str) -> list[dict]
 
         return results
     except KeyError as exc:
-        logger.error("Error processing module %s. Missing key %s in metadata: %s", module.name, exc, module.metadata)
+        logger.error(
+            "Error processing module %s. Missing key %s in metadata: %s",
+            module.name,
+            exc,
+            module.metadata,
+        )
         return []
     except Exception as exc:
         logger.error("Error processing module %s: %s", module.name, exc)
@@ -91,6 +96,7 @@ class PlannerPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
             checkpoint.load()
 
         import functools
+
         worker_fn = functools.partial(process_module, protocol_hash="unused")
 
         super().__init__(

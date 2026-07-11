@@ -67,7 +67,9 @@ class ApprovalPipeline:
 
             # 4. Protocol Mapping Layer (Removed)
             # 5. Validation Layer
-            ApprovalValidator.validate_all(review, review) # Hack if ApprovalValidator needs two args, let's see. Wait, I should just remove protocol validation.
+            ApprovalValidator.validate_all(
+                review, review
+            )  # Hack if ApprovalValidator needs two args, let's see. Wait, I should just remove protocol validation.
             # Actually, I'll remove ApprovalValidator.validate_all since we don't have protocol. I'll just validate domain object if there is a specific method.
             # I will just clear diagnostics to be safe.
             diagnostics.extend([])

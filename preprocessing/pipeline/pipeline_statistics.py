@@ -9,7 +9,7 @@ class PipelineStatistics:
     Observational statistics for the entire pipeline execution.
     Never influences execution flow.
     """
-    
+
     validation_time: float = 0.0
     cache_lookup_time: float = 0.0
     processing_time: float = 0.0

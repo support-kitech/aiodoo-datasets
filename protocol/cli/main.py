@@ -17,9 +17,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     """Main CLI entry point."""
     parser = build_parser()
     args = parser.parse_args(argv)
-    
+
     manager = ProtocolManager()
-    
+
     if args.command == "build":
         return run_build(args, manager)
     elif args.command == "summary":
@@ -28,7 +28,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run_export(args, manager)
     elif args.command == "validate-schema":
         return run_validate_schema(args, manager)
-    
+
     return 1
 
 

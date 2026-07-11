@@ -52,14 +52,14 @@ class RepositoryLoader:
             for version_str, repo_details in versions_config.items():
                 version = OdooVersion(version_str)
                 root_path_str = repo_details["root"]
-                
+
                 # Automatically generate a stable repository name
                 repository_name = f"{repo_type.value}-{version.value}"
-                
+
                 root_path = Path(root_path_str).resolve()
-                
+
                 addons_strs: list[str] = repo_details.get("addons", [])
-                
+
                 if addons_strs:
                     # Resolve relative to root_path
                     addons_paths = tuple((root_path / Path(p)).resolve() for p in addons_strs)

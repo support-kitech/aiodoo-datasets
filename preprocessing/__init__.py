@@ -1,8 +1,8 @@
 """
 AIODOO Preprocessing Framework
 
-This module provides the central public API for the Preprocessing Framework, 
-which acts as a universal normalization layer mapping raw `RepositoryContext` 
+This module provides the central public API for the Preprocessing Framework,
+which acts as a universal normalization layer mapping raw `RepositoryContext`
 graphs to strictly immutable, uniformly formatted `PreprocessedRepositoryContext` graphs.
 """
 

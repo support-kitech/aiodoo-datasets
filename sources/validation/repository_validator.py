@@ -39,13 +39,13 @@ class RepositoryValidator:
                     f"Addon path does not exist for {config.repo_type.value} "
                     f"({config.version.value}): {addon_path}"
                 )
-            
+
             if not addon_path.is_dir():
                 raise ValidationError(
                     f"Addon path is not a directory for {config.repo_type.value} "
                     f"({config.version.value}): {addon_path}"
                 )
-                
+
             resolved_str = str(addon_path.resolve())
             if resolved_str in seen_addons:
                 raise ValidationError(

@@ -5,6 +5,7 @@ from enum import Enum
 
 class ProtocolType(Enum):
     """The types of Protocol objects."""
+
     DATASET = "dataset"
     MANIFEST = "manifest"
     SCHEMA = "schema"
@@ -16,6 +17,7 @@ class ProtocolType(Enum):
 
 class RelationshipType(Enum):
     """Common relationships between protocol objects."""
+
     PARENT = "parent"
     CHILD = "child"
     DEPENDS_ON = "depends_on"
@@ -26,6 +28,7 @@ class RelationshipType(Enum):
 
 class ReferenceType(Enum):
     """The type of target a ProtocolReference points to."""
+
     REPOSITORY = "repository"
     MODULE = "module"
     FILE = "file"
@@ -38,6 +41,7 @@ class ReferenceType(Enum):
 
 class ExportFormat(Enum):
     """Supported export formats for protocol objects."""
+
     JSON = "json"
     JSONL = "jsonl"
     DICT = "dict"

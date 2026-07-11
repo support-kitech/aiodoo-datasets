@@ -20,10 +20,10 @@ def mock_repository(tmp_path: Path) -> RepositoryConfiguration:
     """Creates a mock repository structure on disk."""
     root = tmp_path / "odoo"
     root.mkdir()
-    
+
     addons = root / "addons"
     addons.mkdir()
-    
+
     # Create module 1
     mod1 = addons / "base"
     mod1.mkdir()
@@ -34,7 +34,7 @@ def mock_repository(tmp_path: Path) -> RepositoryConfiguration:
         "    'depends': [],\n"
         "    'installable': True,\n"
         "}\n",
-        encoding="utf-8"
+        encoding="utf-8",
     )
 
     # Create module 2
@@ -47,9 +47,9 @@ def mock_repository(tmp_path: Path) -> RepositoryConfiguration:
         "    'depends': ['base'],\n"
         "    'installable': True,\n"
         "}\n",
-        encoding="utf-8"
+        encoding="utf-8",
     )
-    
+
     return RepositoryConfiguration(
         repository_name="framework-17.0",
         repo_type=RepositoryType.FRAMEWORK,
@@ -62,7 +62,7 @@ def mock_repository(tmp_path: Path) -> RepositoryConfiguration:
 def test_repository_scanner(mock_repository: RepositoryConfiguration):
     """Test the scanner successfully discovers modules without parsing them."""
     discovered = RepositoryScanner.scan(mock_repository)
-    
+
     assert len(discovered) == 2
     for d in discovered:
         assert isinstance(d, DiscoveredModule)
@@ -75,7 +75,7 @@ def test_repository_interpreter(mock_repository: RepositoryConfiguration):
     """Test interpreter parses valid manifests into InterpretedModule."""
     discovered = RepositoryScanner.scan(mock_repository)
     base_module = next(d for d in discovered if d.module_path.name == "base")
-    
+
     interpreted = RepositoryInterpreter.interpret(base_module)
     assert isinstance(interpreted, InterpretedModule)
     assert interpreted.raw_metadata["name"] == "Base"
@@ -100,10 +100,10 @@ def test_module_factory(mock_repository: RepositoryConfiguration):
     """Test ModuleFactory creates immutable OdooModules."""
     discovered = RepositoryScanner.scan(mock_repository)
     web_module = next(d for d in discovered if d.module_path.name == "web")
-    
+
     interpreted = RepositoryInterpreter.interpret(web_module)
     module = ModuleFactory.create(interpreted)
-    
+
     assert module.name == "Web Core"
     assert module.technical_name == "web"
     assert module.depends == ("base",)
@@ -114,14 +114,14 @@ def test_module_factory(mock_repository: RepositoryConfiguration):
 def test_repository_builder(mock_repository: RepositoryConfiguration):
     """Test RepositoryBuilder assembles the full repository."""
     discovered = RepositoryScanner.scan(mock_repository)
-    
+
     modules = []
     for d in discovered:
         interpreted = RepositoryInterpreter.interpret(d)
         modules.append(ModuleFactory.create(interpreted))
-        
+
     repo = RepositoryBuilder.build(mock_repository, tuple(modules))
-    
+
     assert repo.name == "framework-17.0"
     assert len(repo.modules) == 2
     assert repo.manifest.module_count == 2
@@ -136,18 +136,18 @@ def test_repository_index(mock_repository: RepositoryConfiguration):
     for d in discovered:
         interpreted = RepositoryInterpreter.interpret(d)
         modules.append(ModuleFactory.create(interpreted))
-        
+
     repo = RepositoryBuilder.build(mock_repository, tuple(modules))
     index = RepositoryIndex((repo,))
-    
+
     # find_repository
     found_repo = index.find_repository("framework-17.0")
     assert found_repo == repo
-    
+
     # find_by_version
     assert len(index.versions[OdooVersion.V17]) == 1
     assert OdooVersion.V18 not in index.versions
-    
+
     # find_module
     base_mods = index.find_module("base")
     assert len(base_mods) == 1

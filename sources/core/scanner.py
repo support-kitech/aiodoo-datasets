@@ -20,13 +20,13 @@ class RepositoryScanner:
 
         Returns:
             A tuple of DiscoveredModule objects containing raw manifest strings.
-            
+
         Raises:
             ScannerError: If filesystem operations fail.
         """
         discovered: list[DiscoveredModule] = []
         search_paths: list[Path] = list(config.addons_paths)
-        
+
         if not search_paths:
             search_paths = [config.root_path]
 
@@ -53,9 +53,7 @@ class RepositoryScanner:
                             )
                         )
         except OSError as e:
-            raise ScannerError(
-                f"Failed to scan repository '{config.repository_name}': {e}"
-            )
+            raise ScannerError(f"Failed to scan repository '{config.repository_name}': {e}")
 
         # Final safety sort
         discovered.sort(key=lambda m: str(m.module_path))

@@ -17,15 +17,15 @@ class RepositoryDeserializer:
     def deserialize_repository(json_str: str) -> Repository:
         """
         Reconstruct the immutable Repository from JSON dict.
-        
+
         Args:
             json_str: The serialized JSON string.
-            
+
         Returns:
             An immutable Repository instance.
         """
         data: dict[str, Any] = json.loads(json_str)
-        
+
         # 1. Configuration
         conf_data = data["configuration"]
         config = RepositoryConfiguration(

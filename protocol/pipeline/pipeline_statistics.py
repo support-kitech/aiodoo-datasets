@@ -9,6 +9,7 @@ class PipelineStatistics:
     Immutable statistics collected during protocol assembly.
     Observational only.
     """
+
     objects_created: int = 0
     relationships_created: int = 0
     references_created: int = 0

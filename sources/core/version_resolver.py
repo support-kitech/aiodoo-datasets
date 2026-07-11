@@ -13,7 +13,7 @@ class VersionResolver:
 
     @staticmethod
     def resolve_mappings(
-        config_set: ConfigurationSet
+        config_set: ConfigurationSet,
     ) -> MappingProxyType[OdooVersion, tuple[RepositoryConfiguration, ...]]:
         """
         Group configurations by version and ensure consistency.
@@ -23,7 +23,7 @@ class VersionResolver:
 
         Returns:
             An immutable MappingProxyType mapping OdooVersion to its corresponding configurations.
-            
+
         Raises:
             ConfigurationError: If conflicting configurations exist for a single version.
         """
@@ -38,7 +38,7 @@ class VersionResolver:
                         f"Duplicate repository definition for type '{config.repo_type.value}' "
                         f"in version '{config.version.value}'."
                     )
-            
+
             mapping[config.version].append(config)
 
         # Convert to immutable structures with deterministic ordering

@@ -9,6 +9,7 @@ from sources.domain.context import RepositoryContext
 
 class RepositoryEncoder(json.JSONEncoder):
     """Encodes immutable domain objects into JSON."""
+
     def default(self, o: Any) -> Any:
         if isinstance(o, Path):
             return str(o.resolve())

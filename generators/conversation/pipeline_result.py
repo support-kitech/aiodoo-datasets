@@ -21,14 +21,7 @@ class PipelineResult:
 
     @property
     def status(self) -> PipelineStatus:
-        if (
-            not self.success
-            and any("has no turns" in str(d).lower() for d in self.diagnostics)
-        ):
+        if not self.success and any("has no turns" in str(d).lower() for d in self.diagnostics):
             return PipelineStatus.SKIPPED
 
-        return (
-            PipelineStatus.SUCCESS
-            if self.success
-            else PipelineStatus.FAILED
-        )
+        return PipelineStatus.SUCCESS if self.success else PipelineStatus.FAILED

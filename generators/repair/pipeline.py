@@ -76,6 +76,7 @@ class RepairPipeline(SharedPipelineOrchestrator):  # type: ignore[misc]
             checkpoint.load()
 
         import functools
+
         worker_fn = functools.partial(process_module, protocol_hash="unused")
 
         super().__init__(

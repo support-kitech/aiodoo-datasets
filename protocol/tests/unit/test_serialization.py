@@ -43,7 +43,6 @@ def _make_context():
 
 
 class TestSerializer(unittest.TestCase):
-
     def test_to_dict(self) -> None:
         ctx = _make_context()
         d = Serializer.context_to_dict(ctx)
@@ -67,7 +66,6 @@ class TestSerializer(unittest.TestCase):
 
 
 class TestDeserializer(unittest.TestCase):
-
     def test_from_json_roundtrip(self) -> None:
         """Serialize then deserialize — structural equality."""
         original = _make_context()
@@ -103,7 +101,6 @@ class TestDeserializer(unittest.TestCase):
 
 
 class TestExporter(unittest.TestCase):
-
     def test_export_json(self) -> None:
         ctx = _make_context()
         result = Exporter.export(ctx, ExportFormat.JSON)
@@ -124,7 +121,7 @@ class TestExporter(unittest.TestCase):
     def test_export_unsupported_format(self) -> None:
         ctx = _make_context()
         with self.assertRaises(ValueError):
-            Exporter.export(ctx, "xml") # type: ignore
+            Exporter.export(ctx, "xml")  # type: ignore
 
 
 if __name__ == "__main__":

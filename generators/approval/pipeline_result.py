@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Any, Mapping, Tuple
+
 # Removed ApprovalProtocol import
 if TYPE_CHECKING:
     from generators.common.pipeline.status import PipelineStatus
@@ -16,9 +17,7 @@ class PipelineResult:
 
     success: bool
     approval_protocol: Any = None
-    statistics: Mapping[str, Any] = field(
-        default_factory=lambda: MappingProxyType({})
-    )
+    statistics: Mapping[str, Any] = field(default_factory=lambda: MappingProxyType({}))
     diagnostics: Tuple[str, ...] = field(default_factory=tuple)
     exported_files: Tuple[str, ...] = field(default_factory=tuple)
 
@@ -26,8 +25,4 @@ class PipelineResult:
     def status(self) -> PipelineStatus:
         from generators.common.pipeline.status import PipelineStatus
 
-        return (
-            PipelineStatus.SUCCESS
-            if self.success
-            else PipelineStatus.FAILED
-        )
+        return PipelineStatus.SUCCESS if self.success else PipelineStatus.FAILED
