@@ -22,7 +22,7 @@ package-dir = {"aiodoo_datasets" = "."}
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["generators*", "tests*", "protocol*", "validation*", "statistics*", "cli*", "analysis*", "builders*", "domain*", "factories*", "registries*", "preprocessing*", "sources*", "config*"]
-namespaces = false
+namespaces = true
 
 [project.optional-dependencies]
 dev = [
