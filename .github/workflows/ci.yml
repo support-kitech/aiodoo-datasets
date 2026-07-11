@@ -2,38 +2,54 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+
+[tool.coverage.run]
+branch = true
+source = [
+    "generators",
+    "sources",
+    "preprocessing",
+    "protocol",
+    "validation",
+    "statistics",
+]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         python-version: ["3.12"]
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e .[dev]
-        
-    - name: Run Ruff (Lint & Formatting)
-      run: |
-        ruff check generators/
-        ruff format --check generators/
-        
+      - uses: actions/checkout@v4
 
-    - name: Run Tests with Coverage
-      run: |
-        coverage run -m pytest generators/
-        coverage report -m --fail-under=90
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install \
+            pydantic \
+            PyYAML \
+            pytest \
+            coverage \
+            ruff
+
+      - name: Run Ruff
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Run Tests
+        run: |
+          coverage run -m pytest
+          coverage report -m --fail-under=90

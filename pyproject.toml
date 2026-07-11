@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,44 +8,32 @@ version = "1.0.0"
 description = "Deterministic AI dataset generators for Odoo."
 readme = "README.md"
 requires-python = ">=3.12"
-license = {file = "LICENSE"}
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+
 authors = [
-    {name = "AIODOO Team"}
+    { name = "AIODOO Team" }
 ]
+
 dependencies = [
     "pydantic>=2.0.0",
     "PyYAML>=6.0",
-]
-
-[tool.setuptools]
-
-
-
-[project.optional-dependencies]
-dev = [
-    "ruff",
-    "pytest",
-    "coverage",
 ]
 
 [tool.ruff]
 line-length = 100
 target-version = "py312"
 
-
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = "-ra -q --import-mode=importlib"
-markers = [
-    "integration: marks tests as integration tests",
-]
-testpaths = [
-    "generators",
-]
-
 [tool.coverage.run]
 branch = true
-source = ["generators"]
+source = [
+    "generators",
+    "sources",
+    "preprocessing",
+    "protocol",
+    "validation",
+    "statistics",
+]
 
 [tool.coverage.report]
 show_missing = true
