@@ -1,7 +1,7 @@
 """Reverse-engineers real Odoo files into Artifact Protocol objects."""
 
+from preprocessing.domain.repository import PreprocessedModule
 from generators.coding.discovery import (
-    OdooModule,
     Scenario,
     PythonKnowledge,
     XMLKnowledge,
@@ -11,7 +11,7 @@ from generators.coding.generation.dependency_builder import determine_dependenci
 
 
 def build_artifacts(
-    module: OdooModule, scenario: Scenario, py_k: PythonKnowledge, xml_k: XMLKnowledge
+    module: PreprocessedModule, scenario: Scenario, py_k: PythonKnowledge, xml_k: XMLKnowledge
 ) -> list[GeneratedArtifact]:
     """
     Slices the real Odoo codebase into discrete GeneratedArtifacts based on the scenario.
@@ -32,8 +32,10 @@ def build_artifacts(
             raw_files.append((xml_file, "xml"))
 
     # Include manifest
+    from pathlib import Path
+    module_path = Path(str(module.metadata["path"]))
     manifest_path = (
-        "__manifest__.py" if (module.path / "__manifest__.py").exists() else "__openerp__.py"
+        "__manifest__.py" if (module_path / "__manifest__.py").exists() else "__openerp__.py"
     )
     raw_files.append((manifest_path, "python"))
 
@@ -81,7 +83,7 @@ def build_artifacts(
         deps = determine_dependencies(ta["path"], temp_artifacts, py_k, xml_k, module)
 
         art = map_to_artifact(
-            raw_data=ta, dependencies=deps, module_version=module.version, module_name=module.name
+            raw_data=ta, dependencies=deps, module_version=str(module.metadata["version"]), module_name=module.name
         )
         artifacts.append(art)
 

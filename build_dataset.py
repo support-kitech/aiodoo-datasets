@@ -5,7 +5,6 @@ import argparse
 import logging
 import sys
 from pathlib import Path
-from types import SimpleNamespace
 
 from generators.planner.pipeline import PlannerPipeline
 from generators.coding.pipeline import CodingPipeline
@@ -44,38 +43,29 @@ def run_generator(name: str, func, *args, **kwargs) -> None:
     logger.info("=" * 60)
     logger.info(f"Starting {name} Generator...")
     logger.info("=" * 60)
-    try:
-        # Planner, Coding, Repair return a boolean (True on success)
-        # ContextPipeline.run() returns None
-        # Execution, Approval, Conversation pipelines return a Result object
-        # Evaluation returns None
-        result = func(*args, **kwargs)
+    result = func(*args, **kwargs)
 
-        # Some pipelines return a boolean success
-        if isinstance(result, bool):
-            if not result:
-                raise RuntimeError(f"{name} pipeline returned False indicating failure.")
-                
-        if not isinstance(result, bool):
-            if hasattr(result, "status"):
-                from generators.common.pipeline.status import PipelineStatus
-                if result.status == PipelineStatus.FAILED:
-                    diagnostics = getattr(result, "diagnostics", [])
-                    raise RuntimeError(f"{name} pipeline failed. Diagnostics: {diagnostics}")
-                elif result.status == PipelineStatus.SKIPPED:
-                    logger.info(f"{name} Generator skipped execution (expected without full upstream data).")
-                else:
-                    logger.info(f"{name} Generator completed successfully.")
-            elif hasattr(result, "success"):
-                if not getattr(result, "success"):
-                    diagnostics = getattr(result, "diagnostics", [])
-                    error_msg = f"{name} pipeline failed. Diagnostics: {diagnostics}"
-                    raise RuntimeError(error_msg)
+    # Some pipelines return a boolean success
+    if isinstance(result, bool):
+        if not result:
+            raise RuntimeError(f"{name} pipeline returned False indicating failure.")
+            
+    if not isinstance(result, bool):
+        if hasattr(result, "status"):
+            from generators.common.pipeline.status import PipelineStatus
+            if result.status == PipelineStatus.FAILED:
+                diagnostics = getattr(result, "diagnostics", [])
+                raise RuntimeError(f"{name} pipeline failed. Diagnostics: {diagnostics}")
+            elif result.status == PipelineStatus.SKIPPED:
+                logger.info(f"{name} Generator skipped execution (expected without full upstream data).")
+            else:
                 logger.info(f"{name} Generator completed successfully.")
-    except Exception as e:
-        logger.error(f"Fatal error in {name} Generator: {e}")
-        logger.error("Stopping immediately.")
-        sys.exit(1)
+        elif hasattr(result, "success"):
+            if not getattr(result, "success"):
+                diagnostics = getattr(result, "diagnostics", [])
+                error_msg = f"{name} pipeline failed. Diagnostics: {diagnostics}"
+                raise RuntimeError(error_msg)
+            logger.info(f"{name} Generator completed successfully.")
 
 
 def main() -> None:
@@ -143,11 +133,33 @@ def main() -> None:
     preprocessed_context = prep_result.context
     logger.info(f"PreprocessedRepositoryContext loaded successfully. Cache Hit: {prep_result.statistics.cache_hit}")
 
+    # Initialize Protocol Framework
+    logger.info("Assembling ProtocolContext via Protocol Framework...")
+    from protocol.core.manager import ProtocolManager
+    from protocol.pipeline.assembly_options import AssemblyOptions as ProtocolOptions
+    
+    protocol_manager = ProtocolManager()
+    protocol_result = protocol_manager.assemble(preprocessed_context, ProtocolOptions(validate_schema=True))
+    
+    if not protocol_result.validation_result.valid:
+        logger.error("Failed to assemble ProtocolContext.")
+        for err in protocol_result.validation_result.errors:
+            logger.error(f"  - {err}")
+        sys.exit(1)
+        
+    protocol_context = protocol_result.protocol_context
+    if protocol_context is None:
+        logger.error("ProtocolContext is None.")
+        sys.exit(1)
+        
+    logger.info(f"ProtocolContext assembled successfully. Objects created: {protocol_result.statistics.objects_created}")
+
     # 1. Planner
     run_generator(
         "Planner",
         lambda: PlannerPipeline(
             repository_context=preprocessed_context,
+            protocol_context=protocol_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -160,6 +172,7 @@ def main() -> None:
         "Coding",
         lambda: CodingPipeline(
             repository_context=preprocessed_context,
+            protocol_context=protocol_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -172,6 +185,7 @@ def main() -> None:
         "Repair",
         lambda: RepairPipeline(
             repository_context=preprocessed_context,
+            protocol_context=protocol_context,
             output_dir=output_dir,
             workers=workers,
             resume=resume,
@@ -184,6 +198,7 @@ def main() -> None:
         "Context",
         lambda: ContextPipeline(
             repository_context=preprocessed_context,
+            protocol_context=protocol_context,
             output_dir=str(output_dir),
             workers=workers,
             resume=resume,
@@ -196,6 +211,7 @@ def main() -> None:
     common_ns = argparse.Namespace(
         source_dir=Path("sources"),
         repository_context=preprocessed_context,
+        protocol_context=protocol_context,
         output_dir=output_dir,
         debug=False,
         fail_fast=True,
@@ -220,10 +236,14 @@ def main() -> None:
     )
 
     # 8. Evaluation
+    eval_config = EvalConfig.load(str(eval_config_path))
+    # Inject protocol context dynamically
+    eval_config["protocol_context"] = protocol_context
+
     run_generator(
         "Evaluation",
         lambda: EvalCommands.run_generate(
-            EvalConfig.load(str(eval_config_path)), str(output_dir)
+            eval_config, str(output_dir)
         ),
     )
 

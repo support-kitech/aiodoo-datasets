@@ -1,10 +1,10 @@
 """Generates instructions for the dataset row."""
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.repair.analysis.rules.base import RepairOpportunity
 
 
-def generate_instruction(module: OdooModule, opportunities: list[RepairOpportunity]) -> str:
+def generate_instruction(module: PreprocessedModule, opportunities: list[RepairOpportunity]) -> str:
     """Generate the user-facing prompt that initiates the repair."""
     issues = ", ".join(set(o.problem_description for o in opportunities))
     return (

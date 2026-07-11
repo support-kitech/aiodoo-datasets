@@ -20,3 +20,4 @@ class PipelineContext:
     generator_version: str
     protocol_version: str
     schema_version: str
+    protocol_context: Any = None

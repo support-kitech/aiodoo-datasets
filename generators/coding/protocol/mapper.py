@@ -1,13 +1,14 @@
 """Assembles the final Artifact Protocol V1 payload."""
 
-from generators.coding.discovery import OdooModule, Scenario
+from preprocessing.domain.repository import PreprocessedModule
+from generators.coding.discovery import Scenario
 from generators.coding.validation.schema import ArtifactPayload
 from generators.coding.protocol.operation_builder import build_operations
 from generators.coding.protocol.validation_mapper import build_validation_actions
 
 
 def build_artifact_payload(  # type: ignore[no-untyped-def]
-    module: OdooModule, scenario: Scenario, py_k, xml_k, artifacts
+    module: PreprocessedModule, scenario: Scenario, py_k, xml_k, artifacts
 ) -> ArtifactPayload:
     """Orchestrates the protocol payload construction."""
 

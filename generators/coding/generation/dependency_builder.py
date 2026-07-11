@@ -6,7 +6,7 @@ from dataclasses import dataclass
 import re
 import ast
 from pathlib import Path
-from generators.coding.discovery import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 
 
 def _extract_python_deps(file_path: Path) -> set[str]:
@@ -97,21 +97,21 @@ def determine_dependencies(
     all_artifacts: list[dict[str, Any]],
     py_k: Any,
     xml_k: Any,
-    module: OdooModule,
+    module: PreprocessedModule,
 ) -> list[str]:
     """
     Builds a semantic dependency graph based on actual engineering relationships.
     Internally constructs a typed DependencyGraph before flattening for the protocol schema.
     """
     graph = DependencyGraph()
-    abs_path = module.path / artifact_path
+    abs_path = Path(str(module.metadata["path"])) / artifact_path
 
     # We need a stable ID generation mechanism here since artifact_builder hasn't mapped them yet.
     # Fortunately, the artifact_mapper uses a deterministic hash based on module_version, module_name, and path.
     import hashlib
 
     def get_id(path: str) -> str:
-        seed = f"{module.version}_{module.name}_file_{path}"
+        seed = f"{module.metadata.get('version', '')}_{module.name}_file_{path}"
         return f"art_{hashlib.sha256(seed.encode('utf-8')).hexdigest()[:12]}"
 
     current_id = get_id(artifact_path)

@@ -6,9 +6,7 @@ from generators.execution.integration.pipeline_result import PipelineResult
 from generators.execution.export.export_context import ExportContext
 from generators.execution.export.export_statistics import ExportStatistics
 from generators.execution.export.exporter import Exporter
-from generators.execution.protocol.protocol_context import ProtocolContext
-from generators.execution.protocol.protocol_statistics import ProtocolStatistics
-from generators.execution.protocol.protocol import Protocol
+# Removed protocol imports
 from generators.execution.planning.planning_context import PlanningContext
 from generators.execution.planning.planning_statistics import PlanningStatistics
 from generators.execution.planning.planner import Planner
@@ -125,45 +123,26 @@ class IntegrationPipeline:
             planning_result = PlanningResult(success=True)
         context.pipeline_statistics.phase_execution_times["PLANNING"] = time.time() - planning_start
 
-        # 6. Protocol
-        protocol_start = time.time()
-        try:
-            protocol_ctx = ProtocolContext(
-                planning_result=planning_result,
-                planning_statistics=planning_result.statistics
-                if hasattr(planning_result, "statistics")
-                else PlanningStatistics(),
-                configuration=context.generator_config.custom_settings,
-                protocol_version="1.0.0",
-                protocol_statistics=ProtocolStatistics(),
-            )
-            protocol_result = Protocol.map_protocol(protocol_ctx)
-            if not protocol_result.success:
-                return PipelineResult(
-                    success=False,
-                    diagnostics=protocol_result.diagnostics,
-                    statistics=context.pipeline_statistics,
-                )
-        except Exception:
-            from generators.execution.protocol.protocol_result import ProtocolResult
-
-            protocol_result = ProtocolResult(success=True)
-        context.pipeline_statistics.phase_execution_times["PROTOCOL"] = time.time() - protocol_start
+        # 6. Protocol Layer (Removed)
+        context.pipeline_statistics.phase_execution_times["PROTOCOL"] = 0
 
         # 7. Export
         export_start = time.time()
         try:
             export_ctx = ExportContext(
-                protocol_result=protocol_result,
-                protocol_statistics=protocol_ctx.protocol_statistics
-                if "protocol_ctx" in locals()
-                else ProtocolStatistics(),
+                planning_result=planning_result,
                 export_configuration=context.export_config.custom_settings
                 if hasattr(context.export_config, "custom_settings")
                 else {},
                 output_directory=context.export_config.output_directory,
                 export_statistics=ExportStatistics(),
             )
+            
+            # Inject protocol_context dynamically to export context
+            if hasattr(context, "protocol_context"):
+                # Dynamically set it so exporter can access it
+                object.__setattr__(export_ctx, "protocol_context", getattr(context, "protocol_context"))
+
             export_result = Exporter.export(export_ctx)
             if not export_result.success:
                 return PipelineResult(
@@ -186,7 +165,6 @@ class IntegrationPipeline:
             build_result=build_result,
             graph_result=graph_result,
             planning_result=planning_result,
-            protocol_result=protocol_result,
             export_result=export_result,
             statistics=context.pipeline_statistics,
         )

@@ -1,8 +1,8 @@
 """Builds minimal context required for the Coding Model implementation."""
 
 from typing import Any
+from preprocessing.domain.repository import PreprocessedModule
 from generators.coding.discovery import (
-    OdooModule,
     Scenario,
     PythonKnowledge,
     XMLKnowledge,
@@ -12,7 +12,7 @@ from generators.coding.validation.schema import ArtifactPayload
 
 
 def build_context(
-    module: OdooModule,
+    module: PreprocessedModule,
     scenario: Scenario,
     py_k: PythonKnowledge,
     xml_k: XMLKnowledge,
@@ -26,8 +26,8 @@ def build_context(
 
     context = {
         "module": module.name,
-        "version": module.version,
-        "depends": module.manifest.depends,
+        "version": module.metadata.get("version", ""),
+        "depends": module.metadata.get("depends", []),
         "scenario": scenario.name,
         "existing_models": [],
         "existing_views": [],

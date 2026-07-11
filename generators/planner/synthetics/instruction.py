@@ -5,7 +5,7 @@ import random
 from pathlib import Path
 import yaml
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.common.discovery.classifier import Scenario
 
 logger = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ class InstructionEngine:
             except Exception as exc:
                 logger.error("Failed to load template file %s: %s", yaml_file, exc)
 
-    def generate(self, module: OdooModule, scenario: Scenario) -> str:
+    def generate(self, module: PreprocessedModule, scenario: Scenario) -> str:
         """Render a deterministic instruction for the given scenario."""
         available_templates = self.templates.get(scenario.name, [])
 
@@ -52,15 +52,15 @@ class InstructionEngine:
             template = "Build the {module_name} module to satisfy the architectural requirements defined by its dependencies."
         else:
             # Use deterministic seeded selection based on module and scenario to ensure reproducibility
-            seed_str = f"{module.name}_{scenario.name}_{module.version}"
+            seed_str = f"{module.name}_{scenario.name}_{module.metadata.get('version', '')}"
             rng = random.Random(seed_str)
             template = rng.choice(available_templates)
 
         return template.format(
-            module_name=module.manifest.name,
+            module_name=module.metadata.get("name", module.name),
             module_tech_name=module.name,
-            version=module.version,
-            edition=module.edition,
+            version=module.metadata.get("version", ""),
+            edition="ce",
         )
 
 
@@ -68,7 +68,7 @@ class InstructionEngine:
 _engine = None
 
 
-def generate_instruction(module: OdooModule, scenario: Scenario) -> str:
+def generate_instruction(module: PreprocessedModule, scenario: Scenario) -> str:
     """Backward compatible public interface for instruction generation."""
     global _engine
     if _engine is None:

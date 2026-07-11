@@ -3,15 +3,16 @@
 import datetime
 from typing import Any
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.common.discovery.classifier import Scenario
 
 _GIT_CACHE: dict[str, str] = {}
 
 
-def get_git_commit(module: OdooModule) -> str:
+def get_git_commit(module: PreprocessedModule) -> str:
     """Retrieve and cache the git commit for the repository."""
-    repo_path = str(module.path.parent.absolute())
+    from pathlib import Path
+    repo_path = str(Path(str(module.metadata["path"])).parent.absolute())
     if repo_path in _GIT_CACHE:
         return _GIT_CACHE[repo_path]
 
@@ -65,7 +66,7 @@ def compute_difficulty(metrics: dict[str, int]) -> int:
         return 5
 
 
-def build_base_metadata(module: OdooModule, scenario: Scenario) -> dict[str, Any]:
+def build_base_metadata(module: PreprocessedModule, scenario: Scenario) -> dict[str, Any]:
     """Compile the base metadata dictionary for the JSONL row with full provenance."""
     difficulty = (
         compute_difficulty(scenario.metrics)
@@ -73,34 +74,36 @@ def build_base_metadata(module: OdooModule, scenario: Scenario) -> dict[str, Any
         else scenario.difficulty
     )
 
-    python_files = sorted([str(p.relative_to(module.path)) for p in module.path.rglob("*.py")])
-    xml_files = sorted([str(p.relative_to(module.path)) for p in module.path.rglob("*.xml")])
+    from pathlib import Path
+    module_path = Path(str(module.metadata["path"]))
+    python_files = sorted([str(f.normalized_path) for f in module.files if str(f.normalized_path).endswith('.py')])
+    xml_files = sorted([str(f.normalized_path) for f in module.files if str(f.normalized_path).endswith('.xml')])
 
     git_commit = get_git_commit(module)
 
     manifest_name = (
-        "__manifest__.py" if (module.path / "__manifest__.py").exists() else "__openerp__.py"
+        "__manifest__.py" if (module_path / "__manifest__.py").exists() else "__openerp__.py"
     )
-    manifest_path = str(module.path / manifest_name)
+    manifest_path = str(module_path / manifest_name)
 
-    file_count = getattr(module, "file_count", len(python_files) + len(xml_files))
+    file_count = len(module.files)
 
     return {
-        "repository": f"odoo/{module.edition}",
+        "repository": f"odoo/{module.metadata.get('version', '')}",
         "repository_type": "git" if git_commit is not None else "archive",
-        "repository_version": module.version,
-        "edition": module.edition,
-        "version": module.version,
-        "odoo_version": module.version,
+        "repository_version": module.metadata.get("version", ""),
+        "edition": "ce",
+        "version": module.metadata.get("version", ""),
+        "odoo_version": module.metadata.get("version", ""),
         "module": module.name,
-        "module_path": str(module.path.absolute()),
+        "module_path": str(module_path.absolute()),
         "manifest_path": manifest_path,
         "python_files": python_files,
         "xml_files": xml_files,
-        "source_checksum": module.module_hash,
+        "source_checksum": "",
         "source_file_count": file_count,
-        "module_hash": module.module_hash,
-        "manifest_hash": module.manifest_hash,
+        "module_hash": "",
+        "manifest_hash": "",
         "generator_version": "0.1.0",
         "protocol_version": "1.0",
         "generation_timestamp": datetime.datetime.utcnow().isoformat(),

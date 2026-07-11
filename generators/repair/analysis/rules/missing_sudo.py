@@ -32,7 +32,7 @@ class MissingSudoRule(BaseRepairRule):  # type: ignore[misc]
                     if node.func.value.attr == "cr":
                         line_num = node.lineno
                         snippet = context.lines[line_num - 1].strip()
-                        rel_path = str(context.file_path.relative_to(context.base_path))
+                        rel_path = str(context.file_path)
 
                         deterministic_id = hashlib.sha256(
                             f"{context.module_name}:{rel_path}:{line_num}:{self.rule_id}".encode()

@@ -14,15 +14,15 @@ class ContextGraph:
         self._edges: dict[str, ContextEdge] = {}
 
     def add_node(self, node: ContextNode) -> None:
-        """Add a node to the graph. Raises ValueError if it already exists."""
+        """Add a node to the graph. Silently skips if node already exists."""
         if node.node_id in self._nodes:
-            raise ValueError(f"Node with ID {node.node_id} already exists.")
+            return
         self._nodes[node.node_id] = node
 
     def add_edge(self, edge: ContextEdge) -> None:
-        """Add an edge to the graph. Raises ValueError if edge already exists or nodes are missing."""
+        """Add an edge to the graph. Silently skips if edge already exists or nodes are missing."""
         if edge.edge_id in self._edges:
-            raise ValueError(f"Edge with ID {edge.edge_id} already exists.")
+            return
         if edge.source_id not in self._nodes:
             raise ValueError(f"Source node {edge.source_id} does not exist.")
         if edge.target_id not in self._nodes:

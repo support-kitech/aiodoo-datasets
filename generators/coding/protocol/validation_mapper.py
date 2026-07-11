@@ -2,14 +2,15 @@
 
 from generators.coding.validation.schema import ValidationAction, GeneratedArtifact
 
-from generators.coding.discovery import PythonKnowledge, XMLKnowledge, OdooModule
+from generators.coding.discovery import PythonKnowledge, XMLKnowledge
+from preprocessing.domain.repository import PreprocessedModule
 
 
 def build_validation_actions(
     artifacts: list[GeneratedArtifact],
     py_k: PythonKnowledge,
     xml_k: XMLKnowledge,
-    module: OdooModule,
+    module: PreprocessedModule,
 ) -> list[ValidationAction]:
     """
     Determines necessary execution hints for AIODOO Core based on generated artifacts.
@@ -49,11 +50,12 @@ def build_validation_actions(
                     )
 
     # Manifest validation
-    if module.manifest.depends:
+    depends = module.metadata.get("depends", [])
+    if depends:
         actions.append(
             ValidationAction(
                 action="Check Dependencies",
-                reason=f"Verify manifest dependencies {module.manifest.depends} are satisfied.",
+                reason=f"Verify manifest dependencies {depends} are satisfied.",
             )
         )
 

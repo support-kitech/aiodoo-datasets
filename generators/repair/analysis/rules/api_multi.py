@@ -34,7 +34,7 @@ class ApiMultiRule(BaseRepairRule):  # type: ignore[misc]
                     ):
                         line_num = decorator.lineno
                         snippet = context.lines[line_num - 1].strip()
-                        rel_path = str(context.file_path.relative_to(context.base_path))
+                        rel_path = str(context.file_path)
 
                         deterministic_id = hashlib.sha256(
                             f"{context.module_name}:{rel_path}:{line_num}:{self.rule_id}".encode()

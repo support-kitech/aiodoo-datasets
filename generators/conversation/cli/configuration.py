@@ -22,4 +22,5 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
         output_dir=str(args.output_dir),
         source_identifier=str(args.source_dir.name),
         strict_mode=args.fail_fast,
+        protocol_context=getattr(args, "protocol_context", None),
     )

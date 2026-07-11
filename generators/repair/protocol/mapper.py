@@ -1,7 +1,7 @@
 """Maps repair scenarios to the Repair Protocol V1 JSON Schema."""
 
 from pathlib import Path
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.repair.validation.schema import (
     RepairTask,
     Problem,
@@ -59,9 +59,9 @@ def build_repair_task(opp: RepairOpportunity, base_path: Path) -> RepairTask:
 
 
 def build_repair_payload(
-    module: OdooModule, opportunities: list[RepairOpportunity]
+    module: PreprocessedModule, opportunities: list[RepairOpportunity]
 ) -> RepairPayload:
-    tasks = [build_repair_task(opp, module.path) for opp in opportunities]
+    tasks = [build_repair_task(opp, Path(str(module.metadata["path"]))) for opp in opportunities]
     return RepairPayload(
         goal=f"Repair {len(tasks)} issues in {module.name}",
         workspace=f"src/{module.name}",

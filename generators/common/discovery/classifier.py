@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 from typing import Sequence
 
-from .scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from .ast_parser import PythonKnowledge
 from .xml_parser import XMLKnowledge
 
@@ -23,7 +23,7 @@ class ScenarioClassifier:
 
     def classify(
         self,
-        module: OdooModule,
+        module: PreprocessedModule,
         python_data: Sequence[PythonKnowledge],
         xml_data: Sequence[XMLKnowledge],
     ) -> list[Scenario]:
@@ -51,9 +51,9 @@ class ScenarioClassifier:
             "reports": 0,
             "security_rules": 0,
             "scheduled_actions": 0,
-            "dependencies": len(module.manifest.depends),
+            "dependencies": len(module.metadata.get("depends", [])),
             "assets": 0,
-            "file_count": module.file_count,
+            "file_count": len(module.files),
         }
 
         for py_k in python_data:
@@ -133,7 +133,7 @@ class ScenarioClassifier:
             scenarios.append(Scenario(name="Module Architecture", tags=["Module", "Structural"]))
 
         # Enrich tags based on manifest and assign metrics
-        depends = set(module.manifest.depends)
+        depends = set(module.metadata.get("depends", []))
         for scenario in scenarios:
             scenario.metrics = metrics.copy()
             if "account" in depends:

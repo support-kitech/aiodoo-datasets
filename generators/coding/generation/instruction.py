@@ -4,7 +4,8 @@ from pathlib import Path
 import yaml
 import hashlib
 
-from generators.coding.discovery import OdooModule, Scenario
+from preprocessing.domain.repository import PreprocessedModule
+from generators.coding.discovery import Scenario
 
 
 class InstructionEngine:
@@ -23,7 +24,7 @@ class InstructionEngine:
                 pass
         return templates
 
-    def generate(self, module: OdooModule, scenario: Scenario) -> str:
+    def generate(self, module: PreprocessedModule, scenario: Scenario) -> str:
         # Fallback template if missing
         generic = [
             "Implement the backend logic for the {module_name} module, focusing on the core business objects defined in {feature}.",
@@ -38,7 +39,7 @@ class InstructionEngine:
             available = generic
 
         # Stable hash for strict determinism (no random module)
-        seed_str = f"{module.name}_{scenario.name}_{module.version}"
+        seed_str = f"{module.name}_{scenario.name}_{module.metadata.get('version', '')}"
         seed_val = int(hashlib.md5(seed_str.encode("utf-8")).hexdigest(), 16)
 
         template_index = seed_val % len(available)
@@ -47,7 +48,7 @@ class InstructionEngine:
         return template.format(module_name=module.name, feature=scenario.name)
 
 
-def generate_instruction(module: OdooModule, scenario: Scenario) -> str:
+def generate_instruction(module: PreprocessedModule, scenario: Scenario) -> str:
     templates_dir = Path(__file__).resolve().parent.parent / "templates"
     engine = InstructionEngine(templates_dir)
     return engine.generate(module, scenario)

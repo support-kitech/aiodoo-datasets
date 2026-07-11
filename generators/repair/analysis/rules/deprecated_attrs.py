@@ -23,7 +23,7 @@ class DeprecatedAttrsRule(BaseRepairRule):  # type: ignore[misc]
         for i, line in enumerate(context.lines):
             if 'attrs="' in line:
                 line_num = i + 1
-                rel_path = str(context.file_path.relative_to(context.base_path))
+                rel_path = str(context.file_path)
                 deterministic_id = hashlib.sha256(
                     f"{context.module_name}:{rel_path}:{line_num}:{self.rule_id}".encode()
                 ).hexdigest()

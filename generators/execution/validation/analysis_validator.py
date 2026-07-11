@@ -10,6 +10,6 @@ class AnalysisValidator:
     def validate(cls, context: AnalysisContext) -> None:
         """Asserts context rules."""
         if not context.module:
-            raise ValueError("AnalysisContext missing OdooModule")
+            raise ValueError("AnalysisContext missing PreprocessedModule")
         if not context.python_knowledge and not context.xml_knowledge:
             raise ValueError("AnalysisContext missing structural knowledge inputs")

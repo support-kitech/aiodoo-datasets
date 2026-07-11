@@ -1,6 +1,5 @@
 """CLI Commands for Evaluation Generator."""
 
-import sys
 from typing import Dict, Any
 from generators.evaluation import api
 
@@ -12,13 +11,9 @@ class Commands:
     def run_generate(config: Dict[str, Any], output_dir: str) -> None:
         """Execute the generate command."""
         print(f"Generating evaluation dataset into {output_dir}...")
-        try:
-            result = api.generate(config)
-            api.export(result, output_dir)
-            print("Successfully generated and exported the evaluation dataset.")
-        except Exception as e:
-            print(f"Generation failed: {e}", file=sys.stderr)
-            sys.exit(1)
+        result = api.generate(config)
+        api.export(result, output_dir)
+        print("Successfully generated and exported the evaluation dataset.")
 
     @staticmethod
     def run_validate(input_dir: str) -> None:

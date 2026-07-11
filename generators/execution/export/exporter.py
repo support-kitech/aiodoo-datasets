@@ -30,8 +30,9 @@ class Exporter:
                 success=False, diagnostics=violations, statistics=context.export_statistics
             )
 
-        protocol = context.protocol_result.protocol
-        plan_id = protocol.plan_id if protocol else "unknown"
+        planning_result = context.planning_result
+        planned_execution = planning_result.planned_execution if planning_result else None
+        plan_id = planned_execution.plan_id if hasattr(planned_execution, 'plan_id') else "unknown"
 
         # Paths
         jsonl_path = context.output_directory / f"{plan_id}.jsonl"

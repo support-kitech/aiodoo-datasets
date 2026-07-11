@@ -4,13 +4,13 @@ import hashlib
 import json
 from typing import Any
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.common.discovery.classifier import Scenario
 from generators.coding.validation.schema import ArtifactPayload
 from generators.common.export.metadata import build_base_metadata
 
 
-def compute_protocol_hash(module: OdooModule, scenario: Scenario, payload: ArtifactPayload) -> str:
+def compute_protocol_hash(module: PreprocessedModule, scenario: Scenario, payload: ArtifactPayload) -> str:
     """Compute a deterministic SHA256 hash identifying the exact protocol execution logic."""
     canonical_repr = {
         "goal": payload.goal,
@@ -42,9 +42,9 @@ def compute_protocol_hash(module: OdooModule, scenario: Scenario, payload: Artif
 
 
 def build_metadata(
-    module: OdooModule, scenario: Scenario, payload: ArtifactPayload
+    module: PreprocessedModule, scenario: Scenario, protocol_hash: str
 ) -> dict[str, Any]:
     """Compile the metadata dictionary for the JSONL row with full provenance."""
     metadata = build_base_metadata(module, scenario)
-    metadata["protocol_hash"] = compute_protocol_hash(module, scenario, payload)
+    metadata["protocol_hash"] = protocol_hash
     return metadata  # type: ignore[no-any-return]

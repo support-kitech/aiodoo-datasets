@@ -23,11 +23,13 @@ class RepositoryBuilder:
         )
 
     @staticmethod
-    def build_module(name: str, files: tuple[NormalizedFile, ...]) -> PreprocessedModule:
+    def build_module(name: str, files: tuple[NormalizedFile, ...], metadata: dict[str, object] | None = None) -> PreprocessedModule:
         """Constructs a module ensuring deterministic ordering of files."""
+        from types import MappingProxyType
         sorted_files = tuple(sorted(files, key=lambda f: f.normalized_path))
         
         return PreprocessedModule(
             name=name,
-            files=sorted_files
+            files=sorted_files,
+            metadata=MappingProxyType(metadata) if metadata else MappingProxyType({})
         )

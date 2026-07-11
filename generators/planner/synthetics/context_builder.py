@@ -1,9 +1,9 @@
 """Builds minimal input context for the Planner model."""
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 
 
-def build_context(module: OdooModule) -> str:
+def build_context(module: PreprocessedModule) -> str:
     """Generates the minimal realistic input context."""
-    depends = ", ".join(module.manifest.depends) or "base"
-    return f"Target Odoo Version: {module.version}\\nAvailable Dependencies: {depends}"
+    depends = ", ".join(module.metadata.get("depends", [])) or "base"
+    return f"Target Odoo Version: {module.metadata.get('version', '')}\\nAvailable Dependencies: {depends}"

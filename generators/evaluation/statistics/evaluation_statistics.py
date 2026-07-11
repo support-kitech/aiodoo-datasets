@@ -1,9 +1,7 @@
 """Evaluation Statistics for Evaluation Generator."""
 
 from typing import Tuple, Any
-from generators.evaluation.protocol.domain.benchmark_protocol import (
-    EvaluationProtocol,
-)
+# removed EvaluationProtocol import
 from generators.common.statistics.base_statistics import BaseStatistics
 
 
@@ -11,7 +9,7 @@ class EvaluationStatistics(BaseStatistics):
     """Computes deterministic aggregates for the entire evaluation dataset."""
 
     def __init__(self) -> None:
-        super().__init__()
+        BaseStatistics.__init__(self)
         self.total_evaluations = 0
         self.total_catalogs = 0
         self.total_suites = 0
@@ -29,8 +27,8 @@ class EvaluationStatistics(BaseStatistics):
         self.total_samples += 1
         self.total_tokens += len(json_str) // 4
         
-        # Now process the specific EvaluationProtocol payload
-        if not isinstance(record, EvaluationProtocol):
+        # Now process the specific Evaluation payload
+        if not hasattr(record, 'catalog'):
             return
 
         self.total_evaluations += 1
@@ -62,7 +60,7 @@ class EvaluationStatistics(BaseStatistics):
         }
 
     @staticmethod
-    def compute(dataset: Tuple[EvaluationProtocol, ...]) -> "EvaluationStatistics":
+    def compute(dataset: Tuple[Any, ...]) -> "EvaluationStatistics":
         """Backwards compatibility for compute() pattern."""
         stats = EvaluationStatistics()
         for record in dataset:

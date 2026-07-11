@@ -14,3 +14,4 @@ class PipelineContext:
     output_dir: str
     source_identifier: str
     strict_mode: bool = True
+    protocol_context: Any = None

@@ -111,6 +111,7 @@ class ProtocolMetadata(BaseModel):
 
     protocol_version: str = Field(default=CONTEXT_PROTOCOL_V1, description="Protocol version.")
     generator: str = Field(default=GENERATOR_NAME, description="Name of the generator.")
+    protocol_hash: str = Field(..., description="Hash ID from Protocol Framework.")
     module: str = Field(..., description="Primary module for this task.")
     odoo_version: str = Field(default="17.0", description="Odoo target version.")
     query_type: ProtocolQueryType = Field(..., description="The type of the query in this task.")

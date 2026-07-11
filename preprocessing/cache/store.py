@@ -44,6 +44,9 @@ class CacheStore:
                 
                 if row:
                     payload, meta_json = row
+                    if isinstance(payload, bytes):
+                        payload = __import__('zlib').decompress(payload).decode('utf-8')
+
                     meta_dict = json.loads(meta_json)
                     from types import MappingProxyType
                     metadata = CacheMetadata(
@@ -79,10 +82,11 @@ class CacheStore:
         }
         
         try:
+            compressed_payload = __import__('zlib').compress(payload.encode('utf-8'))
             with sqlite3.connect(self._db_path) as conn:
                 conn.execute(
                     "INSERT OR REPLACE INTO preprocessing_cache (cache_key, payload, metadata) VALUES (?, ?, ?)",
-                    (key.value, payload, json.dumps(meta_dict))
+                    (key.value, compressed_payload, json.dumps(meta_dict))
                 )
         except sqlite3.Error as e:
             raise PreprocessingError(f"Cache write failed: {e}")

@@ -70,7 +70,7 @@ class TestContextMapper(unittest.TestCase):
         self.mapper = ContextMapper()
 
     def test_mapper_subgraph_extraction(self) -> None:
-        task = self.mapper.map(self.query, self.results, self.graph)
+        task = self.mapper.map(self.query, self.results, self.graph, "test_hash")
 
         # Artifacts
         self.assertEqual(len(task.artifacts), 1)
@@ -96,7 +96,7 @@ class TestContextMapper(unittest.TestCase):
         nodes_before = len(self.graph._nodes)
         edges_before = len(self.graph._edges)
 
-        self.mapper.map(self.query, self.results, self.graph)
+        self.mapper.map(self.query, self.results, self.graph, "test_hash")
 
         self.assertEqual(len(self.graph._nodes), nodes_before)
         self.assertEqual(len(self.graph._edges), edges_before)

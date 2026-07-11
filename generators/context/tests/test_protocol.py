@@ -35,6 +35,7 @@ class TestProtocol(unittest.TestCase):
             query_type=ProtocolQueryType.FIND_MODEL,
             artifact_count=0,
             relationship_count=0,
+            protocol_hash="test_hash"
         )
 
         graph = ProtocolGraph(nodes=[], edges=[])

@@ -3,8 +3,10 @@
 import logging
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
+import copyreg
+from types import MappingProxyType
 
-from generators.common.discovery.scanner import ContextModuleScanner, OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.common.discovery.ast_parser import OdooASTParser
 from generators.common.discovery.xml_parser import OdooXMLParser
 from generators.common.validation.deduplicator import Deduplicator
@@ -22,21 +24,26 @@ from generators.context.protocol.schema import ContextTask
 
 logger = logging.getLogger(__name__)
 
+def _pickle_mappingproxy(mp: MappingProxyType) -> tuple:
+    return MappingProxyType, (dict(mp),)
 
-def process_module(module: OdooModule) -> list[ContextTask]:
+copyreg.pickle(MappingProxyType, _pickle_mappingproxy)
+
+
+def process_module(module: PreprocessedModule, protocol_hash: str) -> list[ContextTask]:
     """Worker function to process a single module and return a list of Protocol tasks."""
     try:
         # Discovery
         ast_parser = OdooASTParser()
         xml_parser = OdooXMLParser()
 
-        py_knowledge = ast_parser.parse_module(module.path)
-        xml_knowledge = xml_parser.parse_module(module.path)
+        py_knowledge = ast_parser.parse_module(Path(str(module.metadata["path"])))
+        xml_knowledge = xml_parser.parse_module(Path(str(module.metadata["path"])))
 
         # We need to construct ContextKnowledge correctly
         manifest_dict = {}
-        if module.manifest:
-            manifest_dict = {"depends": module.manifest.depends, "data": module.manifest.data}
+        if module.metadata:
+            manifest_dict = {"depends": module.metadata.get("depends", []), "data": module.metadata.get("data", [])}
 
         security_dict = {}
         if hasattr(xml_knowledge, "files"):
@@ -109,7 +116,7 @@ def process_module(module: OdooModule) -> list[ContextTask]:
             results = engine.rank(query, graph)
             if results:
                 try:
-                    task = mapper.map(query, results, graph)
+                    task = mapper.map(query, results, graph, protocol_hash)
                     tasks.append(task)
                 except Exception:
                     # Logging already handled inside mapper
@@ -127,6 +134,7 @@ class ContextPipeline:
     def __init__(
         self,
         repository_context,
+        protocol_context,
         output_dir: str,
         workers: int = 4,
         resume: bool = False,
@@ -134,13 +142,14 @@ class ContextPipeline:
         target_module: str | None = None,
     ) -> None:
         self.repository_context = repository_context
+        self.protocol_context = protocol_context
         self.output_dir = Path(output_dir)
         self.workers = workers
         self.resume = resume
         self.limit = limit
         self.target_module = target_module
 
-        self.scanner = ContextModuleScanner(self.repository_context)
+        self.scanner = None # Removed legacy scanner
         self.checkpoint = CheckpointManager(self.output_dir)
         self.stats = ContextStatistics()
         self.writer = DatasetWriter(
@@ -153,7 +162,7 @@ class ContextPipeline:
     def run(self) -> None:
         """Executes the complete generation pipeline."""
         logger.info("Initializing Context Pipeline...")
-        all_modules = self.scanner.discover_modules()
+        all_modules = [m for r in self.repository_context.repositories for m in r.modules]
         logger.info("Discovered %d modules.", len(all_modules))
 
         if self.target_module:
@@ -175,8 +184,12 @@ class ContextPipeline:
             modules_to_process = all_modules
 
         with ProcessPoolExecutor(max_workers=self.workers) as executor:
+            import functools
+            protocol_hash = self.protocol_context.dataset.identifier.hash_value
+            worker_fn = functools.partial(process_module, protocol_hash=protocol_hash)
+
             future_to_module = {
-                executor.submit(process_module, mod): mod for mod in modules_to_process
+                executor.submit(worker_fn, mod): mod for mod in modules_to_process
             }
 
             for future in as_completed(future_to_module):
@@ -221,7 +234,6 @@ class ContextPipeline:
                     self.checkpoint.save(
                         "odoo", mod.name, "module_completion", "done", self.writer.written_count
                     )
-                    self.scanner.update_cache(mod)
 
                     if self.limit and self.writer.written_count >= self.limit:
                         break

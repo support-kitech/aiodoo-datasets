@@ -3,8 +3,15 @@
 import logging
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Callable, Any, Type
-
+import copyreg
+from types import MappingProxyType
 from pydantic import BaseModel
+
+def _pickle_mappingproxy(mp: MappingProxyType) -> tuple:
+    return MappingProxyType, (dict(mp),)
+
+copyreg.pickle(MappingProxyType, _pickle_mappingproxy)
+
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +21,7 @@ class SharedPipelineOrchestrator:
 
     def __init__(
         self,
-        scanner: Any,
+        repository_context: Any,
         writer: Any,
         deduplicator: Any,
         core_validator: Any,
@@ -28,7 +35,7 @@ class SharedPipelineOrchestrator:
         workers: int = 4,
         resume: bool = False,
     ) -> None:
-        self.scanner = scanner
+        self.repository_context = repository_context
         self.writer = writer
         self.deduplicator = deduplicator
         self.core_validator = core_validator
@@ -44,7 +51,7 @@ class SharedPipelineOrchestrator:
 
     def run(self) -> None:
         """Execute the pipeline across all configured repositories."""
-        all_modules = self.scanner.discover_modules()
+        all_modules = [m for r in self.repository_context.repositories for m in r.modules]
         logger.info("Discovered %d modules in total.", len(all_modules))
 
         if self.resume:
@@ -99,21 +106,15 @@ class SharedPipelineOrchestrator:
                                     "Core validation rejected sample for %s: %s", mod.name, val_exc
                                 )
                                 self.writer.record_validation_failure()
-                            except Exception as val_exc:
-                                logger.error(
-                                    "Local schema validation failed for %s: %s", mod.name, val_exc
-                                )
-                                self.writer.record_validation_failure()
                         else:
                             self.writer.record_duplicate()
-
-                    self.scanner.update_cache(mod)
 
                     if self.checkpoint_strategy == "module":
                         self.checkpoint.save(mod.name, self.writer.written_count)
 
                 except Exception as exc:
                     logger.error("Module %s crashed unexpectedly: %s", mod.name, exc)
+                    raise RuntimeError(f"Pipeline crashed on module {mod.name}") from exc
 
         self.writer.export_statistics(self.stats_filename)
         self.writer.export_manifest(self.manifest_filename)

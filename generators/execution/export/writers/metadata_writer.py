@@ -16,20 +16,21 @@ class MetadataWriter(BaseWriter):  # type: ignore[misc]
     def generate_content(self, context: ExportContext) -> str:
         """Generate metadata content."""
 
-        protocol = context.protocol_result.protocol
+        planning_result = context.planning_result
+        planned_execution = planning_result.planned_execution if planning_result else None
+        plan_id = planned_execution.plan_id if hasattr(planned_execution, 'plan_id') else "unknown"
+        graph_id = planned_execution.graph_id if hasattr(planned_execution, 'graph_id') else "unknown"
 
         metadata_data = {
-            "name": f"aiodoo-execution-dataset-{protocol.plan_id}" if protocol else "unknown",
+            "name": f"aiodoo-execution-dataset-{plan_id}",
             "description": "Auto-generated Execution Graph Dataset",
             "format": "jsonl",
-            "source_graph": protocol.graph_id if protocol else "unknown",
-            "statistics": {
-                "mapped_stages": context.protocol_statistics.mapped_stages,
-                "mapped_phases": context.protocol_statistics.mapped_phases,
-                "mapped_batches": context.protocol_statistics.mapped_batches,
-                "mapped_schedules": context.protocol_statistics.mapped_schedules,
-            },
+            "source_graph": graph_id,
+            "statistics": {},
         }
+        
+        if hasattr(context, "protocol_context") and context.protocol_context:
+            metadata_data["protocol_hash"] = context.protocol_context.dataset.identifier.hash_value
 
         context.export_statistics.metadata_count += 1
 

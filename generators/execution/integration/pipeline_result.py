@@ -7,7 +7,7 @@ from generators.execution.builders.pipeline_result import (
 )
 from generators.execution.graph.results.graph_build_result import GraphBuildResult
 from generators.execution.planning.planning_result import PlanningResult
-from generators.execution.protocol.protocol_result import ProtocolResult
+# removed ProtocolResult
 from generators.execution.export.export_result import ExportResult
 from generators.execution.integration.pipeline_statistics import PipelineStatistics
 
@@ -34,7 +34,7 @@ class PipelineResult:
     build_result: BuildPipelineResult | None = None
     graph_result: GraphBuildResult | None = None
     planning_result: PlanningResult | None = None
-    protocol_result: ProtocolResult | None = None
+    protocol_result: Any | None = None
     export_result: ExportResult | None = None
     statistics: PipelineStatistics | None = None
     diagnostics: tuple[str, ...] = tuple()

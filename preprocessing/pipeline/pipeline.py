@@ -142,7 +142,18 @@ class PreprocessingPipeline:
                         preprocessed_files.append(norm_file)
                         files_processed += 1
                         
-                    module = RepositoryBuilder.build_module(source_module.name, tuple(preprocessed_files))
+                    metadata = {
+                        "technical_name": source_module.technical_name,
+                        "version": source_module.version,
+                        "depends": list(source_module.depends),
+                        "license": source_module.license,
+                        "installable": source_module.installable,
+                        "application": source_module.application,
+                        "auto_install": source_module.auto_install,
+                        "path": str(source_module.path),
+                        "manifest_path": str(source_module.manifest_path),
+                    }
+                    module = RepositoryBuilder.build_module(source_module.name, tuple(preprocessed_files), metadata)
                     preprocessed_modules.append(module)
                     
                 repo = RepositoryBuilder.build(source_repo, tuple(preprocessed_modules))

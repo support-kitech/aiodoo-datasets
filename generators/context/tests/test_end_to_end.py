@@ -5,28 +5,11 @@ from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 from generators.context.pipeline import ContextPipeline
-from generators.common.discovery.scanner import OdooModule, ManifestInfo
+from preprocessing.domain.repository import PreprocessedModule
 
 logging.basicConfig(level=logging.DEBUG)
 
 
-class MockModuleScanner:
-    def __init__(self, *args, **kwargs) -> None:
-        self.modules = [
-            OdooModule(
-                name="mock_module",
-                path=Path(__file__).parent,  # Point to tests dir just to have a valid path
-                version="17.0",
-                edition="ce",
-                manifest=ManifestInfo(depends=["base"]),
-            )
-        ]
-
-    def discover_modules(self):
-        return self.modules
-
-    def update_cache(self, mod):
-        pass
 
 
 class MockASTParser:
@@ -58,13 +41,27 @@ class MockXMLParser:
 
 
 class TestEndToEnd(unittest.TestCase):
-    @patch("generators.context.pipeline.ContextModuleScanner", MockModuleScanner)
+    @patch("generators.context.pipeline.ProcessPoolExecutor", new_callable=lambda: __import__('concurrent.futures').futures.ThreadPoolExecutor)
     @patch("generators.context.pipeline.OdooASTParser", MockASTParser)
     @patch("generators.context.pipeline.OdooXMLParser", MockXMLParser)
-    def test_end_to_end_determinism(self) -> None:
+    def test_end_to_end_determinism(self, mock_process) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
+            class DummyId:
+                hash_value = "mock_hash"
+            class DummyDataset:
+                identifier = DummyId()
+            class DummyProtocolContext:
+                dataset = DummyDataset()
+            
+            mock_protocol_context = DummyProtocolContext()
+            
+            mock_repo_context = MagicMock()
+            mock_repo = MagicMock()
+            mock_repo.modules = [PreprocessedModule(name="mock_module", files=tuple(), metadata={"path": str(Path(__file__).parent), "depends": ["base"]})]
+            mock_repo_context.repositories = [mock_repo]
+
             # Run 1
-            pipeline1 = ContextPipeline(repository_context=MagicMock(), output_dir=tempdir, workers=1)
+            pipeline1 = ContextPipeline(repository_context=mock_repo_context, protocol_context=mock_protocol_context, output_dir=tempdir, workers=1)
             pipeline1.run()
 
             output_file = Path(tempdir) / "context_v1_0.jsonl"
@@ -77,7 +74,7 @@ class TestEndToEnd(unittest.TestCase):
             output_file.rename(Path(tempdir) / "context_v1_0_run1.jsonl")
 
             # Run 2
-            pipeline2 = ContextPipeline(repository_context=MagicMock(), output_dir=tempdir, workers=1)
+            pipeline2 = ContextPipeline(repository_context=mock_repo_context, protocol_context=mock_protocol_context, output_dir=tempdir, workers=1)
             pipeline2.run()
 
             with open(output_file, "r") as f:

@@ -4,8 +4,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Any
 from pathlib import Path
-from generators.execution.protocol.protocol_result import ProtocolResult
-from generators.execution.protocol.protocol_statistics import ProtocolStatistics
+from generators.execution.planning.planning_result import PlanningResult
 from generators.execution.export.export_statistics import ExportStatistics
 
 
@@ -22,8 +21,7 @@ class ExportContext:
         export_statistics: Mutable statistics container for the export phase.
     """
 
-    protocol_result: ProtocolResult
-    protocol_statistics: ProtocolStatistics
+    planning_result: PlanningResult
     export_configuration: MappingProxyType[str, Any]
     output_directory: Path
     export_statistics: ExportStatistics

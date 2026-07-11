@@ -86,8 +86,9 @@ class CheckpointManager:
         self.state["written_dataset_rows"] = written_rows
         self.state["timestamp"] = datetime.utcnow().isoformat()
 
-        temp_file = self.checkpoint_file.with_suffix(".json.tmp")
+        temp_file = Path(str(self.checkpoint_file) + ".tmp")
         try:
+            self.checkpoint_file.parent.mkdir(parents=True, exist_ok=True)
             with open(temp_file, "w", encoding="utf-8") as f:
                 json.dump(self.state, f, indent=4)
             temp_file.replace(self.checkpoint_file)

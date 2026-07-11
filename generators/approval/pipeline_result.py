@@ -5,9 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import TYPE_CHECKING, Any, Mapping, Tuple
-
-from generators.approval.protocol.domain.approval_protocol import ApprovalProtocol
-
+# Removed ApprovalProtocol import
 if TYPE_CHECKING:
     from generators.common.pipeline.status import PipelineStatus
 
@@ -17,7 +15,7 @@ class PipelineResult:
     """The complete result of the approval pipeline."""
 
     success: bool
-    approval_protocol: ApprovalProtocol
+    approval_protocol: Any = None
     statistics: Mapping[str, Any] = field(
         default_factory=lambda: MappingProxyType({})
     )

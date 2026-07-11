@@ -6,13 +6,26 @@ from pathlib import Path
 from typing import Generic, TypeVar
 
 import hashlib
-from pydantic import BaseModel
+import dataclasses
+from enum import Enum
+from types import MappingProxyType
 from generators.common.statistics.base_statistics import BaseStatistics
 from generators.common.export.manifest import generate_manifest
 
 logger = logging.getLogger(__name__)
 
-TRecord = TypeVar("TRecord", bound=BaseModel)
+TRecord = TypeVar("TRecord")
+
+class AdaptiveJSONEncoder(json.JSONEncoder):
+    """Encodes standard structures, dataclasses, MappingProxies, and Enums."""
+    def default(self, obj):
+        if dataclasses.is_dataclass(obj):
+            return dataclasses.asdict(obj)
+        if isinstance(obj, Enum):
+            return obj.value
+        if isinstance(obj, MappingProxyType):
+            return dict(obj)
+        return super().default(obj)
 
 
 class DatasetWriter(Generic[TRecord]):
@@ -37,17 +50,17 @@ class DatasetWriter(Generic[TRecord]):
 
     def write_record(self, record: TRecord) -> None:
         """Serialize and append a single validated record to the JSONL file."""
-        try:
+        if hasattr(record, "model_dump"):
             record_dict = record.model_dump()
             json_str = json.dumps(record_dict, ensure_ascii=False)
+        else:
+            json_str = json.dumps(record, cls=AdaptiveJSONEncoder, ensure_ascii=False)
 
-            with open(self.output_path, "a", encoding="utf-8") as f:
-                f.write(json_str + "\n")
+        with open(self.output_path, "a", encoding="utf-8") as f:
+            f.write(json_str + "\n")
 
-            self.written_count += 1
-            self.stats.add_sample(record, json_str)
-        except Exception as exc:
-            logger.error("Failed to write record to %s: %s", self.output_path, exc)
+        self.written_count += 1
+        self.stats.add_sample(record, json_str)
 
     def _calculate_checksum(self) -> str:
         """Stream the JSONL file to calculate its SHA256 checksum efficiently."""

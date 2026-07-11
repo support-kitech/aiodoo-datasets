@@ -34,5 +34,9 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     rule_set = RuleRegistry.compile()
 
     return PipelineContext(
-        config=config, input_protocols=input_protocols, metadata=metadata, rule_set=rule_set
+        config=config, 
+        input_protocols=input_protocols, 
+        metadata=metadata, 
+        rule_set=rule_set,
+        protocol_context=getattr(args, "protocol_context", None)
     )

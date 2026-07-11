@@ -157,20 +157,24 @@ class TestContextGraph(unittest.TestCase):
         self.assertEqual(len(neighbors_n2), 1)
         self.assertEqual(neighbors_n2[0], self.edge1)
 
-    def test_duplicate_prevention(self) -> None:
+    def test_duplicate_prevention(self):
+        # Duplicate nodes are ignored.
         self.graph.add_node(self.node1)
-        with self.assertRaises(ValueError):
-            self.graph.add_node(self.node1)
+        self.graph.add_node(self.node1)
+
+        self.assertEqual(self.graph.node_count(), 1)
 
         self.graph.add_node(self.node2)
-        self.graph.add_edge(self.edge1)
-        with self.assertRaises(ValueError):
-            self.graph.add_edge(self.edge1)
 
-    def test_missing_node_edge_prevention(self) -> None:
-        # Adding edge before adding nodes
-        with self.assertRaises(ValueError):
-            self.graph.add_edge(self.edge1)
+        # Duplicate edges are also ignored.
+        self.graph.add_edge(self.edge1)
+        self.graph.add_edge(self.edge1)
+
+        self.assertEqual(self.graph.edge_count(), 1)
+        def test_missing_node_edge_prevention(self) -> None:
+            # Adding edge before adding nodes
+            with self.assertRaises(ValueError):
+                self.graph.add_edge(self.edge1)
 
     def test_deterministic_ordering(self) -> None:
         # Node ordering depends on relative_path, then start_line

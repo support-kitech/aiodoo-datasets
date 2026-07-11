@@ -1,7 +1,7 @@
 """Assembles the full Planning Protocol V1 payload."""
 
 from typing import Sequence
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.common.discovery.ast_parser import PythonKnowledge
 from generators.common.discovery.xml_parser import XMLKnowledge
 from generators.common.discovery.classifier import Scenario
@@ -11,7 +11,7 @@ from generators.planner.protocol.action_builder import build_actions
 
 
 def build_plan_payload(
-    module: OdooModule,
+    module: PreprocessedModule,
     scenario: Scenario,
     python_data: Sequence[PythonKnowledge],
     xml_data: Sequence[XMLKnowledge],
@@ -27,7 +27,7 @@ def build_plan_payload(
     )
 
     return PlanPayload(
-        goal=f"Build {module.manifest.name} features matching {scenario.name}.",
+        goal=f"Build {module.metadata.get('name', module.name)} features matching {scenario.name}.",
         workspace=f"src/{module.name}",
         analysis=analysis,
         tasks=tasks,

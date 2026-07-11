@@ -4,7 +4,7 @@ import hashlib
 import json
 from typing import Any
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.repair.validation.schema import RepairPayload
 
 
@@ -21,13 +21,12 @@ def compute_protocol_hash(payload: RepairPayload) -> str:
     return hashlib.sha256(json_str.encode("utf-8")).hexdigest()
 
 
-def build_metadata(module: OdooModule, payload: RepairPayload) -> dict[str, Any]:
+def build_metadata(module: PreprocessedModule, protocol_hash: str) -> dict[str, Any]:
     """Compile the metadata dictionary for the JSONL row with full provenance."""
     metadata = {
         "module": module.name,
-        "version": module.version,
+        "version": module.metadata.get("version", ""),
         "generator": "repair",
-        "repair_tasks": len(payload.tasks),
-        "protocol_hash": compute_protocol_hash(payload),
+        "protocol_hash": protocol_hash,
     }
     return metadata

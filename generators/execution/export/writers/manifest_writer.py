@@ -17,22 +17,28 @@ class ManifestWriter(BaseWriter):  # type: ignore[misc]
     def generate_content(self, context: ExportContext) -> str:
         """Generate deterministic manifest content."""
 
-        # Calculate checksum over the raw serialized payload data
-        data_bytes = context.protocol_result.serialized_data.encode("utf-8")
+        import dataclasses
+        planning_result = context.planning_result
+        planned_execution = planning_result.planned_execution if planning_result else None
+        
+        data = dataclasses.asdict(planned_execution) if planned_execution else {}
+        if hasattr(context, "protocol_context") and context.protocol_context:
+            data["protocol_hash"] = context.protocol_context.dataset.identifier.hash_value
+            
+        data_bytes = json.dumps(data).encode("utf-8")
         checksum = hashlib.sha256(data_bytes).hexdigest()
 
-        protocol = context.protocol_result.protocol
-        metadata = protocol.metadata if protocol else None
+        plan_id = planned_execution.plan_id if hasattr(planned_execution, 'plan_id') else "unknown"
 
         manifest_data = {
             "dataset_version": "1.0.0",
-            "protocol_version": metadata.protocol_version if metadata else "unknown",
-            "schema_version": metadata.schema_version if metadata else "unknown",
+            "protocol_version": "1.0.0",
+            "schema_version": "1.0.0",
             "generator_version": "1.0.0",
-            "generated_at": metadata.timestamp if metadata else "",
+            "generated_at": "",
             "record_count": 1,
             "checksum": checksum,
-            "exported_files": [f"{protocol.plan_id}.jsonl"] if protocol else [],
+            "exported_files": [f"{plan_id}.jsonl"],
         }
 
         context.export_statistics.manifest_count += 1

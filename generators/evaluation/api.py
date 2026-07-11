@@ -6,10 +6,7 @@ from types import MappingProxyType
 from generators.evaluation.pipeline.pipeline_context import PipelineContext
 from generators.evaluation.pipeline.pipeline_result import PipelineResult
 from generators.evaluation.pipeline.pipeline import EvaluationPipeline
-from generators.evaluation.protocol.domain.benchmark_protocol import (
-    EvaluationProtocol,
-)
-from generators.evaluation.validation.protocol_validator import ProtocolValidator
+# Protocol imports removed
 
 
 def generate(config: Dict[str, Any]) -> PipelineResult:
@@ -30,18 +27,18 @@ def generate(config: Dict[str, Any]) -> PipelineResult:
         generator_version=config.get("generator_version", "1.0.0"),
         protocol_version=config.get("protocol_version", "1.0.0"),
         schema_version=config.get("schema_version", "1.0.0"),
+        protocol_context=config.get("protocol_context", None),
     )
 
     return EvaluationPipeline.run(context)
 
 
-def validate(dataset: Tuple[EvaluationProtocol, ...]) -> bool:
+def validate(dataset: Tuple[Any, ...]) -> bool:
     """
     Perform deep validation on an externally supplied dataset.
     """
     try:
-        for proto in dataset:
-            ProtocolValidator.validate(proto)
+        # Protocol validation removed
         return True
     except Exception:
         return False

@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 from typing import Any
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
 from generators.common.discovery.ast_parser import PythonKnowledge
 from generators.common.discovery.xml_parser import XMLKnowledge
 from generators.execution.statistics.analysis_statistics import AnalysisStatistics
@@ -14,7 +14,7 @@ class AnalysisContext:
     Immutable shared state passed to all analyzers during the discovery phase.
 
     Attributes:
-        module: The Odoo module being analyzed.
+        module: The preprocessed module being analyzed.
         python_knowledge: Discovered Python AST knowledge.
         xml_knowledge: Discovered XML knowledge.
         csv_knowledge: Discovered CSV knowledge.
@@ -23,7 +23,7 @@ class AnalysisContext:
         statistics: Mutable statistics collector (reference is frozen, but internal state mutates).
     """
 
-    module: OdooModule
+    module: PreprocessedModule
     python_knowledge: PythonKnowledge
     xml_knowledge: XMLKnowledge
     csv_knowledge: dict[str, Any] = field(default_factory=dict)

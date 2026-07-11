@@ -4,7 +4,8 @@ import ast
 import logging
 from pathlib import Path
 
-from generators.common.discovery.scanner import OdooModule
+from preprocessing.domain.repository import PreprocessedModule
+from preprocessing.domain.file import NormalizedFile, Language
 from generators.repair.validation.schema import ArtifactType
 
 from generators.repair.analysis.rules.base import AnalyzeContext, RepairOpportunity
@@ -21,31 +22,32 @@ class RepairAnalyzer:
     def __init__(self) -> None:
         self.rules = [MissingSudoRule(), ApiMultiRule(), DeprecatedAttrsRule()]
 
-    def analyze(self, module: OdooModule) -> list[RepairOpportunity]:
+    def analyze(self, module: PreprocessedModule) -> list[RepairOpportunity]:
         opportunities = []
-        for py_file in module.path.rglob("*.py"):
-            opportunities.extend(self._analyze_python(py_file, module.path, module.name))
-
-        for xml_file in module.path.rglob("*.xml"):
-            opportunities.extend(self._analyze_xml(xml_file, module.path, module.name))
+        base_path = Path(str(module.metadata["path"]))
+        for file in module.files:
+            if file.language == Language.PYTHON:
+                opportunities.extend(self._analyze_python(file, base_path, module.name))
+            elif file.language == Language.XML:
+                opportunities.extend(self._analyze_xml(file, base_path, module.name))
 
         return opportunities
 
     def _analyze_python(
-        self, py_file: Path, base_path: Path, module_name: str
+        self, file: NormalizedFile, base_path: Path, module_name: str
     ) -> list[RepairOpportunity]:
         opportunities = []  # type: ignore[var-annotated]
         try:
-            content = py_file.read_text(encoding="utf-8")
+            content = file.normalized_content
             lines = content.splitlines()
-            tree = ast.parse(content, filename=str(py_file))
+            tree = ast.parse(content, filename=str(file.normalized_path))
         except Exception:
-            logger.exception("Failed to parse %s", py_file)
+            logger.exception("Failed to parse %s", file.normalized_path)
             return opportunities
 
         context = AnalyzeContext(
             module_name=module_name,
-            file_path=py_file,
+            file_path=file.normalized_path,
             base_path=base_path,
             content=content,
             lines=lines,
@@ -60,7 +62,7 @@ class RepairAnalyzer:
                     logger.exception(
                         "Repair Rule Failed\n\nModule:\n%s\n\nFile:\n%s\n\nRule:\n%s\n\nRule Name:\n%s\n\nException:",
                         context.module_name,
-                        context.file_path.relative_to(context.base_path),
+                        context.file_path,
                         rule.rule_id,
                         rule.title,
                     )
@@ -68,19 +70,19 @@ class RepairAnalyzer:
         return opportunities
 
     def _analyze_xml(
-        self, xml_file: Path, base_path: Path, module_name: str
+        self, file: NormalizedFile, base_path: Path, module_name: str
     ) -> list[RepairOpportunity]:
         opportunities = []  # type: ignore[var-annotated]
         try:
-            content = xml_file.read_text(encoding="utf-8")
+            content = file.normalized_content
             lines = content.splitlines()
         except Exception:
-            logger.exception("Failed to parse %s", xml_file)
+            logger.exception("Failed to parse %s", file.normalized_path)
             return opportunities
 
         context = AnalyzeContext(
             module_name=module_name,
-            file_path=xml_file,
+            file_path=file.normalized_path,
             base_path=base_path,
             content=content,
             lines=lines,
@@ -95,7 +97,7 @@ class RepairAnalyzer:
                     logger.exception(
                         "Repair Rule Failed\n\nModule:\n%s\n\nFile:\n%s\n\nRule:\n%s\n\nRule Name:\n%s\n\nException:",
                         context.module_name,
-                        context.file_path.relative_to(context.base_path),
+                        context.file_path,
                         rule.rule_id,
                         rule.title,
                     )

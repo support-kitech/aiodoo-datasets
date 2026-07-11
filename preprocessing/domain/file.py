@@ -45,3 +45,38 @@ class NormalizedFile:
     metadata: Mapping[str, object] = MappingProxyType({})
     warnings: tuple[str, ...] = tuple()
     statistics: TransformationStatistics = TransformationStatistics()
+
+    def __getstate__(self):
+        return (
+            self.file_path,
+            self.normalized_path,
+            self.language,
+            self.raw_content,
+            self.normalized_content,
+            self.duplicate_status,
+            dict(self.metadata),
+            self.warnings,
+            self.statistics,
+        )
+
+    def __setstate__(self, state):
+        (
+            file_path,
+            normalized_path,
+            language,
+            raw_content,
+            normalized_content,
+            duplicate_status,
+            metadata_dict,
+            warnings,
+            statistics,
+        ) = state
+        object.__setattr__(self, "file_path", file_path)
+        object.__setattr__(self, "normalized_path", normalized_path)
+        object.__setattr__(self, "language", language)
+        object.__setattr__(self, "raw_content", raw_content)
+        object.__setattr__(self, "normalized_content", normalized_content)
+        object.__setattr__(self, "duplicate_status", duplicate_status)
+        object.__setattr__(self, "metadata", MappingProxyType(metadata_dict))
+        object.__setattr__(self, "warnings", warnings)
+        object.__setattr__(self, "statistics", statistics)

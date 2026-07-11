@@ -19,3 +19,4 @@ class PipelineContext:
     rule_set: RuleSet
     parser_registry_cls: type[ParserRegistry] = ParserRegistry
     rule_registry_cls: type[RuleRegistry] = RuleRegistry
+    protocol_context: Any = None

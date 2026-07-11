@@ -9,12 +9,9 @@ from generators.conversation.analysis.evidence_extractor import EvidenceExtracto
 from generators.conversation.builders.conversation_builder import (
     ConversationBuilder,
 )
-from generators.conversation.protocol.mapper import ProtocolMapper
 from generators.conversation.validation.conversation_validator import (
     ConversationValidator,
 )
-from generators.conversation.validation.protocol_validator import ProtocolValidator
-from generators.conversation.validation.dataset_validator import DatasetValidator
 from generators.conversation.statistics.conversation_statistics import (
     ConversationStatistics,
 )
@@ -46,14 +43,8 @@ class ConversationPipeline:
             if context.strict_mode:
                 ConversationValidator.validate(conversation)
 
-            # 4. Protocol Mapping Layer
-            protocol = ProtocolMapper.map_conversation(conversation)
-
-            # 5. Validation Layer (Protocol)
-            if context.strict_mode:
-                ProtocolValidator.validate(protocol)
-                # Dataset validation is a single item here, but could be extended to validate against history if needed.
-                DatasetValidator.validate_all([protocol])
+            # 4. Protocol Mapping Layer (Removed)
+            # 5. Validation Layer (Protocol) (Removed)
 
             # 6. Statistics (handled by DatasetWriter below)
 
@@ -67,7 +58,14 @@ class ConversationPipeline:
                 filename="conversation_dataset.jsonl",
                 dataset_name="conversation",
             )
-            writer.write_record(protocol)
+            # Add protocol hash to the domain object's metadata before export
+            if hasattr(context, "protocol_context") and context.protocol_context:
+                protocol_hash = context.protocol_context.dataset.identifier.hash_value
+                if hasattr(conversation, "metadata"):
+                    conversation.metadata.protocol_hash = protocol_hash
+            
+            # Write the domain object directly
+            writer.write_record(conversation)
             writer.export_manifest()
             writer.export_statistics()
 

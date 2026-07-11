@@ -1,18 +1,15 @@
 """Benchmark Statistics for Evaluation Generator."""
 
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Any
 from collections import defaultdict
 from types import MappingProxyType
-from generators.evaluation.protocol.domain.benchmark_protocol import (
-    EvaluationProtocol,
-)
 
 
 class BenchmarkStatistics:
     """Computes deterministic coverage and distribution statistics."""
 
     @staticmethod
-    def compute(dataset: Tuple[EvaluationProtocol, ...]) -> MappingProxyType:  # type: ignore[type-arg]
+    def compute(dataset: Tuple[Any, ...]) -> MappingProxyType:  # type: ignore[type-arg]
         """Compute coverage and distributions deterministically."""
 
         coverage_by_generator: Dict[str, int] = defaultdict(int)

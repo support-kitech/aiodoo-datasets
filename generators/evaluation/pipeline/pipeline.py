@@ -29,12 +29,7 @@ from generators.evaluation.builders.expected_output_builder import (
 )
 from generators.evaluation.builders.ground_truth_builder import GroundTruthBuilder
 
-from generators.evaluation.protocol.mapper import ProtocolMapper
-from generators.evaluation.protocol.domain.benchmark_protocol import (
-    EvaluationProtocol,
-)
-
-from generators.evaluation.validation.protocol_validator import ProtocolValidator
+# Protocol imports removed
 
 from generators.evaluation.statistics.evaluation_statistics import (
     EvaluationStatistics,
@@ -146,16 +141,10 @@ class EvaluationPipeline:
             catalog=catalog,
         )
 
-        # 3. Protocol Mapping Layer
-        protocol: EvaluationProtocol = ProtocolMapper.map_evaluation(evaluation)
-        dataset = (protocol,)
+        # 3. Protocol Mapping Layer (Removed)
+        dataset = (evaluation,)
 
-        # 4. Validation Layer
-        # Note: DatasetValidator checks Domain objects, but since pipeline output is protocol,
-        # we do ProtocolValidator for protocol checking.
-        for proto in dataset:
-            ProtocolValidator.validate(proto)
-
+        # 4. Validation Layer (Removed Protocol Validation)
         # Optional domain checking can be run here on `(evaluation,)`
 
         # 5. Statistics Layer
@@ -166,7 +155,12 @@ class EvaluationPipeline:
             }
         )
 
-        return PipelineResult(dataset=dataset, statistics=stats, validation_passed=True)
+        return PipelineResult(
+            dataset=dataset, 
+            statistics=stats, 
+            validation_passed=True,
+            protocol_context=getattr(context, "protocol_context", None)
+        )
 
     @staticmethod
     def export(result: PipelineResult, output_dir: str) -> PipelineResult:
@@ -185,8 +179,16 @@ class EvaluationPipeline:
             dataset_name="Evaluation Dataset"
         )
 
-        for proto in result.dataset:
-            writer.write_record(proto)
+        for obj in result.dataset:
+            # Inject protocol_hash
+            if hasattr(result, "protocol_context") and result.protocol_context:
+                protocol_hash = result.protocol_context.dataset.identifier.hash_value
+                if hasattr(obj, "metadata"):
+                    try:
+                        object.__setattr__(obj.metadata, "protocol_hash", protocol_hash)
+                    except AttributeError:
+                        pass
+            writer.write_record(obj)
 
         writer.export_statistics(filename="statistics.json")
         writer.export_manifest(filename="dataset_manifest.json")

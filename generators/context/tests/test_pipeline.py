@@ -1,9 +1,8 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from pathlib import Path
 
 from generators.context.pipeline import ContextPipeline, process_module
-from generators.common.discovery.scanner import OdooModule, ManifestInfo
+from preprocessing.domain.repository import PreprocessedModule
 
 
 class TestContextPipeline(unittest.TestCase):
@@ -14,28 +13,22 @@ class TestContextPipeline(unittest.TestCase):
         mock_ast.return_value.parse_module.return_value = MagicMock(files={})
         mock_xml.return_value.parse_module.return_value = MagicMock(files={})
 
-        module = OdooModule(
+        module = PreprocessedModule(
             name="test_mod",
-            path=Path("/fake"),
-            version="17.0",
-            edition="ce",
-            manifest=ManifestInfo(),
+            files=[],
+            metadata={"path": "/fake"},
         )
 
-        tasks = process_module(module)
+        tasks = process_module(module, "test_hash")
         # Empty graph -> 0 queries -> 0 tasks
         self.assertEqual(len(tasks), 0)
 
-    @patch("generators.context.pipeline.ContextModuleScanner")
     @patch("generators.context.pipeline.CheckpointManager")
-    def test_pipeline_orchestration(self, mock_chkpt, mock_scanner):
-        mock_scanner.return_value.discover_modules.return_value = []
+    def test_pipeline_orchestration(self, mock_chkpt):
 
-        pipeline = ContextPipeline(repository_context=MagicMock(), output_dir="/tmp/out", workers=1)
+        pipeline = ContextPipeline(repository_context=MagicMock(), protocol_context=MagicMock(), output_dir="/tmp/out", workers=1)
         pipeline.run()
 
-        # Ensure it attempts discovery
-        mock_scanner.return_value.discover_modules.assert_called_once()
         # Should initialize gracefully
         self.assertEqual(pipeline.writer.written_count, 0)
 
