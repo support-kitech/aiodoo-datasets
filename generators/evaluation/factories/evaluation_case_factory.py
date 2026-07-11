@@ -13,16 +13,17 @@ from aiodoo_datasets.generators.evaluation.domain.reference import Reference
 from aiodoo_datasets.generators.evaluation.domain.attachment import EvaluationAttachment
 from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
 
+
 class EvaluationCaseFactory:
     """Factory for creating immutable EvaluationCase objects with deterministic IDs."""
-    
+
     @staticmethod
     def generate_id(suite_id: str, sequence_index: int) -> str:
         """Generate a deterministic case ID."""
         hash_input = f"CASE:{suite_id}:{sequence_index}"
         case_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
         return f"CASE-{case_hash}"
-    
+
     @staticmethod
     def create(
         suite_id: str,
@@ -36,11 +37,11 @@ class EvaluationCaseFactory:
         failure_criteria: Tuple[FailureCriteria, ...] = (),
         references: Tuple[Reference, ...] = (),
         attachments: Tuple[EvaluationAttachment, ...] = (),
-        scores: Tuple[EvaluationScore, ...] = ()
+        scores: Tuple[EvaluationScore, ...] = (),
     ) -> EvaluationCase:
         """Create a new evaluation case with a hash-based deterministic ID."""
         case_id = EvaluationCaseFactory.generate_id(suite_id, sequence_index)
-        
+
         return EvaluationCase(
             case_id=case_id,
             prompt=prompt,
@@ -52,5 +53,5 @@ class EvaluationCaseFactory:
             failure_criteria=failure_criteria,
             references=references,
             attachments=attachments,
-            scores=scores
+            scores=scores,
         )

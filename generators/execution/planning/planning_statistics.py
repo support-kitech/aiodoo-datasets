@@ -2,11 +2,12 @@
 
 from dataclasses import dataclass
 
+
 @dataclass
 class PlanningStatistics:
     """
     Mutable container for planning metrics.
-    
+
     Attributes:
         stage_count: Total number of execution stages.
         phase_count: Total number of execution phases.
@@ -16,6 +17,7 @@ class PlanningStatistics:
         dependency_groups: Number of dependency-bound groups.
         critical_path_length: Length of the critical path.
     """
+
     stage_count: int = 0
     phase_count: int = 0
     batch_count: int = 0

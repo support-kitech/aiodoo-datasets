@@ -7,11 +7,12 @@ from aiodoo_datasets.generators.execution.planning.planning_result import Planni
 from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
 from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
 
+
 @dataclass(frozen=True, slots=True)
 class ProtocolContext:
     """
     Context carrying only necessary data for protocol mapping.
-    
+
     Attributes:
         planning_result: The result of the planning phase.
         planning_statistics: Statistics from the planning phase.
@@ -19,6 +20,7 @@ class ProtocolContext:
         protocol_version: The version string for the protocol schema.
         protocol_statistics: Mutable statistics container for the protocol phase.
     """
+
     planning_result: PlanningResult
     planning_statistics: PlanningStatistics
     configuration: MappingProxyType[str, Any]

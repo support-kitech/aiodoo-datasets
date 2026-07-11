@@ -7,6 +7,7 @@ from aiodoo_datasets.generators.context.validation.result import ValidationResul
 
 logger = logging.getLogger(__name__)
 
+
 class ProtocolValidator:
     """
     Validates Protocol semantic invariants.
@@ -17,10 +18,10 @@ class ProtocolValidator:
     def validate(self, task: ContextTask) -> ValidationResult:
         """
         Validates protocol-level semantic invariants.
-        
+
         Args:
             task: The ContextTask to validate.
-            
+
         Returns:
             ValidationResult containing status and any errors.
         """
@@ -33,7 +34,7 @@ class ProtocolValidator:
             logger.error("Protocol Validation Failed: %s", msg)
             errors.append(msg)
             is_valid = False
-            
+
         if not task.query.target_node:
             msg = f"Empty Target Node in Query {task.query.query_id}"
             logger.error("Protocol Validation Failed: %s", msg)
@@ -48,14 +49,14 @@ class ProtocolValidator:
                 logger.error("Protocol Validation Failed: %s", msg)
                 errors.append(msg)
                 is_valid = False
-            
+
             if artifact.node_id in seen_artifact_ids:
                 msg = f"Duplicate artifact node_id {artifact.node_id}"
                 logger.error("Protocol Validation Failed: %s", msg)
                 errors.append(msg)
                 is_valid = False
             seen_artifact_ids.add(artifact.node_id)
-            
+
             if not (0 <= artifact.score <= 100):
                 msg = f"Invalid score {artifact.score} for artifact {artifact.node_id}"
                 logger.error("Protocol Validation Failed: %s", msg)
@@ -70,13 +71,13 @@ class ProtocolValidator:
                 logger.error("Protocol Validation Failed: %s", msg)
                 errors.append(msg)
                 is_valid = False
-                
+
         if task.query.target_node not in graph_node_ids:
             msg = f"Target node {task.query.target_node} not in graph nodes"
             logger.error("Protocol Validation Failed: %s", msg)
             errors.append(msg)
             is_valid = False
-            
+
         # Validate Edges point to existing nodes
         seen_edges = set()
         for edge in task.graph.edges:
@@ -85,7 +86,7 @@ class ProtocolValidator:
                 logger.error("Protocol Validation Failed: %s", msg)
                 errors.append(msg)
                 is_valid = False
-                
+
             if edge.edge_id in seen_edges:
                 msg = f"Duplicate edge {edge.edge_id}"
                 logger.error("Protocol Validation Failed: %s", msg)

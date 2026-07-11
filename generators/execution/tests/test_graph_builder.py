@@ -12,11 +12,16 @@ from unittest.mock import Mock
 
 
 class TestGraphBuilder(unittest.TestCase):
-
     def _make_step(self, step_id, deps=()):
-        artifact = PythonArtifact(module="test", relative_path="m.py", name="m", artifact_type=PythonArtifactType.MODEL)
-        op = ExecutionOperation(operation_id=f"op_{step_id}", action=OperationAction.CREATE, target=artifact)
-        return ExecutionStep(step_id=step_id, description=f"Step {step_id}", operation=op, dependencies=deps)
+        artifact = PythonArtifact(
+            module="test", relative_path="m.py", name="m", artifact_type=PythonArtifactType.MODEL
+        )
+        op = ExecutionOperation(
+            operation_id=f"op_{step_id}", action=OperationAction.CREATE, target=artifact
+        )
+        return ExecutionStep(
+            step_id=step_id, description=f"Step {step_id}", operation=op, dependencies=deps
+        )
 
     def test_deterministic_build(self):
         s1 = self._make_step("s1")
@@ -45,8 +50,10 @@ class TestGraphBuilder(unittest.TestCase):
         ctx = GraphContext(builder_context=Mock(), domain_steps=(s1, s2))
         r1 = GraphBuilder().build(ctx)
         r2 = GraphBuilder().build(ctx)
-        self.assertEqual(tuple(n.node_id for n in r1.graph.nodes), tuple(n.node_id for n in r2.graph.nodes))
+        self.assertEqual(
+            tuple(n.node_id for n in r1.graph.nodes), tuple(n.node_id for n in r2.graph.nodes)
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

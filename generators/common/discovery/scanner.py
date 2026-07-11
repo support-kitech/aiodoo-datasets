@@ -12,9 +12,11 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass(slots=True)
 class ManifestInfo:
     """Strongly typed model for Odoo module manifests."""
+
     name: str = ""
     technical_name: str = ""
     version: str = "1.0"
@@ -32,9 +34,11 @@ class ManifestInfo:
     auto_install: bool | list[str] = False
     license: str = "LGPL-3"
 
+
 @dataclass(slots=True)
 class OdooModule:
     """Represents a discovered Odoo module with incremental hashing."""
+
     name: str
     path: Path
     version: str
@@ -71,7 +75,7 @@ class ModuleScanner:
             for version, data in versions.items():
                 root_path_str = data.get("root")
                 addons_paths = data.get("addons", [])
-                
+
                 if not root_path_str:
                     logger.warning("Missing root path for %s %s. Skipping.", edition, version)
                     continue
@@ -90,7 +94,7 @@ class ModuleScanner:
                             modules.extend(self._scan_directory(addon_dir, edition, version))
                         else:
                             logger.warning("Addon path %s does not exist. Skipping.", addon_dir)
-        
+
         self._save_cache()
         return modules
 
@@ -123,11 +127,11 @@ class ModuleScanner:
         for child in target_dir.iterdir():
             if not child.is_dir():
                 continue
-            
+
             manifest_path = child / "__manifest__.py"
             if not manifest_path.exists():
                 manifest_path = child / "__openerp__.py"
-                
+
             if manifest_path.exists():
                 manifest_data = self._read_manifest(manifest_path)
                 if manifest_data is not None:
@@ -137,7 +141,7 @@ class ModuleScanner:
                         path=child.resolve(),
                         version=version,
                         edition=edition,
-                        manifest=manifest_info
+                        manifest=manifest_info,
                     )
                     self._compute_module_hashes(mod)
                     modules.append(mod)
@@ -160,7 +164,7 @@ class ModuleScanner:
             installable=data.get("installable", True),
             application=data.get("application", False),
             auto_install=data.get("auto_install", False),
-            license=data.get("license", "LGPL-3")
+            license=data.get("license", "LGPL-3"),
         )
 
     def _read_manifest(self, manifest_path: Path) -> dict[str, Any] | None:
@@ -180,11 +184,11 @@ class ModuleScanner:
         hasher = hashlib.sha256()
         file_count = 0
         latest_mod = 0.0
-        
+
         manifest_path = module.path / "__manifest__.py"
         if not manifest_path.exists():
             manifest_path = module.path / "__openerp__.py"
-            
+
         if manifest_path.exists():
             with open(manifest_path, "rb") as f:
                 content = f.read()
@@ -194,7 +198,7 @@ class ModuleScanner:
                 if stat.st_mtime > latest_mod:
                     latest_mod = stat.st_mtime
                 file_count += 1
-                
+
         # Hash important files only (Python, XML, CSV) to avoid cache busting on unrelated changes
         for file_path in module.path.rglob("*"):
             if file_path.is_file() and file_path.suffix in (".py", ".xml", ".csv"):
@@ -209,7 +213,7 @@ class ModuleScanner:
                     file_count += 1
                 except Exception:
                     continue
-                    
+
         module.module_hash = hasher.hexdigest()
         module.file_count = file_count
         module.last_modified = latest_mod

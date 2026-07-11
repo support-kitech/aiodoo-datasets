@@ -17,6 +17,7 @@ class ExecutionNode:
     Wraps a Phase 1 domain object with graph-specific metadata.
     Identity is determined exclusively by node_id.
     """
+
     node_id: NodeId
     node_type: NodeType
     payload: Any

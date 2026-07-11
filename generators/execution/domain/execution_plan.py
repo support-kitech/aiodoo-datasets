@@ -8,11 +8,12 @@ from aiodoo_datasets.generators.execution.environment.environment import Executi
 from aiodoo_datasets.generators.execution.domain.execution_metadata import ExecutionMetadata
 from aiodoo_datasets.generators.execution.domain.types import PlanId
 
+
 @dataclass(frozen=True)
 class ExecutionPlan:
     """
     The final, topologically sorted sequence of execution steps.
-    
+
     Attributes:
         plan_id: Unique deterministic SHA-256 identifier for the full workflow.
         environment: The contextual deployment limits.
@@ -20,15 +21,16 @@ class ExecutionPlan:
         metadata: Workflow metadata excluded from hashing.
         statistics: Immutable mapping for dataset metrics.
     """
+
     plan_id: PlanId
     environment: ExecutionEnvironment
     steps: tuple[ExecutionStep, ...] = field(default_factory=tuple)
     metadata: ExecutionMetadata = field(default_factory=ExecutionMetadata)
     statistics: MappingProxyType[str, Any] = field(default_factory=lambda: MappingProxyType({}))
-    
+
     def __hash__(self) -> int:
         return hash(self.plan_id)
-        
+
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, ExecutionPlan):
             return NotImplemented

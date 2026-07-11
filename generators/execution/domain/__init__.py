@@ -1,6 +1,9 @@
 """Core immutable domain models representing the execution workflow."""
 
-from aiodoo_datasets.generators.execution.domain.execution_operation import ExecutionOperation, OperationAction
+from aiodoo_datasets.generators.execution.domain.execution_operation import (
+    ExecutionOperation,
+    OperationAction,
+)
 from aiodoo_datasets.generators.execution.domain.execution_dependency import ExecutionDependency
 from aiodoo_datasets.generators.execution.domain.execution_constraint import ExecutionConstraint
 from aiodoo_datasets.generators.execution.domain.execution_verification import ExecutionVerification

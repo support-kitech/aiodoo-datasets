@@ -4,9 +4,11 @@ from dataclasses import dataclass
 from typing import Tuple
 from aiodoo_datasets.generators.evaluation.enums import BenchmarkCategory
 
+
 @dataclass(frozen=True, slots=True)
 class BenchmarkMetadata:
     """Immutable benchmark context data."""
+
     suite_version: str
     benchmark_version: str
     benchmark_name: str

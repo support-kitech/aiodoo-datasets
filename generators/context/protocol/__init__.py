@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.context.protocol.schema import (
     ProtocolNode,
     ProtocolEdge,
     ProtocolGraph,
-    ProtocolMetadata
+    ProtocolMetadata,
 )
 
 __all__ = [
@@ -19,5 +19,5 @@ __all__ = [
     "ProtocolNode",
     "ProtocolEdge",
     "ProtocolGraph",
-    "ProtocolMetadata"
+    "ProtocolMetadata",
 ]

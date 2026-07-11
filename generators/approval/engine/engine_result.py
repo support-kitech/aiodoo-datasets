@@ -6,9 +6,11 @@ from aiodoo_datasets.generators.approval.domain.decision import Decision
 from aiodoo_datasets.generators.approval.domain.finding import Finding
 from aiodoo_datasets.generators.approval.domain.recommendation import Recommendation
 
+
 @dataclass(frozen=True, slots=True)
 class EngineResult:
     """The result of the Decision Engine evaluation."""
+
     success: bool
     decision: Decision
     findings: Tuple[Finding, ...] = field(default_factory=tuple)

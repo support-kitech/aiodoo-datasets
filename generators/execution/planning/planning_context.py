@@ -8,12 +8,13 @@ from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistic
 from aiodoo_datasets.generators.execution.planning.enums import PlanningStrategyType
 from aiodoo_datasets.generators.execution.planning.planning_statistics import PlanningStatistics
 
+
 @dataclass(frozen=True, slots=True)
 class PlanningContext:
     """
     Context carrying strictly necessary data for planning.
     Completely isolated from upstream Analysis and Builder contexts.
-    
+
     Attributes:
         graph: The validated ExecutionGraph to be planned.
         graph_statistics: Statistics of the incoming graph.
@@ -21,6 +22,7 @@ class PlanningContext:
         strategy: The active planning strategy type to employ.
         planning_statistics: Mutable statistics container for the planning phase.
     """
+
     graph: ExecutionGraph
     graph_statistics: GraphStatistics
     configuration: MappingProxyType[str, Any]

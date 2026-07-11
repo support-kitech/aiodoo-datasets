@@ -10,10 +10,11 @@ from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
 from aiodoo_datasets.generators.conversation.enums import AttachmentType
 import hashlib
 
+
 @ParserRegistry.register("coding_protocol")
 class CodingParser(BaseParser):
     """Parses Coding protocols."""
-    
+
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         attachments = []
@@ -23,26 +24,26 @@ class CodingParser(BaseParser):
                 Reference(
                     source_generator="coding",
                     source_reference=file_id,
-                    description=f"Generated file: {file.get('path', '')}"
+                    description=f"Generated file: {file.get('path', '')}",
                 )
             )
-            
+
             # Create a deterministic attachment id
             hash_input = f"CODE_ATT:{file_id}"
             att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
-            
+
             attachments.append(
                 Attachment(
                     attachment_id=f"ATT-{att_hash}",
                     attachment_type=AttachmentType.CODE,
                     content=file.get("content", ""),
-                    file_path=file.get("path")
+                    file_path=file.get("path"),
                 )
             )
-            
+
         return ExtractedEvidence(
             protocol_name="coding_protocol",
             references=tuple(references),
             attachments=tuple(attachments),
-            raw_data=MappingProxyType(data)
+            raw_data=MappingProxyType(data),
         )

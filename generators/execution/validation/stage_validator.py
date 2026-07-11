@@ -2,9 +2,10 @@
 
 from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
 
+
 class StageValidator:
     """Validator for execution stages."""
-    
+
     @staticmethod
     def validate(stage: ExecutionStage) -> tuple[str, ...]:
         """Validate a single stage."""

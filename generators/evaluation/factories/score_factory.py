@@ -3,9 +3,10 @@
 import hashlib
 from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
 
+
 class ScoreFactory:
     """Factory for creating immutable EvaluationScore objects."""
-    
+
     @staticmethod
     def generate_id(case_id: str, metric_name: str) -> str:
         """Generate a deterministic score ID."""
@@ -22,7 +23,7 @@ class ScoreFactory:
         normalized_score: float,
         weight: float,
         pass_threshold: float,
-        result: bool
+        result: bool,
     ) -> EvaluationScore:
         """Create an evaluation score with a hash-based deterministic ID."""
         score_id = ScoreFactory.generate_id(case_id, metric_name)
@@ -34,5 +35,5 @@ class ScoreFactory:
             normalized_score=normalized_score,
             weight=weight,
             pass_threshold=pass_threshold,
-            result=result
+            result=result,
         )

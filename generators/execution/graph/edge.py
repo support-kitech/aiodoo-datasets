@@ -13,6 +13,7 @@ class ExecutionEdge:
 
     Identity is determined by the (source_id, target_id) pair.
     """
+
     source_id: NodeId
     target_id: NodeId
     edge_type: EdgeType

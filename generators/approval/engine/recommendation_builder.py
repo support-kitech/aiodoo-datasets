@@ -4,9 +4,10 @@ from typing import Tuple
 from aiodoo_datasets.generators.approval.domain.finding import Finding
 from aiodoo_datasets.generators.approval.domain.recommendation import Recommendation
 
+
 class RecommendationBuilder:
     """Builds recommendations based on review findings."""
-    
+
     @staticmethod
     def build(findings: Tuple[Finding, ...]) -> Tuple[Recommendation, ...]:
         """Generate deterministic recommendations for negative findings."""
@@ -18,7 +19,7 @@ class RecommendationBuilder:
                         recommendation_id=f"REC-{finding.finding_id}",
                         finding_id=finding.finding_id,
                         description=f"Address finding: {finding.description}",
-                        suggested_fix="Review architecture and apply standard patterns."
+                        suggested_fix="Review architecture and apply standard patterns.",
                     )
                 )
         return tuple(recommendations)

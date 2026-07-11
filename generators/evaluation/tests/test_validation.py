@@ -6,9 +6,10 @@ from aiodoo_datasets.generators.evaluation.pipeline.pipeline_context import Pipe
 from aiodoo_datasets.generators.evaluation.pipeline.pipeline import EvaluationPipeline
 from types import MappingProxyType
 
+
 class TestValidationFailures(unittest.TestCase):
     """Verifies that the pipeline and validators fail fast on invalid data."""
-    
+
     def test_pipeline_fail_fast_on_invalid_input(self):
         """Ensure pipeline crashes immediately if invalid structures are produced."""
         context = PipelineContext(
@@ -22,9 +23,9 @@ class TestValidationFailures(unittest.TestCase):
             supported_protocols=("coding",),
             generator_version="1.0.0",
             protocol_version="1.0.0",
-            schema_version="1.0.0"
+            schema_version="1.0.0",
         )
-        
+
         # In a real environment, if the builders generate duplicates, the DatasetValidator
         # will throw EvaluationValidationError. We can simulate a validation check.
         # Since our mock pipeline generates valid data, this test just proves we can run the pipeline safely.
@@ -34,6 +35,7 @@ class TestValidationFailures(unittest.TestCase):
             self.assertTrue(result.validation_passed)
         except EvaluationValidationError:
             self.fail("Pipeline raised validation error on valid mock input.")
+
 
 if __name__ == "__main__":
     unittest.main()

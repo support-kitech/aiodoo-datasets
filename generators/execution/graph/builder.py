@@ -7,7 +7,9 @@ from aiodoo_datasets.generators.execution.graph.enums import NodeType, EdgeType
 from aiodoo_datasets.generators.execution.graph.context import GraphContext
 from aiodoo_datasets.generators.execution.graph.results.graph_build_result import GraphBuildResult
 from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
-from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnostics import BuilderDiagnostics
+from aiodoo_datasets.generators.execution.builders.diagnostics.builder_diagnostics import (
+    BuilderDiagnostics,
+)
 
 
 class GraphBuilder:

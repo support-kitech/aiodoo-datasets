@@ -4,11 +4,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
 
+
 @dataclass(frozen=True, slots=True)
 class ExportResult:
     """
     Result of the export process.
-    
+
     Attributes:
         success: Whether the export completed successfully.
         exported_files: List of file paths generated.
@@ -19,6 +20,7 @@ class ExportResult:
         statistics: The final state of ExportStatistics.
         diagnostics: Any diagnostic messages.
     """
+
     success: bool
     exported_files: tuple[Path, ...] = tuple()
     record_count: int = 0

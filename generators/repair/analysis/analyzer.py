@@ -14,27 +14,26 @@ from aiodoo_datasets.generators.repair.analysis.rules.deprecated_attrs import De
 
 logger = logging.getLogger(__name__)
 
+
 class RepairAnalyzer:
     """Analyzes Odoo source code for known anti-patterns and generates repair opportunities."""
 
     def __init__(self):
-        self.rules = [
-            MissingSudoRule(),
-            ApiMultiRule(),
-            DeprecatedAttrsRule()
-        ]
+        self.rules = [MissingSudoRule(), ApiMultiRule(), DeprecatedAttrsRule()]
 
     def analyze(self, module: OdooModule) -> list[RepairOpportunity]:
         opportunities = []
         for py_file in module.path.rglob("*.py"):
             opportunities.extend(self._analyze_python(py_file, module.path, module.name))
-            
+
         for xml_file in module.path.rglob("*.xml"):
             opportunities.extend(self._analyze_xml(xml_file, module.path, module.name))
-            
+
         return opportunities
 
-    def _analyze_python(self, py_file: Path, base_path: Path, module_name: str) -> list[RepairOpportunity]:
+    def _analyze_python(
+        self, py_file: Path, base_path: Path, module_name: str
+    ) -> list[RepairOpportunity]:
         opportunities = []
         try:
             content = py_file.read_text(encoding="utf-8")
@@ -43,16 +42,16 @@ class RepairAnalyzer:
         except Exception:
             logger.exception("Failed to parse %s", py_file)
             return opportunities
-            
+
         context = AnalyzeContext(
             module_name=module_name,
             file_path=py_file,
             base_path=base_path,
             content=content,
             lines=lines,
-            tree=tree
+            tree=tree,
         )
-        
+
         for rule in self.rules:
             if ArtifactType.PYTHON in rule.target_artifacts:
                 try:
@@ -63,12 +62,14 @@ class RepairAnalyzer:
                         context.module_name,
                         context.file_path.relative_to(context.base_path),
                         rule.rule_id,
-                        rule.title
+                        rule.title,
                     )
-                    
+
         return opportunities
 
-    def _analyze_xml(self, xml_file: Path, base_path: Path, module_name: str) -> list[RepairOpportunity]:
+    def _analyze_xml(
+        self, xml_file: Path, base_path: Path, module_name: str
+    ) -> list[RepairOpportunity]:
         opportunities = []
         try:
             content = xml_file.read_text(encoding="utf-8")
@@ -76,16 +77,16 @@ class RepairAnalyzer:
         except Exception:
             logger.exception("Failed to parse %s", xml_file)
             return opportunities
-            
+
         context = AnalyzeContext(
             module_name=module_name,
             file_path=xml_file,
             base_path=base_path,
             content=content,
             lines=lines,
-            tree=None
+            tree=None,
         )
-        
+
         for rule in self.rules:
             if ArtifactType.XML in rule.target_artifacts:
                 try:
@@ -96,7 +97,7 @@ class RepairAnalyzer:
                         context.module_name,
                         context.file_path.relative_to(context.base_path),
                         rule.rule_id,
-                        rule.title
+                        rule.title,
                     )
-                    
+
         return opportunities

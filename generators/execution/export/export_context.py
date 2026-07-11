@@ -8,11 +8,12 @@ from aiodoo_datasets.generators.execution.protocol.protocol_result import Protoc
 from aiodoo_datasets.generators.execution.protocol.protocol_statistics import ProtocolStatistics
 from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
 
+
 @dataclass(frozen=True, slots=True)
 class ExportContext:
     """
     Context carrying only necessary data for export.
-    
+
     Attributes:
         protocol_result: The result of the protocol mapping phase.
         protocol_statistics: Statistics from the protocol mapping phase.
@@ -20,6 +21,7 @@ class ExportContext:
         output_directory: The base path where the dataset will be written.
         export_statistics: Mutable statistics container for the export phase.
     """
+
     protocol_result: ProtocolResult
     protocol_statistics: ProtocolStatistics
     export_configuration: MappingProxyType[str, Any]

@@ -5,9 +5,10 @@ from aiodoo_datasets.generators.execution.planning.results.stage_result import S
 from aiodoo_datasets.generators.execution.planning.domain.execution_stage import ExecutionStage
 from aiodoo_datasets.generators.execution.planning.enums import StageType
 
+
 class StageBuilder:
     """Builder for generating execution stages."""
-    
+
     @staticmethod
     def build(context: PlanningContext) -> StageResult:
         """
@@ -21,7 +22,7 @@ class StageBuilder:
         stage = ExecutionStage(
             stage_id=f"stage_{context.graph_statistics.node_count}",
             stage_type=StageType.EXECUTION,
-            nodes=nodes
+            nodes=nodes,
         )
         context.planning_statistics.stage_count = 1
         return StageResult(success=True, stages=(stage,))

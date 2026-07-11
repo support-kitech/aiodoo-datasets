@@ -6,13 +6,15 @@ from aiodoo_datasets.generators.context.analysis.graph.enums import Relationship
 from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
+
 class ContainsRelationship(BaseRelationshipExtractor):
     """
     Extracts structural ownership relationships (e.g. Model -> Field, Model -> Method).
-    
+
     Supported Knowledge: Python AST structures.
     Limitations: Does not extract dynamic additions.
     """
+
     relation_type = RelationshipType.CONTAINS
     supported_languages = [LanguageType.PYTHON, LanguageType.XML]
 

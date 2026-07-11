@@ -7,7 +7,9 @@ from aiodoo_datasets.generators.evaluation.analysis.parsers.repair_parser import
 from aiodoo_datasets.generators.evaluation.analysis.parsers.context_parser import ContextParser
 from aiodoo_datasets.generators.evaluation.analysis.parsers.execution_parser import ExecutionParser
 from aiodoo_datasets.generators.evaluation.analysis.parsers.approval_parser import ApprovalParser
-from aiodoo_datasets.generators.evaluation.analysis.parsers.conversation_parser import ConversationParser
+from aiodoo_datasets.generators.evaluation.analysis.parsers.conversation_parser import (
+    ConversationParser,
+)
 
 __all__ = [
     "BaseParser",

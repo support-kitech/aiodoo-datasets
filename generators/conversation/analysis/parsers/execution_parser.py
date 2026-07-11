@@ -10,10 +10,11 @@ from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
 from aiodoo_datasets.generators.conversation.enums import AttachmentType
 import hashlib
 
+
 @ParserRegistry.register("execution_protocol")
 class ExecutionParser(BaseParser):
     """Parses Execution protocols."""
-    
+
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         attachments = []
@@ -23,25 +24,25 @@ class ExecutionParser(BaseParser):
                 Reference(
                     source_generator="execution",
                     source_reference=result_id,
-                    description=f"Execution result: {result.get('name', '')}"
+                    description=f"Execution result: {result.get('name', '')}",
                 )
             )
-            
+
             hash_input = f"LOG_ATT:{result_id}"
             att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
-            
+
             attachments.append(
                 Attachment(
                     attachment_id=f"ATT-{att_hash}",
                     attachment_type=AttachmentType.LOG,
                     content=result.get("log", ""),
-                    file_path=None
+                    file_path=None,
                 )
             )
-            
+
         return ExtractedEvidence(
             protocol_name="execution_protocol",
             references=tuple(references),
             attachments=tuple(attachments),
-            raw_data=MappingProxyType(data)
+            raw_data=MappingProxyType(data),
         )

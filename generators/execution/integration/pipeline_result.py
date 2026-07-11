@@ -2,18 +2,21 @@
 
 from dataclasses import dataclass
 from typing import Any
-from aiodoo_datasets.generators.execution.builders.pipeline_result import PipelineResult as BuildPipelineResult
+from aiodoo_datasets.generators.execution.builders.pipeline_result import (
+    PipelineResult as BuildPipelineResult,
+)
 from aiodoo_datasets.generators.execution.graph.results.graph_build_result import GraphBuildResult
 from aiodoo_datasets.generators.execution.planning.planning_result import PlanningResult
 from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
 from aiodoo_datasets.generators.execution.export.export_result import ExportResult
 from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
 
+
 @dataclass(frozen=True, slots=True)
 class PipelineResult:
     """
     Result of the end-to-end integration pipeline.
-    
+
     Attributes:
         success: Whether the pipeline completed successfully.
         analysis_result: Result from the Analysis phase.
@@ -25,6 +28,7 @@ class PipelineResult:
         statistics: The final state of PipelineStatistics.
         diagnostics: Any diagnostic messages.
     """
+
     success: bool
     analysis_result: Any | None = None
     build_result: BuildPipelineResult | None = None

@@ -7,7 +7,6 @@ from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistic
 
 
 class TestGraphStatistics(unittest.TestCase):
-
     def _compute(self, graph: ExecutionGraph) -> GraphStatistics:
         """Compute all graph statistics."""
         stats = GraphStatistics()
@@ -92,5 +91,5 @@ class TestGraphStatistics(unittest.TestCase):
         self.assertEqual(stats.leaf_count, 3)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

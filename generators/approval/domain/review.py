@@ -8,9 +8,11 @@ from aiodoo_datasets.generators.approval.domain.decision import Decision
 from aiodoo_datasets.generators.approval.domain.evidence import Evidence
 from aiodoo_datasets.generators.approval.domain.metadata import ReviewMetadata
 
+
 @dataclass(frozen=True, slots=True)
 class Review:
     """The aggregate root containing all review components."""
+
     review_id: str
     metadata: ReviewMetadata
     decision: Decision

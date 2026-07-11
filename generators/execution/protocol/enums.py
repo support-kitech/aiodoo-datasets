@@ -2,9 +2,11 @@
 
 from enum import Enum, unique
 
+
 @unique
 class ProtocolType(Enum):
     """Types of protocol objects."""
+
     EXECUTION = "EXECUTION"
     STAGE = "STAGE"
     PHASE = "PHASE"

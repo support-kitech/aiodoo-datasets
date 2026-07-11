@@ -7,7 +7,6 @@ from aiodoo_datasets.generators.execution.graph.serializer import GraphSerialize
 
 
 class TestGraphSerializer(unittest.TestCase):
-
     def test_deterministic(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p")
@@ -43,5 +42,5 @@ class TestGraphSerializer(unittest.TestCase):
         self.assertIn('"nodes":[]', result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

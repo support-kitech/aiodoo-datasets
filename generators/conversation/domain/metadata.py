@@ -3,9 +3,11 @@
 from dataclasses import dataclass
 from aiodoo_datasets.generators.conversation.enums import ConversationType
 
+
 @dataclass(frozen=True, slots=True)
 class ConversationMetadata:
     """Immutable environment and context tracking for a conversation."""
+
     generator_version: str
     protocol_version: str
     schema_version: str

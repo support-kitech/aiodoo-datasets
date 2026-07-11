@@ -2,9 +2,11 @@
 
 from enum import Enum, unique
 
+
 @unique
 class PipelinePhase(Enum):
     """Phases of the integration pipeline."""
+
     DISCOVERY = "DISCOVERY"
     ANALYSIS = "ANALYSIS"
     BUILDERS = "BUILDERS"

@@ -3,11 +3,12 @@
 from dataclasses import dataclass, field
 from typing import Dict
 
+
 @dataclass
 class PipelineStatistics:
     """
     Mutable container for pipeline metrics.
-    
+
     Attributes:
         total_execution_time: Total duration of pipeline execution.
         phase_execution_times: Duration of each phase.
@@ -17,6 +18,7 @@ class PipelineStatistics:
         warnings: Number of warnings encountered.
         errors: Number of errors encountered.
     """
+
     total_execution_time: float = 0.0
     phase_execution_times: Dict[str, float] = field(default_factory=dict)
     generated_records: int = 0

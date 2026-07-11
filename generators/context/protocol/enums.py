@@ -2,8 +2,10 @@
 
 from enum import Enum
 
+
 class ProtocolQueryType(str, Enum):
     """Protocol representation of query type."""
+
     FIND_MODEL = "find_model"
     FIND_FIELD = "find_field"
     FIND_COMPUTE = "find_compute"
@@ -13,8 +15,10 @@ class ProtocolQueryType(str, Enum):
     FIND_SECURITY = "find_security"
     FIND_DEPENDENCY = "find_dependency"
 
+
 class ProtocolIntent(str, Enum):
     """Protocol representation of query intent."""
+
     FIND_MODEL = "locate_model_definition"
     FIND_FIELD = "locate_field_definition"
     FIND_COMPUTE = "locate_compute_logic"
@@ -24,8 +28,10 @@ class ProtocolIntent(str, Enum):
     FIND_SECURITY = "locate_security_protection"
     FIND_DEPENDENCY = "locate_module_dependencies"
 
+
 class ProtocolNodeType(str, Enum):
     """Protocol representation of node type."""
+
     MODEL = "model"
     FIELD = "field"
     VIEW = "view"
@@ -35,15 +41,19 @@ class ProtocolNodeType(str, Enum):
     SECURITY_RULE = "security_rule"
     MANIFEST = "manifest"
 
+
 class ProtocolLanguage(str, Enum):
     """Protocol representation of language."""
+
     PYTHON = "python"
     XML = "xml"
     CSV = "csv"
     JSON = "json"
 
+
 class ProtocolRankingReason(str, Enum):
     """Protocol representation of ranking reason."""
+
     DIRECT_DEFINITION = "direct_definition"
     MODEL_INHERITANCE = "model_inheritance"
     MANIFEST_DEPENDENCY = "manifest_dependency"

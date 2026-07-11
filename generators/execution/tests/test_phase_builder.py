@@ -10,25 +10,27 @@ from aiodoo_datasets.generators.execution.graph.enums import NodeType
 from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
 from types import MappingProxyType
 
+
 class TestPhaseBuilder(unittest.TestCase):
     def test_phase_generation(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         g = ExecutionGraph(nodes=(n1,), edges=())
         g_stats = GraphStatistics()
         p_stats = PlanningStatistics()
-        
+
         ctx = PlanningContext(
             graph=g,
             graph_statistics=g_stats,
             configuration=MappingProxyType({}),
             strategy=PlanningStrategyType.SEQUENTIAL,
-            planning_statistics=p_stats
+            planning_statistics=p_stats,
         )
-        
+
         s_res = StageBuilder.build(ctx)
         p_res = PhaseBuilder.build(ctx, s_res)
         self.assertTrue(p_res.success)
         self.assertEqual(len(p_res.phases), 1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

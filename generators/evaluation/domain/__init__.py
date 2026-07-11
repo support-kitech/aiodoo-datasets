@@ -15,7 +15,12 @@ from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
 from aiodoo_datasets.generators.evaluation.domain.category import Category
 from aiodoo_datasets.generators.evaluation.domain.evaluation_case import EvaluationCase
 from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
-from aiodoo_datasets.generators.evaluation.domain.future import ModelComparison, PreferenceEvaluation, HumanReview, RewardModel
+from aiodoo_datasets.generators.evaluation.domain.future import (
+    ModelComparison,
+    PreferenceEvaluation,
+    HumanReview,
+    RewardModel,
+)
 
 __all__ = [
     "Evaluation",

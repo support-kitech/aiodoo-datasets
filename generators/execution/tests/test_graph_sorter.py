@@ -7,7 +7,6 @@ from aiodoo_datasets.generators.execution.graph.sorter import TopologicalSorter
 
 
 class TestGraphSorter(unittest.TestCase):
-
     def test_linear_sort(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p1")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p2")
@@ -56,5 +55,5 @@ class TestGraphSorter(unittest.TestCase):
         self.assertIn("c", ids[1:3])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

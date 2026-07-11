@@ -5,6 +5,7 @@ from aiodoo_datasets.generators.execution.export.writers.base_writer import Base
 from aiodoo_datasets.generators.execution.export.enums import WriterType
 from aiodoo_datasets.generators.execution.export.export_context import ExportContext
 
+
 class MetadataWriter(BaseWriter):
     """Writes the overarching dataset metadata file."""
 
@@ -14,9 +15,9 @@ class MetadataWriter(BaseWriter):
 
     def generate_content(self, context: ExportContext) -> str:
         """Generate metadata content."""
-        
+
         protocol = context.protocol_result.protocol
-        
+
         metadata_data = {
             "name": f"aiodoo-execution-dataset-{protocol.plan_id}" if protocol else "unknown",
             "description": "Auto-generated Execution Graph Dataset",
@@ -26,15 +27,10 @@ class MetadataWriter(BaseWriter):
                 "mapped_stages": context.protocol_statistics.mapped_stages,
                 "mapped_phases": context.protocol_statistics.mapped_phases,
                 "mapped_batches": context.protocol_statistics.mapped_batches,
-                "mapped_schedules": context.protocol_statistics.mapped_schedules
-            }
+                "mapped_schedules": context.protocol_statistics.mapped_schedules,
+            },
         }
-        
+
         context.export_statistics.metadata_count += 1
-        
-        return json.dumps(
-            metadata_data,
-            sort_keys=True,
-            ensure_ascii=False,
-            indent=2
-        )
+
+        return json.dumps(metadata_data, sort_keys=True, ensure_ascii=False, indent=2)

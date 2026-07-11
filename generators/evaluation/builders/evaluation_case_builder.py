@@ -11,11 +11,14 @@ from aiodoo_datasets.generators.evaluation.domain.failure_criteria import Failur
 from aiodoo_datasets.generators.evaluation.domain.reference import Reference
 from aiodoo_datasets.generators.evaluation.domain.attachment import EvaluationAttachment
 from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
-from aiodoo_datasets.generators.evaluation.factories.evaluation_case_factory import EvaluationCaseFactory
+from aiodoo_datasets.generators.evaluation.factories.evaluation_case_factory import (
+    EvaluationCaseFactory,
+)
+
 
 class EvaluationCaseBuilder:
     """Orchestrates the construction of an EvaluationCase."""
-    
+
     @staticmethod
     def build(
         suite_id: str,
@@ -29,7 +32,7 @@ class EvaluationCaseBuilder:
         failure_criteria: Tuple[FailureCriteria, ...] = (),
         references: Tuple[Reference, ...] = (),
         attachments: Tuple[EvaluationAttachment, ...] = (),
-        scores: Tuple[EvaluationScore, ...] = ()
+        scores: Tuple[EvaluationScore, ...] = (),
     ) -> EvaluationCase:
         """Build an evaluation case by orchestrating the factory."""
         return EvaluationCaseFactory.create(
@@ -44,5 +47,5 @@ class EvaluationCaseBuilder:
             failure_criteria=failure_criteria,
             references=references,
             attachments=attachments,
-            scores=scores
+            scores=scores,
         )

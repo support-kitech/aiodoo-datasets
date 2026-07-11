@@ -6,12 +6,14 @@ from aiodoo_datasets.generators.context.analysis.graph.enums import Relationship
 from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
+
 class DisplaysRelationship(BaseRelationshipExtractor):
     """
     Extracts display relationships (e.g. View -> Field, View -> Model).
-    
+
     Supported Knowledge: XML trees.
     """
+
     relation_type = RelationshipType.DISPLAYS
     supported_languages = [LanguageType.XML]
 

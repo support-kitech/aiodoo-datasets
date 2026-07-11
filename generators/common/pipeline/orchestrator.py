@@ -8,6 +8,7 @@ from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
+
 class SharedPipelineOrchestrator:
     """Generic orchestrator for AIODOO dataset generation pipelines."""
 
@@ -25,7 +26,7 @@ class SharedPipelineOrchestrator:
         stats_filename: str = "statistics.json",
         manifest_filename: str = "manifest.json",
         workers: int = 4,
-        resume: bool = False
+        resume: bool = False,
     ):
         self.scanner = scanner
         self.writer = writer
@@ -45,18 +46,24 @@ class SharedPipelineOrchestrator:
         """Execute the pipeline across all configured repositories."""
         all_modules = self.scanner.discover_modules()
         logger.info("Discovered %d modules in total.", len(all_modules))
-        
+
         if self.resume:
-            modules = [m for m in all_modules if not self.checkpoint.is_module_fully_processed(m.name)]
-            logger.info("Resuming generation. Skipping %d processed modules. %d remaining.", len(all_modules) - len(modules), len(modules))
+            modules = [
+                m for m in all_modules if not self.checkpoint.is_module_fully_processed(m.name)
+            ]
+            logger.info(
+                "Resuming generation. Skipping %d processed modules. %d remaining.",
+                len(all_modules) - len(modules),
+                len(modules),
+            )
         else:
             modules = all_modules
-            
+
         validator_fn = getattr(self.core_validator, self.validation_method)
-            
+
         with ProcessPoolExecutor(max_workers=self.workers) as executor:
             future_to_module = {executor.submit(self.worker_fn, mod): mod for mod in modules}
-            
+
             for future in as_completed(future_to_module):
                 mod = future_to_module[future]
                 try:
@@ -64,38 +71,50 @@ class SharedPipelineOrchestrator:
                     for data in records_data:
                         payload_dict = data["output"]
                         protocol_hash = data["metadata"]["protocol_hash"]
-                        
+
                         if self.checkpoint_strategy == "artifact":
                             scenario_name = data["metadata"]["scenario"][0]
                             repo = data["metadata"]["repository"]
-                            if self.resume and self.checkpoint.is_processed(repo, mod.name, scenario_name, protocol_hash):
+                            if self.resume and self.checkpoint.is_processed(
+                                repo, mod.name, scenario_name, protocol_hash
+                            ):
                                 continue
-                                
+
                         if self.deduplicator.is_unique(protocol_hash):
                             try:
                                 record = self.record_class(**data)
                                 validator_fn(payload_dict)
                                 self.writer.write_record(record)
-                                
+
                                 if self.checkpoint_strategy == "artifact":
-                                    self.checkpoint.save(repo, mod.name, scenario_name, protocol_hash, self.writer.written_count)
+                                    self.checkpoint.save(
+                                        repo,
+                                        mod.name,
+                                        scenario_name,
+                                        protocol_hash,
+                                        self.writer.written_count,
+                                    )
                             except ValueError as val_exc:
-                                logger.error("Core validation rejected sample for %s: %s", mod.name, val_exc)
+                                logger.error(
+                                    "Core validation rejected sample for %s: %s", mod.name, val_exc
+                                )
                                 self.writer.record_validation_failure()
                             except Exception as val_exc:
-                                logger.error("Local schema validation failed for %s: %s", mod.name, val_exc)
+                                logger.error(
+                                    "Local schema validation failed for %s: %s", mod.name, val_exc
+                                )
                                 self.writer.record_validation_failure()
                         else:
                             self.writer.record_duplicate()
-                                
+
                     self.scanner.update_cache(mod)
-                    
+
                     if self.checkpoint_strategy == "module":
                         self.checkpoint.save(mod.name, self.writer.written_count)
-                    
+
                 except Exception as exc:
                     logger.error("Module %s crashed unexpectedly: %s", mod.name, exc)
-                    
+
         self.writer.export_statistics(self.stats_filename)
         self.writer.export_manifest(self.manifest_filename)
         logger.info("Pipeline complete. Wrote %d unique records.", self.writer.written_count)

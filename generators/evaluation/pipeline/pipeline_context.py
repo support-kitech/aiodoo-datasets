@@ -4,9 +4,11 @@ from dataclasses import dataclass
 from typing import Any
 from types import MappingProxyType
 
+
 @dataclass(frozen=True, slots=True)
 class PipelineContext:
     """Immutable input configuration container for the evaluation pipeline."""
+
     source_protocols: MappingProxyType[str, Any]
     evaluation_type: str
     target_generator: str

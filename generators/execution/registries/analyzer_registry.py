@@ -20,21 +20,24 @@ _REGISTERED_ANALYZERS: tuple[type[BaseAnalyzer], ...] = (
     MetadataAnalyzer,
 )
 
+
 class AnalyzerRegistry:
     """Manages the deterministic loading of analysis plugins."""
-    
+
     @classmethod
     def get_analyzers(cls) -> tuple[BaseAnalyzer, ...]:
         """Returns instantiated analyzers sorted explicitly by priority."""
         instances = [analyzer_cls() for analyzer_cls in _REGISTERED_ANALYZERS]
-        
+
         # Validate unique priorities
         priorities = set()
         for inst in instances:
             if not hasattr(inst, "PRIORITY"):
                 raise ValueError(f"{inst.__class__.__name__} missing PRIORITY")
             if inst.PRIORITY in priorities:
-                raise ValueError(f"Duplicate PRIORITY {inst.PRIORITY} found in {inst.__class__.__name__}")
+                raise ValueError(
+                    f"Duplicate PRIORITY {inst.PRIORITY} found in {inst.__class__.__name__}"
+                )
             priorities.add(inst.PRIORITY)
-            
+
         return tuple(sorted(instances, key=lambda a: a.PRIORITY))

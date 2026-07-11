@@ -2,6 +2,7 @@
 
 from enum import Enum
 
+
 class PythonArtifactType(Enum):
     MODEL = "model"
     FIELD = "field"
@@ -10,12 +11,14 @@ class PythonArtifactType(Enum):
     TEST = "test"
     INIT = "init"
 
+
 class XMLArtifactType(Enum):
     VIEW = "view"
     ACTION = "action"
     MENU = "menu"
     TEMPLATE = "template"
     RECORD = "record"
+
 
 class CSVArtifactType(Enum):
     ACCESS_RIGHT = "access_right"

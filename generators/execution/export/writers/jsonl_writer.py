@@ -4,6 +4,7 @@ from aiodoo_datasets.generators.execution.export.writers.base_writer import Base
 from aiodoo_datasets.generators.execution.export.enums import WriterType
 from aiodoo_datasets.generators.execution.export.export_context import ExportContext
 
+
 class JSONLWriter(BaseWriter):
     """Writes the dataset payload as a JSON Lines file."""
 

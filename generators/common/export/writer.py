@@ -12,7 +12,8 @@ from aiodoo_datasets.generators.common.export.manifest import generate_manifest
 
 logger = logging.getLogger(__name__)
 
-TRecord = TypeVar('TRecord', bound=BaseModel)
+TRecord = TypeVar("TRecord", bound=BaseModel)
+
 
 class DatasetWriter(Generic[TRecord]):
     """Thread-safe append-only writer for JSONL datasets with streaming statistics."""
@@ -28,7 +29,7 @@ class DatasetWriter(Generic[TRecord]):
 
     def record_duplicate(self) -> None:
         self.stats.record_duplicate()
-        
+
     def record_validation_failure(self) -> None:
         self.stats.record_validation_failure()
 
@@ -37,15 +38,15 @@ class DatasetWriter(Generic[TRecord]):
         try:
             record_dict = record.model_dump()
             json_str = json.dumps(record_dict, ensure_ascii=False)
-            
+
             with open(self.output_path, "a", encoding="utf-8") as f:
                 f.write(json_str + "\n")
-            
+
             self.written_count += 1
             self.stats.add_sample(record, json_str)
         except Exception as exc:
             logger.error("Failed to write record to %s: %s", self.output_path, exc)
-            
+
     def _calculate_checksum(self) -> str:
         """Stream the JSONL file to calculate its SHA256 checksum efficiently."""
         hasher = hashlib.sha256()
@@ -54,23 +55,23 @@ class DatasetWriter(Generic[TRecord]):
                 for chunk in iter(lambda: f.read(8192), b""):
                     hasher.update(chunk)
         return hasher.hexdigest()
-            
+
     def export_statistics(self, filename: str = "statistics.json") -> None:
         """Dump the generated statistics to a JSON file."""
         stats_path = self.output_dir / filename
         self.stats.export(stats_path)
         logger.info("Exported statistics to %s", stats_path)
-        
+
     def export_manifest(self, filename: str = "dataset_manifest.json") -> None:
         """Calculate the final checksum and export the dataset manifest index."""
         manifest_path = self.output_dir / filename
         checksum = self._calculate_checksum()
-        
+
         generate_manifest(
             output_path=manifest_path,
             dataset_name=self.dataset_name,
             jsonl_filename=self.filename,
             checksum=checksum,
-            stats=self.stats
+            stats=self.stats,
         )
         logger.info("Exported dataset manifest to %s", manifest_path)

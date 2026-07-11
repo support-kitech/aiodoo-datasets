@@ -3,25 +3,31 @@
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 from aiodoo_datasets.generators.context.analysis.graph.enums import RelationshipType
 from aiodoo_datasets.generators.context.generation.query import Query, QueryType
-from aiodoo_datasets.generators.context.ranking.enums import RankingRuleType, RankingScore, RankingReason
+from aiodoo_datasets.generators.context.ranking.enums import (
+    RankingRuleType,
+    RankingScore,
+    RankingReason,
+)
 from aiodoo_datasets.generators.context.ranking.result import RankingResult
 from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
 from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
 
+
 class InheritanceRule(BaseRankingRule):
     """
     Ranks inherited implementations.
-    
+
     Engineering Purpose:
         Identifies nodes that inherit from the query target.
         Scores high (90) because inherited implementations often contain relevant extensions.
-        
+
     Supported Queries:
         FIND_MODEL
-        
+
     Limitations:
         Only traverses one level of INHERITS edges explicitly.
     """
+
     rule_type = RankingRuleType.INHERITANCE
     supported_query_types = [QueryType.FIND_MODEL]
 
@@ -40,14 +46,16 @@ class InheritanceRule(BaseRankingRule):
                             score=RankingScore.INHERITANCE,
                             matched_rule=self.rule_type,
                             reason=RankingReason.MODEL_INHERITANCE,
-                            metadata=freeze_metadata({
-                                "module": source_node.module,
-                                "language": source_node.language.value,
-                                "relative_path": source_node.relative_path,
-                                "start_line": 0,
-                                "matched_relationship": edge.relationship_type.value,
-                                "inherited_from": query.target_symbol
-                            })
+                            metadata=freeze_metadata(
+                                {
+                                    "module": source_node.module,
+                                    "language": source_node.language.value,
+                                    "relative_path": source_node.relative_path,
+                                    "start_line": 0,
+                                    "matched_relationship": edge.relationship_type.value,
+                                    "inherited_from": query.target_symbol,
+                                }
+                            ),
                         )
                     )
         return results

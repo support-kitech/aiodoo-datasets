@@ -7,6 +7,7 @@ from typing import Optional
 
 from aiodoo_datasets.generators.repair.validation.schema import RepairSeverity, ArtifactType
 
+
 @dataclass
 class RepairOpportunity:
     id: str
@@ -26,6 +27,7 @@ class RepairOpportunity:
     detector_name: str
     line_num: int
 
+
 @dataclass
 class AnalyzeContext:
     module_name: str
@@ -35,9 +37,10 @@ class AnalyzeContext:
     lines: list[str]
     tree: Optional[ast.AST] = None
 
+
 class BaseRepairRule:
     """Base interface for all static analysis repair rules."""
-    
+
     rule_id: str = "UNKNOWN"
     title: str = "Unknown Rule"
     description: str = ""

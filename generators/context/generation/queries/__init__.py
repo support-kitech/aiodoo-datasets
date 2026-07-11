@@ -8,7 +8,9 @@ from aiodoo_datasets.generators.context.generation.queries.find_view import Find
 from aiodoo_datasets.generators.context.generation.queries.find_action import FindActionQuery
 from aiodoo_datasets.generators.context.generation.queries.find_menu import FindMenuQuery
 from aiodoo_datasets.generators.context.generation.queries.find_security import FindSecurityQuery
-from aiodoo_datasets.generators.context.generation.queries.find_dependency import FindDependencyQuery
+from aiodoo_datasets.generators.context.generation.queries.find_dependency import (
+    FindDependencyQuery,
+)
 
 __all__ = [
     "BaseContextQuery",

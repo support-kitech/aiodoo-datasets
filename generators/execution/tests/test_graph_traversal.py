@@ -7,7 +7,6 @@ from aiodoo_datasets.generators.execution.graph.traversal import GraphTraversal
 
 
 class TestGraphTraversal(unittest.TestCase):
-
     def _make_graph(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="a")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="b")
@@ -54,5 +53,5 @@ class TestGraphTraversal(unittest.TestCase):
         self.assertEqual(graph.edges, edges_before)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

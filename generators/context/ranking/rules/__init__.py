@@ -13,5 +13,5 @@ __all__ = [
     "DependencyRule",
     "ViewRule",
     "SecurityRule",
-    "ActionRule"
+    "ActionRule",
 ]

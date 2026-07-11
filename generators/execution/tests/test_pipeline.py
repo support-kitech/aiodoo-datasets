@@ -7,6 +7,7 @@ from aiodoo_datasets.generators.execution.config.export_config import ExportConf
 from aiodoo_datasets.generators.execution.config.runtime_config import RuntimeConfig
 from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
 
+
 class TestIntegrationPipeline(unittest.TestCase):
     def test_pipeline_execution(self):
         context = PipelineContext(
@@ -14,14 +15,15 @@ class TestIntegrationPipeline(unittest.TestCase):
             export_config=ExportConfig(output_directory=Path("/tmp")),
             runtime_config=RuntimeConfig(),
             discovery_result={},
-            pipeline_statistics=PipelineStatistics()
+            pipeline_statistics=PipelineStatistics(),
         )
-        
+
         result = IntegrationPipeline.execute(context)
-        
+
         self.assertIsNotNone(result)
         self.assertFalse(result.success)
         self.assertIsNotNone(result.statistics)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

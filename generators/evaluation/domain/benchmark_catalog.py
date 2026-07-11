@@ -6,9 +6,11 @@ from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import Benchma
 
 from aiodoo_datasets.generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
 
+
 @dataclass(frozen=True, slots=True)
 class BenchmarkCatalog:
     """Immutable collection of benchmark suites."""
+
     catalog_id: str
     catalog_name: str
     metadata: BenchmarkMetadata

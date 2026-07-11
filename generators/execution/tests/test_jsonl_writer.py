@@ -6,6 +6,7 @@ from aiodoo_datasets.generators.execution.export.export_context import ExportCon
 from aiodoo_datasets.generators.execution.export.export_statistics import ExportStatistics
 from aiodoo_datasets.generators.execution.protocol.protocol_result import ProtocolResult
 
+
 class TestJSONLWriter(unittest.TestCase):
     def test_generate_content(self):
         ctx = ExportContext(
@@ -13,14 +14,15 @@ class TestJSONLWriter(unittest.TestCase):
             protocol_statistics=None,
             export_configuration=MappingProxyType({}),
             output_directory=Path("/tmp"),
-            export_statistics=ExportStatistics()
+            export_statistics=ExportStatistics(),
         )
-        
+
         writer = JSONLWriter()
         content = writer.generate_content(ctx)
-        
+
         self.assertEqual(content, '{"plan_id":"p1"}\n')
         self.assertEqual(ctx.export_statistics.jsonl_records, 1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

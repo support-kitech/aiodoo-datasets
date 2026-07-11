@@ -2,8 +2,10 @@
 
 from enum import Enum
 
+
 class NodeType(str, Enum):
     """Supported types of engineering symbols."""
+
     MODEL = "model"
     FIELD = "field"
     METHOD = "method"
@@ -19,16 +21,20 @@ class NodeType(str, Enum):
     QWEB_TEMPLATE = "qweb_template"
     RPC_ENDPOINT = "rpc_endpoint"
 
+
 class LanguageType(str, Enum):
     """Supported source code languages."""
+
     PYTHON = "python"
     XML = "xml"
     CSV = "csv"
     JAVASCRIPT = "javascript"
     UNKNOWN = "unknown"
 
+
 class RelationshipType(str, Enum):
     """Supported types of engineering relationships."""
+
     CONTAINS = "contains"
     INHERITS = "inherits"
     COMPUTES = "computes"

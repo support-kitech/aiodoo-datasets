@@ -2,9 +2,10 @@
 
 from aiodoo_datasets.generators.execution.protocol.domain.stage_protocol import StageProtocol
 
+
 class StageProtocolValidator:
     """Validates StageProtocol schema compliance."""
-    
+
     @staticmethod
     def validate(stage: StageProtocol) -> tuple[str, ...]:
         violations = []

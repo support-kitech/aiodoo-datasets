@@ -9,10 +9,11 @@ from aiodoo_datasets.generators.context.ranking.registry import REGISTERED_RANKI
 
 logger = logging.getLogger(__name__)
 
+
 class RankingEngine:
     """
     Orchestrates the execution of statically registered Ranking Rules.
-    
+
     Responsibilities:
     - Executes ranking rules applicable to a specific Query.
     - Aggregates scores (using max() to prevent artificial inflation).
@@ -25,17 +26,17 @@ class RankingEngine:
         # Register rules statically and ensure deterministic alphabetical sorting.
         self.rules = sorted(
             [rule_cls() for rule_cls in REGISTERED_RANKING_RULES],
-            key=lambda r: r.__class__.__name__
+            key=lambda r: r.__class__.__name__,
         )
 
     def rank(self, query: Query, graph: ContextGraph) -> list[RankingResult]:
         """
         Execute all applicable ranking rules for the given query.
-        
+
         Args:
             query: The engineering query to rank context against.
             graph: A fully populated, read-only ContextGraph.
-            
+
         Returns:
             A deterministically sorted list of unique RankingResult objects.
         """
@@ -46,10 +47,10 @@ class RankingEngine:
             # Skip rule if it doesn't support this query type
             if query.query_type not in rule.supported_query_types:
                 continue
-                
+
             try:
                 results = rule.rank(query, graph)
-                
+
                 for r in results:
                     node_id = r.node_id
                     if node_id not in best_results_by_node:
@@ -65,15 +66,15 @@ class RankingEngine:
                             # Usually this shouldn't happen for the same node, but just in case:
                             if r.matched_rule.value < existing_result.matched_rule.value:
                                 best_results_by_node[node_id] = r
-                                
+
             except Exception as e:
-                rule_type = getattr(rule, 'rule_type', 'Unknown')
-                if hasattr(rule_type, 'value'):
+                rule_type = getattr(rule, "rule_type", "Unknown")
+                if hasattr(rule_type, "value"):
                     rule_type = rule_type.value
-                    
-                module = getattr(e, 'module', 'Unknown')
-                node_id = getattr(e, 'node_id', 'Unknown')
-                
+
+                module = getattr(e, "module", "Unknown")
+                node_id = getattr(e, "node_id", "Unknown")
+
                 logger.exception(
                     "Ranking Rule Failed\n"
                     "Rule: %s\n"
@@ -85,8 +86,8 @@ class RankingEngine:
                     query.query_type.value,
                     query.query_id,
                     node_id,
-                    module
+                    module,
                 )
-                
+
         # Deterministically sort all best results before returning
         return sorted(list(best_results_by_node.values()))

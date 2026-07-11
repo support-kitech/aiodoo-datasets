@@ -2,9 +2,11 @@
 
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True, slots=True)
 class EvaluationScore:
     """Immutable score components."""
+
     score_id: str
     metric_name: str
     raw_score: float

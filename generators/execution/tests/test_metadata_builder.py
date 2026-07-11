@@ -1,7 +1,10 @@
 import unittest
 from unittest.mock import Mock
 from aiodoo_datasets.generators.execution.builders.metadata_builder import MetadataBuilder
-from aiodoo_datasets.generators.execution.builders.results.metadata_build_result import MetadataBuildResult
+from aiodoo_datasets.generators.execution.builders.results.metadata_build_result import (
+    MetadataBuildResult,
+)
+
 
 class TestMetadataBuilder(unittest.TestCase):
     def test_build_signature(self):
@@ -11,5 +14,6 @@ class TestMetadataBuilder(unittest.TestCase):
         result = builder.build(ctx)
         self.assertIsInstance(result, MetadataBuildResult)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

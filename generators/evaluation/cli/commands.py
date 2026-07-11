@@ -4,9 +4,10 @@ import sys
 from typing import Dict, Any
 from aiodoo_datasets.generators.evaluation import api
 
+
 class Commands:
     """Executes CLI commands by orchestrating the public API."""
-    
+
     @staticmethod
     def run_generate(config: Dict[str, Any], output_dir: str) -> None:
         """Execute the generate command."""
@@ -18,7 +19,7 @@ class Commands:
         except Exception as e:
             print(f"Generation failed: {e}", file=sys.stderr)
             sys.exit(1)
-            
+
     @staticmethod
     def run_validate(input_dir: str) -> None:
         """Execute the validate command."""

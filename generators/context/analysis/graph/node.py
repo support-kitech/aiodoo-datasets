@@ -6,9 +6,11 @@ from typing import Any, Optional
 
 from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType, LanguageType
 
+
 @dataclass
 class ContextNode:
     """Represents exactly one engineering symbol."""
+
     name: str
     module: str
     relative_path: str
@@ -38,13 +40,13 @@ class ContextNode:
         # Deterministic sorting: path -> start_line -> node_id
         if self.relative_path != other.relative_path:
             return self.relative_path < other.relative_path
-        
+
         # Handle None start lines by treating them as -1 for sorting
         self_line = self.start_line if self.start_line is not None else -1
         other_line = other.start_line if other.start_line is not None else -1
         if self_line != other_line:
             return self_line < other_line
-            
+
         return self.node_id < other.node_id
 
     def to_dict(self) -> dict[str, Any]:
@@ -58,7 +60,7 @@ class ContextNode:
             "language": self.language.value,
             "start_line": self.start_line,
             "end_line": self.end_line,
-            "metadata": dict(sorted(self.metadata.items()))
+            "metadata": dict(sorted(self.metadata.items())),
         }
 
     @classmethod
@@ -72,7 +74,7 @@ class ContextNode:
             language=LanguageType(data["language"]),
             start_line=data.get("start_line"),
             end_line=data.get("end_line"),
-            metadata=data.get("metadata", {})
+            metadata=data.get("metadata", {}),
         )
         # Override the generated node_id with the one from the dict if provided
         if "node_id" in data:

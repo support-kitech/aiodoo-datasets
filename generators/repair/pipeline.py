@@ -18,50 +18,61 @@ from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipeli
 
 logger = logging.getLogger(__name__)
 
+
 def process_module(module: OdooModule) -> list[dict]:
     """Worker function orchestrating the strictly ordered pipeline stages."""
     try:
         analyzer = RepairAnalyzer()
         opportunities = analyzer.analyze(module)
-        
+
         if not opportunities:
             return []
-            
+
         instruction = generate_instruction(module, opportunities)
         payload = build_repair_payload(module, opportunities)
         metadata = build_metadata(module, payload)
-        
-        return [{
-            "instruction": instruction,
-            "context": {"module_name": module.name},
-            "output": payload.model_dump(),
-            "metadata": metadata
-        }]
+
+        return [
+            {
+                "instruction": instruction,
+                "context": {"module_name": module.name},
+                "output": payload.model_dump(),
+                "metadata": metadata,
+            }
+        ]
     except Exception as exc:
         logger.error("Error processing module %s: %s", module.name, exc)
         return []
 
+
 class RepairPipeline(SharedPipelineOrchestrator):
     """Orchestrates the deterministic generation of Repair Protocol V1 JSONL."""
 
-    def __init__(self, sources_yaml: Path, output_dir: Path, workers: int = 4, resume: bool = False, reset_checkpoint: bool = False):
+    def __init__(
+        self,
+        sources_yaml: Path,
+        output_dir: Path,
+        workers: int = 4,
+        resume: bool = False,
+        reset_checkpoint: bool = False,
+    ):
         scanner = ModuleScanner(config_path=sources_yaml, cache_dir=output_dir / "cache")
         stats = RepairStatistics()
         writer = DatasetWriter(
             output_dir=output_dir,
             stats=stats,
             filename="repair_v1_0.jsonl",
-            dataset_name="AIODOO Repair Dataset"
+            dataset_name="AIODOO Repair Dataset",
         )
         deduplicator = Deduplicator()
         core_validator = CoreProtocolValidator()
         checkpoint = CheckpointManager(output_dir=output_dir)
-        
+
         if reset_checkpoint:
             checkpoint.clear()
         if resume:
             checkpoint.load()
-            
+
         super().__init__(
             scanner=scanner,
             writer=writer,
@@ -75,5 +86,5 @@ class RepairPipeline(SharedPipelineOrchestrator):
             stats_filename="repair_statistics.json",
             manifest_filename="repair_manifest.json",
             workers=workers,
-            resume=resume
+            resume=resume,
         )

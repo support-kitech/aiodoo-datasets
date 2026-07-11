@@ -2,9 +2,10 @@
 
 from aiodoo_datasets.generators.execution.export.export_context import ExportContext
 
+
 class JSONLValidator:
     """Validates that the context is ready for JSONL export."""
-    
+
     @staticmethod
     def validate(context: ExportContext) -> tuple[str, ...]:
         violations = []
@@ -14,5 +15,5 @@ class JSONLValidator:
             violations.append("Cannot export: Serialized data is empty.")
         if not context.output_directory:
             violations.append("Cannot export: Output directory is missing.")
-            
+
         return tuple(violations)

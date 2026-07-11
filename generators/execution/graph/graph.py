@@ -14,6 +14,7 @@ class ExecutionGraph:
     Stores only domain objects. Never Knowledge, never Protocol.
     Provides read-only lookup helpers.
     """
+
     nodes: tuple[ExecutionNode, ...] = field(default_factory=tuple)
     edges: tuple[ExecutionEdge, ...] = field(default_factory=tuple)
 

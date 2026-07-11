@@ -1,16 +1,21 @@
 """Protocol mapper for the Approval Generator."""
 
 from aiodoo_datasets.generators.approval.domain.review import Review
-from aiodoo_datasets.generators.approval.protocol.domain.finding_protocol import FindingProtocol, RecommendationProtocol, EvidenceProtocol
+from aiodoo_datasets.generators.approval.protocol.domain.finding_protocol import (
+    FindingProtocol,
+    RecommendationProtocol,
+    EvidenceProtocol,
+)
 from aiodoo_datasets.generators.approval.protocol.domain.decision_protocol import DecisionProtocol
 from aiodoo_datasets.generators.approval.protocol.domain.approval_protocol import (
     ApprovalProtocol,
     ReviewMetadataProtocol,
 )
 
+
 class ProtocolMapper:
     """Maps internal domain models to external protocol models."""
-    
+
     @staticmethod
     def map_review(review: Review) -> ApprovalProtocol:
         """Map a Review domain model to an ApprovalProtocol model."""
@@ -52,9 +57,11 @@ class ProtocolMapper:
                             line_number=e.line_number,
                             snippet=e.snippet,
                             description=e.description,
-                        ) for e in f.evidence
+                        )
+                        for e in f.evidence
                     ],
-                ) for f in review.findings
+                )
+                for f in review.findings
             ],
             recommendations=[
                 RecommendationProtocol(
@@ -62,6 +69,7 @@ class ProtocolMapper:
                     finding_id=r.finding_id,
                     description=r.description,
                     suggested_fix=r.suggested_fix,
-                ) for r in review.recommendations
+                )
+                for r in review.recommendations
             ],
         )

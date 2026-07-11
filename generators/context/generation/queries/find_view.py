@@ -7,13 +7,15 @@ from aiodoo_datasets.generators.context.generation.enums import QueryType, Query
 from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
 from types import MappingProxyType
 
+
 class FindViewQuery(BaseContextQuery):
     """
     Generates queries asking which view displays a given element (like a field or model).
-    
+
     Supported Node Types: NodeType.VIEW
     Generated Question: "Which view displays X?"
     """
+
     query_type = QueryType.FIND_VIEW
     supported_node_types = [NodeType.VIEW]
 
@@ -25,7 +27,7 @@ class FindViewQuery(BaseContextQuery):
             target_node = graph.get_node(edge.target_id)
             # Source is the view
             view_node = graph.get_node(edge.source_id)
-            
+
             if view_node.node_type == NodeType.VIEW:
                 queries.append(
                     Query(
@@ -34,7 +36,9 @@ class FindViewQuery(BaseContextQuery):
                         target_node=target_node.node_id,
                         target_symbol=target_node.name,
                         natural_language=f"Which view displays {target_node.name}?",
-                        metadata=MappingProxyType({"module": view_node.module, "language": view_node.language.value})
+                        metadata=MappingProxyType(
+                            {"module": view_node.module, "language": view_node.language.value}
+                        ),
                     )
                 )
         return queries

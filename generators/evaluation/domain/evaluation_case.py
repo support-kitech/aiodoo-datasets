@@ -12,9 +12,11 @@ from aiodoo_datasets.generators.evaluation.domain.success_criteria import Succes
 from aiodoo_datasets.generators.evaluation.domain.failure_criteria import FailureCriteria
 from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
 
+
 @dataclass(frozen=True, slots=True)
 class EvaluationCase:
     """Immutable evaluation case representing a single test sample."""
+
     case_id: str
     prompt: str
     metadata: EvaluationMetadata

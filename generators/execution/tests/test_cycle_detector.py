@@ -8,7 +8,6 @@ from aiodoo_datasets.generators.execution.graph.exceptions import CycleDetectedE
 
 
 class TestCycleDetector(unittest.TestCase):
-
     def test_acyclic(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p1")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p2")
@@ -51,5 +50,5 @@ class TestCycleDetector(unittest.TestCase):
             CycleDetector.detect(graph)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -14,6 +14,7 @@ class GraphContext:
     Contains upstream BuilderContext, domain objects from PipelineResult,
     statistics, and configuration. All graph components receive only GraphContext.
     """
+
     builder_context: BuilderContext
     domain_steps: tuple = field(default_factory=tuple)
     domain_dependencies: tuple = field(default_factory=tuple)

@@ -2,8 +2,10 @@
 
 from enum import Enum
 
+
 class QueryType(str, Enum):
     """Enumeration of all supported query intents."""
+
     FIND_MODEL = "find_model"
     FIND_FIELD = "find_field"
     FIND_COMPUTE = "find_compute"
@@ -13,8 +15,10 @@ class QueryType(str, Enum):
     FIND_SECURITY = "find_security"
     FIND_DEPENDENCY = "find_dependency"
 
+
 class QueryIntent(str, Enum):
     """Enumeration of specific engineering intents."""
+
     FIND_MODEL = "locate_model_definition"
     FIND_FIELD = "locate_field_definition"
     FIND_COMPUTE = "locate_compute_logic"

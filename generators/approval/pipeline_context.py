@@ -8,9 +8,11 @@ from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
 from aiodoo_datasets.generators.approval.rules.registry import RuleRegistry
 from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import ParserRegistry
 
+
 @dataclass(frozen=True, slots=True)
 class PipelineContext:
     """State context orchestrating the entire approval pipeline."""
+
     config: ApprovalConfig
     input_protocols: Mapping[str, Mapping[str, Any]]
     metadata: ReviewMetadata

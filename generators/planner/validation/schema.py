@@ -3,9 +3,11 @@
 from typing import Any
 from pydantic import BaseModel, Field
 
+
 class Analysis(BaseModel):
     summary: str
     risks: list[str] = Field(default_factory=list)
+
 
 class GeneratedArtifact(BaseModel):
     id: str
@@ -20,6 +22,7 @@ class GeneratedArtifact(BaseModel):
     version: int = 1
     dependencies: list[str] = Field(default_factory=list)
     validation_status: str = "pending"
+
 
 class TaskSpec(BaseModel):
     id: str
@@ -37,6 +40,7 @@ class TaskSpec(BaseModel):
     execution_result: dict[str, Any] = Field(default_factory=dict)
     phase: str = ""
 
+
 class PlanAction(BaseModel):
     id: str
     action: str
@@ -46,6 +50,7 @@ class PlanAction(BaseModel):
     depends_on: list[str] = Field(default_factory=list)
     continue_on_error: bool = False
 
+
 class PlanPayload(BaseModel):
     goal: str
     workspace: str
@@ -54,8 +59,10 @@ class PlanPayload(BaseModel):
     execution: list[PlanAction]
     summary: str
 
+
 class PlannerDatasetRecord(BaseModel):
     """The overall JSONL row structure."""
+
     instruction: str
     input: str
     output: PlanPayload

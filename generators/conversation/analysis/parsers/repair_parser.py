@@ -10,10 +10,11 @@ from aiodoo_datasets.generators.conversation.domain.attachment import Attachment
 from aiodoo_datasets.generators.conversation.enums import AttachmentType
 import hashlib
 
+
 @ParserRegistry.register("repair_protocol")
 class RepairParser(BaseParser):
     """Parses Repair protocols."""
-    
+
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         attachments = []
@@ -23,25 +24,25 @@ class RepairParser(BaseParser):
                 Reference(
                     source_generator="repair",
                     source_reference=patch_id,
-                    description=f"Repair patch: {patch.get('description', '')}"
+                    description=f"Repair patch: {patch.get('description', '')}",
                 )
             )
-            
+
             hash_input = f"DIFF_ATT:{patch_id}"
             att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
-            
+
             attachments.append(
                 Attachment(
                     attachment_id=f"ATT-{att_hash}",
                     attachment_type=AttachmentType.DIFF,
                     content=patch.get("diff", ""),
-                    file_path=patch.get("file_path")
+                    file_path=patch.get("file_path"),
                 )
             )
-            
+
         return ExtractedEvidence(
             protocol_name="repair_protocol",
             references=tuple(references),
             attachments=tuple(attachments),
-            raw_data=MappingProxyType(data)
+            raw_data=MappingProxyType(data),
         )

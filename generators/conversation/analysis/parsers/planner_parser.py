@@ -7,10 +7,11 @@ from aiodoo_datasets.generators.conversation.registries.parser_registry import P
 from aiodoo_datasets.generators.conversation.analysis.result import ExtractedEvidence
 from aiodoo_datasets.generators.conversation.domain.reference import Reference
 
+
 @ParserRegistry.register("planner_protocol")
 class PlannerParser(BaseParser):
     """Parses Planner protocols."""
-    
+
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         for task in data.get("tasks", []):
@@ -18,12 +19,12 @@ class PlannerParser(BaseParser):
                 Reference(
                     source_generator="planner",
                     source_reference=task.get("task_id", "unknown"),
-                    description=f"Planner task: {task.get('description', '')}"
+                    description=f"Planner task: {task.get('description', '')}",
                 )
             )
         return ExtractedEvidence(
             protocol_name="planner_protocol",
             references=tuple(references),
             attachments=(),
-            raw_data=MappingProxyType(data)
+            raw_data=MappingProxyType(data),
         )

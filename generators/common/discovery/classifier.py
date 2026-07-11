@@ -7,9 +7,11 @@ from .scanner import OdooModule
 from .ast_parser import PythonKnowledge
 from .xml_parser import XMLKnowledge
 
+
 @dataclass(slots=True)
 class Scenario:
     """Represents an identified engineering scenario."""
+
     name: str
     tags: list[str] = field(default_factory=list)
     difficulty: int = 1
@@ -20,19 +22,19 @@ class ScenarioClassifier:
     """Uses rich heuristics to classify structural code into training scenarios."""
 
     def classify(
-        self, 
-        module: OdooModule, 
-        python_data: Sequence[PythonKnowledge], 
-        xml_data: Sequence[XMLKnowledge]
+        self,
+        module: OdooModule,
+        python_data: Sequence[PythonKnowledge],
+        xml_data: Sequence[XMLKnowledge],
     ) -> list[Scenario]:
         scenarios = []
-        
+
         has_transient = False
         has_controllers = False
         has_routes = False
         has_compute = False
         has_onchange = False
-        
+
         has_views = False
         has_qweb = False
         has_reports = False
@@ -65,9 +67,9 @@ class ScenarioClassifier:
                     metrics["controllers"] += 1
                 else:
                     metrics["models"] += 1
-                    
+
                 metrics["fields"] += len(model_def.fields)
-                    
+
                 for field_name, f_def in model_def.fields.items():
                     if f_def.computed:
                         has_compute = True
@@ -79,7 +81,7 @@ class ScenarioClassifier:
             metrics["views"] += len(xml_k.views)
             metrics["security_rules"] += len(xml_k.security_rules)
             metrics["assets"] += len(xml_k.assets)
-            
+
             if xml_k.views:
                 has_views = True
             if xml_k.security_rules:
@@ -100,26 +102,32 @@ class ScenarioClassifier:
 
         if has_transient and has_views:
             scenarios.append(Scenario(name="Create Wizard", tags=["Wizard", "UI"]))
-            
+
         if (has_controllers or has_routes) and has_qweb:
-            scenarios.append(Scenario(name="Portal Interface", tags=["Portal", "Controller", "QWeb"]))
+            scenarios.append(
+                Scenario(name="Portal Interface", tags=["Portal", "Controller", "QWeb"])
+            )
         elif has_controllers or has_routes:
             scenarios.append(Scenario(name="REST API / Controller", tags=["API", "Controller"]))
-            
+
         if has_reports:
             scenarios.append(Scenario(name="Create Report", tags=["Report", "QWeb"]))
-            
+
         if has_security:
-            scenarios.append(Scenario(name="Complex Access Controls", tags=["Security", "Access Rights"]))
-            
+            scenarios.append(
+                Scenario(name="Complex Access Controls", tags=["Security", "Access Rights"])
+            )
+
         if has_cron:
             scenarios.append(Scenario(name="Scheduled Automation", tags=["Automation", "Cron"]))
-            
+
         if has_mail:
             scenarios.append(Scenario(name="Mail Template Automation", tags=["Mail", "Templates"]))
-            
+
         if has_compute and has_onchange:
-            scenarios.append(Scenario(name="Dynamic Business Logic", tags=["Compute", "Onchange", "Fields"]))
+            scenarios.append(
+                Scenario(name="Dynamic Business Logic", tags=["Compute", "Onchange", "Fields"])
+            )
 
         if not scenarios:
             scenarios.append(Scenario(name="Module Architecture", tags=["Module", "Structural"]))

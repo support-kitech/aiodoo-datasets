@@ -6,9 +6,10 @@ from aiodoo_datasets.generators.approval.rules.rule_context import RuleContext
 from aiodoo_datasets.generators.approval.rules.rule_result import RuleResult
 from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity
 
+
 class BaseRule(ABC):
     """Abstract base class for an approval rule plugin."""
-    
+
     RULE_ID: ClassVar[str]
     RULE_NAME: ClassVar[str]
     RULE_CATEGORY: ClassVar[RuleCategory]
@@ -16,7 +17,7 @@ class BaseRule(ABC):
     DESCRIPTION: ClassVar[str]
     VERSION: ClassVar[str]
     PRIORITY: ClassVar[int]
-        
+
     @abstractmethod
     def evaluate(self, context: RuleContext) -> RuleResult:
         """Evaluate the rule against the provided context."""

@@ -2,11 +2,12 @@
 
 from dataclasses import dataclass
 
+
 @dataclass
 class ExportStatistics:
     """
     Mutable container for export metrics.
-    
+
     Attributes:
         jsonl_records: Number of JSONL records written.
         exported_files: Total number of files generated.
@@ -17,6 +18,7 @@ class ExportStatistics:
         validation_execution_count: Number of validators executed.
         export_duration: Time taken to complete the export.
     """
+
     jsonl_records: int = 0
     exported_files: int = 0
     exported_bytes: int = 0

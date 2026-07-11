@@ -9,7 +9,6 @@ from aiodoo_datasets.generators.execution.validation.edge_validator import EdgeV
 
 
 class TestGraphValidator(unittest.TestCase):
-
     def test_valid_graph(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         n2 = ExecutionNode(node_id="b", node_type=NodeType.STEP, payload="p")
@@ -55,5 +54,5 @@ class TestGraphValidator(unittest.TestCase):
         self.assertFalse(result.success)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

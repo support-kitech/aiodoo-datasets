@@ -3,9 +3,10 @@
 import json
 from typing import Dict, Any
 
+
 class Configuration:
     """Loads and validates CLI configuration."""
-    
+
     @staticmethod
     def load(config_path: str) -> Dict[str, Any]:
         """Load configuration from a JSON file."""

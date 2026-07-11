@@ -7,13 +7,15 @@ from aiodoo_datasets.generators.context.generation.enums import QueryType, Query
 from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
 from types import MappingProxyType
 
+
 class FindComputeQuery(BaseContextQuery):
     """
     Generates queries asking where a field's computation logic resides.
-    
+
     Supported Node Types: NodeType.FIELD
     Generated Question: "Where is field X computed?"
     """
+
     query_type = QueryType.FIND_COMPUTE
     supported_node_types = [NodeType.FIELD]
 
@@ -22,8 +24,10 @@ class FindComputeQuery(BaseContextQuery):
         # Target fields that have a COMPUTES outgoing edge.
         for node in graph.find_nodes_by_type(NodeType.FIELD):
             outgoing_edges = graph.get_outgoing_edges(node.node_id)
-            has_compute = any(e.relationship_type == RelationshipType.COMPUTES for e in outgoing_edges)
-            
+            has_compute = any(
+                e.relationship_type == RelationshipType.COMPUTES for e in outgoing_edges
+            )
+
             if has_compute:
                 queries.append(
                     Query(
@@ -32,7 +36,9 @@ class FindComputeQuery(BaseContextQuery):
                         target_node=node.node_id,
                         target_symbol=node.name,
                         natural_language=f"Where is field {node.name} computed?",
-                        metadata=MappingProxyType({"module": node.module, "language": node.language.value})
+                        metadata=MappingProxyType(
+                            {"module": node.module, "language": node.language.value}
+                        ),
                     )
                 )
         return queries

@@ -8,6 +8,7 @@ from aiodoo_datasets.generators.approval.rules.style_rules import Pep8Compliance
 from aiodoo_datasets.generators.approval.rules.odoo_rules import OdooManifestRule
 from aiodoo_datasets.generators.approval.rules.protocol_rules import ProtocolIntegrityRule
 
+
 def register_all_rules():
     RuleRegistry.register(SQLInjectionRule)
     RuleRegistry.register(Pep8ComplianceRule)
@@ -15,5 +16,6 @@ def register_all_rules():
     RuleRegistry.register(NPlusOneQueryRule)
     RuleRegistry.register(OdooManifestRule)
     RuleRegistry.register(ProtocolIntegrityRule)
+
 
 register_all_rules()

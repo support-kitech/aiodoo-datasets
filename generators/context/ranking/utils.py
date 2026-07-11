@@ -2,6 +2,7 @@
 
 from types import MappingProxyType
 
+
 def freeze_metadata(data: dict) -> MappingProxyType:
     """Recursively freezes a dictionary using MappingProxyType."""
     if not isinstance(data, dict):

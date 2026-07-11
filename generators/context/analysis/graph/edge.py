@@ -6,9 +6,11 @@ from typing import Any
 
 from aiodoo_datasets.generators.context.analysis.graph.enums import RelationshipType
 
+
 @dataclass
 class ContextEdge:
     """Represents a directed relationship between two ContextNodes."""
+
     source_id: str
     target_id: str
     relationship_type: RelationshipType
@@ -43,7 +45,7 @@ class ContextEdge:
             "source_id": self.source_id,
             "target_id": self.target_id,
             "relationship_type": self.relationship_type.value,
-            "metadata": dict(sorted(self.metadata.items()))
+            "metadata": dict(sorted(self.metadata.items())),
         }
 
     @classmethod
@@ -53,7 +55,7 @@ class ContextEdge:
             source_id=data["source_id"],
             target_id=data["target_id"],
             relationship_type=RelationshipType(data["relationship_type"]),
-            metadata=data.get("metadata", {})
+            metadata=data.get("metadata", {}),
         )
         # Override generated edge_id if provided
         if "edge_id" in data:

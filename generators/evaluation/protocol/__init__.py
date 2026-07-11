@@ -2,10 +2,20 @@
 
 from aiodoo_datasets.generators.evaluation.protocol.mapper import ProtocolMapper
 from aiodoo_datasets.generators.evaluation.protocol.domain import (
-    MetadataProtocol, ExpectedOutputProtocol, GroundTruthProtocol, EvaluationRuleProtocol,
-    SuccessCriteriaProtocol, FailureCriteriaProtocol, ReferenceProtocol, AttachmentProtocol,
-    ScoreProtocol, EvaluationCaseProtocol, BenchmarkMetadataProtocol, BenchmarkSuiteProtocol,
-    BenchmarkCatalogProtocol, EvaluationProtocol
+    MetadataProtocol,
+    ExpectedOutputProtocol,
+    GroundTruthProtocol,
+    EvaluationRuleProtocol,
+    SuccessCriteriaProtocol,
+    FailureCriteriaProtocol,
+    ReferenceProtocol,
+    AttachmentProtocol,
+    ScoreProtocol,
+    EvaluationCaseProtocol,
+    BenchmarkMetadataProtocol,
+    BenchmarkSuiteProtocol,
+    BenchmarkCatalogProtocol,
+    EvaluationProtocol,
 )
 
 __all__ = [

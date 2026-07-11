@@ -5,12 +5,12 @@ from aiodoo_datasets.generators.execution.registries.graph_registry import Graph
 class DummyA:
     pass
 
+
 class DummyB:
     pass
 
 
 class TestGraphRegistry(unittest.TestCase):
-
     def test_valid_registration(self):
         reg = GraphRegistry()
         reg.register(DummyA())
@@ -34,5 +34,5 @@ class TestGraphRegistry(unittest.TestCase):
         self.assertIsInstance(snap, tuple)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

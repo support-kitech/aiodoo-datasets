@@ -4,22 +4,22 @@ from typing import Tuple
 from aiodoo_datasets.generators.evaluation.domain.benchmark_suite import BenchmarkSuite
 from aiodoo_datasets.generators.evaluation.domain.evaluation_case import EvaluationCase
 from aiodoo_datasets.generators.evaluation.enums import BenchmarkCategory
-from aiodoo_datasets.generators.evaluation.factories.benchmark_suite_factory import BenchmarkSuiteFactory
+from aiodoo_datasets.generators.evaluation.factories.benchmark_suite_factory import (
+    BenchmarkSuiteFactory,
+)
+
 
 class BenchmarkSuiteBuilder:
     """Orchestrates the construction of a BenchmarkSuite."""
-    
+
     @staticmethod
     def build(
         catalog_id: str,
         suite_category: BenchmarkCategory,
         suite_name: str,
-        cases: Tuple[EvaluationCase, ...]
+        cases: Tuple[EvaluationCase, ...],
     ) -> BenchmarkSuite:
         """Build a benchmark suite by orchestrating the factory."""
         return BenchmarkSuiteFactory.create(
-            catalog_id=catalog_id,
-            suite_category=suite_category,
-            suite_name=suite_name,
-            cases=cases
+            catalog_id=catalog_id, suite_category=suite_category, suite_name=suite_name, cases=cases
         )

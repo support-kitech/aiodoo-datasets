@@ -2,9 +2,10 @@
 
 from typing import Dict, Any
 
+
 class DifficultyEstimator:
     """Deterministically estimates the difficulty level of the extracted evidence."""
-    
+
     @staticmethod
     def estimate(evidence: Dict[str, Any]) -> str:
         """Estimate difficulty purely based on structural evidence."""

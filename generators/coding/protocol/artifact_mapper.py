@@ -3,18 +3,16 @@
 import hashlib
 from aiodoo_datasets.generators.coding.validation.schema import GeneratedArtifact
 
+
 def map_to_artifact(
-    raw_data: dict, 
-    dependencies: list[str],
-    module_version: str,
-    module_name: str
+    raw_data: dict, dependencies: list[str], module_version: str, module_name: str
 ) -> GeneratedArtifact:
     """Translates raw file data into a strictly typed GeneratedArtifact with deterministic ID."""
-    
+
     # Deterministic ID generation based on stable inputs
     seed_str = f"{module_version}_{module_name}_file_{raw_data['path']}"
     stable_id = f"art_{hashlib.sha256(seed_str.encode('utf-8')).hexdigest()[:12]}"
-    
+
     # Convert structured intent dict to string for final schema
     intent_dict = raw_data.get("intent", {})
     if isinstance(intent_dict, dict):
@@ -40,5 +38,5 @@ def map_to_artifact(
         reason=f"Implement {raw_data['path']} for {raw_data.get('scenario_name', 'feature')}",
         created_by="aiodoo_coding_model",
         dependencies=sorted(dependencies),
-        validation_status="validated"
+        validation_status="validated",
     )

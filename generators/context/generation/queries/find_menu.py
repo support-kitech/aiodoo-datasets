@@ -7,13 +7,15 @@ from aiodoo_datasets.generators.context.generation.enums import QueryType, Query
 from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
 from types import MappingProxyType
 
+
 class FindMenuQuery(BaseContextQuery):
     """
     Generates queries asking which menu opens an action.
-    
+
     Supported Node Types: NodeType.MENU
     Generated Question: "Which menu opens X?"
     """
+
     query_type = QueryType.FIND_MENU
     supported_node_types = [NodeType.MENU]
 
@@ -31,7 +33,9 @@ class FindMenuQuery(BaseContextQuery):
                         target_node=target_node.node_id,
                         target_symbol=target_node.name,
                         natural_language=f"Which menu opens {target_node.name}?",
-                        metadata=MappingProxyType({"module": source_node.module, "language": source_node.language.value})
+                        metadata=MappingProxyType(
+                            {"module": source_node.module, "language": source_node.language.value}
+                        ),
                     )
                 )
         return queries

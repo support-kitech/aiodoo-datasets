@@ -1,41 +1,103 @@
 import unittest
 
 from aiodoo_datasets.generators.context.analysis.graph import (
-    ContextNode, ContextEdge, ContextGraph, NodeType, LanguageType, RelationshipType
+    ContextNode,
+    ContextEdge,
+    ContextGraph,
+    NodeType,
+    LanguageType,
+    RelationshipType,
 )
 from aiodoo_datasets.generators.context.generation.enums import QueryType
 from aiodoo_datasets.generators.context.generation.queries import (
-    FindModelQuery, FindFieldQuery, FindComputeQuery, FindViewQuery,
-    FindActionQuery, FindMenuQuery, FindSecurityQuery, FindDependencyQuery
+    FindModelQuery,
+    FindFieldQuery,
+    FindComputeQuery,
+    FindViewQuery,
+    FindActionQuery,
+    FindMenuQuery,
+    FindSecurityQuery,
+    FindDependencyQuery,
 )
 
-class TestQueries(unittest.TestCase):
 
+class TestQueries(unittest.TestCase):
     def setUp(self):
         self.graph = ContextGraph()
         # Mock Nodes
-        self.n_model = ContextNode("sale.order", "sale", "models/sale_order.py", NodeType.MODEL, LanguageType.PYTHON)
-        self.n_field = ContextNode("amount_total", "sale", "models/sale_order.py", NodeType.FIELD, LanguageType.PYTHON)
-        self.n_method = ContextNode("_compute_total", "sale", "models/sale_order.py", NodeType.METHOD, LanguageType.PYTHON)
-        self.n_view = ContextNode("view_sale_order_form", "sale", "views/sale_views.xml", NodeType.VIEW, LanguageType.XML)
-        self.n_action = ContextNode("action_orders", "sale", "views/sale_views.xml", NodeType.ACTION, LanguageType.XML)
-        self.n_menu = ContextNode("menu_sale_orders", "sale", "views/sale_views.xml", NodeType.MENU, LanguageType.XML)
-        self.n_acl = ContextNode("access_sale_order", "sale", "security/ir.model.access.csv", NodeType.ACL, LanguageType.CSV)
-        self.n_manifest_sale = ContextNode("sale", "sale", "__manifest__.py", NodeType.MANIFEST, LanguageType.PYTHON)
-        self.n_manifest_stock = ContextNode("stock", "stock", "__manifest__.py", NodeType.MANIFEST, LanguageType.PYTHON)
+        self.n_model = ContextNode(
+            "sale.order", "sale", "models/sale_order.py", NodeType.MODEL, LanguageType.PYTHON
+        )
+        self.n_field = ContextNode(
+            "amount_total", "sale", "models/sale_order.py", NodeType.FIELD, LanguageType.PYTHON
+        )
+        self.n_method = ContextNode(
+            "_compute_total", "sale", "models/sale_order.py", NodeType.METHOD, LanguageType.PYTHON
+        )
+        self.n_view = ContextNode(
+            "view_sale_order_form", "sale", "views/sale_views.xml", NodeType.VIEW, LanguageType.XML
+        )
+        self.n_action = ContextNode(
+            "action_orders", "sale", "views/sale_views.xml", NodeType.ACTION, LanguageType.XML
+        )
+        self.n_menu = ContextNode(
+            "menu_sale_orders", "sale", "views/sale_views.xml", NodeType.MENU, LanguageType.XML
+        )
+        self.n_acl = ContextNode(
+            "access_sale_order",
+            "sale",
+            "security/ir.model.access.csv",
+            NodeType.ACL,
+            LanguageType.CSV,
+        )
+        self.n_manifest_sale = ContextNode(
+            "sale", "sale", "__manifest__.py", NodeType.MANIFEST, LanguageType.PYTHON
+        )
+        self.n_manifest_stock = ContextNode(
+            "stock", "stock", "__manifest__.py", NodeType.MANIFEST, LanguageType.PYTHON
+        )
 
         # Mock Edges
-        self.e_compute = ContextEdge(self.n_field.node_id, self.n_method.node_id, RelationshipType.COMPUTES)
-        self.e_displays = ContextEdge(self.n_view.node_id, self.n_field.node_id, RelationshipType.DISPLAYS)
-        self.e_triggers_action = ContextEdge(self.n_action.node_id, self.n_view.node_id, RelationshipType.TRIGGERS)
-        self.e_triggers_menu = ContextEdge(self.n_menu.node_id, self.n_action.node_id, RelationshipType.TRIGGERS)
-        self.e_secures = ContextEdge(self.n_acl.node_id, self.n_model.node_id, RelationshipType.SECURES)
-        self.e_depends = ContextEdge(self.n_manifest_sale.node_id, self.n_manifest_stock.node_id, RelationshipType.DEPENDS)
+        self.e_compute = ContextEdge(
+            self.n_field.node_id, self.n_method.node_id, RelationshipType.COMPUTES
+        )
+        self.e_displays = ContextEdge(
+            self.n_view.node_id, self.n_field.node_id, RelationshipType.DISPLAYS
+        )
+        self.e_triggers_action = ContextEdge(
+            self.n_action.node_id, self.n_view.node_id, RelationshipType.TRIGGERS
+        )
+        self.e_triggers_menu = ContextEdge(
+            self.n_menu.node_id, self.n_action.node_id, RelationshipType.TRIGGERS
+        )
+        self.e_secures = ContextEdge(
+            self.n_acl.node_id, self.n_model.node_id, RelationshipType.SECURES
+        )
+        self.e_depends = ContextEdge(
+            self.n_manifest_sale.node_id, self.n_manifest_stock.node_id, RelationshipType.DEPENDS
+        )
 
         # Populate graph
-        for node in [self.n_model, self.n_field, self.n_method, self.n_view, self.n_action, self.n_menu, self.n_acl, self.n_manifest_sale, self.n_manifest_stock]:
+        for node in [
+            self.n_model,
+            self.n_field,
+            self.n_method,
+            self.n_view,
+            self.n_action,
+            self.n_menu,
+            self.n_acl,
+            self.n_manifest_sale,
+            self.n_manifest_stock,
+        ]:
             self.graph.add_node(node)
-        for edge in [self.e_compute, self.e_displays, self.e_triggers_action, self.e_triggers_menu, self.e_secures, self.e_depends]:
+        for edge in [
+            self.e_compute,
+            self.e_displays,
+            self.e_triggers_action,
+            self.e_triggers_menu,
+            self.e_secures,
+            self.e_depends,
+        ]:
             self.graph.add_edge(edge)
 
     def test_find_model_query(self):
@@ -101,5 +163,6 @@ class TestQueries(unittest.TestCase):
         self.assertEqual(queries[0].natural_language, "Which modules depend on stock?")
         self.assertEqual(queries[0].target_node, self.n_manifest_stock.node_id)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

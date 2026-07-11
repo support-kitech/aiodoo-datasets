@@ -6,12 +6,14 @@ from aiodoo_datasets.generators.context.analysis.graph.enums import Relationship
 from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 
+
 class TriggersRelationship(BaseRelationshipExtractor):
     """
     Extracts action triggers (e.g. Menu -> Action, Action -> View).
-    
+
     Supported Knowledge: XML trees.
     """
+
     relation_type = RelationshipType.TRIGGERS
     supported_languages = [LanguageType.XML]
 

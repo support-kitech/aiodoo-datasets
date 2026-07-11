@@ -4,12 +4,24 @@ from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 from aiodoo_datasets.generators.context.generation.query import Query
 from aiodoo_datasets.generators.context.ranking.result import RankingResult
 from aiodoo_datasets.generators.context.protocol.schema import (
-    ProtocolQuery, ProtocolArtifact, ProtocolNode, ProtocolEdge, ProtocolMetadata
+    ProtocolQuery,
+    ProtocolArtifact,
+    ProtocolNode,
+    ProtocolEdge,
+    ProtocolMetadata,
 )
 from aiodoo_datasets.generators.context.protocol.enums import (
-    ProtocolQueryType, ProtocolIntent, ProtocolNodeType, ProtocolLanguage, ProtocolRankingReason
+    ProtocolQueryType,
+    ProtocolIntent,
+    ProtocolNodeType,
+    ProtocolLanguage,
+    ProtocolRankingReason,
 )
-from aiodoo_datasets.generators.context.protocol.constants import CONTEXT_PROTOCOL_V1, GENERATOR_NAME
+from aiodoo_datasets.generators.context.protocol.constants import (
+    CONTEXT_PROTOCOL_V1,
+    GENERATOR_NAME,
+)
+
 
 def map_query(query: Query) -> ProtocolQuery:
     """Maps an engineering Query to ProtocolQuery."""
@@ -19,15 +31,16 @@ def map_query(query: Query) -> ProtocolQuery:
         intent=ProtocolIntent(query.intent.value),
         natural_language=query.natural_language,
         target_node=query.target_node,
-        target_symbol=query.target_symbol
+        target_symbol=query.target_symbol,
     )
+
 
 def map_artifact(result: RankingResult, graph: ContextGraph) -> ProtocolArtifact | None:
     """Maps a RankingResult to ProtocolArtifact if the node exists."""
     node = graph.get_node(result.node_id)
     if not node:
         return None
-        
+
     return ProtocolArtifact(
         node_id=node.node_id,
         name=node.name,
@@ -38,21 +51,23 @@ def map_artifact(result: RankingResult, graph: ContextGraph) -> ProtocolArtifact
         start_line=result.metadata.get("start_line", 0),
         end_line=result.metadata.get("end_line", 0),
         score=result.score.value,
-        ranking_reason=ProtocolRankingReason(result.reason.value)
+        ranking_reason=ProtocolRankingReason(result.reason.value),
     )
+
 
 def map_node(node_id: str, graph: ContextGraph) -> ProtocolNode | None:
     """Maps a node ID to ProtocolNode."""
     node = graph.get_node(node_id)
     if not node:
         return None
-        
+
     return ProtocolNode(
         node_id=node.node_id,
         name=node.name,
         type=ProtocolNodeType(node.node_type.value),
-        module=node.module
+        module=node.module,
     )
+
 
 def map_edge(edge) -> ProtocolEdge:
     """Maps an engineering edge to ProtocolEdge."""
@@ -60,10 +75,13 @@ def map_edge(edge) -> ProtocolEdge:
         edge_id=edge.edge_id,
         source_id=edge.source_id,
         target_id=edge.target_id,
-        relationship_type=edge.relationship_type.value
+        relationship_type=edge.relationship_type.value,
     )
 
-def map_metadata(module: str, query_type_value: str, artifact_count: int, relationship_count: int) -> ProtocolMetadata:
+
+def map_metadata(
+    module: str, query_type_value: str, artifact_count: int, relationship_count: int
+) -> ProtocolMetadata:
     """Creates a ProtocolMetadata object."""
     return ProtocolMetadata(
         protocol_version=CONTEXT_PROTOCOL_V1,
@@ -71,5 +89,5 @@ def map_metadata(module: str, query_type_value: str, artifact_count: int, relati
         module=module,
         query_type=ProtocolQueryType(query_type_value),
         artifact_count=artifact_count,
-        relationship_count=relationship_count
+        relationship_count=relationship_count,
     )

@@ -7,13 +7,15 @@ from aiodoo_datasets.generators.context.generation.enums import QueryType, Query
 from aiodoo_datasets.generators.context.generation.queries.base import BaseContextQuery
 from types import MappingProxyType
 
+
 class FindActionQuery(BaseContextQuery):
     """
     Generates queries asking which action opens a target (like a view or model).
-    
+
     Supported Node Types: NodeType.ACTION
     Generated Question: "Which action opens X?"
     """
+
     query_type = QueryType.FIND_ACTION
     supported_node_types = [NodeType.ACTION]
 
@@ -33,7 +35,9 @@ class FindActionQuery(BaseContextQuery):
                         target_node=target_node.node_id,
                         target_symbol=target_node.name,
                         natural_language=f"Which action opens {target_node.name}?",
-                        metadata=MappingProxyType({"module": source_node.module, "language": source_node.language.value})
+                        metadata=MappingProxyType(
+                            {"module": source_node.module, "language": source_node.language.value}
+                        ),
                     )
                 )
         return queries

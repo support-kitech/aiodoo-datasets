@@ -3,6 +3,7 @@
 
 class GraphError(Exception):
     """Base exception for all graph-related failures."""
+
     pass
 
 
@@ -16,14 +17,17 @@ class CycleDetectedError(GraphError):
 
 class InvalidEdgeError(GraphError):
     """Raised when an edge references a non-existent node or is a self-loop."""
+
     pass
 
 
 class InvalidNodeError(GraphError):
     """Raised when a node has invalid or duplicate identifiers."""
+
     pass
 
 
 class GraphValidationError(GraphError):
     """Raised when the graph fails structural validation."""
+
     pass

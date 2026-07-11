@@ -5,6 +5,7 @@ from aiodoo_datasets.generators.context.analysis.graph.node import ContextNode
 from aiodoo_datasets.generators.context.analysis.graph.edge import ContextEdge
 from aiodoo_datasets.generators.context.analysis.graph.enums import NodeType, RelationshipType
 
+
 class ContextGraph:
     """A deterministic, directed engineering graph representing Odoo modules."""
 
@@ -92,7 +93,7 @@ class ContextGraph:
         """Deterministically serialize the entire graph to a dictionary."""
         return {
             "nodes": [node.to_dict() for node in self.get_nodes()],
-            "edges": [edge.to_dict() for edge in self.get_edges()]
+            "edges": [edge.to_dict() for edge in self.get_edges()],
         }
 
     @classmethod

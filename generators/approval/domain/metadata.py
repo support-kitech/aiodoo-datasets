@@ -3,9 +3,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
+
 @dataclass(frozen=True, slots=True)
 class ReviewMetadata:
     """Traceability mapping back to the exact versions and protocols."""
+
     generator_version: str
     protocol_version: str
     schema_version: str

@@ -17,12 +17,14 @@ except ImportError:
     core_path = Path(__file__).resolve().parent.parent.parent.parent.parent.parent / "aiodoo-core"
     if core_path.exists() and str(core_path) not in sys.path:
         sys.path.append(str(core_path))
-    
+
     try:
         from protocol.validator import ProtocolValidator, ValidationError
         from protocol.schemas import AgentContext, AIODOOEvent, PlanPayload
     except ImportError:
-        logger.warning("Could not import AIODOO Core Protocol Validator. Core validation will be bypassed.")
+        logger.warning(
+            "Could not import AIODOO Core Protocol Validator. Core validation will be bypassed."
+        )
         ProtocolValidator = None
         ValidationError = Exception
         AgentContext = None
@@ -32,25 +34,28 @@ except ImportError:
 
 class DummyToolRegistry:
     """A mocked registry to satisfy ProtocolValidator during synthetic generation."""
+
     def get(self, action_name: str) -> Any:
         class DummyTool:
             def validate_args(self, context: Any, action: Any) -> None:
                 pass
+
         return DummyTool()
 
 
 class DummySettings:
     """Mocked settings for ProtocolValidator."""
+
     class WorkspaceSettings:
         default_workspace = "synthetic_workspace"
-        
+
     protocol_version = "1.0"
     workspace = WorkspaceSettings()
 
 
 class CoreProtocolValidator:
     """Pluggable adapter for AIODOO Core V1 validation."""
-    
+
     def __init__(self):
         self.is_available = ProtocolValidator is not None
         if self.is_available:
@@ -58,12 +63,12 @@ class CoreProtocolValidator:
                 workspace_root=Path("/tmp/synthetic"),
                 workspace="synthetic_workspace",
                 registry=DummyToolRegistry(),
-                settings=DummySettings()
+                settings=DummySettings(),
             )
             # Patch resolve_workspace and resolve_path_in_workspace to bypass IO checks
             self._context.resolve_workspace = lambda ws: Path("/tmp/synthetic")
             self._context.resolve_path_in_workspace = lambda ws, path: Path("/tmp/synthetic") / path
-            
+
             self._validator = ProtocolValidator(context=self._context)
 
     def validate_plan(self, payload_dict: dict[str, Any]) -> None:
@@ -75,10 +80,7 @@ class CoreProtocolValidator:
             # We must reconstruct the core Pydantic/Dataclass from the dict
             plan_payload = PlanPayload(**payload_dict)
             event = AIODOOEvent(
-                id="synthetic_event",
-                event_type="plan",
-                payload=plan_payload,
-                version="1.0"
+                id="synthetic_event", event_type="plan", payload=plan_payload, version="1.0"
             )
             self._validator.validate(event)
         except ValidationError as e:

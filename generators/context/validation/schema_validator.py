@@ -8,6 +8,7 @@ from aiodoo_datasets.generators.context.validation.result import ValidationResul
 
 logger = logging.getLogger(__name__)
 
+
 class SchemaValidator:
     """
     Validates strict Pydantic V2 structural schema integrity.
@@ -17,10 +18,10 @@ class SchemaValidator:
     def validate(self, task: ContextTask) -> ValidationResult:
         """
         Validates the Pydantic schema structure.
-        
+
         Args:
             task: The ContextTask to validate.
-            
+
         Returns:
             ValidationResult containing status and any errors.
         """

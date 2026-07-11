@@ -1,10 +1,18 @@
 """Builders for Evaluation Generator."""
 
 from aiodoo_datasets.generators.evaluation.builders.evaluation_builder import EvaluationBuilder
-from aiodoo_datasets.generators.evaluation.builders.benchmark_catalog_builder import BenchmarkCatalogBuilder
-from aiodoo_datasets.generators.evaluation.builders.benchmark_suite_builder import BenchmarkSuiteBuilder
-from aiodoo_datasets.generators.evaluation.builders.evaluation_case_builder import EvaluationCaseBuilder
-from aiodoo_datasets.generators.evaluation.builders.expected_output_builder import ExpectedOutputBuilder
+from aiodoo_datasets.generators.evaluation.builders.benchmark_catalog_builder import (
+    BenchmarkCatalogBuilder,
+)
+from aiodoo_datasets.generators.evaluation.builders.benchmark_suite_builder import (
+    BenchmarkSuiteBuilder,
+)
+from aiodoo_datasets.generators.evaluation.builders.evaluation_case_builder import (
+    EvaluationCaseBuilder,
+)
+from aiodoo_datasets.generators.evaluation.builders.expected_output_builder import (
+    ExpectedOutputBuilder,
+)
 from aiodoo_datasets.generators.evaluation.builders.ground_truth_builder import GroundTruthBuilder
 from aiodoo_datasets.generators.evaluation.builders.criteria_builder import CriteriaBuilder
 from aiodoo_datasets.generators.evaluation.builders.rule_builder import RuleBuilder

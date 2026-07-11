@@ -5,9 +5,10 @@ from aiodoo_datasets.generators.evaluation.exceptions import EvaluationValidatio
 from aiodoo_datasets.generators.evaluation.domain.success_criteria import SuccessCriteria
 from aiodoo_datasets.generators.evaluation.domain.failure_criteria import FailureCriteria
 
+
 class CriteriaValidator:
     """Validates SuccessCriteria and FailureCriteria."""
-    
+
     @staticmethod
     def validate_success(criteria: Tuple[SuccessCriteria, ...]) -> None:
         """Fail-fast validation."""

@@ -1,13 +1,14 @@
 import unittest
 from aiodoo_datasets.generators.execution.integration.pipeline_statistics import PipelineStatistics
 
+
 class TestPipelineStatistics(unittest.TestCase):
     def test_statistics_initialization(self):
         stats = PipelineStatistics()
         self.assertEqual(stats.total_execution_time, 0.0)
         self.assertEqual(stats.generated_records, 0)
         self.assertEqual(stats.validation_failures, 0)
-        
+
     def test_statistics_mutation(self):
         stats = PipelineStatistics()
         stats.total_execution_time = 5.0
@@ -15,5 +16,6 @@ class TestPipelineStatistics(unittest.TestCase):
         self.assertEqual(stats.total_execution_time, 5.0)
         self.assertEqual(stats.phase_execution_times["ANALYSIS"], 2.0)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

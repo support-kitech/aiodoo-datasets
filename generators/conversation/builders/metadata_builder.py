@@ -3,13 +3,19 @@
 from aiodoo_datasets.generators.conversation.domain.metadata import ConversationMetadata
 from aiodoo_datasets.generators.conversation.enums import ConversationType
 
+
 class MetadataBuilder:
     """Builds standard conversation metadata from generator environment."""
-    
+
     @staticmethod
-    def build(conversation_type: ConversationType, source_module: str, language: str = "en", complexity: int = 1) -> ConversationMetadata:
+    def build(
+        conversation_type: ConversationType,
+        source_module: str,
+        language: str = "en",
+        complexity: int = 1,
+    ) -> ConversationMetadata:
         from aiodoo_datasets.generators.conversation.version import __version__, SCHEMA_VERSION
-        
+
         return ConversationMetadata(
             generator_version=__version__,
             protocol_version="1.0",
@@ -19,5 +25,5 @@ class MetadataBuilder:
             odoo_edition="enterprise",
             language=language,
             complexity=complexity,
-            conversation_type=conversation_type
+            conversation_type=conversation_type,
         )

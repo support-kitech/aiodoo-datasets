@@ -3,25 +3,31 @@
 from aiodoo_datasets.generators.context.analysis.graph.graph import ContextGraph
 from aiodoo_datasets.generators.context.analysis.graph.enums import RelationshipType, NodeType
 from aiodoo_datasets.generators.context.generation.query import Query, QueryType
-from aiodoo_datasets.generators.context.ranking.enums import RankingRuleType, RankingScore, RankingReason
+from aiodoo_datasets.generators.context.ranking.enums import (
+    RankingRuleType,
+    RankingScore,
+    RankingReason,
+)
 from aiodoo_datasets.generators.context.ranking.result import RankingResult
 from aiodoo_datasets.generators.context.ranking.base import BaseRankingRule
 from aiodoo_datasets.generators.context.ranking.utils import freeze_metadata
 
+
 class SecurityRule(BaseRankingRule):
     """
     Ranks security rules (ACL, Record Rules, Groups).
-    
+
     Engineering Purpose:
         Identifies security mechanisms protecting a target model.
         Scores (70).
-        
+
     Supported Queries:
         FIND_SECURITY
-        
+
     Limitations:
         Specifically looks for SECURES edges pointing to the query target.
     """
+
     rule_type = RankingRuleType.SECURITY
     supported_query_types = [QueryType.FIND_SECURITY]
 
@@ -39,14 +45,16 @@ class SecurityRule(BaseRankingRule):
                                 score=RankingScore.SECURITY,
                                 matched_rule=self.rule_type,
                                 reason=RankingReason.SECURITY_REFERENCE,
-                                metadata=freeze_metadata({
-                                    "module": source_node.module,
-                                    "language": source_node.language.value,
-                                    "relative_path": source_node.relative_path,
-                                    "start_line": 0,
-                                    "matched_relationship": edge.relationship_type.value,
-                                    "secures": query.target_symbol
-                                })
+                                metadata=freeze_metadata(
+                                    {
+                                        "module": source_node.module,
+                                        "language": source_node.language.value,
+                                        "relative_path": source_node.relative_path,
+                                        "start_line": 0,
+                                        "matched_relationship": edge.relationship_type.value,
+                                        "secures": query.target_symbol,
+                                    }
+                                ),
                             )
                         )
         return results

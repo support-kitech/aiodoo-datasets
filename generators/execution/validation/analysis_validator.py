@@ -2,9 +2,10 @@
 
 from aiodoo_datasets.generators.execution.analysis.context import AnalysisContext
 
+
 class AnalysisValidator:
     """Validates AnalysisContext input hygiene before executing analyzers."""
-    
+
     @classmethod
     def validate(cls, context: AnalysisContext) -> None:
         """Asserts context rules."""

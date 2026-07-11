@@ -3,9 +3,11 @@
 from dataclasses import dataclass, field
 from typing import List, Optional
 
+
 @dataclass(frozen=True, slots=True)
 class EvidenceProtocol:
     """Serializable evidence structure."""
+
     evidence_id: str
     source_generator: str
     source_reference: str
@@ -14,17 +16,21 @@ class EvidenceProtocol:
     snippet: Optional[str] = None
     description: str = ""
 
+
 @dataclass(frozen=True, slots=True)
 class RecommendationProtocol:
     """Serializable recommendation structure."""
+
     recommendation_id: str
     finding_id: str
     description: str
     suggested_fix: Optional[str] = None
 
+
 @dataclass(frozen=True, slots=True)
 class FindingProtocol:
     """Serializable finding structure."""
+
     finding_id: str
     rule_id: str
     category: str

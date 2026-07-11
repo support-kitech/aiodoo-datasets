@@ -2,12 +2,17 @@
 
 from aiodoo_datasets.generators.evaluation.domain.metadata import EvaluationMetadata
 from aiodoo_datasets.generators.evaluation.domain.benchmark_metadata import BenchmarkMetadata
-from aiodoo_datasets.generators.evaluation.enums import EvaluationType, BenchmarkCategory, DifficultyLevel
+from aiodoo_datasets.generators.evaluation.enums import (
+    EvaluationType,
+    BenchmarkCategory,
+    DifficultyLevel,
+)
 from typing import Tuple
+
 
 class MetadataFactory:
     """Factory for creating immutable Metadata objects."""
-    
+
     @staticmethod
     def create_evaluation_metadata(
         generator_version: str,
@@ -18,7 +23,7 @@ class MetadataFactory:
         odoo_edition: str,
         evaluation_type: EvaluationType,
         difficulty: DifficultyLevel,
-        complexity: int
+        complexity: int,
     ) -> EvaluationMetadata:
         """Create evaluation metadata."""
         return EvaluationMetadata(
@@ -30,9 +35,9 @@ class MetadataFactory:
             odoo_edition=odoo_edition,
             evaluation_type=evaluation_type,
             difficulty=difficulty,
-            complexity=complexity
+            complexity=complexity,
         )
-        
+
     @staticmethod
     def create_benchmark_metadata(
         suite_version: str,
@@ -42,7 +47,7 @@ class MetadataFactory:
         benchmark_description: str,
         target_generator: str,
         supported_odoo_versions: Tuple[str, ...],
-        supported_protocols: Tuple[str, ...]
+        supported_protocols: Tuple[str, ...],
     ) -> BenchmarkMetadata:
         """Create benchmark metadata."""
         return BenchmarkMetadata(
@@ -53,5 +58,5 @@ class MetadataFactory:
             benchmark_description=benchmark_description,
             target_generator=target_generator,
             supported_odoo_versions=supported_odoo_versions,
-            supported_protocols=supported_protocols
+            supported_protocols=supported_protocols,
         )

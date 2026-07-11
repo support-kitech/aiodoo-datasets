@@ -3,7 +3,13 @@
 import unittest
 from aiodoo_datasets.generators.approval.engine.scoring import DecisionScorer
 from aiodoo_datasets.generators.approval.domain.finding import Finding
-from aiodoo_datasets.generators.approval.enums import RuleCategory, Severity, DecisionEnum, ConfidenceLevel
+from aiodoo_datasets.generators.approval.enums import (
+    RuleCategory,
+    Severity,
+    DecisionEnum,
+    ConfidenceLevel,
+)
+
 
 class TestDecisionScorer(unittest.TestCase):
     def test_evaluate_decision_approved(self):
@@ -19,7 +25,7 @@ class TestDecisionScorer(unittest.TestCase):
             category=RuleCategory.SECURITY,
             severity=Severity.CRITICAL,
             description="Critical security flaw",
-            evidence=tuple()
+            evidence=tuple(),
         )
         decision, confidence, reasoning = DecisionScorer.evaluate_decision([finding])
         self.assertEqual(decision, DecisionEnum.REJECTED)
@@ -32,11 +38,12 @@ class TestDecisionScorer(unittest.TestCase):
             category=RuleCategory.STYLE,
             severity=Severity.MEDIUM,
             description="Style violation",
-            evidence=tuple()
+            evidence=tuple(),
         )
         decision, confidence, reasoning = DecisionScorer.evaluate_decision([finding])
         self.assertEqual(decision, DecisionEnum.CHANGES_REQUESTED)
         self.assertEqual(confidence, ConfidenceLevel.HIGH)
+
 
 if __name__ == "__main__":
     unittest.main()

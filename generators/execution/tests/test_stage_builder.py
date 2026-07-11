@@ -9,24 +9,26 @@ from aiodoo_datasets.generators.execution.graph.enums import NodeType
 from aiodoo_datasets.generators.execution.graph.statistics import GraphStatistics
 from types import MappingProxyType
 
+
 class TestStageBuilder(unittest.TestCase):
     def test_stage_generation(self):
         n1 = ExecutionNode(node_id="a", node_type=NodeType.STEP, payload="p")
         g = ExecutionGraph(nodes=(n1,), edges=())
         g_stats = GraphStatistics()
         p_stats = PlanningStatistics()
-        
+
         ctx = PlanningContext(
             graph=g,
             graph_statistics=g_stats,
             configuration=MappingProxyType({}),
             strategy=PlanningStrategyType.SEQUENTIAL,
-            planning_statistics=p_stats
+            planning_statistics=p_stats,
         )
-        
+
         res = StageBuilder.build(ctx)
         self.assertTrue(res.success)
         self.assertEqual(len(res.stages), 1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

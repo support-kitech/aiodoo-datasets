@@ -9,6 +9,7 @@ class GraphStatistics:
     Tracks structural metrics of the ExecutionGraph.
     Mutable during computation, frozen after pipeline completes.
     """
+
     node_count: int = 0
     edge_count: int = 0
     root_count: int = 0

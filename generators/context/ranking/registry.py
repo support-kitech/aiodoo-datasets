@@ -6,7 +6,7 @@ from aiodoo_datasets.generators.context.ranking.rules import (
     DependencyRule,
     ViewRule,
     SecurityRule,
-    ActionRule
+    ActionRule,
 )
 
 # Constant defining all explicitly registered ranking rules.

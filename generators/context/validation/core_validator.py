@@ -8,6 +8,7 @@ from aiodoo_datasets.generators.context.validation.result import ValidationResul
 
 logger = logging.getLogger(__name__)
 
+
 class CoreValidator:
     """
     Validates dataset-wide deterministic guarantees.
@@ -18,10 +19,10 @@ class CoreValidator:
     def validate(self, task: ContextTask) -> ValidationResult:
         """
         Validates core deterministic dataset rules.
-        
+
         Args:
             task: The ContextTask to validate.
-            
+
         Returns:
             ValidationResult containing status and any errors.
         """
@@ -41,7 +42,7 @@ class CoreValidator:
             logger.error("Core Validation Failed: %s", msg)
             errors.append(msg)
             is_valid = False
-            
+
         if task.metadata.relationship_count != len(task.graph.edges):
             msg = f"Relationship count mismatch. Meta: {task.metadata.relationship_count}, Actual: {len(task.graph.edges)}"
             logger.error("Core Validation Failed: %s", msg)

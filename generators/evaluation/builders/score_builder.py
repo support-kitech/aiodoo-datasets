@@ -3,9 +3,10 @@
 from aiodoo_datasets.generators.evaluation.domain.score import EvaluationScore
 from aiodoo_datasets.generators.evaluation.factories.score_factory import ScoreFactory
 
+
 class ScoreBuilder:
     """Builds EvaluationScore objects securely."""
-    
+
     @staticmethod
     def build(
         case_id: str,
@@ -15,7 +16,7 @@ class ScoreBuilder:
         normalized_score: float,
         weight: float,
         pass_threshold: float,
-        result: bool
+        result: bool,
     ) -> EvaluationScore:
         """Build evaluation score."""
         return ScoreFactory.create(
@@ -26,5 +27,5 @@ class ScoreBuilder:
             normalized_score=normalized_score,
             weight=weight,
             pass_threshold=pass_threshold,
-            result=result
+            result=result,
         )
