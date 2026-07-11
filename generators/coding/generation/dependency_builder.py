@@ -1,6 +1,7 @@
 """Determines implementation dependencies for topological sorting."""
 
 from typing import Any
+from dataclasses import dataclass
 
 import re
 import ast
@@ -52,8 +53,6 @@ def _extract_xml_deps(file_path: Path) -> set[str]:
     except Exception:
         pass
     return deps
-
-from dataclasses import dataclass
 
 @dataclass
 class DependencyNode:

@@ -15,6 +15,7 @@ from aiodoo_datasets.generators.planner.export.metadata import build_metadata
 from aiodoo_datasets.generators.common.export.writer import DatasetWriter
 from aiodoo_datasets.generators.common.state.checkpoint import CheckpointManager
 from aiodoo_datasets.generators.planner.statistics.planner_statistics import PlannerStatistics
+from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
 
 logger = logging.getLogger(__name__)
 
@@ -48,8 +49,6 @@ def process_module(module: OdooModule) -> list[dict]:
         logger.error("Error processing module %s: %s", module.name, exc)
         return []
 
-
-from aiodoo_datasets.generators.common.pipeline.orchestrator import SharedPipelineOrchestrator
 
 class PlannerPipeline(SharedPipelineOrchestrator):
     """Orchestrates the deterministic generation of Protocol V1 JSONL."""

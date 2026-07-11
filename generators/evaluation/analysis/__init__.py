@@ -8,7 +8,7 @@ from aiodoo_datasets.generators.evaluation.analysis.difficulty_estimator import 
 from aiodoo_datasets.generators.evaluation.analysis.complexity_estimator import ComplexityEstimator
 
 # Ensure parsers are imported to trigger registry registration
-import aiodoo_datasets.generators.evaluation.analysis.parsers
+from aiodoo_datasets.generators.evaluation.analysis import parsers
 
 __all__ = [
     "AnalysisContext",
@@ -17,4 +17,5 @@ __all__ = [
     "GroundTruthExtractor",
     "DifficultyEstimator",
     "ComplexityEstimator",
+    "parsers",
 ]

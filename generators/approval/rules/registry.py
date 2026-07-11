@@ -1,9 +1,12 @@
 """Rule registry for the Approval Generator."""
 
-from typing import Dict, List, Type
+from typing import Dict, List, Type, TYPE_CHECKING
 from aiodoo_datasets.generators.approval.rules.base_rule import BaseRule
 from aiodoo_datasets.generators.approval.exceptions import ValidationException
 from aiodoo_datasets.generators.approval.enums import RuleCategory
+
+if TYPE_CHECKING:
+    from aiodoo_datasets.generators.approval.rules.rule_set import RuleSet
 
 class RuleRegistry:
     """Deterministic registry for approval rules."""

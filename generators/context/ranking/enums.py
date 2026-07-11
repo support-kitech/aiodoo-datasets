@@ -1,6 +1,6 @@
 """Enumerations for Ranking Engine."""
 
-from enum import Enum
+from enum import Enum, IntEnum
 
 class RankingRuleType(str, Enum):
     """Enumeration of all supported ranking rule types."""
@@ -11,7 +11,7 @@ class RankingRuleType(str, Enum):
     VIEW = "view"
     ACTION = "action"
 
-from enum import IntEnum
+
 
 class RankingScore(IntEnum):
     """Determines strict deterministic score value for rules."""

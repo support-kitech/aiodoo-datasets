@@ -1,7 +1,9 @@
 """Unit tests for factories in Conversation Generator."""
 
 from aiodoo_datasets.generators.conversation.factories.message_factory import MessageFactory
-from aiodoo_datasets.generators.conversation.enums import Role
+from aiodoo_datasets.generators.conversation.enums import Role, ConversationType
+from aiodoo_datasets.generators.conversation.factories.turn_factory import TurnFactory
+from aiodoo_datasets.generators.conversation.factories.conversation_factory import ConversationFactory
 
 def test_message_factory_determinism():
     """Test that message IDs are perfectly deterministic based on inputs."""
@@ -26,9 +28,6 @@ def test_message_factory_determinism():
     # Must use MSG- prefix
     assert msg1.message_id.startswith("MSG-")
 
-from aiodoo_datasets.generators.conversation.factories.turn_factory import TurnFactory
-from aiodoo_datasets.generators.conversation.factories.conversation_factory import ConversationFactory
-from aiodoo_datasets.generators.conversation.enums import ConversationType
 
 def test_turn_factory_determinism():
     """Test that turn IDs are perfectly deterministic."""

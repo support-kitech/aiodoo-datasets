@@ -3,10 +3,19 @@
 from typing import List, Mapping, Any
 from aiodoo_datasets.generators.approval.domain.evidence import Evidence
 from aiodoo_datasets.generators.approval.analysis.parsers.parser_registry import ParserRegistry
-import aiodoo_datasets.generators.approval.analysis.parsers.coding_parser
-import aiodoo_datasets.generators.approval.analysis.parsers.execution_parser
-import aiodoo_datasets.generators.approval.analysis.parsers.planner_parser
-import aiodoo_datasets.generators.approval.analysis.parsers.repair_parser
+from aiodoo_datasets.generators.approval.analysis.parsers import (
+    coding_parser,
+    execution_parser,
+    planner_parser,
+    repair_parser
+)
+
+__all__ = [
+    "coding_parser",
+    "execution_parser",
+    "planner_parser",
+    "repair_parser"
+]
 
 class EvidenceCollector:
     """Collects and aggregates evidence from upstream protocol data."""

@@ -64,7 +64,7 @@ class OdooASTVisitor(ast.NodeVisitor):
 
     def visit_ClassDef(self, node: ast.ClassDef):
         model_type = "PythonClass"
-        inherit = []
+
         for base in node.bases:
             if isinstance(base, ast.Attribute) and isinstance(base.value, ast.Name):
                 if base.value.id == "models":

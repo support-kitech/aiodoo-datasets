@@ -3,7 +3,9 @@
 from aiodoo_datasets.generators.conversation.analysis.context import AnalysisContext
 from aiodoo_datasets.generators.conversation.analysis.result import AnalysisResult
 from aiodoo_datasets.generators.conversation.registries.parser_registry import ParserRegistry
-import aiodoo_datasets.generators.conversation.analysis.parsers
+from aiodoo_datasets.generators.conversation.analysis import parsers
+
+__all__ = ["parsers"]
 
 class EvidenceExtractor:
     """Extracts immutable evidence and references from input protocols."""
