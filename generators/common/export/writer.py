@@ -18,7 +18,9 @@ TRecord = TypeVar("TRecord", bound=BaseModel)
 class DatasetWriter(Generic[TRecord]):
     """Thread-safe append-only writer for JSONL datasets with streaming statistics."""
 
-    def __init__(self, output_dir: Path, stats: BaseStatistics, filename: str, dataset_name: str) -> None:
+    def __init__(
+        self, output_dir: Path, stats: BaseStatistics, filename: str, dataset_name: str
+    ) -> None:
         self.output_dir = output_dir
         self.filename = filename
         self.dataset_name = dataset_name

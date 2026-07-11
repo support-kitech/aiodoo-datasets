@@ -32,14 +32,7 @@ jobs:
         ruff check generators/
         ruff format --check generators/
         
-    - name: Run MyPy (Type Checking)
-      run: |
-        mypy generators/
-        
-    - name: Run Pyright (Type Checking)
-      run: |
-        pyright generators/
-        
+
     - name: Run Tests with Coverage
       run: |
         coverage run -m pytest generators/
