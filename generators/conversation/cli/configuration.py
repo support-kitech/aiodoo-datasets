@@ -9,8 +9,15 @@ from generators.conversation.enums import ConversationType
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     """Build the pipeline context from CLI arguments."""
 
-    # In a real environment, this would read actual protocols from args.source_dir
-    input_protocols = {}  # type: ignore[var-annotated]
+    artifact_records = getattr(args, "artifact_records", {})
+    input_protocols = {
+        "planner_protocol": tuple(artifact_records.get("planner", ())),
+        "coding_protocol": tuple(artifact_records.get("coding", ())),
+        "repair_protocol": tuple(artifact_records.get("repair", ())),
+        "context_protocol": tuple(artifact_records.get("context", ())),
+        "execution_protocol": tuple(artifact_records.get("execution", ())),
+        "approval_protocol": tuple(artifact_records.get("approval", ())),
+    }
 
     metadata = MetadataBuilder.build(
         conversation_type=ConversationType.PLANNING, source_module=str(args.source_dir.name)

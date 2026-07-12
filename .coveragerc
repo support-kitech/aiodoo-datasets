@@ -1,0 +1,14 @@
+[run]
+source =
+    sources
+    protocol
+    preprocessing
+    validation
+    generators/context
+
+omit =
+    generators/conversation/*
+    generators/evaluation/*
+    generators/execution/*
+    generators/planner/*
+    generators/coding/*

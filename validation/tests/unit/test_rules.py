@@ -128,7 +128,14 @@ class TestRecordStructureRule(unittest.TestCase):
         self.assertEqual(len(self.rule.validate(record, _ctx(schema=_CTX_SCHEMA))), 0)
 
     def test_context_schema_rejects_instruction(self) -> None:
-        record = {"id": "x", "query": {}, "artifacts": [], "graph": {}, "metadata": {}, "instruction": "bad"}
+        record = {
+            "id": "x",
+            "query": {},
+            "artifacts": [],
+            "graph": {},
+            "metadata": {},
+            "instruction": "bad",
+        }
         issues = self.rule.validate(record, _ctx(schema=_CTX_SCHEMA))
         self.assertEqual(len(issues), 1)
 
@@ -204,17 +211,25 @@ class TestCircularReferenceRule(unittest.TestCase):
         self.rule = CircularReferenceRule()
 
     def test_no_cycle(self) -> None:
-        record = {"output": {"artifacts": [
-            {"id": "a", "dependencies": ["b"]},
-            {"id": "b", "dependencies": []},
-        ]}}
+        record = {
+            "output": {
+                "artifacts": [
+                    {"id": "a", "dependencies": ["b"]},
+                    {"id": "b", "dependencies": []},
+                ]
+            }
+        }
         self.assertEqual(len(self.rule.validate(record, _ctx())), 0)
 
     def test_cycle(self) -> None:
-        record = {"output": {"artifacts": [
-            {"id": "a", "dependencies": ["b"]},
-            {"id": "b", "dependencies": ["a"]},
-        ]}}
+        record = {
+            "output": {
+                "artifacts": [
+                    {"id": "a", "dependencies": ["b"]},
+                    {"id": "b", "dependencies": ["a"]},
+                ]
+            }
+        }
         issues = self.rule.validate(record, _ctx())
         self.assertEqual(len(issues), 1)
 

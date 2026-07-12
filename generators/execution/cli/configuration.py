@@ -28,6 +28,7 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
             "source_dir": args.source_dir,
             "repository_context": getattr(args, "repository_context", None),
             "protocol_context": getattr(args, "protocol_context", None),
+            "artifact_records": getattr(args, "artifact_records", {}),
         },
         pipeline_statistics=PipelineStatistics(),
     )

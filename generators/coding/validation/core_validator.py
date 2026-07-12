@@ -9,16 +9,19 @@ logger = logging.getLogger(__name__)
 
 # Attempt to dynamically import the core components.
 try:
-    from aiodoo.protocol.validator import ProtocolValidator, ValidationError
+    from aiodoo.validator import ProtocolValidator, ValidationError
     from aiodoo.protocol.schemas import AgentContext, AIODOOEvent
+
 except ImportError:
-    core_path = Path(__file__).resolve().parent.parent.parent.parent.parent.parent / "aiodoo-core"
+    core_path = Path(__file__).resolve().parents[4] / "aiodoo-core"
+
     if core_path.exists() and str(core_path) not in sys.path:
-        sys.path.append(str(core_path))
+        sys.path.insert(0, str(core_path))
 
     try:
-        from protocol.validator import ProtocolValidator, ValidationError
-        from protocol.schemas import AgentContext, AIODOOEvent
+        from aiodoo.validator import ProtocolValidator, ValidationError
+        from aiodoo.protocol.schemas import AgentContext, AIODOOEvent
+
     except ImportError:
         logger.warning(
             "Could not import AIODOO Core Protocol Validator. Core validation will be bypassed."
@@ -58,8 +61,6 @@ class CoreProtocolValidator:
                 registry=DummyToolRegistry(),
                 settings=DummySettings(),
             )
-            self._context.resolve_workspace = lambda ws: Path("/tmp/synthetic")
-            self._context.resolve_path_in_workspace = lambda ws, path: Path("/tmp/synthetic") / path
 
             self._validator = ProtocolValidator(context=self._context)
 

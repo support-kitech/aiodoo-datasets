@@ -18,32 +18,45 @@ class CodingParser(BaseParser):  # type: ignore[misc]
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         attachments = []
-        for file in data.get("files", []):
-            file_id = file.get("file_id", "unknown")
-            references.append(
-                Reference(
-                    source_generator="coding",
-                    source_reference=file_id,
-                    description=f"Generated file: {file.get('path', '')}",
+        records = data if isinstance(data, (list, tuple)) else (data,)
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            output = record.get("output", {})
+            artifacts = output.get("artifacts", []) if isinstance(output, dict) else []
+            record_ref = record.get("metadata", {}).get("protocol_hash", "coding")
+            for artifact in artifacts:
+                if not isinstance(artifact, dict):
+                    continue
+                file_id = artifact.get("id", "unknown")
+                source_ref = f"{record_ref}:{file_id}"
+                references.append(
+                    Reference(
+                        source_generator="coding",
+                        source_reference=source_ref,
+                        description=f"Generated artifact: {artifact.get('path', '')}",
+                    )
                 )
-            )
 
-            # Create a deterministic attachment id
-            hash_input = f"CODE_ATT:{file_id}"
-            att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
+                hash_input = f"CODE_ATT:{source_ref}"
+                att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
 
-            attachments.append(
-                Attachment(
-                    attachment_id=f"ATT-{att_hash}",
-                    attachment_type=AttachmentType.CODE,
-                    content=file.get("content", ""),
-                    file_path=file.get("path"),
+                attachments.append(
+                    Attachment(
+                        attachment_id=f"ATT-{att_hash}",
+                        attachment_type=AttachmentType.CODE,
+                        content=str(artifact.get("intent", ""))[:500],
+                        file_path=artifact.get("path"),
+                    )
                 )
-            )
+                if len(references) >= 25:
+                    break
+            if len(references) >= 25:
+                break
 
         return ExtractedEvidence(
             protocol_name="coding_protocol",
             references=tuple(references),
             attachments=tuple(attachments),
-            raw_data=MappingProxyType(data),
+            raw_data=MappingProxyType({"record_count": len(records)}),
         )

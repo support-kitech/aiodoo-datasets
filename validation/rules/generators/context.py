@@ -38,7 +38,9 @@ class ContextQueryRule(BaseRule):
         return ("context",)
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         query = record.get("query")
         if not isinstance(query, dict):

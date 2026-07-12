@@ -72,9 +72,16 @@ class Commands:
                         record = json.loads(line.strip())
                         manager = ValidationManager()
                         result = manager.validate_record(record, jsonl_path.name)
-                        logger.info("Record %d: %s (%d issues)", line_num, result.status.value, len(result.issues))
+                        logger.info(
+                            "Record %d: %s (%d issues)",
+                            line_num,
+                            result.status.value,
+                            len(result.issues),
+                        )
                         for issue in result.issues:
-                            logger.info("  [%s] %s: %s", issue.severity.value, issue.rule_id, issue.message)
+                            logger.info(
+                                "  [%s] %s: %s", issue.severity.value, issue.rule_id, issue.message
+                            )
                         return 0 if result.status.value == "passed" else 1
 
             logger.error("Line %d not found in %s", line_num, jsonl_path)

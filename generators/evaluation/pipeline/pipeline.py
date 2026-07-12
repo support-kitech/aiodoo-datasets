@@ -44,15 +44,45 @@ from generators.common.export.writer import DatasetWriter
 class EvaluationPipeline:
     """Orchestrates the complete deterministic evaluation generation flow."""
 
+    REQUIRED_SOURCE_TYPES = frozenset(
+        {
+            "planner",
+            "coding",
+            "repair",
+            "context",
+            "execution",
+            "approval",
+            "conversation",
+        }
+    )
+
     @staticmethod
     def run(context: PipelineContext) -> PipelineResult:
         """Run the full pipeline: Analysis -> Build -> Map -> Validate -> Stats."""
+
+        missing_sources = sorted(
+            source_type
+            for source_type in EvaluationPipeline.REQUIRED_SOURCE_TYPES
+            if not context.source_protocols.get(source_type)
+        )
+        if missing_sources:
+            raise RuntimeError(
+                "Evaluation generation requires upstream artifacts for: "
+                + ", ".join(missing_sources)
+            )
 
         # 1. Analysis Layer
         analysis_ctx = AnalysisContext(
             source_protocols=context.source_protocols, evaluation_type=context.evaluation_type
         )
         extracted_evidence = EvidenceExtractor.extract(analysis_ctx)
+        parsed_sources = {item.get("source_type") for item in extracted_evidence}
+        missing_evidence = sorted(EvaluationPipeline.REQUIRED_SOURCE_TYPES - parsed_sources)
+        if missing_evidence:
+            raise RuntimeError(
+                "Evaluation parsers did not produce evidence for: " + ", ".join(missing_evidence)
+            )
+
         ground_truths = GroundTruthExtractor.extract(extracted_evidence)
         difficulty = DifficultyEstimator.estimate(
             extracted_evidence[0] if extracted_evidence else {}
@@ -168,9 +198,10 @@ class EvaluationPipeline:
         from pathlib import Path
         from generators.evaluation.statistics.evaluation_statistics import EvaluationStatistics
 
-        stats = result.statistics.get("evaluation")
-        if not isinstance(stats, EvaluationStatistics):
-            stats = EvaluationStatistics()
+        if not result.validation_passed or not result.dataset:
+            raise RuntimeError("Evaluation generation did not produce an exportable dataset.")
+
+        stats = EvaluationStatistics()
 
         writer = DatasetWriter(
             output_dir=Path(output_dir),
@@ -180,18 +211,10 @@ class EvaluationPipeline:
         )
 
         for obj in result.dataset:
-            # Inject protocol_hash
-            if hasattr(result, "protocol_context") and result.protocol_context:
-                protocol_hash = result.protocol_context.dataset.identifier.hash_value
-                if hasattr(obj, "metadata"):
-                    try:
-                        object.__setattr__(obj.metadata, "protocol_hash", protocol_hash)
-                    except AttributeError:
-                        pass
             writer.write_record(obj)
 
-        writer.export_statistics(filename="statistics.json")
-        writer.export_manifest(filename="dataset_manifest.json")
+        writer.export_statistics(filename="evaluation_statistics.json")
+        writer.export_manifest(filename="evaluation_manifest.json")
 
         export_metadata = MappingProxyType(
             {"output_dir": output_dir, "exported_records": len(result.dataset)}

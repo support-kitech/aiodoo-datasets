@@ -23,7 +23,7 @@ class ApprovalExportStatistics(BaseStatistics):  # type: ignore[misc]
         self.stats_dict = stats_dict
 
     def add_sample(self, record, json_str):  # type: ignore[no-untyped-def]
-        pass  # Handle natively inside BaseStatistics if we want, or do nothing
+        self._add_base_sample(record, json_str)
 
     def get_export_stats(self):  # type: ignore[no-untyped-def]
         return dict(self.stats_dict)
@@ -38,6 +38,18 @@ class ApprovalPipeline:
         diagnostics = []
 
         try:
+            required_inputs = ("planner_data", "coding_data", "repair_data", "execution_data")
+            missing_inputs = tuple(
+                name for name in required_inputs if not context.input_protocols.get(name)
+            )
+            if missing_inputs:
+                return PipelineResult(
+                    success=False,
+                    diagnostics=tuple(
+                        f"Missing required upstream artifact: {name}" for name in missing_inputs
+                    ),
+                )
+
             # 1. Analysis & Evidence Collection
             analysis_context = AnalysisContext(
                 input_protocols=context.input_protocols,
@@ -100,13 +112,13 @@ class ApprovalPipeline:
                         pass
 
             writer.write_record(review)
-            writer.export_manifest()
-            writer.export_statistics()
+            writer.export_manifest("approval_manifest.json")
+            writer.export_statistics("approval_statistics.json")
 
             exported_files = [
                 str(output_path / "approval_dataset.jsonl"),
-                str(output_path / "dataset_manifest.json"),
-                str(output_path / "statistics.json"),
+                str(output_path / "approval_manifest.json"),
+                str(output_path / "approval_statistics.json"),
             ]
 
             return PipelineResult(

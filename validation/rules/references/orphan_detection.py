@@ -30,7 +30,9 @@ class OrphanReferenceRule(BaseRule):
         return REFERENCE_RULE_PRIORITY
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         output = record.get("output")
         if not isinstance(output, dict):

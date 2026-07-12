@@ -61,7 +61,9 @@ class BaseRule(abc.ABC):
 
     @abc.abstractmethod
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         """
         Validate a single deserialized record.

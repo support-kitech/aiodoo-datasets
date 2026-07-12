@@ -18,31 +18,45 @@ class RepairParser(BaseParser):  # type: ignore[misc]
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         attachments = []
-        for patch in data.get("patches", []):
-            patch_id = patch.get("patch_id", "unknown")
-            references.append(
-                Reference(
-                    source_generator="repair",
-                    source_reference=patch_id,
-                    description=f"Repair patch: {patch.get('description', '')}",
+        records = data if isinstance(data, (list, tuple)) else (data,)
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            output = record.get("output", {})
+            tasks = output.get("tasks", []) if isinstance(output, dict) else []
+            record_ref = record.get("metadata", {}).get("protocol_hash", "repair")
+            for task in tasks:
+                if not isinstance(task, dict):
+                    continue
+                patch_id = task.get("id", "unknown")
+                source_ref = f"{record_ref}:{patch_id}"
+                references.append(
+                    Reference(
+                        source_generator="repair",
+                        source_reference=source_ref,
+                        description=f"Repair task: {task.get('problem', {})}",
+                    )
                 )
-            )
 
-            hash_input = f"DIFF_ATT:{patch_id}"
-            att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
+                hash_input = f"DIFF_ATT:{source_ref}"
+                att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
 
-            attachments.append(
-                Attachment(
-                    attachment_id=f"ATT-{att_hash}",
-                    attachment_type=AttachmentType.DIFF,
-                    content=patch.get("diff", ""),
-                    file_path=patch.get("file_path"),
+                attachments.append(
+                    Attachment(
+                        attachment_id=f"ATT-{att_hash}",
+                        attachment_type=AttachmentType.DIFF,
+                        content=str(task.get("expected_outcome", ""))[:500],
+                        file_path=None,
+                    )
                 )
-            )
+                if len(references) >= 25:
+                    break
+            if len(references) >= 25:
+                break
 
         return ExtractedEvidence(
             protocol_name="repair_protocol",
             references=tuple(references),
             attachments=tuple(attachments),
-            raw_data=MappingProxyType(data),
+            raw_data=MappingProxyType({"record_count": len(records)}),
         )

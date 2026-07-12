@@ -8,13 +8,11 @@ from generators.evaluation.registries.parser_registry import ParserRegistry
 class ContextParser(BaseParser):  # type: ignore[misc]
     """Extracts deterministic evidence from Context protocol objects."""
 
+    source_type = "context"
+
     def parse(self, protocol_object: Any) -> Dict[str, Any]:
         """Extract context grounding and semantic references."""
-        # Simulated read-only extraction
-        return {
-            "source_type": "context",
-            "raw_data": getattr(protocol_object, "model_dump", lambda: {})(),
-        }
+        return self._aggregate_records(protocol_object)
 
 
 ParserRegistry.register("context", ContextParser)

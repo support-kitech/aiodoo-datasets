@@ -16,6 +16,25 @@ class ConversationStatistics(BaseStatistics):  # type: ignore[misc]
 
     def add_sample(self, protocol: Any, json_str: str) -> None:
         """Add metrics from a generated protocol."""
+        if isinstance(protocol, dict):
+
+            class _Record:
+                def __init__(self, metadata: Dict[str, Any]) -> None:
+                    self.metadata = metadata
+
+            self._add_base_sample(_Record(protocol.get("metadata", {})), json_str)
+            self.conversations_generated += 1
+            output = protocol.get("output", {})
+            metadata = protocol.get("metadata", {})
+            c_type = str(metadata.get("conversation_type", "unknown"))
+            self.conversation_types[c_type] = self.conversation_types.get(c_type, 0) + 1
+            turns = output.get("turns", []) if isinstance(output, dict) else []
+            self.turns_generated += len(turns)
+            for turn in turns:
+                if isinstance(turn, dict):
+                    self.messages_generated += len(turn.get("messages", []))
+            return
+
         self._add_base_sample(protocol, json_str)
         self.conversations_generated += 1
 

@@ -32,7 +32,9 @@ class RecordStructureRule(BaseRule):
         return SCHEMA_RULE_PRIORITY + 2
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         schema = context.metadata.get("resolved_schema")
 

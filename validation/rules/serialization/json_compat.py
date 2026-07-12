@@ -30,7 +30,9 @@ class JsonCompatibilityRule(BaseRule):
         return SERIALIZATION_RULE_PRIORITY
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         # By the time this rule runs, the record is already parsed.
         # JSON parsing failures are caught in DatasetValidator before rules execute.

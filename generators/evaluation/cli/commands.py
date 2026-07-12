@@ -2,18 +2,20 @@
 
 from typing import Dict, Any
 from generators.evaluation import api
+from generators.evaluation.pipeline.pipeline_result import PipelineResult
 
 
 class Commands:
     """Executes CLI commands by orchestrating the public API."""
 
     @staticmethod
-    def run_generate(config: Dict[str, Any], output_dir: str) -> None:
+    def run_generate(config: Dict[str, Any], output_dir: str) -> PipelineResult:
         """Execute the generate command."""
         print(f"Generating evaluation dataset into {output_dir}...")
         result = api.generate(config)
-        api.export(result, output_dir)
+        exported = api.export(result, output_dir)
         print("Successfully generated and exported the evaluation dataset.")
+        return exported
 
     @staticmethod
     def run_validate(input_dir: str) -> None:

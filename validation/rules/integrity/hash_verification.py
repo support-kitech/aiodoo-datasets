@@ -34,7 +34,9 @@ class HashVerificationRule(BaseRule):
         return INTEGRITY_RULE_PRIORITY
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         metadata = record.get("metadata")
         if not isinstance(metadata, dict):

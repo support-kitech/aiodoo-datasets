@@ -30,7 +30,9 @@ class CrossRecordReferenceRule(BaseRule):
         return REFERENCE_RULE_PRIORITY + 2
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         # Cross-record validation is handled by CrossDatasetValidator
         return ()

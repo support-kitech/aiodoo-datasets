@@ -38,7 +38,9 @@ class EvaluationCatalogRule(BaseRule):
         return ("evaluation",)
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         catalog = record.get("catalog")
         if not isinstance(catalog, dict):

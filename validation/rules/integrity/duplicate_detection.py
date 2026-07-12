@@ -46,7 +46,9 @@ class DuplicateDetectionRule(BaseRule):
         return INTEGRITY_RULE_PRIORITY + 1
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         record_id = self._extract_record_id(record)
 

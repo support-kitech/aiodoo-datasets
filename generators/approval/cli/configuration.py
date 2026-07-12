@@ -17,9 +17,13 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
         strict_mode=args.fail_fast,
     )
 
-    # In a real scenario, this would dynamically parse the protocols from input paths
-    # For now, we initialize an empty context to satisfy the pipeline
-    input_protocols = {}  # type: ignore[var-annotated]
+    artifact_records = getattr(args, "artifact_records", {})
+    input_protocols = {
+        "planner_data": tuple(artifact_records.get("planner", ())),
+        "coding_data": tuple(artifact_records.get("coding", ())),
+        "repair_data": tuple(artifact_records.get("repair", ())),
+        "execution_data": tuple(artifact_records.get("execution", ())),
+    }
 
     metadata = ReviewMetadata(
         generator_version="1.0.0",

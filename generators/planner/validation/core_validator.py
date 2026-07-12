@@ -10,17 +10,25 @@ logger = logging.getLogger(__name__)
 # We attempt to dynamically import the core components.
 # If they are not found in the environment, we attempt to resolve the local workspace.
 try:
-    from aiodoo.protocol.validator import ProtocolValidator, ValidationError
+    from aiodoo.validator import ProtocolValidator, ValidationError
     from aiodoo.protocol.schemas import AgentContext, AIODOOEvent, PlanPayload
 except ImportError:
     # Try resolving local path assuming aiodoo-core is in the same parent directory
-    core_path = Path(__file__).resolve().parent.parent.parent.parent.parent.parent / "aiodoo-core"
-    if core_path.exists() and str(core_path) not in sys.path:
-        sys.path.append(str(core_path))
+    core_path = Path(__file__).resolve().parents[4] / "aiodoo-core"
 
+    if core_path.exists() and str(core_path) not in sys.path:
+        sys.path.insert(0, str(core_path))
     try:
-        from protocol.validator import ProtocolValidator, ValidationError
-        from protocol.schemas import AgentContext, AIODOOEvent, PlanPayload
+        from aiodoo.validator import ProtocolValidator, ValidationError
+        from aiodoo.protocol.schemas import (
+            AgentContext,
+            AIODOOEvent,
+            PlanPayload,
+            Analysis,
+            TaskSpec,
+            PlanAction,
+            GeneratedArtifact,
+        )
     except ImportError:
         logger.warning(
             "Could not import AIODOO Core Protocol Validator. Core validation will be bypassed."
@@ -59,15 +67,13 @@ class CoreProtocolValidator:
     def __init__(self) -> None:
         self.is_available = ProtocolValidator is not None
         if self.is_available:
+            # Patch resolve_workspace and resolve_path_in_workspace to bypass IO checks
             self._context = AgentContext(
                 workspace_root=Path("/tmp/synthetic"),
                 workspace="synthetic_workspace",
                 registry=DummyToolRegistry(),
                 settings=DummySettings(),
             )
-            # Patch resolve_workspace and resolve_path_in_workspace to bypass IO checks
-            self._context.resolve_workspace = lambda ws: Path("/tmp/synthetic")
-            self._context.resolve_path_in_workspace = lambda ws, path: Path("/tmp/synthetic") / path
 
             self._validator = ProtocolValidator(context=self._context)
 
@@ -77,10 +83,33 @@ class CoreProtocolValidator:
             return
 
         try:
+            analysis = Analysis(**payload_dict["analysis"])
+            tasks = []
+
+            for task in payload_dict["tasks"]:
+                task = dict(task)
+
+                task["generated_artifacts"] = [
+                    GeneratedArtifact(**artifact)
+                    for artifact in task.get("generated_artifacts", [])
+                ]
+
+                tasks.append(TaskSpec(**task))
+            execution = [PlanAction(**action) for action in payload_dict["execution"]]
+            plan_payload = PlanPayload(
+                goal=payload_dict["goal"],
+                workspace=payload_dict["workspace"],
+                analysis=analysis,
+                tasks=tasks,
+                execution=execution,
+                summary=payload_dict["summary"],
+            )
+
             # We must reconstruct the core Pydantic/Dataclass from the dict
-            plan_payload = PlanPayload(**payload_dict)
             event = AIODOOEvent(
-                id="synthetic_event", event_type="plan", payload=plan_payload, version="1.0"
+                version="1.0",
+                event_type="plan",
+                payload=plan_payload,
             )
             self._validator.validate(event)
         except ValidationError as e:

@@ -13,6 +13,4 @@ class PipelineStatistics:
     records_validated: int = 0
     rules_executed: int = 0
     total_duration_ms: float = 0.0
-    per_dataset_durations: Mapping[str, float] = field(
-        default_factory=lambda: MappingProxyType({})
-    )
+    per_dataset_durations: Mapping[str, float] = field(default_factory=lambda: MappingProxyType({}))

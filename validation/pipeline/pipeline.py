@@ -92,8 +92,7 @@ class ValidationPipeline:
                 datasets_validated=len(val_context.dataset_files),
                 records_validated=sum(r.records_validated for r in results),
                 rules_executed=sum(
-                    len(registry.get_rules_for_dataset(f.name))
-                    for f in val_context.dataset_files
+                    len(registry.get_rules_for_dataset(f.name)) for f in val_context.dataset_files
                 ),
                 total_duration_ms=total_ms,
                 per_dataset_durations=MappingProxyType(per_dataset_durations),

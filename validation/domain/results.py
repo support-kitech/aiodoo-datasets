@@ -96,12 +96,8 @@ class ValidationSummary:
     passed: bool = True
     duration_ms: float = 0.0
     # Per-category and per-generator breakdowns (Issue 5)
-    per_category_counts: Mapping[str, int] = field(
-        default_factory=lambda: MappingProxyType({})
-    )
-    per_generator_counts: Mapping[str, int] = field(
-        default_factory=lambda: MappingProxyType({})
-    )
+    per_category_counts: Mapping[str, int] = field(default_factory=lambda: MappingProxyType({}))
+    per_generator_counts: Mapping[str, int] = field(default_factory=lambda: MappingProxyType({}))
     health_score: float = 100.0
 
 

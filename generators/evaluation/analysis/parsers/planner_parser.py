@@ -8,13 +8,11 @@ from generators.evaluation.registries.parser_registry import ParserRegistry
 class PlannerParser(BaseParser):  # type: ignore[misc]
     """Extracts deterministic evidence from Planner protocol objects."""
 
+    source_type = "planner"
+
     def parse(self, protocol_object: Any) -> Dict[str, Any]:
         """Extract planner instructions and structure."""
-        # Simulated read-only extraction
-        return {
-            "source_type": "planner",
-            "raw_data": getattr(protocol_object, "model_dump", lambda: {})(),
-        }
+        return self._aggregate_records(protocol_object)
 
 
 # Statically register parser

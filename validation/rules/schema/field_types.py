@@ -37,7 +37,9 @@ class FieldTypeRule(BaseRule):
         return SCHEMA_RULE_PRIORITY + 1
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         schema = context.metadata.get("resolved_schema")
         ds_name = context.metadata.get("current_dataset", "")

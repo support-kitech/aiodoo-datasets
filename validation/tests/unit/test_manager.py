@@ -49,7 +49,12 @@ class TestValidationManager(unittest.TestCase):
         manager = ValidationManager()
         record = {
             "review_id": "REV-001",
-            "decision": {"status": "approved", "decision_id": "DEC-001", "confidence": 0.95, "reasoning": "Good"},
+            "decision": {
+                "status": "approved",
+                "decision_id": "DEC-001",
+                "confidence": 0.95,
+                "reasoning": "Good",
+            },
             "findings": [],
             "evidence": [],
             "recommendations": [],

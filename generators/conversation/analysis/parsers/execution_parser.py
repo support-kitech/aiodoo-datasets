@@ -18,31 +18,46 @@ class ExecutionParser(BaseParser):  # type: ignore[misc]
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
         attachments = []
-        for result in data.get("test_results", []):
-            result_id = result.get("test_id", "unknown")
-            references.append(
-                Reference(
-                    source_generator="execution",
-                    source_reference=result_id,
-                    description=f"Execution result: {result.get('name', '')}",
-                )
+        records = data if isinstance(data, (list, tuple)) else (data,)
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            output = record.get("output", {})
+            steps = output.get("steps", []) if isinstance(output, dict) else []
+            execution_id = (
+                output.get("execution_id", "execution") if isinstance(output, dict) else "execution"
             )
-
-            hash_input = f"LOG_ATT:{result_id}"
-            att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
-
-            attachments.append(
-                Attachment(
-                    attachment_id=f"ATT-{att_hash}",
-                    attachment_type=AttachmentType.LOG,
-                    content=result.get("log", ""),
-                    file_path=None,
+            for step in steps:
+                if not isinstance(step, dict):
+                    continue
+                result_id = f"{execution_id}:{step.get('id', 'unknown')}"
+                references.append(
+                    Reference(
+                        source_generator="execution",
+                        source_reference=result_id,
+                        description=f"Execution step: {step.get('action', '')}",
+                    )
                 )
-            )
+
+                hash_input = f"LOG_ATT:{result_id}"
+                att_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()[:8]
+
+                attachments.append(
+                    Attachment(
+                        attachment_id=f"ATT-{att_hash}",
+                        attachment_type=AttachmentType.LOG,
+                        content=str(step)[:500],
+                        file_path=step.get("path"),
+                    )
+                )
+                if len(references) >= 25:
+                    break
+            if len(references) >= 25:
+                break
 
         return ExtractedEvidence(
             protocol_name="execution_protocol",
             references=tuple(references),
             attachments=tuple(attachments),
-            raw_data=MappingProxyType(data),
+            raw_data=MappingProxyType({"record_count": len(records)}),
         )

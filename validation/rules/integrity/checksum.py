@@ -34,7 +34,9 @@ class FileChecksumRule(BaseRule):
         return INTEGRITY_RULE_PRIORITY + 3
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         # This rule operates at the manifest level, not per-record.
         # It is invoked by ManifestValidator, not RecordValidator.

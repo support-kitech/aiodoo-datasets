@@ -30,7 +30,9 @@ class EncodingRule(BaseRule):
         return SERIALIZATION_RULE_PRIORITY + 1
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         issues: list[ValidationIssue] = []
         self._check_nulls(record, "", issues, context)

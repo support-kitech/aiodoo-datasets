@@ -38,13 +38,17 @@ class MarkdownReporter(BaseReporter):
             for result in report.results:
                 status = "✅" if result.status.value == "passed" else "❌"
                 lines.append(f"### {status} {result.dataset_name}\n")
-                lines.append(f"Records: {result.records_validated} | Issues: {len(result.issues)}\n")
+                lines.append(
+                    f"Records: {result.records_validated} | Issues: {len(result.issues)}\n"
+                )
 
                 if result.issues:
                     lines.append("| Severity | Rule | Message |")
                     lines.append("|----------|------|---------|")
                     for issue in result.issues[:20]:
-                        lines.append(f"| {issue.severity.value} | {issue.rule_id} | {issue.message} |")
+                        lines.append(
+                            f"| {issue.severity.value} | {issue.rule_id} | {issue.message} |"
+                        )
                     if len(result.issues) > 20:
                         lines.append(f"\n*...and {len(result.issues) - 20} more issues*\n")
                     lines.append("")

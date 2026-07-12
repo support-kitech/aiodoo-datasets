@@ -70,9 +70,27 @@ class TestValidationResult(unittest.TestCase):
 
     def test_severity_counts(self) -> None:
         issues = (
-            ValidationIssue(rule_id="A", severity=ValidationSeverity.FATAL, category=ValidationCategory.SCHEMA, message="", dataset_name=""),
-            ValidationIssue(rule_id="B", severity=ValidationSeverity.ERROR, category=ValidationCategory.SCHEMA, message="", dataset_name=""),
-            ValidationIssue(rule_id="C", severity=ValidationSeverity.WARNING, category=ValidationCategory.SCHEMA, message="", dataset_name=""),
+            ValidationIssue(
+                rule_id="A",
+                severity=ValidationSeverity.FATAL,
+                category=ValidationCategory.SCHEMA,
+                message="",
+                dataset_name="",
+            ),
+            ValidationIssue(
+                rule_id="B",
+                severity=ValidationSeverity.ERROR,
+                category=ValidationCategory.SCHEMA,
+                message="",
+                dataset_name="",
+            ),
+            ValidationIssue(
+                rule_id="C",
+                severity=ValidationSeverity.WARNING,
+                category=ValidationCategory.SCHEMA,
+                message="",
+                dataset_name="",
+            ),
         )
         r = ValidationResult(status=ValidationStatus.FAILED, issues=issues)
         self.assertEqual(r.fatal_count, 1)

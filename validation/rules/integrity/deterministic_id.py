@@ -30,7 +30,9 @@ class DeterministicIdRule(BaseRule):
         return INTEGRITY_RULE_PRIORITY + 2
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         output = record.get("output")
         if not isinstance(output, dict):

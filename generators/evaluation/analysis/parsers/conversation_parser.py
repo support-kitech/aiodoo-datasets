@@ -8,13 +8,11 @@ from generators.evaluation.registries.parser_registry import ParserRegistry
 class ConversationParser(BaseParser):  # type: ignore[misc]
     """Extracts deterministic evidence from Conversation protocol objects."""
 
+    source_type = "conversation"
+
     def parse(self, protocol_object: Any) -> Dict[str, Any]:
         """Extract conversational turns and interaction dynamics."""
-        # Simulated read-only extraction
-        return {
-            "source_type": "conversation",
-            "raw_data": getattr(protocol_object, "model_dump", lambda: {})(),
-        }
+        return self._aggregate_records(protocol_object)
 
 
 ParserRegistry.register("conversation", ConversationParser)

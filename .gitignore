@@ -63,3 +63,4 @@ aiodoo_workspace/
 .fresh_venv/
 
 datasets/
+datasets_*/

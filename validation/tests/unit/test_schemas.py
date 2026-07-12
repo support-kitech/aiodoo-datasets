@@ -118,7 +118,16 @@ class TestSchemaBuilder(unittest.TestCase):
 
     def test_all_generators_registered(self) -> None:
         reg = SchemaBuilder.build_default()
-        expected = {"planner", "coding", "repair", "context", "execution", "approval", "conversation", "evaluation"}
+        expected = {
+            "planner",
+            "coding",
+            "repair",
+            "context",
+            "execution",
+            "approval",
+            "conversation",
+            "evaluation",
+        }
         actual = {s.generator_name for s in reg.all_schemas}
         self.assertEqual(actual, expected)
 

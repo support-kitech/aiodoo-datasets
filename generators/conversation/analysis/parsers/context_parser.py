@@ -14,17 +14,22 @@ class ContextParser(BaseParser):  # type: ignore[misc]
 
     def parse(self, data: Dict[str, Any]) -> ExtractedEvidence:
         references = []
-        for doc in data.get("documents", []):
+        records = data if isinstance(data, (list, tuple)) else (data,)
+        for record in records[:25]:
+            if not isinstance(record, dict):
+                continue
+            query = record.get("query", {})
+            query_text = query.get("natural_language", "") if isinstance(query, dict) else ""
             references.append(
                 Reference(
                     source_generator="context",
-                    source_reference=doc.get("doc_id", "unknown"),
-                    description=f"Context document: {doc.get('title', '')}",
+                    source_reference=record.get("id", "unknown"),
+                    description=f"Context query: {query_text}",
                 )
             )
         return ExtractedEvidence(
             protocol_name="context_protocol",
             references=tuple(references),
             attachments=(),
-            raw_data=MappingProxyType(data),
+            raw_data=MappingProxyType({"record_count": len(records)}),
         )

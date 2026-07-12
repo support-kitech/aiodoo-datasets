@@ -2,9 +2,13 @@
 """AIODOO Datasets v1.0 Final Orchestrator."""
 
 import argparse
+import json
 import logging
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
+from typing import Any
 
 from generators.planner.pipeline import PlannerPipeline
 from generators.coding.pipeline import CodingPipeline
@@ -38,6 +42,95 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(sys.stdout)],
 )
 logger = logging.getLogger("build_dataset")
+
+
+@dataclass(frozen=True, slots=True)
+class DatasetArtifact:
+    """Generated dataset artifact registered by the build orchestrator."""
+
+    generator: str
+    jsonl_path: Path
+    manifest_path: Path | None
+    statistics_path: Path | None
+    records: tuple[dict[str, Any], ...]
+
+
+class DatasetArtifactRegistry:
+    """Local registry for passing generated datasets between downstream generators."""
+
+    def __init__(self, output_dir: Path) -> None:
+        self.output_dir = output_dir
+        self._artifacts: dict[str, DatasetArtifact] = {}
+
+    def register(
+        self,
+        generator: str,
+        jsonl_filename: str,
+        *,
+        manifest_filename: str | None = None,
+        statistics_filename: str | None = None,
+        required: bool = True,
+    ) -> DatasetArtifact | None:
+        jsonl_path = self.output_dir / jsonl_filename
+        if not jsonl_path.exists():
+            if required:
+                raise RuntimeError(f"Missing generated dataset for {generator}: {jsonl_path}")
+            return None
+
+        records = self._load_jsonl(jsonl_path)
+        if required and not records:
+            raise RuntimeError(f"Generated dataset for {generator} is empty: {jsonl_path}")
+
+        artifact = DatasetArtifact(
+            generator=generator,
+            jsonl_path=jsonl_path,
+            manifest_path=(self.output_dir / manifest_filename) if manifest_filename else None,
+            statistics_path=(self.output_dir / statistics_filename)
+            if statistics_filename
+            else None,
+            records=records,
+        )
+        self._artifacts[generator] = artifact
+        logger.info(
+            "Registered %s artifact: %s (%d records)",
+            generator,
+            jsonl_path,
+            len(records),
+        )
+        return artifact
+
+    def records_for(
+        self, *generators: str, optional: tuple[str, ...] = ()
+    ) -> MappingProxyType[str, tuple[dict[str, Any], ...]]:
+        selected: dict[str, tuple[dict[str, Any], ...]] = {}
+        optional_names = set(optional)
+        for generator in generators:
+            artifact = self._artifacts.get(generator)
+            if artifact is None:
+                if generator in optional_names:
+                    continue
+                raise RuntimeError(f"Required upstream artifact is not registered: {generator}")
+            if not artifact.records and generator not in optional_names:
+                raise RuntimeError(f"Required upstream artifact has no records: {generator}")
+            selected[generator] = artifact.records
+        return MappingProxyType(selected)
+
+    @staticmethod
+    def _load_jsonl(path: Path) -> tuple[dict[str, Any], ...]:
+        records: list[dict[str, Any]] = []
+        with open(path, encoding="utf-8") as f:
+            for line_number, line in enumerate(f, start=1):
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    record = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise RuntimeError(f"Invalid JSONL in {path}:{line_number}: {exc}") from exc
+                if not isinstance(record, dict):
+                    raise RuntimeError(f"Invalid non-object JSONL record in {path}:{line_number}")
+                records.append(record)
+        return tuple(records)
 
 
 def run_generator(name: str, func, *args, **kwargs) -> None:
@@ -105,6 +198,7 @@ def main() -> None:
 
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
+    artifacts = DatasetArtifactRegistry(output_dir)
 
     workers = 4
     resume = False
@@ -181,6 +275,12 @@ def main() -> None:
             reset_checkpoint=reset_checkpoint,
         ).run(),
     )
+    artifacts.register(
+        "planner",
+        "planner_v1_0.jsonl",
+        manifest_filename="planner_manifest.json",
+        statistics_filename="planner_statistics.json",
+    )
 
     # 2. Coding
     run_generator(
@@ -194,6 +294,12 @@ def main() -> None:
             reset_checkpoint=reset_checkpoint,
         ).run(),
     )
+    artifacts.register(
+        "coding",
+        "coding_v1_0.jsonl",
+        manifest_filename="coding_manifest.json",
+        statistics_filename="coding_statistics.json",
+    )
 
     # 3. Repair
     run_generator(
@@ -206,6 +312,12 @@ def main() -> None:
             resume=resume,
             reset_checkpoint=reset_checkpoint,
         ).run(),
+    )
+    artifacts.register(
+        "repair",
+        "repair_v1_0.jsonl",
+        manifest_filename="repair_manifest.json",
+        statistics_filename="repair_statistics.json",
     )
 
     # 4. Context
@@ -221,6 +333,12 @@ def main() -> None:
             target_module=None,
         ).run(),
     )
+    artifacts.register(
+        "context",
+        "context_v1_0.jsonl",
+        manifest_filename="manifest.json",
+        statistics_filename="statistics.json",
+    )
 
     # Prepare namespace for subsequent generators
     common_ns = argparse.Namespace(
@@ -233,31 +351,76 @@ def main() -> None:
     )
 
     # 5. Execution
+    common_ns.artifact_records = artifacts.records_for(
+        "planner", "coding", "context", "repair", optional=("repair",)
+    )
     run_generator(
         "Execution",
         lambda: ExecutionPipeline.execute(build_execution_context(common_ns)),
     )
+    artifacts.register(
+        "execution",
+        "execution_dataset.jsonl",
+        manifest_filename="execution_manifest.json",
+        statistics_filename="execution_statistics.json",
+    )
 
     # 6. Approval
+    common_ns.artifact_records = artifacts.records_for("planner", "coding", "repair", "execution")
     run_generator(
         "Approval",
         lambda: ApprovalPipeline.generate(build_approval_context(common_ns)),
     )
+    artifacts.register(
+        "approval",
+        "approval_dataset.jsonl",
+        manifest_filename="approval_manifest.json",
+        statistics_filename="approval_statistics.json",
+    )
 
     # 7. Conversation
+    common_ns.artifact_records = artifacts.records_for(
+        "planner", "coding", "repair", "context", "execution", "approval"
+    )
     run_generator(
         "Conversation",
         lambda: ConversationPipeline.generate(build_conversation_context(common_ns)),
+    )
+    artifacts.register(
+        "conversation",
+        "conversation_dataset.jsonl",
+        manifest_filename="conversation_manifest.json",
+        statistics_filename="conversation_statistics.json",
     )
 
     # 8. Evaluation
     eval_config = EvalConfig.load(str(eval_config_path))
     # Inject protocol context dynamically
     eval_config["protocol_context"] = protocol_context
+    eval_config["source_protocols"] = artifacts.records_for(
+        "planner",
+        "coding",
+        "repair",
+        "context",
+        "execution",
+        "approval",
+        "conversation",
+    )
+    eval_config["target_generator"] = "aiodoo"
+    eval_config["benchmark_name"] = "aiodoo_downstream_integration"
+    eval_config["benchmark_category"] = "integration"
+    eval_config["benchmark_description"] = "Evaluation generated from all AIODOO datasets."
+    eval_config["supported_protocols"] = tuple(eval_config["source_protocols"].keys())
 
     run_generator(
         "Evaluation",
         lambda: EvalCommands.run_generate(eval_config, str(output_dir)),
+    )
+    artifacts.register(
+        "evaluation",
+        "evaluation_dataset.jsonl",
+        manifest_filename="evaluation_manifest.json",
+        statistics_filename="evaluation_statistics.json",
     )
 
     # 9. Validation Framework

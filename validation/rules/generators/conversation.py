@@ -38,7 +38,9 @@ class ConversationInstructionRule(BaseRule):
         return ("conversation",)
 
     def validate(
-        self, record: dict, context: ValidationContext  # type: ignore[type-arg]
+        self,
+        record: dict,
+        context: ValidationContext,  # type: ignore[type-arg]
     ) -> tuple[ValidationIssue, ...]:
         instruction = record.get("instruction", "")
         if not instruction or not isinstance(instruction, str) or not instruction.strip():

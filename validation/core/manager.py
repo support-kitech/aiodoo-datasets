@@ -89,7 +89,9 @@ class ValidationManager:
         )
 
     def validate_record(
-        self, record: dict, dataset_name: str = ""  # type: ignore[type-arg]
+        self,
+        record: dict,
+        dataset_name: str = "",  # type: ignore[type-arg]
     ) -> ValidationResult:
         """Validate a single deserialized record."""
         val_context = ContextBuilder.build(Path("."))
@@ -109,7 +111,9 @@ class ValidationManager:
     # ---------------------------------------------------------------
 
     def validate_generator_output(
-        self, records: list[dict], generator_name: str  # type: ignore[type-arg]
+        self,
+        records: list[dict],
+        generator_name: str,  # type: ignore[type-arg]
     ) -> ValidationResult:
         """
         Validate a list of generator output records before export.
