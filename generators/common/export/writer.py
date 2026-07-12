@@ -31,16 +31,26 @@ class AdaptiveJSONEncoder(json.JSONEncoder):
 
 
 class DatasetWriter(Generic[TRecord]):
-    """Thread-safe append-only writer for JSONL datasets with streaming statistics."""
+    """Thread-safe streaming writer for JSONL datasets."""
 
     def __init__(
-        self, output_dir: Path, stats: BaseStatistics, filename: str, dataset_name: str
+        self,
+        output_dir: Path,
+        stats: BaseStatistics,
+        filename: str,
+        dataset_name: str,
     ) -> None:
         self.output_dir = output_dir
         self.filename = filename
         self.dataset_name = dataset_name
         self.output_path = output_dir / filename
+
+        # Ensure output directory exists
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Start each dataset generation with a clean file
+        self.output_path.unlink(missing_ok=True)
+
         self.written_count = 0
         self.stats = stats
 
