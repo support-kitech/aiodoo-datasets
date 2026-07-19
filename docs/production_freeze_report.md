@@ -2,84 +2,93 @@
 
 ## 1. Repository Overview
 
-This document serves as the formal Production Freeze Report for the **AIODOO Dataset Repository**. The repository houses a suite of deterministic, highly-engineered generators designed to construct robust AI training datasets tailored to Odoo. The architecture strictly isolates domain logic, serialization protocols, and validation boundaries to ensure complete reproducibility and immutability.
+This document is the production freeze report for the **AIODOO Dataset Repository**
+(generators + orchestration). It records what is frozen for tooling release
+**v2.0.0**, and what remains intentionally deferred.
 
-**Repository Version:** `v1.0.0`  
-**Repository Status:** `Production Ready`  
-**Freeze Recommendation:** `Approved for v1.0.0 Release Branch Cut`
+**Repository tooling version:** `v2.0.0`  
+**Repository status:** `Tooling freeze — generation DAG complete; three corpora sparse`  
+**Freeze recommendation:** `Approved for annotated tag v2.0.0 (tooling); not train-all-8 ready`
 
----
-
-## 2. Completed Generators
-
-The repository is now fully feature-complete, encompassing eight unified generators. Each generator strictly adheres to the unified 10-layer pipeline architecture.
-
-1. **Planner Generator:** Orchestrates high-level implementation strategy datasets.
-2. **Coding Generator:** Generates deterministic code structure datasets.
-3. **Repair Generator:** Simulates and repairs syntax and integration anomalies.
-4. **Context Generator:** Extracts and aggregates Odoo architectural context.
-5. **Execution Generator:** The foundational reference implementation mapping the Odoo execution environment.
-6. **Approval Generator:** Validates and scores human-in-the-loop (HITL) approval datasets.
-7. **Conversation Generator:** Maps multi-turn agentic conversation flows securely.
-8. **Evaluation Generator:** The capstone module; orchestrates benchmarking, ground truth extraction, and success criteria across all preceding generators.
+This repository is **not** an installable Python package. Run from source via
+`python3 build_dataset.py`.
 
 ---
 
-## 3. Engineering Principles
+## 2. Completed Generators (orchestration)
 
-The entire repository was engineered upon an uncompromising foundation of rigid structural principles:
+All eight generators are implemented as code and registered in `build_dataset.py`:
 
-- **Deterministic:** Outputs are 100% reproducible. Dictionary keys are strictly sorted.
-- **Immutable:** Domain models leverage `frozen=True` and `slots=True`. Deep structures utilize `Tuple` and `MappingProxyType`. Data is never mutated post-instantiation.
-- **Stateless:** The pipeline architecture avoids mutable globals and caches. Multiprocessing and pickling are natively supported.
-- **Layered:** Separation of Concerns is absolute: `Domain → Factories → Builders → Analysis → Protocol → Validation → Statistics → Pipeline → API → CLI`.
-- **Shared Infrastructure:** The core engine (`DatasetWriter`, Validation engine, CLI bootstraps) is uniformly shared, ensuring zero duplicated export or logging code.
+| # | Capability | Training-scale corpus? | Notes |
+| --- | --- | --- | --- |
+| 1 | Planner | Yes (thousands of records) | Usable at scale |
+| 2 | Coding | Yes | Usable at scale; some duplicates in stats |
+| 3 | Repair | Yes (hundreds) | Smaller but non-stub |
+| 4 | Context | Yes (tens of thousands) | Best-tested generator |
+| 5 | Execution | Yes | Consumes upstream artifacts |
+| 6 | Approval | **No** — 1 record | Rules partially stubbed; see FUTURE doc |
+| 7 | Conversation | **No** — 1 record | Richness deferred |
+| 8 | Evaluation | **No** — 1 record | Placeholder prompts; deferred |
+
+Frozen release inventory (external `AIODOO/datasets/…` and local `datasets/` build):
+**67,258** total records. Sparse counts are intentional and documented in
+`docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`.
+
+---
+
+## 3. Engineering Principles (unchanged)
+
+- **Deterministic:** Sorted keys; shared export writer.
+- **Immutable domain:** Frozen models where established.
+- **Layered pipelines:** Domain → builders → protocol → export → validation.
+- **Shared infrastructure:** DatasetWriter, validation framework, checkpoints.
 
 ---
 
 ## 4. Repository Checklist
 
-The following strict engineering invariants have been exhaustively verified across every generator in the repository:
-
-- [x] **No UUID:** All IDs are deterministically hashed via Factory single-sources-of-truth.
-- [x] **No Random:** No random jitter or unpredictable branching.
-- [x] **No Runtime Discovery:** No unsafe `importlib` plugin loading or reflection; registries are manually built and frozen.
-- [x] **Immutable Domain:** The domain layer is strictly protected from the serialization layer.
-- [x] **Deterministic IDs:** Same inputs yield identical downstream IDs (`SUITE-XXX`, `TRUTH-XXX`, etc.).
-- [x] **Shared Export:** All generators route through the unified export module.
-- [x] **Shared Validation:** Dataset invariants (duplicate IDs, orphaned references) are caught by unified validators.
-- [x] **Shared Statistics:** Exact analytical coverage metrics are gathered using the shared statistics infrastructure.
-- [x] **Shared CLI:** Argparse interfaces follow identical sub-command branching architectures.
-- [x] **Shared Pipeline:** The execution flow strictly follows the 10-layer process without bypasses.
-- [x] **Shared DatasetWriter:** The final JSONL, manifest, and statistics files are flushed to disk via the shared writer.
+- [x] No UUID / no random in generator ID paths (factory hashing).
+- [x] Shared DatasetWriter / manifests / statistics paths.
+- [x] Validation framework runs at end of `build_dataset.py`.
+- [x] CI: ruff + pytest + coverage (honest measured surface).
+- [x] Not packaged; README matches clone-and-run workflow.
+- [ ] Approval / conversation / evaluation training-scale richness (future).
+- [ ] Automated freeze/publish job (out of scope for this freeze).
 
 ---
 
 ## 5. Testing Summary
 
-Testing focuses exclusively on enforcing architectural invariants rather than fragile cosmetic assertions:
-- **Registry Freeze Tests:** Ensure that component registries throw `RuntimeError` on post-freeze mutations.
-- **Immutability Tests:** Assert that any attempt to modify `AnalysisResult` or `PipelineResult` raises `TypeError`.
-- **Determinism Tests:** Verify that generating a dataset 10× consecutively produces a byte-for-byte identical dataset output.
-- **Validation Failure Tests:** Guarantee fail-fast behaviors upon introduction of malformed protocols or duplicated IDs.
+- Strong coverage on **sources / protocol / preprocessing / validation / context**.
+- Unit coverage on **approval** rule wiring (not E2E richness).
+- **No** dedicated `test_*.py` suites for planner, coding, repair, execution,
+  conversation, or evaluation — coverage gate **omits** those trees intentionally.
+- Determinism infrastructure exists; byte-identical multi-run claims are **not**
+  proven by CI for every generator.
 
 ---
 
-## 6. Repository Metrics
+## 6. Repository Metrics (honest)
 
 | Metric | Score | Assessment |
 | :--- | :---: | :--- |
-| **Architecture Score** | **10/10** | Unbreakable adherence to the 10-layer standard; pure functional decoupling. |
-| **Determinism Score** | **10/10** | Byte-for-byte reproducibility guaranteed via frozen structures and sorted mapping keys. |
-| **Maintainability Score** | **10/10** | Modular registries, stateless orchestrators, and decoupled Pydantic protocols guarantee trivial maintenance. |
-| **Coverage Score** | **10/10** | 10x determinism loops and rigorous invariant enforcement testing. |
-| **CI/CD Score** | **10/10** | Pristine workflow pipeline exclusively targeting Python 3.12 with flawless linting standards (Ruff/Pyright). |
-| **Production Readiness** | **10/10** | Fully hardened for enterprise workloads. |
+| Architecture / layering | **7/10** | Real layered stack; stubs remain in sparse paths |
+| Generator completeness | **4/10** | Five scalable corpora; three documented stubs |
+| Schema / validation | **6/10** | Framework works; quality ≠ pass |
+| Determinism | **5/10** | Infrastructure present; not CI-proven for all 8 |
+| Packaging / CLI honesty | **8/10** | Clone-and-run; no false package claims (v2.0.0) |
+| Tests / coverage honesty | **5/10** | Gate measures tested surface only |
+| Training usability (all 8) | **2/10** | Skip approval / conversation / evaluation at scale |
+| Docs honesty | **7/10** | This report + FUTURE doc aligned with artifacts |
+| **Overall production readiness** | **3/10** | Demoable DAG; **not** train-all-8 ready |
 
 ---
 
 ## 7. Final Recommendation
 
-Following the conclusion of the architectural, implementation, testing, and release audits, I recommend the immediate **Version 1.0.0 Production Freeze**. 
+**Approve tooling tag `v2.0.0`** for: clone-and-run layout, honest docs, green CI,
+and frozen architecture of the generation DAG.
 
-The AIODOO Dataset Repository stands as a masterclass in deterministic pipeline engineering and is fully cleared for release.
+**Do not** treat this freeze as approval to train all eight capabilities tomorrow.
+Block or skip **approval**, **conversation**, and **evaluation** until richness is
+rebuilt (future work — not part of this freeze).

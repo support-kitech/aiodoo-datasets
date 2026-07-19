@@ -26,6 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # This repo is not an installable package — dependencies only (no pip install -e).
           pip install \
             pydantic \
             PyYAML \
@@ -41,4 +42,5 @@ jobs:
       - name: Run Tests
         run: |
           coverage run -m pytest
+          # fail_under also set in pyproject.toml [tool.coverage.report]
           coverage report -m --fail-under=60

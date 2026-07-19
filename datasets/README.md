@@ -1,0 +1,75 @@
+# AIODOO Dataset Release Inventory (artifact release v1.0.0)
+
+> Describes the frozen JSONL corpora produced by this repository.  
+> Artifact files themselves are **gitignored**; the canonical copy may also live under
+> `AIODOO/datasets/v1.0.0/`. This README is tracked for inventory honesty.
+
+Generator tooling freeze for this repository: **v2.0.0** (see
+`docs/production_freeze_report.md`). Dataset **artifact** version remains **v1.0.0**
+until a new data release is published.
+
+---
+
+## Overview
+
+Local builds write into `datasets/` via `python3 build_dataset.py`. Validation
+“pass” means schema/integrity rules succeeded — it does **not** mean every
+capability is training-scale or high-signal.
+
+---
+
+## Release information
+
+| Property | Value |
+| --- | --- |
+| Dataset artifact version | v1.0.0 |
+| Generator repository | aiodoo-datasets (tooling tag v2.0.0) |
+| Total records | 67,258 |
+| Supported Odoo versions (sources) | 17.0, 18.0, 19.0 |
+| Train-all-8 ready? | **No** — see sparse rows below |
+
+---
+
+## Dataset contents (measured)
+
+| File | Records | Training-scale? |
+| --- | ---: | --- |
+| planner_v1_0.jsonl | 5,695 | Yes |
+| coding_v1_0.jsonl | 5,459 | Yes (duplicates present in stats) |
+| repair_v1_0.jsonl | 481 | Yes (smaller) |
+| context_v1_0.jsonl | 50,161 | Yes |
+| execution_dataset.jsonl | 5,459 | Yes |
+| approval_dataset.jsonl | 1 | **No** — single huge record; rules incomplete |
+| conversation_dataset.jsonl | 1 | **No** — richness deferred |
+| evaluation_dataset.jsonl | 1 | **No** — placeholder content |
+| **Total** | **67,258** | |
+
+Deferred richness: `docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`.
+
+---
+
+## Directory layout (build / external release)
+
+```text
+datasets/   # or AIODOO/datasets/v1.0.0/
+├── *_v1_0.jsonl / *_dataset.jsonl
+├── *_manifest.json (context may use manifest.json)
+├── *_statistics.json
+└── (checkpoints / sqlite caches may appear in local builds — not part of release)
+```
+
+External release may use `manifests/` and `statistics/` subdirectories.
+
+---
+
+## Intended usage
+
+- Prefer planner / coding / repair / context / execution for training experiments.
+- Do **not** train on approval / conversation / evaluation at scale until rebuilt.
+- Consumer: `aiodoo-training` (configs under `configs/training/`).
+
+---
+
+## License
+
+Distributed under the licensing terms of the AIODOO project.
