@@ -1,75 +1,56 @@
-# aiodoo-datasets — Implementation Report (v2.0.0 tooling freeze)
+# aiodoo-datasets — Implementation Report (v2.0.0)
 
-## 1. Modified files
+## Summary
 
-| File | Why |
-| --- | --- |
-| `pyproject.toml` | Removed installable `[build-system]` / `[project]`; tooling-only coverage/ruff/pytest aligned with CI (`fail_under=60`, honest omit list) |
-| `.github/workflows/ci.yml` | Documented no editable install; coverage gate comment |
-| `.gitignore` | Track `datasets/README.md` while ignoring build artifacts |
-| `README.md` | Removed false `pip install -e`, `generate-execution`, and `aiodoo_datasets.*` claims |
-| `docs/production_freeze_report.md` | Replaced overclaim 10/10 with honest scores and train-all-8 = NO |
+Tooling freeze completed in two batches: packaging/CI/docs honesty (prior), then
+completion residuals (CHANGELOG, checklists, RELEASE_REPORT, artifact
+spot-check). Architecture unchanged.
 
-## 2. New files
+## Batch A (prior) — modified / new / deleted
 
-| File | Why |
-| --- | --- |
-| `AUDIT_RESOLUTION.md` | Mandatory finding classification before code changes |
-| `IMPLEMENTATION_REPORT.md` | This report |
-| `datasets/README.md` (now tracked) | Release inventory was gitignored; honest record counts |
+See prior freeze commit notes: tooling-only `pyproject.toml`, README, freeze
+report, `.gitignore`, removed `.coveragerc`, tracked `datasets/README.md`.
 
-## 3. Deleted files
+## Batch B (this pass) — modified files
 
 | File | Why |
 | --- | --- |
-| `.coveragerc` | Consolidated into `pyproject.toml` so CI cannot silently diverge |
+| `AUDIT_RESOLUTION.md` | Residual classification for completion pass |
+| `CHANGELOG.md` | `[2.0.0]` + honest historical notes |
+| `docs/release_checklist.md` | Real gates (ruff/pytest/coverage 60) |
+| `docs/FUTURE_INTEGRATION_IMPROVEMENTS.md` | Summary no longer overclaims train-all-8 |
 
-## 4. Before → After
+## Batch B — new files
 
-| Topic | Before | After |
-| --- | --- | --- |
-| Packaging | Declared package; `pip install -e .` fails (multiple top-level packages) | Not a package; deps-only install |
-| README | Console script + fake package imports | `python3 build_dataset.py` + real module paths |
-| Coverage | `.coveragerc` vs `pyproject` conflict; bare `generators` → ~54% if coveragerc missing | Single config; measured surface ~81%; fail_under 60 |
-| Freeze report | Production Ready 10/10 | Honest metrics; tooling v2.0.0; sparse corpora called out |
-| `datasets/README.md` | Ignored by `datasets/` | Tracked; artifacts still ignored |
+| File | Why |
+| --- | --- |
+| `RELEASE_REPORT.md` | Required release hygiene + verdict |
 
-## 5. Architecture impact
+## Deleted files
 
-None. No generators moved, no DAG changes, no new abstractions.
+None in this pass.
 
-## 6. Test impact
+## Architecture impact
 
-No new product tests. Existing suite: **264 passed**. Coverage gate still 60% on the honest measured surface.
+None.
 
-## 7. Backward compatibility
+## Test / CI impact
 
-- Callers already using repo-root imports (`from sources…`, `from generators…`) unchanged.
-- Anyone relying on `pip install -e .` or `aiodoo_datasets` namespace was already broken; docs now match reality.
-- Dataset **artifact** version remains **v1.0.0**; repository **tooling** tag is **v2.0.0**.
+Gates re-verified: 264 tests, ~81% coverage, ruff clean. No new product tests.
 
-## 8. Breaking changes
+## Backward compatibility
 
-Documentation / packaging posture only. No protocol or generator API redesign.
+Clone-and-run imports unchanged. Dataset artifact inventory still v1.0.0 counts.
 
-## 9. Future work left intentionally untouched
+## Breaking changes
 
-- Approval / conversation / evaluation corpus expansion
-- Completing stub approval rules
-- Generator test suites for planner/coding/repair/execution/conversation/evaluation
-- Automated freeze/publish CI job
-- Naming unification (`*_v1_0` vs `*_dataset`, context `manifest.json`)
-- Regenerating manifests to bump `generator_version`
-- Hardcoded `config/sources.yaml` paths
-- Sibling-repo training/validation/model integration
+Documentation / packaging posture only (already established in Batch A).
 
-## 10. Quality gate results (local)
+## Future work left untouched
 
-```
-ruff check .          → passed
-ruff format --check . → passed
-coverage run -m pytest → 264 passed
-coverage report --fail-under=60 → ~81%
-```
+Sparse approval/conversation/evaluation; stub approval rules; generator test
+suites; naming unification; automated freeze job; full corpus regenerate.
 
-`mypy` is not part of this repository’s GitHub workflow (unlike `aiodoo-training`); not added here to avoid inventing a new gate across hundreds of untyped modules.
+## Production readiness
+
+**YES** in-boundary tooling. **NO** train-all-8.
