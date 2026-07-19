@@ -271,9 +271,12 @@ Low
 
 Current Status:
 
-Infrastructure:
-Production Ready
+- **Orchestration / DAG:** ready (all 8 generators wired in `build_dataset.py`)
+- **Framework CI:** ready (ruff + pytest + coverage fail-under 60)
+- **Training-scale corpora:** planner, coding, repair, context, execution
+- **Sparse (not train-all-8):** approval, conversation, evaluation — deferred richness
+- **Overall train-all-8 readiness:** **NO**
 
 Next Phase:
 
-Improve dataset quality rather than orchestration.
+Improve dataset quality (sparse corpora) rather than orchestration.
