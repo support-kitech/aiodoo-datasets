@@ -77,6 +77,7 @@ class SharedPipelineOrchestrator:
                 mod = future_to_module[future]
                 try:
                     records_data = future.result()
+                    written_before = self.writer.written_count
                     for data in records_data:
                         payload_dict = data["output"]
                         protocol_hash = data["metadata"]["protocol_hash"]
@@ -112,7 +113,24 @@ class SharedPipelineOrchestrator:
                             self.writer.record_duplicate()
 
                     if self.checkpoint_strategy == "module":
-                        self.checkpoint.save(mod.name, self.writer.written_count)
+                        # ACT-102: only mark a module as processed once it has
+                        # actually contributed at least one written record
+                        # this run. A module that produced zero new records
+                        # (e.g. every candidate was a duplicate, rejected by
+                        # core validation, or the worker returned nothing) is
+                        # left unmarked so a future --resume run retries it,
+                        # instead of a checkpoint permanently treating "empty
+                        # result" as "module done". See
+                        # ecosystem-v2-certification/MASTER_ACTION_LIST.md
+                        # (ACT-102) and docs/adr/0005-deterministic-ordering.md.
+                        if self.writer.written_count > written_before:
+                            self.checkpoint.save(mod.name, self.writer.written_count)
+                        else:
+                            logger.warning(
+                                "Module %s produced no new written records this run; "
+                                "not marking it processed so --resume retries it.",
+                                mod.name,
+                            )
 
                 except Exception as exc:
                     logger.error("Module %s crashed unexpectedly: %s", mod.name, exc)

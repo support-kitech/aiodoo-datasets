@@ -423,6 +423,40 @@ def main() -> None:
         statistics_filename="evaluation_statistics.json",
     )
 
+    # 8b. Per-capability evaluation corpora, built from the canonical
+    # aiodoo_contract schemas (ACT-007 / DEF-05 — see MASTER_ACTION_LIST.md
+    # and ARCHITECTURE_FREEZE_REPORT.md Tier 1). This is distinct from the
+    # "Evaluation" generator above: that generator produces one aggregate,
+    # cross-capability integration benchmark; this step produces one
+    # contract-shaped (request, expected_response) gold corpus per learnable
+    # capability for aiodoo-validation to certify against.
+    logger.info("=" * 60)
+    logger.info("Building per-capability evaluation corpora (aiodoo_contract)...")
+    logger.info("=" * 60)
+
+    from generators.common.contract.adapters import SUPPORTED_CAPABILITIES
+    from generators.common.contract.eval_corpus import write_eval_corpus
+
+    eval_corpus_source_records = artifacts.records_for(*SUPPORTED_CAPABILITIES)
+    for capability in SUPPORTED_CAPABILITIES:
+        eval_report = write_eval_corpus(
+            capability, eval_corpus_source_records[capability], output_dir
+        )
+        logger.info(
+            "%s eval corpus: %d candidate(s) -> %d written "
+            "(%d skipped: not projectable, %d skipped: failed contract validation)",
+            capability,
+            eval_report.candidates,
+            eval_report.written,
+            eval_report.skipped_projection,
+            eval_report.skipped_validation,
+        )
+        if eval_report.written == 0:
+            raise RuntimeError(
+                f"Eval corpus generation produced zero contract-valid cases for "
+                f"capability '{capability}'."
+            )
+
     # 9. Validation Framework
     logger.info("=" * 60)
     logger.info("Starting Validation Framework...")

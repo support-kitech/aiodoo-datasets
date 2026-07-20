@@ -18,6 +18,8 @@ source = [
     "validation",
     "generators/context",
     "generators/approval",
+    "generators/common/contract",
+    "generators/common/pipeline",
 ]
 omit = [
     "generators/conversation/*",

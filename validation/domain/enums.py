@@ -31,6 +31,7 @@ class ValidationCategory(str, Enum):
     SERIALIZATION = "serialization"
     GENERATOR = "generator"
     CROSS_DATASET = "cross_dataset"
+    CONTRACT = "contract"
 
 
 class RuleScope(str, Enum):
