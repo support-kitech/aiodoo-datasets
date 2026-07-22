@@ -1,12 +1,19 @@
 """Public API for Evaluation Generator."""
 
+import logging
 from typing import Dict, Any, Tuple
 from types import MappingProxyType
 
 from generators.evaluation.pipeline.pipeline_context import PipelineContext
 from generators.evaluation.pipeline.pipeline_result import PipelineResult
 from generators.evaluation.pipeline.pipeline import EvaluationPipeline
+from generators.evaluation.domain.evaluation import Evaluation
+from generators.evaluation.exceptions import EvaluationGeneratorError
+from generators.evaluation.validation.dataset_validator import DatasetValidator
+from generators.evaluation.validation.evaluation_validator import EvaluationValidator
 # Protocol imports removed
+
+logger = logging.getLogger(__name__)
 
 
 def generate(config: Dict[str, Any]) -> PipelineResult:
@@ -36,12 +43,39 @@ def generate(config: Dict[str, Any]) -> PipelineResult:
 def validate(dataset: Tuple[Any, ...]) -> bool:
     """
     Perform deep validation on an externally supplied dataset.
+
+    ACT-103: this previously always returned ``True`` (a no-op stub — see
+    ecosystem-v2-certification/MASTER_ACTION_LIST.md). It now runs the real,
+    fail-fast domain validators (:class:`EvaluationValidator`,
+    :class:`DatasetValidator`) against every :class:`Evaluation` aggregate in
+    ``dataset`` and returns ``False`` (fail closed) on any violation,
+    unexpected element type, or unexpected exception, instead of silently
+    reporting success.
     """
-    try:
-        # Protocol validation removed
-        return True
-    except Exception:
+    if not dataset:
+        logger.error("Evaluation dataset validation rejected an empty dataset.")
         return False
+
+    for item in dataset:
+        if not isinstance(item, Evaluation):
+            logger.error(
+                "Evaluation dataset validation rejected a non-Evaluation element: %r",
+                type(item),
+            )
+            return False
+
+    try:
+        for evaluation in dataset:
+            EvaluationValidator.validate(evaluation)
+        DatasetValidator.validate(tuple(dataset))
+    except EvaluationGeneratorError as exc:
+        logger.error("Evaluation dataset validation failed: %s", exc)
+        return False
+    except Exception:
+        logger.exception("Evaluation dataset validation raised an unexpected exception.")
+        return False
+
+    return True
 
 
 def export(result: PipelineResult, output_dir: str) -> PipelineResult:

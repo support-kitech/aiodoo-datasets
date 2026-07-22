@@ -9,7 +9,6 @@ from generators.evaluation.validation.ground_truth_validator import (
     GroundTruthValidator,
 )
 from generators.evaluation.validation.reference_validator import ReferenceValidator
-from generators.evaluation.validation.protocol_validator import ProtocolValidator
 from generators.evaluation.validation.dataset_validator import DatasetValidator
 
 __all__ = [
@@ -18,6 +17,5 @@ __all__ = [
     "CriteriaValidator",
     "GroundTruthValidator",
     "ReferenceValidator",
-    "ProtocolValidator",
     "DatasetValidator",
 ]

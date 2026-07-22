@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import logging
 import time
 from typing import Any, Mapping
 
@@ -27,6 +28,8 @@ from generators.execution.builders.build_pipeline_context import (
 from generators.execution.builders.build_pipeline import BuildPipeline
 from generators.execution.analysis.context import AnalysisContext
 from generators.execution.analysis.execution_analyzer import ExecutionAnalyzer
+
+logger = logging.getLogger(__name__)
 
 
 class ExecutionIntegrationStatistics(BaseStatistics):  # type: ignore[misc]
@@ -169,13 +172,19 @@ class IntegrationPipeline:
                     diagnostics=planning_result.diagnostics,
                     statistics=context.pipeline_statistics,
                 )
-        except Exception:
-            import traceback
-
-            traceback.print_exc()
-            from generators.execution.planning.planning_result import PlanningResult
-
-            planning_result = PlanningResult(success=True)
+        except Exception as exc:
+            # ACT-005: an unhandled exception must fail the pipeline, not be
+            # reported as a successful, empty PlanningResult. See
+            # ecosystem-v2-certification/MASTER_ACTION_LIST.md.
+            logger.exception("Planning phase raised an unhandled exception")
+            context.pipeline_statistics.phase_execution_times["PLANNING"] = (
+                time.time() - planning_start
+            )
+            return PipelineResult(
+                success=False,
+                diagnostics=(f"Planning phase raised an exception: {exc!r}",),
+                statistics=context.pipeline_statistics,
+            )
         context.pipeline_statistics.phase_execution_times["PLANNING"] = time.time() - planning_start
 
         # 6. Protocol Layer (Removed)
@@ -207,10 +216,17 @@ class IntegrationPipeline:
                     diagnostics=export_result.diagnostics,
                     statistics=context.pipeline_statistics,
                 )
-        except Exception:
-            from generators.execution.export.export_result import ExportResult
-
-            export_result = ExportResult(success=True)
+        except Exception as exc:
+            # ACT-005: an unhandled exception must fail the pipeline, not be
+            # reported as a successful, empty ExportResult. See
+            # ecosystem-v2-certification/MASTER_ACTION_LIST.md.
+            logger.exception("Export phase raised an unhandled exception")
+            context.pipeline_statistics.phase_execution_times["EXPORT"] = time.time() - export_start
+            return PipelineResult(
+                success=False,
+                diagnostics=(f"Export phase raised an exception: {exc!r}",),
+                statistics=context.pipeline_statistics,
+            )
         context.pipeline_statistics.phase_execution_times["EXPORT"] = time.time() - export_start
 
         context.pipeline_statistics.total_execution_time = time.time() - start_time
