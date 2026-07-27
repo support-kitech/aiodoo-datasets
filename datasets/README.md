@@ -1,20 +1,18 @@
-# AIODOO Dataset Release Inventory (artifact release v1.0.0)
+# AIODOO Dataset Release Inventory (post Step 6 regen)
 
-> Describes the frozen JSONL corpora produced by this repository.  
-> Artifact files themselves are **gitignored**; the canonical copy may also live under
-> `AIODOO/datasets/v1.0.0/`. This README is tracked for inventory honesty.
+> Describes the JSONL corpora under `datasets/`.  
+> Artifact files themselves are **gitignored**.
 
-Generator tooling freeze for this repository: **v2.0.0** (see
-`docs/production_freeze_report.md`). Dataset **artifact** version remains **v1.0.0**
-until a new data release is published.
+Generator tooling: **v2.0.0** (Approval / Conversation / Evaluation generators).  
+Step 6 regeneration date: **2026-07-27**.
 
 ---
 
 ## Overview
 
-Local builds write into `datasets/` via `python3 build_dataset.py`. Validation
-“pass” means schema/integrity rules succeeded — it does **not** mean every
-capability is training-scale or high-signal.
+Local builds write into `datasets/` via `python3 build_dataset.py` (full) or
+`python3 regenerate_v2_datasets.py` (Approval / Conversation / Evaluation only,
+from existing upstream JSONL).
 
 ---
 
@@ -22,53 +20,39 @@ capability is training-scale or high-signal.
 
 | Property | Value |
 | --- | --- |
-| Dataset artifact version | v1.0.0 |
-| Generator repository | aiodoo-datasets (tooling tag v2.0.0) |
-| Total records | 67,258 |
+| Dataset artifact status | Step 6 regen complete (A/C/E v2) |
+| Generator repository | aiodoo-datasets |
 | Supported Odoo versions (sources) | 17.0, 18.0, 19.0 |
-| Train-all-8 ready? | **No** — see sparse rows below |
+| Train-all-8 ready? | **Yes** for grain (see note on EvaluationFormatter) |
 
 ---
 
-## Dataset contents (measured)
+## Dataset contents (measured 2026-07-27)
 
 | File | Records | Training-scale? |
 | --- | ---: | --- |
 | planner_v1_0.jsonl | 5,695 | Yes |
-| coding_v1_0.jsonl | 5,459 | Yes (duplicates present in stats) |
+| coding_v1_0.jsonl | 5,459 | Yes |
 | repair_v1_0.jsonl | 481 | Yes (smaller) |
 | context_v1_0.jsonl | 50,161 | Yes |
 | execution_dataset.jsonl | 5,459 | Yes |
-| approval_dataset.jsonl | many (1/subject after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
-| conversation_dataset.jsonl | many (1/reply after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
-| evaluation_dataset.jsonl | many (1/judgment after regen) | **Yes (v2 grain)** — regenerate; old catalog-as-SFT obsolete |
-| evaluation_benchmark_catalog.jsonl | 1 catalog | **Not SFT** — certification/benchmark side channel |
-| **Total** | **67,258** (pre A/C/E v2 regen) | |
+| approval_dataset.jsonl | **17,094** | **Yes (v2)** |
+| conversation_dataset.jsonl | **29,016** | **Yes (v2)** |
+| evaluation_dataset.jsonl | **189,615** | **Yes (v2)** |
+| evaluation_benchmark_catalog.jsonl | **1** | **Not SFT** |
+| **Train JSONL total (excl. catalog)** | **303,380** | |
 
-Approval / Conversation / Evaluation generator v2 docs under `generators/*/README.md`.
-
----
-
-## Directory layout (build / external release)
-
-```text
-datasets/   # or AIODOO/datasets/v1.0.0/
-├── *_v1_0.jsonl / *_dataset.jsonl
-├── *_manifest.json (context may use manifest.json)
-├── *_statistics.json
-└── (checkpoints / sqlite caches may appear in local builds — not part of release)
-```
-
-External release may use `manifests/` and `statistics/` subdirectories.
+Checksums: `datasets/step6_regeneration_summary.json`.
 
 ---
 
 ## Intended usage
 
-- Prefer planner / coding / repair / context / execution / approval /
-  conversation / **evaluation** (after v2 regen) for training.
+- Train Development: Coding, Repair, Execution (+ supporting Context).
+- Train Reasoning: Planner, Conversation, Approval, Evaluation (SFT file only).
 - Do **not** train on `evaluation_benchmark_catalog.jsonl`.
-- Consumer: `aiodoo-training` (configs under `configs/training/`).
+- Sync `aiodoo-training` EvaluationFormatter to contract projection before
+  Evaluation LoRA training (known follow-up).
 
 ---
 

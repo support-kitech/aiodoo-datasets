@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Step 6 production regen:** regenerated `approval_dataset.jsonl` (17,094),
+  `conversation_dataset.jsonl` (29,016), `evaluation_dataset.jsonl` (189,615),
+  and `evaluation_benchmark_catalog.jsonl` (1) via `regenerate_v2_datasets.py`.
+  All four passed full ValidationManager checks (0 issues).
 - **Evaluation generator v2 (Step 5):** capability SFT judgment grain — one JSONL
   record per evaluation case (`EvaluationRequest`→`EvaluationResponse`) with
   stable `record_id` (`candidate_id` + `evaluation_case_key` +
