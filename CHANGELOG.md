@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Remaining capability certification:** planner / coding / repair / execution /
+  context production datasets certified (schema, manifests, stats, unique IDs,
+  content uniqueness, scale, full contract projection where applicable).
+  Decision: **Production Certified**. See
+  `docs/remaining_datasets_certification_report.md`.
 - **Step 7 production certification:** all four Step 6 regenerated artifacts
   certified (schema, manifests, stats, deterministic IDs/ordering, duplicates,
   scale, full contract projection, catalog `training_forbidden`). Decision:

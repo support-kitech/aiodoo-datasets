@@ -5,7 +5,8 @@
 
 Generator tooling: **v2.0.0** (Approval / Conversation / Evaluation generators).  
 Step 6 regeneration date: **2026-07-27**.  
-Step 7 certification: **Production Certified** — see `docs/step7_certification_report.md`.
+Step 7 (A/C/E) certification: **Production Certified** — `docs/step7_certification_report.md`.  
+Remaining (P/C/R/E/Context) certification: **Production Certified** — `docs/remaining_datasets_certification_report.md`.
 
 ---
 
@@ -21,7 +22,7 @@ from existing upstream JSONL).
 
 | Property | Value |
 | --- | --- |
-| Dataset artifact status | **Production Certified** (Step 7; A/C/E v2) |
+| Dataset artifact status | **Production Certified** (all train JSONL) |
 | Generator repository | aiodoo-datasets |
 | Supported Odoo versions (sources) | 17.0, 18.0, 19.0 |
 | Train-all-8 ready? | **Yes** for grain (see note on EvaluationFormatter) |
