@@ -40,12 +40,12 @@ capability is training-scale or high-signal.
 | context_v1_0.jsonl | 50,161 | Yes |
 | execution_dataset.jsonl | 5,459 | Yes |
 | approval_dataset.jsonl | many (1/subject after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
-| conversation_dataset.jsonl | 1 | **No** — richness deferred |
+| conversation_dataset.jsonl | many (1/reply after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
 | evaluation_dataset.jsonl | 1 | **No** — placeholder content |
-| **Total** | **67,258** (pre-approval-v2) | |
+| **Total** | **67,258** (pre A/C v2 regen) | |
 
-Approval generator v2: `generators/approval/README.md`. Deferred: conversation / evaluation
-(`docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`).
+Approval / Conversation generator v2: see `generators/approval/README.md` and
+`generators/conversation/README.md`. Deferred: evaluation capability SFT.
 
 ---
 
@@ -65,8 +65,9 @@ External release may use `manifests/` and `statistics/` subdirectories.
 
 ## Intended usage
 
-- Prefer planner / coding / repair / context / execution / **approval (after v2 regen)** for training.
-- Do **not** train on conversation / evaluation at scale until rebuilt.
+- Prefer planner / coding / repair / context / execution / **approval** /
+  **conversation** (after v2 regen) for training.
+- Do **not** train on evaluation at scale until rebuilt.
 - Consumer: `aiodoo-training` (configs under `configs/training/`).
 
 ---

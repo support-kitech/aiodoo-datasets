@@ -100,30 +100,14 @@ still improve diversity but is no longer a grain/architecture blocker.
 
 # 4. Conversation Dataset Richness
 
-Current:
+**Status (Step 4):** Implemented — next-reply grain (generator v2).
 
-Conversation produces one integrated conversation.
+Conversation now reconstructs development episodes and emits **one JSONL record
+per assistant reply** with bounded history and stable identities. See
+`generators/conversation/README.md` and `docs/conversation_migration_v2.md`.
 
-Future improvements:
-
-Generate many conversations such as:
-
-- planning discussions
-- implementation discussions
-- debugging sessions
-- repair conversations
-- review conversations
-- architecture discussions
-- code explanation conversations
-- migration conversations
-- optimization conversations
-
-Goal:
-
-Large conversational training dataset.
-
-Priority:
-High
+Remaining optional richness (more natural dialogue phrasing, tool turns) can
+still improve diversity but is no longer a grain/architecture blocker.
 
 ---
 

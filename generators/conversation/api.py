@@ -7,7 +7,7 @@ from typing import List, Any
 
 
 def generate(context: PipelineContext) -> PipelineResult:
-    """Generate a conversation dataset entry."""
+    """Generate next-reply Conversation training records from upstream episodes."""
     return ConversationPipeline.generate(context)
 
 

@@ -1,15 +1,17 @@
 """CLI configuration for Conversation Generator."""
 
 import argparse
-from generators.conversation.pipeline_context import PipelineContext
+
 from generators.conversation.builders.metadata_builder import MetadataBuilder
 from generators.conversation.enums import ConversationType
+from generators.conversation.pipeline_context import PipelineContext
 
 
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     """Build the pipeline context from CLI arguments."""
 
     artifact_records = getattr(args, "artifact_records", {})
+    # Approval / context / repair are soft inputs — empty tuples are allowed.
     input_protocols = {
         "planner_protocol": tuple(artifact_records.get("planner", ())),
         "coding_protocol": tuple(artifact_records.get("coding", ())),
@@ -20,7 +22,7 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     }
 
     metadata = MetadataBuilder.build(
-        conversation_type=ConversationType.PLANNING, source_module=str(args.source_dir.name)
+        conversation_type=ConversationType.AGENT, source_module=str(args.source_dir.name)
     )
 
     return PipelineContext(

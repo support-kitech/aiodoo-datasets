@@ -110,9 +110,7 @@ class TestSchemaRegistry(unittest.TestCase):
         self.assertEqual(SchemaRegistry._infer_generator("context_v1_0.jsonl"), "context")
         self.assertEqual(SchemaRegistry._infer_generator("approval_dataset.jsonl"), "approval")
         self.assertEqual(SchemaRegistry._infer_generator("evaluation_dataset.jsonl"), "evaluation")
-        self.assertEqual(
-            SchemaRegistry._infer_generator("coding_eval_corpus.jsonl"), "eval_corpus"
-        )
+        self.assertEqual(SchemaRegistry._infer_generator("coding_eval_corpus.jsonl"), "eval_corpus")
         self.assertEqual(
             SchemaRegistry._infer_generator("planner_eval_corpus.jsonl"), "eval_corpus"
         )
@@ -170,6 +168,17 @@ class TestSchemaBuilder(unittest.TestCase):
         self.assertIn("subject_id", s.required_field_names)
         self.assertIn("payload", s.required_field_names)
         self.assertNotIn("instruction", s.required_field_names)
+
+    def test_conversation_schema(self) -> None:
+        reg = SchemaBuilder.build_default()
+        s = reg.get("conversation")
+        self.assertIsNotNone(s)
+        assert s is not None
+        self.assertEqual(s.schema_id, "conversation-v2")
+        self.assertIn("instruction", s.required_field_names)
+        self.assertIn("record_id", s.required_field_names)
+        self.assertIn("conversation_id", s.required_field_names)
+        self.assertIn("turn_index", s.required_field_names)
 
     def test_evaluation_schema(self) -> None:
         reg = SchemaBuilder.build_default()

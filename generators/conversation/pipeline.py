@@ -1,44 +1,31 @@
-"""Pipeline orchestrator for Conversation Generator."""
+"""Pipeline orchestrator for Conversation Generator (next-reply training grain)."""
 
-import dataclasses
-import hashlib
-import json
-from types import MappingProxyType
+from __future__ import annotations
+
+from pathlib import Path
+
+from generators.conversation.analysis.episode import EpisodeReconstructor
+from generators.conversation.analysis.slicer import DialogueSlicer
+from generators.conversation.builders.slice_record_builder import SliceRecordBuilder
 from generators.conversation.pipeline_context import PipelineContext
 from generators.conversation.pipeline_result import PipelineResult
-from generators.conversation.exceptions import ConversationValidationError
-from generators.conversation.analysis.context import AnalysisContext
-from generators.conversation.analysis.evidence_extractor import EvidenceExtractor
-from generators.conversation.builders.conversation_builder import (
-    ConversationBuilder,
-)
-from generators.conversation.validation.conversation_validator import (
-    ConversationValidator,
-)
-from generators.conversation.statistics.conversation_statistics import (
-    ConversationStatistics,
-)
+from generators.conversation.policy import MIN_PRODUCTION_RECORDS, REQUIRED_PROTOCOL_KEYS
+from generators.conversation.statistics.conversation_statistics import ConversationStatistics
+from generators.common.export.writer import DatasetWriter
 
 
 class ConversationPipeline:
-    """Orchestrates the conversation generation process."""
+    """Orchestrates episode reconstruction → slicing → N JSONL records."""
 
     @staticmethod
     def generate(context: PipelineContext) -> PipelineResult:
         """Execute the full pipeline."""
         stats = ConversationStatistics()
+        diagnostics: list[str] = []
 
         try:
-            required_inputs = (
-                "planner_protocol",
-                "coding_protocol",
-                "repair_protocol",
-                "context_protocol",
-                "execution_protocol",
-                "approval_protocol",
-            )
             missing_inputs = tuple(
-                name for name in required_inputs if not context.input_protocols.get(name)
+                name for name in REQUIRED_PROTOCOL_KEYS if not context.input_protocols.get(name)
             )
             if missing_inputs:
                 return PipelineResult(
@@ -48,31 +35,24 @@ class ConversationPipeline:
                     ],
                 )
 
-            # 1. Analysis Layer
-            analysis_ctx = AnalysisContext(
-                input_protocols=MappingProxyType(context.input_protocols)
-            )
-            analysis_result = EvidenceExtractor.extract(analysis_ctx)
+            episodes = EpisodeReconstructor.reconstruct(context.input_protocols)
+            if not episodes:
+                return PipelineResult(
+                    success=False,
+                    diagnostics=["No conversation episodes reconstructed from upstream datasets"],
+                )
 
-            # 2. Builder Layer
-            conversation = ConversationBuilder.build(
-                analysis_result=analysis_result,
-                metadata=context.metadata,
-                source_identifier=context.source_identifier,
-            )
-
-            # 3. Validation Layer (Domain)
-            if context.strict_mode:
-                ConversationValidator.validate(conversation)
-
-            # 4. Protocol Mapping Layer (Removed)
-            # 5. Validation Layer (Protocol) (Removed)
-
-            # 6. Statistics (handled by DatasetWriter below)
-
-            # 7. Export Layer
-            from pathlib import Path
-            from generators.common.export.writer import DatasetWriter
+            slices = DialogueSlicer.slice_many(episodes)
+            if len(slices) < MIN_PRODUCTION_RECORDS:
+                return PipelineResult(
+                    success=False,
+                    diagnostics=[
+                        "Conversation production dataset rejected: "
+                        f"only {len(slices)} record(s); "
+                        f"minimum is {MIN_PRODUCTION_RECORDS} "
+                        "(single integrated conversation grain forbidden)"
+                    ],
+                )
 
             writer = DatasetWriter(
                 output_dir=Path(context.output_dir),
@@ -81,37 +61,26 @@ class ConversationPipeline:
                 dataset_name="conversation",
             )
 
-            output = dataclasses.asdict(conversation)
-            protocol_hash = hashlib.sha256(
-                json.dumps(output, sort_keys=True, ensure_ascii=True, default=str).encode("utf-8")
-            ).hexdigest()
-            record = {
-                "instruction": (
-                    "Create an integrated conversation over the generated AIODOO datasets."
-                ),
-                "context": {
-                    "source_identifier": context.source_identifier,
-                    "upstream_generators": sorted(context.input_protocols.keys()),
-                    "evidence_count": len(analysis_result.evidence_pool),
-                },
-                "output": output,
-                "metadata": {
-                    "module": context.metadata.source_module,
-                    "protocol_hash": protocol_hash,
-                    "generator_version": context.metadata.generator_version,
-                    "protocol_version": context.metadata.protocol_version,
-                    "schema_version": context.metadata.schema_version,
-                    "conversation_type": context.metadata.conversation_type.value,
-                },
-            }
+            for training_slice in slices:
+                record = SliceRecordBuilder.build(
+                    training_slice,
+                    base_metadata=context.metadata,
+                )
+                writer.write_record(record)
 
-            writer.write_record(record)
+            stats.episodes_generated = len(episodes)
+            stats.training_examples = len(slices)
+
             writer.export_manifest("conversation_manifest.json")
             writer.export_statistics("conversation_statistics.json")
 
-            return PipelineResult(success=True, statistics=stats)
+            return PipelineResult(
+                success=True,
+                statistics=stats,
+                diagnostics=diagnostics,
+                record_count=len(slices),
+                episode_count=len(episodes),
+            )
 
-        except ConversationValidationError as e:
-            return PipelineResult(success=False, diagnostics=[f"Validation failed: {str(e)}"])
         except Exception as e:
             return PipelineResult(success=False, diagnostics=[f"Pipeline failed: {str(e)}"])

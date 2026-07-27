@@ -378,9 +378,15 @@ def main() -> None:
         statistics_filename="approval_statistics.json",
     )
 
-    # 7. Conversation
+    # 7. Conversation (Approval/context/repair are soft dialogue material)
     common_ns.artifact_records = artifacts.records_for(
-        "planner", "coding", "repair", "context", "execution", "approval"
+        "planner",
+        "coding",
+        "repair",
+        "context",
+        "execution",
+        "approval",
+        optional=("repair", "context", "approval"),
     )
     run_generator(
         "Conversation",

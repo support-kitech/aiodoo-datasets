@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Conversation generator v2 (Step 4):** episode reconstruction + dialogue slicing —
+  one JSONL record per assistant reply with bounded history, stable
+  `record_id` (`conversation_id` + `turn_index` + `id_scheme_version`),
+  deterministic ordering, and production-scale validation (CNV-002..004).
+  Approval is a soft upstream dependency. Schema `conversation-v2`.
+  See `generators/conversation/README.md`.
 - **Approval generator v2 (Step 3):** subject-partitioned training grain — one JSONL
   record per planner/coding/repair/execution subject with bounded evidence,
   stable `record_id` (`capability` + `subject_id` + `source_object_id` +

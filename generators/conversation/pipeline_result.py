@@ -18,10 +18,14 @@ class PipelineResult:
     success: bool
     diagnostics: List[str] = field(default_factory=list)
     statistics: ConversationStatistics | None = None
+    record_count: int = 0
+    episode_count: int = 0
 
     @property
     def status(self) -> PipelineStatus:
-        if not self.success and any("has no turns" in str(d).lower() for d in self.diagnostics):
+        if not self.success and any(
+            "no conversation episodes" in str(d).lower() for d in self.diagnostics
+        ):
             return PipelineStatus.SKIPPED
 
         return PipelineStatus.SUCCESS if self.success else PipelineStatus.FAILED
