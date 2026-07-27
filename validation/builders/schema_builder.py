@@ -9,6 +9,7 @@ from validation.schemas.execution import EXECUTION_SCHEMA
 from validation.schemas.approval import APPROVAL_SCHEMA
 from validation.schemas.conversation import CONVERSATION_SCHEMA
 from validation.schemas.evaluation import EVALUATION_SCHEMA
+from validation.schemas.eval_corpus import EVAL_CORPUS_SCHEMA
 
 
 class SchemaBuilder:
@@ -27,6 +28,7 @@ class SchemaBuilder:
             APPROVAL_SCHEMA,
             CONVERSATION_SCHEMA,
             EVALUATION_SCHEMA,
+            EVAL_CORPUS_SCHEMA,
         )
         registry.freeze()
         return registry

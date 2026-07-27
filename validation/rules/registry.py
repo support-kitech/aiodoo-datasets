@@ -7,6 +7,7 @@ from types import MappingProxyType
 from validation.domain.enums import ValidationCategory
 from validation.exceptions import ValidationError
 from validation.rules.base import BaseRule
+from validation.schemas.registry import infer_generator_from_filename
 
 
 class RuleRegistry:
@@ -54,7 +55,7 @@ class RuleRegistry:
 
     def get_rules_for_dataset(self, dataset_name: str) -> tuple[BaseRule, ...]:
         """Return all applicable rules for a dataset, in priority order."""
-        generator = self._infer_generator(dataset_name)
+        generator = infer_generator_from_filename(dataset_name)
         return tuple(
             r
             for r in self._rules
@@ -82,20 +83,7 @@ class RuleRegistry:
     @staticmethod
     def _infer_generator(dataset_name: str) -> str:
         """Infer the generator name from the dataset filename."""
-        name = dataset_name.lower()
-        for gen in (
-            "planner",
-            "coding",
-            "repair",
-            "context",
-            "execution",
-            "approval",
-            "conversation",
-            "evaluation",
-        ):
-            if gen in name:
-                return gen
-        return "unknown"
+        return infer_generator_from_filename(dataset_name)
 
     @property
     def rules(self) -> Mapping[str, BaseRule]:

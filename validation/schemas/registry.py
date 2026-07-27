@@ -5,6 +5,32 @@ import hashlib
 from validation.exceptions import ValidationError
 from validation.schemas.base import DatasetSchema
 
+# Logical generator id for contract-shaped ``*_eval_corpus.jsonl`` files.
+# Must be resolved *before* capability substrings such as ``coding`` /
+# ``planner``, otherwise ``coding_eval_corpus.jsonl`` is misclassified as a
+# training coding dataset.
+EVAL_CORPUS_GENERATOR = "eval_corpus"
+
+
+def infer_generator_from_filename(filename: str) -> str:
+    """Infer the logical generator / corpus kind from a dataset filename."""
+    name = filename.lower()
+    if "eval_corpus" in name:
+        return EVAL_CORPUS_GENERATOR
+    for gen in (
+        "planner",
+        "coding",
+        "repair",
+        "context",
+        "execution",
+        "approval",
+        "conversation",
+        "evaluation",
+    ):
+        if gen in name:
+            return gen
+    return "unknown"
+
 
 class SchemaRegistry:
     """
@@ -53,7 +79,7 @@ class SchemaRegistry:
 
     def resolve_from_filename(self, filename: str) -> DatasetSchema | None:
         """Resolve the schema from a dataset filename."""
-        generator = self._infer_generator(filename)
+        generator = infer_generator_from_filename(filename)
         return self._schemas.get(generator)
 
     @property
@@ -73,18 +99,5 @@ class SchemaRegistry:
 
     @staticmethod
     def _infer_generator(filename: str) -> str:
-        """Infer the generator name from the dataset filename."""
-        name = filename.lower()
-        for gen in (
-            "planner",
-            "coding",
-            "repair",
-            "context",
-            "execution",
-            "approval",
-            "conversation",
-            "evaluation",
-        ):
-            if gen in name:
-                return gen
-        return "unknown"
+        """Infer the generator name from a dataset filename."""
+        return infer_generator_from_filename(filename)

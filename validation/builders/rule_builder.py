@@ -36,6 +36,7 @@ from validation.rules.generators.execution import ExecutionInstructionRule
 from validation.rules.generators.approval import ApprovalDecisionRule
 from validation.rules.generators.conversation import ConversationInstructionRule
 from validation.rules.generators.evaluation import EvaluationCatalogRule
+from validation.rules.generators.eval_corpus import EvalCorpusContractRule
 from validation.rules.generators.contract_compliance import build_contract_compliance_rules
 
 
@@ -92,6 +93,7 @@ class RuleBuilder:
             ApprovalDecisionRule(),
             ConversationInstructionRule(),
             EvaluationCatalogRule(),
+            EvalCorpusContractRule(),
         )
 
         # Contract compliance (aiodoo_contract) — one rule per capability.

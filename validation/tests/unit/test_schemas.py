@@ -83,9 +83,12 @@ class TestSchemaRegistry(unittest.TestCase):
     def test_resolve_from_filename(self) -> None:
         reg = SchemaRegistry()
         schema = DatasetSchema(schema_id="a", generator_name="coding")
+        eval_schema = DatasetSchema(schema_id="eval-corpus-v1", generator_name="eval_corpus")
         reg.register(schema)
+        reg.register(eval_schema)
         reg.freeze()
         self.assertEqual(reg.resolve_from_filename("coding_v1_0.jsonl"), schema)
+        self.assertEqual(reg.resolve_from_filename("coding_eval_corpus.jsonl"), eval_schema)
         self.assertIsNone(reg.resolve_from_filename("unknown.jsonl"))
 
     def test_hash_deterministic(self) -> None:
@@ -107,6 +110,12 @@ class TestSchemaRegistry(unittest.TestCase):
         self.assertEqual(SchemaRegistry._infer_generator("context_v1_0.jsonl"), "context")
         self.assertEqual(SchemaRegistry._infer_generator("approval_dataset.jsonl"), "approval")
         self.assertEqual(SchemaRegistry._infer_generator("evaluation_dataset.jsonl"), "evaluation")
+        self.assertEqual(
+            SchemaRegistry._infer_generator("coding_eval_corpus.jsonl"), "eval_corpus"
+        )
+        self.assertEqual(
+            SchemaRegistry._infer_generator("planner_eval_corpus.jsonl"), "eval_corpus"
+        )
         self.assertEqual(SchemaRegistry._infer_generator("random.jsonl"), "unknown")
 
 
@@ -114,7 +123,7 @@ class TestSchemaBuilder(unittest.TestCase):
     def test_build_default(self) -> None:
         reg = SchemaBuilder.build_default()
         self.assertTrue(reg.is_frozen)
-        self.assertEqual(len(reg.all_schemas), 8)
+        self.assertEqual(len(reg.all_schemas), 9)
 
     def test_all_generators_registered(self) -> None:
         reg = SchemaBuilder.build_default()
@@ -127,6 +136,7 @@ class TestSchemaBuilder(unittest.TestCase):
             "approval",
             "conversation",
             "evaluation",
+            "eval_corpus",
         }
         actual = {s.generator_name for s in reg.all_schemas}
         self.assertEqual(actual, expected)
@@ -163,6 +173,23 @@ class TestSchemaBuilder(unittest.TestCase):
         self.assertIn("evaluation_id", s.required_field_names)
         self.assertIn("catalog", s.required_field_names)
         self.assertNotIn("instruction", s.required_field_names)
+
+    def test_eval_corpus_schema(self) -> None:
+        reg = SchemaBuilder.build_default()
+        s = reg.get("eval_corpus")
+        self.assertIsNotNone(s)
+        assert s is not None
+        self.assertEqual(s.schema_id, "eval-corpus-v1")
+        self.assertEqual(
+            s.required_field_names,
+            frozenset({"capability", "request", "expected_response"}),
+        )
+        self.assertIn("source_protocol_hash", s.optional_field_names)
+        self.assertNotIn("instruction", s.all_field_names)
+        self.assertEqual(
+            reg.resolve_from_filename("repair_eval_corpus.jsonl"),
+            s,
+        )
 
 
 if __name__ == "__main__":

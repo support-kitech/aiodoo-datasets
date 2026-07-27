@@ -73,6 +73,7 @@ class TestRuleRegistry(unittest.TestCase):
         reg.register(DummyRule("UNI-001", gens=()))  # Universal
         reg.register(DummyRule("PLN-001", gens=("planner",)))  # Planner-specific
         reg.register(DummyRule("COD-001", gens=("coding",)))  # Coding-specific
+        reg.register(DummyRule("EVC-001", gens=("eval_corpus",)))  # Eval corpus
         reg.freeze()
 
         planner_rules = reg.get_rules_for_dataset("planner_v1_0.jsonl")
@@ -81,6 +82,14 @@ class TestRuleRegistry(unittest.TestCase):
         self.assertIn("UNI-001", rule_ids)
         self.assertIn("PLN-001", rule_ids)
         self.assertNotIn("COD-001", rule_ids)
+        self.assertNotIn("EVC-001", rule_ids)
+
+        eval_rules = reg.get_rules_for_dataset("coding_eval_corpus.jsonl")
+        eval_ids = {r.rule_id for r in eval_rules}
+        self.assertIn("UNI-001", eval_ids)
+        self.assertIn("EVC-001", eval_ids)
+        self.assertNotIn("COD-001", eval_ids)
+        self.assertNotIn("PLN-001", eval_ids)
 
     def test_hash_deterministic(self) -> None:
         reg1 = RuleRegistry()
