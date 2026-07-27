@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Step 7 production certification:** all four Step 6 regenerated artifacts
+  certified (schema, manifests, stats, deterministic IDs/ordering, duplicates,
+  scale, full contract projection, catalog `training_forbidden`). Decision:
+  **Production Certified**. See `docs/step7_certification_report.md`.
 - **Step 6 production regen:** regenerated `approval_dataset.jsonl` (17,094),
   `conversation_dataset.jsonl` (29,016), `evaluation_dataset.jsonl` (189,615),
   and `evaluation_benchmark_catalog.jsonl` (1) via `regenerate_v2_datasets.py`.

@@ -1,10 +1,11 @@
-# AIODOO Dataset Release Inventory (post Step 6 regen)
+# AIODOO Dataset Release Inventory (Production Certified)
 
 > Describes the JSONL corpora under `datasets/`.  
 > Artifact files themselves are **gitignored**.
 
 Generator tooling: **v2.0.0** (Approval / Conversation / Evaluation generators).  
-Step 6 regeneration date: **2026-07-27**.
+Step 6 regeneration date: **2026-07-27**.  
+Step 7 certification: **Production Certified** — see `docs/step7_certification_report.md`.
 
 ---
 
@@ -20,7 +21,7 @@ from existing upstream JSONL).
 
 | Property | Value |
 | --- | --- |
-| Dataset artifact status | Step 6 regen complete (A/C/E v2) |
+| Dataset artifact status | **Production Certified** (Step 7; A/C/E v2) |
 | Generator repository | aiodoo-datasets |
 | Supported Odoo versions (sources) | 17.0, 18.0, 19.0 |
 | Train-all-8 ready? | **Yes** for grain (see note on EvaluationFormatter) |
