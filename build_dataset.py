@@ -411,6 +411,7 @@ def main() -> None:
         "execution",
         "approval",
         "conversation",
+        optional=("context", "approval", "conversation"),
     )
     eval_config["target_generator"] = "aiodoo"
     eval_config["benchmark_name"] = "aiodoo_downstream_integration"

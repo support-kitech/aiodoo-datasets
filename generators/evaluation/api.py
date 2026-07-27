@@ -18,10 +18,13 @@ logger = logging.getLogger(__name__)
 
 def generate(config: Dict[str, Any]) -> PipelineResult:
     """
-    Generate an evaluation dataset from raw protocol configurations.
+    Generate Evaluation capability SFT judgments (+ separate BenchmarkCatalog).
 
-    This invokes the complete deterministic pipeline.
+    ``result.dataset`` contains one judgment record per evaluation case.
+    ``result.catalog`` is the non-training BenchmarkCatalog artifact.
     """
+    from generators.evaluation.version import SCHEMA_VERSION, __version__
+
     context = PipelineContext(
         source_protocols=MappingProxyType(config.get("source_protocols", {})),
         evaluation_type=config.get("evaluation_type", "standard"),
@@ -31,9 +34,9 @@ def generate(config: Dict[str, Any]) -> PipelineResult:
         benchmark_description=config.get("benchmark_description", ""),
         supported_odoo_versions=tuple(config.get("supported_odoo_versions", [])),
         supported_protocols=tuple(config.get("supported_protocols", [])),
-        generator_version=config.get("generator_version", "1.0.0"),
+        generator_version=config.get("generator_version", __version__),
         protocol_version=config.get("protocol_version", "1.0.0"),
-        schema_version=config.get("schema_version", "1.0.0"),
+        schema_version=config.get("schema_version", SCHEMA_VERSION),
         protocol_context=config.get("protocol_context", None),
     )
 
@@ -42,19 +45,34 @@ def generate(config: Dict[str, Any]) -> PipelineResult:
 
 def validate(dataset: Tuple[Any, ...]) -> bool:
     """
-    Perform deep validation on an externally supplied dataset.
+    Validate Evaluation pipeline outputs.
 
-    ACT-103: this previously always returned ``True`` (a no-op stub — see
-    ecosystem-v2-certification/MASTER_ACTION_LIST.md). It now runs the real,
-    fail-fast domain validators (:class:`EvaluationValidator`,
-    :class:`DatasetValidator`) against every :class:`Evaluation` aggregate in
-    ``dataset`` and returns ``False`` (fail closed) on any violation,
-    unexpected element type, or unexpected exception, instead of silently
-    reporting success.
+    Accepts either:
+    - Judgment SFT dict records (v2 grain), or
+    - Legacy :class:`Evaluation` aggregates (catalog domain objects).
     """
     if not dataset:
         logger.error("Evaluation dataset validation rejected an empty dataset.")
         return False
+
+    if all(isinstance(item, dict) for item in dataset):
+        required = (
+            "record_id",
+            "candidate_id",
+            "evaluation_case_key",
+            "candidate",
+            "verdict",
+            "metadata",
+        )
+        for item in dataset:
+            for field in required:
+                if field not in item:
+                    logger.error("Evaluation judgment missing required field: %s", field)
+                    return False
+            if item.get("verdict") not in {"pass", "fail", "inconclusive"}:
+                logger.error("Evaluation judgment has invalid verdict: %r", item.get("verdict"))
+                return False
+        return True
 
     for item in dataset:
         if not isinstance(item, Evaluation):

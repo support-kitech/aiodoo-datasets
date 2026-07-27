@@ -17,6 +17,8 @@ def infer_generator_from_filename(filename: str) -> str:
     name = filename.lower()
     if "eval_corpus" in name:
         return EVAL_CORPUS_GENERATOR
+    if "benchmark_catalog" in name:
+        return "benchmark_catalog"
     for gen in (
         "planner",
         "coding",

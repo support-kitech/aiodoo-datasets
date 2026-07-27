@@ -113,30 +113,12 @@ still improve diversity but is no longer a grain/architecture blocker.
 
 # 5. Evaluation Dataset Richness
 
-Current:
+**Status (Step 5):** Implemented — capability SFT judgment grain (generator v2).
 
-Single evaluation record.
-
-Future improvements:
-
-Generate benchmark suites for:
-
-- correctness
-- reasoning
-- planning
-- code generation
-- repair
-- execution
-- approval
-- retrieval
-- multi-turn conversation
-
-Goal:
-
-Large evaluation benchmark.
-
-Priority:
-High
+`evaluation_dataset.jsonl` now contains many
+`EvaluationRequest`→`EvaluationResponse` judgments. BenchmarkCatalog is a
+**separate** non-training artifact (`evaluation_benchmark_catalog.jsonl`).
+See `generators/evaluation/README.md` and `docs/evaluation_migration_v2.md`.
 
 ---
 

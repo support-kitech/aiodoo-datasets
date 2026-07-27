@@ -45,7 +45,11 @@ from validation.rules.generators.conversation import (
     ConversationInstructionRule,
     ConversationProductionScaleRule,
 )
-from validation.rules.generators.evaluation import EvaluationCatalogRule
+from validation.rules.generators.evaluation import (
+    EvaluationCatalogRule,
+    EvaluationIdentityRule,
+    EvaluationProductionScaleRule,
+)
 from validation.rules.generators.eval_corpus import EvalCorpusContractRule
 from validation.rules.generators.contract_compliance import build_contract_compliance_rules
 
@@ -109,6 +113,8 @@ class RuleBuilder:
             ConversationBoundedHistoryRule(),
             ConversationProductionScaleRule(),
             EvaluationCatalogRule(),
+            EvaluationIdentityRule(),
+            EvaluationProductionScaleRule(),
             EvalCorpusContractRule(),
         )
 

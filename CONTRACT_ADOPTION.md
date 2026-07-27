@@ -109,15 +109,14 @@ deliberately **not** replaced with imports:
   otherwise threaded through generator-internal domain models, because those
   models predate and are more detailed than the contract's needs.
 - **`generators/evaluation/domain/*`** (`BenchmarkCatalog`, `BenchmarkSuite`,
-  `EvaluationCase`, `GroundTruth`, ...) — this is a *different, larger*
-  domain than `aiodoo_contract.schemas.evaluation.EvaluationRequest/
-  Response`. The evaluation generator produces multi-suite, multi-case
-  *benchmark catalogs* for cross-capability regression testing; the contract's
-  `EvaluationRequest`/`Response` model a single capability-evaluation
-  request/response pair. These are complementary, not duplicate, concerns —
-  there is nothing in `aiodoo_contract` to import here. (The `eval_corpus.py`
-  producer added in Section 2 is the piece that *does* use the contract's
-  evaluation-relevant request/response shapes, per-capability.)
+  `EvaluationCase`, `GroundTruth`, ...) — still a *different, larger* domain
+  than `aiodoo_contract.schemas.evaluation.EvaluationRequest/Response`. As of
+  Evaluation generator v2, capability SFT lives in `evaluation_dataset.jsonl`
+  (projected via `project_evaluation`), while BenchmarkCatalog is exported as
+  a **separate** non-training artifact (`evaluation_benchmark_catalog.jsonl`).
+  The catalog domain models remain complementary for certification/regression;
+  they are not the Evaluation LoRA training unit. (The `eval_corpus.py`
+  producer continues to emit per-capability gold pairs for validation.)
 - **`generators/*/validation/core_validator.py:CoreProtocolValidator`** — these
   wrap the *separate*, pre-existing `aiodoo.validator.ProtocolValidator`
   (an external/optional dependency, imported defensively with a

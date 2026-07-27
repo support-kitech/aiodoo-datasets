@@ -75,14 +75,22 @@ class TestValidationManager(unittest.TestCase):
         self.assertEqual(result.status.value, "passed")
 
     def test_validate_record_evaluation_valid(self) -> None:
-        """Evaluation records use evaluation_id/catalog/metadata."""
+        """Evaluation SFT records use judgment grain (candidate → verdict)."""
         manager = ValidationManager()
         record = {
-            "evaluation_id": "EVAL-001",
-            "catalog": {"catalog_id": "CAT-001", "catalog_name": "Test", "suites": []},
+            "record_id": "EVL-" + ("a" * 32),
+            "candidate_id": "CAND-" + ("b" * 24),
+            "evaluation_case_key": "pass",
+            "capability_under_test": "coding",
+            "candidate": {"capability": "coding", "output": {"goal": "x"}},
+            "expectation": {"capability": "coding", "output": {"goal": "x"}},
+            "rubric": "Judge coding quality",
+            "verdict": "pass",
+            "score": 1.0,
+            "explanation": "Matches expectation",
             "metadata": {
                 "protocol_version": "1.0",
-                "schema_version": "1.0",
+                "schema_version": "2.0",
             },
         }
         result = manager.validate_record(record, "evaluation_dataset.jsonl")

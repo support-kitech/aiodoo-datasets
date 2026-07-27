@@ -21,6 +21,7 @@ from generators.common.contract.adapters import (
     project_approval,
     project_coding,
     project_conversation,
+    project_evaluation,
     project_execution,
     project_planner,
     project_record,
@@ -46,6 +47,7 @@ class TestSupportedCapabilities:
             "execution",
             "conversation",
             "approval",
+            "evaluation",
         }
 
     def test_project_record_unknown_capability_raises(self) -> None:
@@ -278,3 +280,38 @@ class TestProjectApproval:
     def test_unmappable_status_raises(self) -> None:
         with pytest.raises(ContractAdapterError):
             project_approval({"decision": {"status": "ON_HOLD"}})
+
+
+class TestProjectEvaluation:
+    def test_pass_judgment_projects_and_validates(self) -> None:
+        from aiodoo_contract.schemas.enums import EvaluationVerdict
+
+        record = {
+            "candidate": {"capability": "coding", "output": {"goal": "x"}},
+            "expectation": {"capability": "coding", "output": {"goal": "x"}},
+            "rubric": "Judge coding",
+            "verdict": "pass",
+            "score": 1.0,
+            "explanation": "ok",
+        }
+        projection = project_evaluation(record)
+        assert projection.response.verdict == EvaluationVerdict.PASS
+        assert projection.request.candidate["capability"] == "coding"
+        _assert_valid(projection)
+
+    def test_inconclusive_allows_null_expectation(self) -> None:
+        from aiodoo_contract.schemas.enums import EvaluationVerdict
+
+        record = {
+            "candidate": {"capability": "planner", "output": {"goal": "y"}},
+            "expectation": None,
+            "verdict": "inconclusive",
+            "score": None,
+        }
+        projection = project_evaluation(record)
+        assert projection.response.verdict == EvaluationVerdict.INCONCLUSIVE
+        _assert_valid(projection)
+
+    def test_missing_candidate_raises(self) -> None:
+        with pytest.raises(ContractAdapterError):
+            project_evaluation({"verdict": "pass"})

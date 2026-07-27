@@ -41,11 +41,11 @@ capability is training-scale or high-signal.
 | execution_dataset.jsonl | 5,459 | Yes |
 | approval_dataset.jsonl | many (1/subject after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
 | conversation_dataset.jsonl | many (1/reply after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
-| evaluation_dataset.jsonl | 1 | **No** — placeholder content |
-| **Total** | **67,258** (pre A/C v2 regen) | |
+| evaluation_dataset.jsonl | many (1/judgment after regen) | **Yes (v2 grain)** — regenerate; old catalog-as-SFT obsolete |
+| evaluation_benchmark_catalog.jsonl | 1 catalog | **Not SFT** — certification/benchmark side channel |
+| **Total** | **67,258** (pre A/C/E v2 regen) | |
 
-Approval / Conversation generator v2: see `generators/approval/README.md` and
-`generators/conversation/README.md`. Deferred: evaluation capability SFT.
+Approval / Conversation / Evaluation generator v2 docs under `generators/*/README.md`.
 
 ---
 
@@ -65,9 +65,9 @@ External release may use `manifests/` and `statistics/` subdirectories.
 
 ## Intended usage
 
-- Prefer planner / coding / repair / context / execution / **approval** /
-  **conversation** (after v2 regen) for training.
-- Do **not** train on evaluation at scale until rebuilt.
+- Prefer planner / coding / repair / context / execution / approval /
+  conversation / **evaluation** (after v2 regen) for training.
+- Do **not** train on `evaluation_benchmark_catalog.jsonl`.
 - Consumer: `aiodoo-training` (configs under `configs/training/`).
 
 ---

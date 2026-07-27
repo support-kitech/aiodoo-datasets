@@ -89,7 +89,8 @@ Each generator has a dedicated schema describing its record structure:
 | Execution | execution-v1 | instruction, output, metadata, context? |
 | Approval | approval-v2 | review_id, decision, findings, evidence, recommendations, metadata, record_id, capability, subject_id, source_object_id, subject, payload |
 | Conversation | conversation-v2 | instruction, output, metadata, context?, record_id, conversation_id, turn_index |
-| Evaluation | evaluation-v1 | evaluation_id, catalog, metadata |
+| Evaluation | evaluation-v2 | record_id, candidate_id, evaluation_case_key, capability_under_test, candidate, verdict, metadata, … |
+| BenchmarkCatalog | benchmark-catalog-v1 | evaluation_id, catalog, metadata (non-SFT) |
 
 ### Schema Authoring
 

@@ -34,7 +34,13 @@ from aiodoo_contract.schemas.conversation import (
     ConversationResponse,
     ConversationTurn,
 )
-from aiodoo_contract.schemas.enums import ApprovalStatus, ConversationRole, ExecutionStatus
+from aiodoo_contract.schemas.enums import (
+    ApprovalStatus,
+    ConversationRole,
+    EvaluationVerdict,
+    ExecutionStatus,
+)
+from aiodoo_contract.schemas.evaluation import EvaluationRequest, EvaluationResponse
 from aiodoo_contract.schemas.execution import ExecutionRequest, ExecutionResponse
 from aiodoo_contract.schemas.planner import PlanStep, PlannerRequest, PlannerResponse
 from aiodoo_contract.schemas.repair import RepairFix, RepairRequest, RepairResponse
@@ -50,6 +56,7 @@ __all__ = [
     "project_execution",
     "project_conversation",
     "project_approval",
+    "project_evaluation",
 ]
 
 
@@ -440,6 +447,70 @@ def project_approval(record: Mapping[str, Any]) -> ContractProjection:
 
 
 # ---------------------------------------------------------------------
+# Evaluation
+# ---------------------------------------------------------------------
+
+_VERDICT_MAP = {
+    "pass": EvaluationVerdict.PASS,
+    "fail": EvaluationVerdict.FAIL,
+    "inconclusive": EvaluationVerdict.INCONCLUSIVE,
+}
+
+
+def project_evaluation(record: Mapping[str, Any]) -> ContractProjection:
+    """Project an Evaluation SFT judgment onto EvaluationRequest/Response."""
+    candidate_raw = record.get("candidate")
+    if not isinstance(candidate_raw, Mapping) or not candidate_raw:
+        raise ContractAdapterError("evaluation record is missing 'candidate'")
+    candidate = dict(candidate_raw)
+
+    expectation_raw = record.get("expectation")
+    expectation: dict[str, object] | None
+    if expectation_raw is None:
+        expectation = None
+    elif isinstance(expectation_raw, Mapping):
+        expectation = dict(expectation_raw)
+    else:
+        raise ContractAdapterError("evaluation record has invalid 'expectation'")
+
+    rubric_raw = record.get("rubric")
+    rubric = str(rubric_raw) if isinstance(rubric_raw, str) and rubric_raw.strip() else None
+
+    verdict_raw = str(record.get("verdict", "")).strip().lower()
+    verdict = _VERDICT_MAP.get(verdict_raw)
+    if verdict is None:
+        raise ContractAdapterError(f"evaluation record has an unmappable verdict: {verdict_raw!r}")
+
+    score_raw = record.get("score")
+    score: float | None
+    if score_raw is None:
+        score = None
+    else:
+        try:
+            score = float(score_raw)
+        except (TypeError, ValueError) as exc:
+            raise ContractAdapterError("evaluation record has invalid 'score'") from exc
+        if score < 0.0 or score > 1.0:
+            raise ContractAdapterError("evaluation record score must be in [0, 1]")
+
+    explanation_raw = record.get("explanation")
+    explanation = (
+        str(explanation_raw)
+        if isinstance(explanation_raw, str) and explanation_raw.strip()
+        else None
+    )
+
+    request = EvaluationRequest(candidate=candidate, expectation=expectation, rubric=rubric)
+    response = EvaluationResponse(
+        request_id=request.request_id,
+        verdict=verdict,
+        score=score,
+        explanation=explanation,
+    )
+    return ContractProjection("evaluation", request, response)
+
+
+# ---------------------------------------------------------------------
 # Dispatch
 # ---------------------------------------------------------------------
 
@@ -450,6 +521,7 @@ _PROJECTORS: dict[str, Callable[[Mapping[str, Any]], ContractProjection]] = {
     "execution": project_execution,
     "conversation": project_conversation,
     "approval": project_approval,
+    "evaluation": project_evaluation,
 }
 
 SUPPORTED_CAPABILITIES: tuple[str, ...] = tuple(_PROJECTORS)

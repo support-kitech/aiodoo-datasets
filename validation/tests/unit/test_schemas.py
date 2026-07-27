@@ -121,7 +121,7 @@ class TestSchemaBuilder(unittest.TestCase):
     def test_build_default(self) -> None:
         reg = SchemaBuilder.build_default()
         self.assertTrue(reg.is_frozen)
-        self.assertEqual(len(reg.all_schemas), 9)
+        self.assertEqual(len(reg.all_schemas), 10)
 
     def test_all_generators_registered(self) -> None:
         reg = SchemaBuilder.build_default()
@@ -134,6 +134,7 @@ class TestSchemaBuilder(unittest.TestCase):
             "approval",
             "conversation",
             "evaluation",
+            "benchmark_catalog",
             "eval_corpus",
         }
         actual = {s.generator_name for s in reg.all_schemas}
@@ -184,9 +185,25 @@ class TestSchemaBuilder(unittest.TestCase):
         reg = SchemaBuilder.build_default()
         s = reg.get("evaluation")
         self.assertIsNotNone(s)
+        assert s is not None
+        self.assertEqual(s.schema_id, "evaluation-v2")
+        self.assertIn("record_id", s.required_field_names)
+        self.assertIn("candidate", s.required_field_names)
+        self.assertIn("verdict", s.required_field_names)
+        self.assertNotIn("catalog", s.required_field_names)
+
+    def test_benchmark_catalog_schema(self) -> None:
+        reg = SchemaBuilder.build_default()
+        s = reg.get("benchmark_catalog")
+        self.assertIsNotNone(s)
+        assert s is not None
+        self.assertEqual(s.schema_id, "benchmark-catalog-v1")
         self.assertIn("evaluation_id", s.required_field_names)
         self.assertIn("catalog", s.required_field_names)
-        self.assertNotIn("instruction", s.required_field_names)
+        self.assertEqual(
+            reg.resolve_from_filename("evaluation_benchmark_catalog.jsonl"),
+            s,
+        )
 
     def test_eval_corpus_schema(self) -> None:
         reg = SchemaBuilder.build_default()

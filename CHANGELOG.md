@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Evaluation generator v2 (Step 5):** capability SFT judgment grain — one JSONL
+  record per evaluation case (`EvaluationRequest`→`EvaluationResponse`) with
+  stable `record_id` (`candidate_id` + `evaluation_case_key` +
+  `id_scheme_version`). BenchmarkCatalog is exported separately as
+  `evaluation_benchmark_catalog.jsonl` (non-training). Added
+  `project_evaluation`. Schema `evaluation-v2` + `benchmark-catalog-v1`.
+  See `generators/evaluation/README.md`.
 - **Conversation generator v2 (Step 4):** episode reconstruction + dialogue slicing —
   one JSONL record per assistant reply with bounded history, stable
   `record_id` (`conversation_id` + `turn_index` + `id_scheme_version`),

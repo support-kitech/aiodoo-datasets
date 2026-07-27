@@ -1,17 +1,17 @@
 """Evaluation Statistics for Evaluation Generator."""
 
-from typing import Tuple, Any
+from typing import Any, Tuple
 
-# removed EvaluationProtocol import
 from generators.common.statistics.base_statistics import BaseStatistics
 
 
 class EvaluationStatistics(BaseStatistics):
-    """Computes deterministic aggregates for the entire evaluation dataset."""
+    """Computes deterministic aggregates for Evaluation SFT / catalog exports."""
 
     def __init__(self) -> None:
         BaseStatistics.__init__(self)
         self.total_evaluations = 0
+        self.total_judgments = 0
         self.total_catalogs = 0
         self.total_suites = 0
         self.total_cases = 0
@@ -19,16 +19,31 @@ class EvaluationStatistics(BaseStatistics):
         self.total_references = 0
         self.total_expected_outputs = 0
         self.total_ground_truths = 0
+        self.verdict_counts: dict[str, int] = {}
 
     def add_sample(self, record: Any, json_str: str) -> None:
         """Stream a single protocol record and update statistics."""
-        # For evaluation, we only perform minimal base updates if needed,
-        # since Evaluation uses a domain-specific model.
-        # Ensure base counters still increment.
         self.total_samples += 1
         self.total_tokens += len(json_str) // 4
 
-        # Now process the specific Evaluation payload
+        if isinstance(record, dict):
+            if record.get("verdict") is not None:
+                self.total_judgments += 1
+                verdict = str(record.get("verdict"))
+                self.verdict_counts[verdict] = self.verdict_counts.get(verdict, 0) + 1
+            catalog = record.get("catalog")
+            if isinstance(catalog, dict):
+                self.total_catalogs += 1
+                suites = catalog.get("suites")
+                if isinstance(suites, list):
+                    self.total_suites += len(suites)
+                    for suite in suites:
+                        if isinstance(suite, dict):
+                            cases = suite.get("cases")
+                            if isinstance(cases, list):
+                                self.total_cases += len(cases)
+            return
+
         if not hasattr(record, "catalog"):
             return
 
@@ -51,6 +66,8 @@ class EvaluationStatistics(BaseStatistics):
         """Export domain-specific aggregates."""
         return {
             "total_evaluations": self.total_evaluations,
+            "total_judgments": self.total_judgments,
+            "verdict_counts": dict(self.verdict_counts),
             "total_catalogs": self.total_catalogs,
             "total_suites": self.total_suites,
             "total_cases": self.total_cases,
@@ -65,5 +82,5 @@ class EvaluationStatistics(BaseStatistics):
         """Backwards compatibility for compute() pattern."""
         stats = EvaluationStatistics()
         for record in dataset:
-            stats.add_sample(record, "{}")  # Dummy string for json size
+            stats.add_sample(record, "{}")
         return stats

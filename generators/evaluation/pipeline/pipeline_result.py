@@ -1,9 +1,10 @@
 """Pipeline Result for Evaluation Generator."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Tuple, Any, Optional
 from types import MappingProxyType
-# Protocol imports removed
+from typing import Any, Optional, Tuple
 
 
 @dataclass(frozen=True, slots=True)
@@ -15,3 +16,4 @@ class PipelineResult:
     validation_passed: bool
     export_metadata: Optional[MappingProxyType[str, Any]] = None
     protocol_context: Any = None
+    catalog: Any | None = None
