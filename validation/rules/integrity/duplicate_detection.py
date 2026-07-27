@@ -78,7 +78,7 @@ class DuplicateDetectionRule(BaseRule):
         3. 'evaluation_id' (Evaluation generator)
         4. Content hash fallback (Planner, Coding, Repair)
         """
-        for key in ("id", "review_id", "evaluation_id"):
+        for key in ("record_id", "id", "review_id", "evaluation_id"):
             val = record.get(key)
             if isinstance(val, str) and val:
                 return val

@@ -39,12 +39,13 @@ capability is training-scale or high-signal.
 | repair_v1_0.jsonl | 481 | Yes (smaller) |
 | context_v1_0.jsonl | 50,161 | Yes |
 | execution_dataset.jsonl | 5,459 | Yes |
-| approval_dataset.jsonl | 1 | **No** — single huge record; rules incomplete |
+| approval_dataset.jsonl | many (1/subject after regen) | **Yes (v2 grain)** — regenerate; old 1-row file obsolete |
 | conversation_dataset.jsonl | 1 | **No** — richness deferred |
 | evaluation_dataset.jsonl | 1 | **No** — placeholder content |
-| **Total** | **67,258** | |
+| **Total** | **67,258** (pre-approval-v2) | |
 
-Deferred richness: `docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`.
+Approval generator v2: `generators/approval/README.md`. Deferred: conversation / evaluation
+(`docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`).
 
 ---
 
@@ -64,8 +65,8 @@ External release may use `manifests/` and `statistics/` subdirectories.
 
 ## Intended usage
 
-- Prefer planner / coding / repair / context / execution for training experiments.
-- Do **not** train on approval / conversation / evaluation at scale until rebuilt.
+- Prefer planner / coding / repair / context / execution / **approval (after v2 regen)** for training.
+- Do **not** train on conversation / evaluation at scale until rebuilt.
 - Consumer: `aiodoo-training` (configs under `configs/training/`).
 
 ---

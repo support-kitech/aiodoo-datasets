@@ -5,6 +5,7 @@ from generators.approval.pipeline_context import PipelineContext
 from generators.approval.config.approval_config import ApprovalConfig
 from generators.approval.domain.metadata import ReviewMetadata
 from generators.approval.rules.registry import RuleRegistry
+from generators.approval.version import SCHEMA_VERSION, __version__
 
 
 def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
@@ -26,9 +27,9 @@ def build_pipeline_context(args: argparse.Namespace) -> PipelineContext:
     }
 
     metadata = ReviewMetadata(
-        generator_version="1.0.0",
+        generator_version=__version__,
         protocol_version="1.0",
-        schema_version="1.0",
+        schema_version=SCHEMA_VERSION,
         source_module=str(args.source_dir.name),
         odoo_version="18.0",
         odoo_edition="enterprise",

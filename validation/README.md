@@ -87,7 +87,7 @@ Each generator has a dedicated schema describing its record structure:
 | Repair | repair-v1 | instruction, context, output, metadata |
 | Context | context-v1 | id, query, artifacts, graph, metadata |
 | Execution | execution-v1 | instruction, output, metadata, context? |
-| Approval | approval-v1 | review_id, decision, findings, evidence, recommendations, metadata |
+| Approval | approval-v2 | review_id, decision, findings, evidence, recommendations, metadata, record_id, capability, subject_id, source_object_id, subject, payload |
 | Conversation | conversation-v1 | instruction, output, metadata, context? |
 | Evaluation | evaluation-v1 | evaluation_id, catalog, metadata |
 

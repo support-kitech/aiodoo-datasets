@@ -45,14 +45,21 @@ class TestValidationManager(unittest.TestCase):
         self.assertEqual(result.status.value, "passed")
 
     def test_validate_record_approval_valid(self) -> None:
-        """Approval records use review_id/decision/findings/evidence/recommendations/metadata."""
+        """Approval records use subject-decision grain with stable identities."""
         manager = ValidationManager()
+        record_id = "APR-" + ("a" * 32)
         record = {
-            "review_id": "REV-001",
+            "review_id": record_id,
+            "record_id": record_id,
+            "capability": "coding",
+            "subject_id": "coding:sale:abc",
+            "source_object_id": "abc",
+            "subject": "Approve coding artifact abc (sale)",
+            "payload": {"capability": "coding", "evidence_count": 0},
             "decision": {
-                "status": "approved",
+                "status": "APPROVED",
                 "decision_id": "DEC-001",
-                "confidence": 0.95,
+                "confidence": "HIGH",
                 "reasoning": "Good",
             },
             "findings": [],
@@ -60,7 +67,8 @@ class TestValidationManager(unittest.TestCase):
             "recommendations": [],
             "metadata": {
                 "protocol_version": "1.0",
-                "schema_version": "1.0",
+                "schema_version": "2.0",
+                "source_module": "sale",
             },
         }
         result = manager.validate_record(record, "approval_dataset.jsonl")

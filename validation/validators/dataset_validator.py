@@ -9,7 +9,6 @@ from validation.domain.enums import ValidationStatus, ValidationSeverity, Valida
 from validation.domain.models import ValidationIssue, ValidationContext
 from validation.domain.results import ValidationResult
 from validation.rules.base import BaseRule
-from validation.rules.integrity.duplicate_detection import DuplicateDetectionRule
 from validation.schemas.base import DatasetSchema
 from validation.validators.record_validator import RecordValidator
 
@@ -52,8 +51,9 @@ class DatasetValidator:
 
         # Reset stateful rules
         for rule in rules:
-            if isinstance(rule, DuplicateDetectionRule):
-                rule.reset()
+            reset = getattr(rule, "reset", None)
+            if callable(reset):
+                reset()
 
         if not jsonl_path.exists():
             return ValidationResult.failure(
@@ -125,6 +125,22 @@ class DatasetValidator:
                         dataset_name,
                     )
                     break
+
+        # Dataset-level finalize hooks (e.g. Approval production-scale gate)
+        if len(all_issues) < max_issues:
+            for rule in rules:
+                finalize = getattr(rule, "finalize", None)
+                if not callable(finalize):
+                    continue
+                try:
+                    finalized = finalize(
+                        dataset_name=dataset_name,
+                        records_validated=records_validated,
+                    )
+                except TypeError:
+                    continue
+                if finalized:
+                    all_issues.extend(finalized)
 
         duration_ms = (time.perf_counter() - start) * 1000
         has_fatal_or_error = any(

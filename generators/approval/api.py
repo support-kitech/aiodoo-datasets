@@ -7,7 +7,7 @@ from generators.approval.pipeline import ApprovalPipeline
 
 
 def generate(context: PipelineContext) -> PipelineResult:
-    """Generate an approval review based on input protocols."""
+    """Generate one Approval decision record per upstream subject."""
     return ApprovalPipeline.generate(context)
 
 

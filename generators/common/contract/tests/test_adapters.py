@@ -259,6 +259,7 @@ class TestProjectApproval:
         projection = project_approval(record)
         assert projection.response.status == ApprovalStatus.APPROVED
         assert projection.request.payload["evidence_count"] == 1
+        assert "my_module" in projection.request.subject
         _assert_valid(projection)
 
     def test_changes_requested_maps_to_pending(self) -> None:

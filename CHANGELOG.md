@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Approval generator v2 (Step 3):** subject-partitioned training grain — one JSONL
+  record per planner/coding/repair/execution subject with bounded evidence,
+  stable `record_id` (`capability` + `subject_id` + `source_object_id` +
+  `id_scheme_version`), deterministic ordering, and production-scale validation
+  (APR-002..004). Schema `approval-v2`. See `generators/approval/README.md`.
+
 ### Added
 
 - `aiodoo_contract` adopted as the canonical Capability Contract dependency

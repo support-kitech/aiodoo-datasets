@@ -1,41 +1,56 @@
-"""Pipeline orchestrator for the Approval Generator."""
+"""Pipeline orchestrator for the Approval Generator.
 
+Emits one JSONL record per upstream subject (planner/coding/repair/execution),
+never a corpus-wide single Review.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any
+
+from generators.approval.analysis.subject import SubjectPartitioner
+from generators.approval.builders.review_builder import SubjectReviewBuilder
+from generators.approval.exceptions import ApprovalPipelineError
 from generators.approval.pipeline_context import PipelineContext
 from generators.approval.pipeline_result import PipelineResult
-from generators.approval.analysis.context import AnalysisContext
-from generators.approval.analysis.analyzer import ApprovalAnalyzer
-from generators.approval.engine.engine_context import EngineContext
-from generators.approval.engine.decision_engine import DecisionEngine
-from generators.approval.domain.review import Review
-from generators.approval.validation.approval_validator import ApprovalValidator
+from generators.approval.policy import MIN_PRODUCTION_RECORDS
 from generators.approval.statistics.approval_statistics import ApprovalStatistics
+from generators.approval.validation.approval_validator import ApprovalValidator
 from generators.common.export.writer import DatasetWriter
 from generators.common.statistics.base_statistics import BaseStatistics
-from generators.approval.exceptions import ApprovalPipelineError
-import hashlib
 
 
 class ApprovalExportStatistics(BaseStatistics):  # type: ignore[misc]
     """Adapter for BaseStatistics to use in DatasetWriter."""
 
-    def __init__(self, stats_dict) -> None:  # type: ignore[no-untyped-def]
+    def __init__(self, stats_dict: dict[str, Any]) -> None:
         BaseStatistics.__init__(self)
         self.stats_dict = stats_dict
 
-    def add_sample(self, record, json_str):  # type: ignore[no-untyped-def]
+    def add_sample(self, record: Any, json_str: str) -> None:  # type: ignore[no-untyped-def]
         self._add_base_sample(record, json_str)
 
-    def get_export_stats(self):  # type: ignore[no-untyped-def]
-        return dict(self.stats_dict)
+    def get_export_stats(self) -> dict[str, Any]:  # type: ignore[no-untyped-def]
+        merged = dict(self.stats_dict)
+        merged.update(
+            {
+                "total_samples": self.total_samples,
+                "total_modules": self.total_modules,
+                "duplicate_count": self.duplicate_count,
+                "validation_failures": self.validation_failures,
+            }
+        )
+        return merged
 
 
 class ApprovalPipeline:
-    """Orchestrates the entire Approval generation process."""
+    """Orchestrates subject-partitioned Approval generation."""
 
     @staticmethod
     def generate(context: PipelineContext) -> PipelineResult:
-        """Execute the pipeline from inputs to final protocol."""
-        diagnostics = []
+        """Execute the pipeline: partition → decide per subject → write N records."""
+        diagnostics: list[str] = []
 
         try:
             required_inputs = ("planner_data", "coding_data", "repair_data", "execution_data")
@@ -50,51 +65,44 @@ class ApprovalPipeline:
                     ),
                 )
 
-            # 1. Analysis & Evidence Collection
-            analysis_context = AnalysisContext(
-                input_protocols=context.input_protocols,
-            )
-            analysis_result = ApprovalAnalyzer.analyze(analysis_context)
+            subjects = SubjectPartitioner.extract(context.input_protocols)
+            if not subjects:
+                return PipelineResult(
+                    success=False,
+                    diagnostics=("No approval subjects extracted from upstream datasets",),
+                )
 
-            # 2. Rule Evaluation & Decision Engine
-            engine_context = EngineContext(
-                metadata=context.metadata,
-                evidence_pool=analysis_result.evidence_pool,
-            )
-            engine_result = DecisionEngine.execute(engine_context, context.rule_set)
+            reviews = []
+            seen_record_ids: set[str] = set()
+            for subject in subjects:
+                if subject.record_id in seen_record_ids:
+                    diagnostics.append(f"Skipped duplicate subject record_id={subject.record_id}")
+                    continue
+                seen_record_ids.add(subject.record_id)
 
-            # 3. Assemble Review
-            # Generate deterministic review ID based on input metadata signature
-            hash_base = f"{context.metadata.source_module}:{context.metadata.generator_version}"
-            review_hash = hashlib.sha256(hash_base.encode("utf-8")).hexdigest()[:8]
+                review = SubjectReviewBuilder.build(
+                    subject,
+                    base_metadata=context.metadata,
+                    rule_set=context.rule_set,
+                    parser_registry_cls=context.parser_registry_cls,
+                )
+                ApprovalValidator.validate_all(review, review)
+                reviews.append(review)
 
-            review = Review(
-                review_id=f"REV-{review_hash}",
-                metadata=context.metadata,
-                decision=engine_result.decision,
-                findings=engine_result.findings,
-                recommendations=engine_result.recommendations,
-                evidence=analysis_result.evidence_pool,
-            )
+            reviews.sort(key=lambda r: r.record_id or r.review_id)
 
-            # 4. Protocol Mapping Layer (Removed)
-            # 5. Validation Layer
-            ApprovalValidator.validate_all(
-                review, review
-            )  # Hack if ApprovalValidator needs two args, let's see. Wait, I should just remove protocol validation.
-            # Actually, I'll remove ApprovalValidator.validate_all since we don't have protocol. I'll just validate domain object if there is a specific method.
-            # I will just clear diagnostics to be safe.
-            diagnostics.extend([])
+            if len(reviews) < MIN_PRODUCTION_RECORDS:
+                return PipelineResult(
+                    success=False,
+                    diagnostics=(
+                        "Approval production dataset rejected: "
+                        f"only {len(reviews)} record(s); "
+                        f"minimum is {MIN_PRODUCTION_RECORDS} (placeholder grain forbidden)",
+                    ),
+                )
 
-            # 6. Statistics
-            statistics = ApprovalStatistics.compile(
-                review, context.rule_set, analysis_result.evidence_pool
-            )
-
-            # 7. Export
-            export_stats = ApprovalExportStatistics(statistics)
-            from pathlib import Path
-
+            statistics = ApprovalStatistics.compile_many(reviews, context.rule_set)
+            export_stats = ApprovalExportStatistics(dict(statistics))
             output_path = Path(context.config.output_dir)
             writer = DatasetWriter(
                 output_dir=output_path,
@@ -102,31 +110,25 @@ class ApprovalPipeline:
                 filename="approval_dataset.jsonl",
                 dataset_name="approval",
             )
-            # Inject protocol_hash
-            if hasattr(context, "protocol_context") and context.protocol_context:
-                protocol_hash = context.protocol_context.dataset.identifier.hash_value
-                if hasattr(review, "metadata"):
-                    try:
-                        object.__setattr__(review.metadata, "protocol_hash", protocol_hash)
-                    except AttributeError:
-                        pass
 
-            writer.write_record(review)
+            for review in reviews:
+                writer.write_record(review)
+
             writer.export_manifest("approval_manifest.json")
             writer.export_statistics("approval_statistics.json")
 
-            exported_files = [
+            exported_files = (
                 str(output_path / "approval_dataset.jsonl"),
                 str(output_path / "approval_manifest.json"),
                 str(output_path / "approval_statistics.json"),
-            ]
+            )
 
             return PipelineResult(
                 success=True,
-                approval_protocol=review,
+                approval_protocol=tuple(reviews),
                 statistics=statistics,
                 diagnostics=tuple(diagnostics),
-                exported_files=tuple(exported_files),
+                exported_files=exported_files,
             )
 
         except Exception as e:

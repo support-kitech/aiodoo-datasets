@@ -20,7 +20,7 @@ class ParserRegistry:
         return decorator
 
     @classmethod
-    def get_parser(cls, parser_key: str) -> BaseParser:
+    def get_parser(cls, parser_key: str) -> BaseParser | None:
         """Get an instance of a registered parser."""
         parser_class = cls._parsers.get(parser_key)
         if not parser_class:

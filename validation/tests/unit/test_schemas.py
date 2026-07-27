@@ -162,8 +162,13 @@ class TestSchemaBuilder(unittest.TestCase):
         reg = SchemaBuilder.build_default()
         s = reg.get("approval")
         self.assertIsNotNone(s)
+        assert s is not None
+        self.assertEqual(s.schema_id, "approval-v2")
         self.assertIn("review_id", s.required_field_names)
         self.assertIn("decision", s.required_field_names)
+        self.assertIn("record_id", s.required_field_names)
+        self.assertIn("subject_id", s.required_field_names)
+        self.assertIn("payload", s.required_field_names)
         self.assertNotIn("instruction", s.required_field_names)
 
     def test_evaluation_schema(self) -> None:

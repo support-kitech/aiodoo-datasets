@@ -33,7 +33,12 @@ from validation.rules.generators.coding import (
 from validation.rules.generators.repair import RepairTaskStructureRule, RepairOperationsRule
 from validation.rules.generators.context import ContextQueryRule
 from validation.rules.generators.execution import ExecutionInstructionRule
-from validation.rules.generators.approval import ApprovalDecisionRule
+from validation.rules.generators.approval import (
+    ApprovalBoundedEvidenceRule,
+    ApprovalDecisionRule,
+    ApprovalIdentityRule,
+    ApprovalProductionScaleRule,
+)
 from validation.rules.generators.conversation import ConversationInstructionRule
 from validation.rules.generators.evaluation import EvaluationCatalogRule
 from validation.rules.generators.eval_corpus import EvalCorpusContractRule
@@ -91,6 +96,9 @@ class RuleBuilder:
             ContextQueryRule(),
             ExecutionInstructionRule(),
             ApprovalDecisionRule(),
+            ApprovalIdentityRule(),
+            ApprovalBoundedEvidenceRule(),
+            ApprovalProductionScaleRule(),
             ConversationInstructionRule(),
             EvaluationCatalogRule(),
             EvalCorpusContractRule(),

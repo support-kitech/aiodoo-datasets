@@ -407,15 +407,29 @@ def project_approval(record: Mapping[str, Any]) -> ContractProjection:
     metadata: Mapping[str, Any] = raw_metadata if isinstance(raw_metadata, Mapping) else {}
     module = metadata.get("source_module") or metadata.get("module") or "unknown module"
     evidence = record.get("evidence")
-    review_id = record.get("review_id") or ""
+    review_id = record.get("review_id") or record.get("record_id") or ""
 
-    request = ApprovalRequest(
-        subject=f"Approval review for {module}",
-        payload={
+    subject_raw = record.get("subject")
+    if isinstance(subject_raw, str) and subject_raw.strip():
+        subject = subject_raw.strip()
+    else:
+        capability = record.get("capability") or "artifact"
+        subject = f"Approve {capability} for {module}"
+
+    payload_raw = record.get("payload")
+    if isinstance(payload_raw, Mapping) and payload_raw:
+        payload = dict(payload_raw)
+    else:
+        payload = {
             "review_id": str(review_id),
+            "record_id": str(record.get("record_id") or review_id),
+            "capability": str(record.get("capability") or ""),
+            "subject_id": str(record.get("subject_id") or ""),
+            "source_object_id": str(record.get("source_object_id") or ""),
             "evidence_count": len(evidence) if isinstance(evidence, list) else 0,
-        },
-    )
+        }
+
+    request = ApprovalRequest(subject=subject, payload=payload)
     reason = decision.get("reasoning")
     response = ApprovalResponse(
         request_id=request.request_id,

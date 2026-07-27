@@ -87,27 +87,14 @@ Low
 
 # 3. Approval Dataset Richness
 
-Current:
+**Status (Step 3):** Implemented — subject-decision grain (generator v2).
 
-Approval generates one review record.
+Approval now emits **one JSONL record per upstream subject** (planner / coding /
+repair / execution) with bounded evidence and stable `record_id`s. See
+`generators/approval/README.md`.
 
-Future improvements:
-
-- multiple review scenarios
-- module-level approvals
-- failed approvals
-- warnings
-- security findings
-- performance findings
-- architecture findings
-- Odoo best practice findings
-
-Goal:
-
-Increase dataset diversity for LLM training.
-
-Priority:
-Medium
+Remaining optional richness (rules signal quality, more negative cases) can
+still improve diversity but is no longer a grain/architecture blocker.
 
 ---
 
