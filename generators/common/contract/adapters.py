@@ -24,6 +24,7 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from aiodoo_contract.schemas.approval import ApprovalRequest, ApprovalResponse
@@ -141,6 +142,37 @@ def project_planner(record: Mapping[str, Any]) -> ContractProjection:
 # ---------------------------------------------------------------------
 
 
+def _coding_module_root(record: Mapping[str, Any]) -> Path | None:
+    """Resolve on-disk module root from coding record metadata, if present."""
+    metadata = record.get("metadata")
+    if not isinstance(metadata, Mapping):
+        return None
+    module_path = metadata.get("module_path")
+    if not module_path:
+        return None
+    root = Path(str(module_path))
+    return root if root.is_dir() else None
+
+
+def _coding_artifact_content(
+    artifact: Mapping[str, Any],
+    *,
+    module_root: Path | None,
+) -> str:
+    """Prefer embedded artifact content; otherwise read the real Odoo file."""
+    embedded = artifact.get("diff") or artifact.get("content") or ""
+    if isinstance(embedded, str) and embedded.strip():
+        return embedded
+    rel = artifact.get("path")
+    if not module_root or not rel:
+        return str(embedded) if embedded is not None else ""
+    file_path = module_root / str(rel)
+    try:
+        return file_path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return str(embedded) if embedded is not None else ""
+
+
 def project_coding(record: Mapping[str, Any]) -> ContractProjection:
     """Project a coding generator record onto `CodingRequest`/`CodingResponse`."""
     output = _require_dict(record.get("output"), "coding record is missing 'output'")
@@ -150,6 +182,7 @@ def project_coding(record: Mapping[str, Any]) -> ContractProjection:
     if not isinstance(artifacts, list) or not artifacts:
         raise ContractAdapterError("coding record has no artifacts to project into edits")
 
+    module_root = _coding_module_root(record)
     edits: list[FileEdit] = []
     for artifact in artifacts:
         if not isinstance(artifact, Mapping):
@@ -157,12 +190,9 @@ def project_coding(record: Mapping[str, Any]) -> ContractProjection:
         path = artifact.get("path")
         if not path:
             continue
-        # NOTE: current coding artifacts carry an empty "diff"/"content" in
-        # most generated data (content-richness gap tracked separately —
-        # see CONTRACT_ADOPTION.md); FileEdit.content is a plain `str`
-        # (not NonEmptyStr) specifically so an empty-but-contract-shaped
-        # edit is still valid rather than being silently dropped here.
-        content = artifact.get("diff") or artifact.get("content") or ""
+        # Prefer embedded diff/content; backfill from metadata.module_path when
+        # older datasets left content empty (behavior cert requires real gold).
+        content = _coding_artifact_content(artifact, module_root=module_root)
         edits.append(
             FileEdit(
                 path=str(path),

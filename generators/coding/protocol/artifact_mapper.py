@@ -42,4 +42,5 @@ def map_to_artifact(
         created_by="aiodoo_coding_model",
         dependencies=sorted(dependencies),
         validation_status="validated",
+        diff=str(raw_data.get("diff") or raw_data.get("content") or ""),
     )

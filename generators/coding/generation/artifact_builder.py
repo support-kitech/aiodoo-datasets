@@ -46,7 +46,12 @@ def build_artifacts(
     # Temporarily store to resolve dependencies
     temp_artifacts = []
     for idx, (rel_path, lang) in enumerate(raw_files):
-        # We no longer read raw file content from disk to embed in artifacts
+        # Embed real file bodies so training + eval gold have usable FileEdit.content.
+        file_path = module_path / rel_path
+        try:
+            content = file_path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            content = ""
 
         intent = {
             "purpose": f"Implement engineering logic for {rel_path}",
@@ -73,9 +78,14 @@ def build_artifacts(
                     intent["targets"].extend([f"View for model: {m}" for m in models_viewed])  # type: ignore[attr-defined]
                     intent["purpose"] = f"User interface views for {', '.join(models_viewed)}"
 
-        # Do NOT embed raw source code, only engineering intent!
-
-        ta = {"path": rel_path, "intent": intent, "lang": lang, "scenario_name": scenario.name}
+        ta = {
+            "path": rel_path,
+            "intent": intent,
+            "lang": lang,
+            "scenario_name": scenario.name,
+            "content": content,
+            "diff": content,
+        }
         temp_artifacts.append(ta)
 
     from generators.coding.protocol.artifact_mapper import map_to_artifact
