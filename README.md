@@ -23,7 +23,7 @@ python3 -m pip install -e ../aiodoo-contract  # canonical Capability Contract
 (schemas, validators, prompt builder, chat templates — see
 `ecosystem-v2-certification/ARCHITECTURE_FREEZE_REPORT.md`). This repository
 consumes it via a projection/adapter layer rather than redefining schemas;
-see `CONTRACT_ADOPTION.md` for what was adopted, what stayed local, and why.
+see `docs/CONTRACT_ADOPTION.md` for what was adopted, what stayed local, and why.
 
 Run all commands from the **repository root** so imports resolve (`sources`,
 `generators`, `protocol`, …).
@@ -68,13 +68,18 @@ Coverage intentionally measures framework code plus generators that have
 substantial tests (context, approval, and the `aiodoo_contract` adapter /
 eval-corpus / orchestrator code under `generators/common/contract` and
 `generators/common/pipeline`). Sparse/stub generators are omitted from the
-coverage gate — see `AUDIT_RESOLUTION.md` and
+coverage gate — see `docs/archive/AUDIT_RESOLUTION.md` and
 `docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`.
 
 ## Documentation
 
 - Architecture / ADRs: `docs/`
-- Contract adoption (`aiodoo_contract` integration, what stayed local, why): `CONTRACT_ADOPTION.md`
+- Contract adoption (`aiodoo_contract` integration, what stayed local, why): `docs/CONTRACT_ADOPTION.md`
 - Honest freeze status: `docs/production_freeze_report.md`
 - Deferred richness (approval / conversation / evaluation): `docs/FUTURE_INTEGRATION_IMPROVEMENTS.md`
 - Sources public API: `docs/public_api.md`
+
+## Status
+
+Living repository posture: [`docs/STATUS.md`](docs/STATUS.md).
+Historical reports: [`docs/archive/`](docs/archive/).

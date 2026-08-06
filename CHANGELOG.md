@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Documentation sync: `main` is source of truth; living posture in `docs/STATUS.md`; historical reports under `docs/archive/`; cross-references updated after archive moves and Git tag metadata reset.
+
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -44,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `aiodoo_contract` adopted as the canonical Capability Contract dependency
-  (see `CONTRACT_ADOPTION.md`).
+  (see `docs/CONTRACT_ADOPTION.md`).
 - `generators/common/contract/adapters.py`: projects each capability's own
   record shape onto `aiodoo_contract`'s `CapabilityRequest`/
   `CapabilityResponse` schemas (`project_planner`, `project_coding`,
@@ -63,7 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `generators/execution/tests/test_integration_pipeline_reliability.py`,
   `generators/evaluation/tests/unit/test_api_validate.py`,
   `validation/tests/unit/test_contract_compliance.py`.
-- `CONTRACT_ADOPTION.md`.
+- `docs/CONTRACT_ADOPTION.md`.
 
 ### Fixed
 
@@ -99,7 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `AUDIT_RESOLUTION.md`, `IMPLEMENTATION_REPORT.md`, `RELEASE_REPORT.md`
+- `docs/archive/AUDIT_RESOLUTION.md`, `docs/archive/IMPLEMENTATION_REPORT.md`, `docs/archive/RELEASE_REPORT.md`
 
 ### Not in this release
 

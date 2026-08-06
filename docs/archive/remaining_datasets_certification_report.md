@@ -1,3 +1,8 @@
+> **Historical document.** Written when Git tags / release identity existed.
+> Git tags and GitHub Releases were later removed ecosystem-wide.
+> **Current source of truth:** branch `main` only. See `docs/STATUS.md`.
+> Do not treat tag or release recommendations in this file as current instructions.
+
 # Remaining Capability Datasets — Production Certification
 
 **Date:** 2026-07-27  
@@ -96,7 +101,7 @@ Planner/coding scenario labels in statistics use the **primary** scenario string
 | `project_repair` | 481 |
 | `project_execution` | 5,459 |
 
-**Context:** not a contract `CapabilityName` (`CONTRACT_ADOPTION.md` / `SUPPORTED_CAPABILITIES`). Certified on schema + integrity only; no `project_context`.
+**Context:** not a contract `CapabilityName` (`docs/CONTRACT_ADOPTION.md` / `SUPPORTED_CAPABILITIES`). Certified on schema + integrity only; no `project_context`.
 
 ## 7. Reproducibility verification
 

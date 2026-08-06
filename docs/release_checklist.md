@@ -27,7 +27,7 @@ inventory is described in `datasets/README.md`.
 - [ ] `README.md` matches clone-and-run reality (no `pip install -e .`, no false console scripts)
 - [ ] `docs/production_freeze_report.md` does not overclaim train-all-8 readiness
 - [ ] `CHANGELOG.md` has a section for the release version
-- [ ] `RELEASE_REPORT.md` written for the tag
+- [ ] `archive/RELEASE_REPORT.md` written for the release on main
 
 ### 5. Versioning
 

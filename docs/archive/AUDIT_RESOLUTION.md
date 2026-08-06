@@ -1,3 +1,8 @@
+> **Historical document.** Written when Git tags / release identity existed.
+> Git tags and GitHub Releases were later removed ecosystem-wide.
+> **Current source of truth:** branch `main` only. See `docs/STATUS.md`.
+> Do not treat tag or release recommendations in this file as current instructions.
+
 # aiodoo-datasets — Audit Resolution
 
 Scope: production-readiness audit findings for this repository only.  
@@ -20,7 +25,7 @@ Do not implement FUTURE WORK, INTENTIONAL, or OUT OF SCOPE.
 | Audit Finding | Category | Decision | Action | Implementation Required? |
 | :--- | :--- | :--- | :--- | :---: |
 | `CHANGELOG.md` claims packaging, MyPy CI, execution-only API | **Documentation** | Fix | Add `[2.0.0]`; correct historical claims | **YES** |
-| Missing `RELEASE_REPORT.md` | **Missing Implementation** | Fix | Write release report with gates + verdict | **YES** |
+| Missing `docs/archive/RELEASE_REPORT.md` | **Missing Implementation** | Fix | Write release report with gates + verdict | **YES** |
 | `docs/release_checklist.md` still Pyright / >95% / sources-only | **Documentation** | Fix | Align with real ruff/pytest/coverage gates | **YES** |
 | FUTURE summary “Infrastructure: Production Ready” without train-all-8 caveat | **Documentation** | Fix | Soften summary; call out sparse three | **YES** |
 | No mypy in CI | **Intentional** | Leave | Do not invent repo-wide mypy gate | **NO** |
@@ -38,7 +43,7 @@ Do not implement FUTURE WORK, INTENTIONAL, or OUT OF SCOPE.
 2. Fix CHANGELOG, release checklist, FUTURE summary.
 3. Re-run quality gates; fix only if failing.
 4. Validate existing artifact counts + training `REQUIRED_FIELDS` spot-check.
-5. Write `RELEASE_REPORT.md`; refresh `IMPLEMENTATION_REPORT.md`.
+5. Write `docs/archive/RELEASE_REPORT.md`; refresh `docs/archive/IMPLEMENTATION_REPORT.md`.
 6. Logical commits; recreate local annotated tag `v2.0.0`.
 
 ## Batch C — `aiodoo-contract` adoption (Phase 2, `ecosystem-v2-certification/MASTER_ACTION_LIST.md`)
@@ -47,7 +52,7 @@ Scope: adopt the canonical Capability Contract package (`aiodoo_contract`,
 implemented in Phase 1B) as the single source of truth for
 schemas/parsers/validators this repository previously owned independently,
 and resolve the dataset-specific reliability findings assigned to this
-repository. See `CONTRACT_ADOPTION.md` for the full design rationale,
+repository. See `docs/CONTRACT_ADOPTION.md` for the full design rationale,
 including every case where duplication was deliberately **not** removed.
 
 | Audit Finding (`MASTER_ACTION_LIST.md`) | Category | Decision | Action | Implementation Required? |
@@ -62,7 +67,7 @@ including every case where duplication was deliberately **not** removed.
 | `DecisionEnum.CHANGES_REQUESTED` has no equivalent in `aiodoo_contract.schemas.enums.ApprovalStatus` | **Intentional divergence** | Leave, document | Adapter maps it to `PENDING` (documented lossy mapping); dataset enum retained for training signal | **NO** |
 | `generators/evaluation/domain/*` (`BenchmarkCatalog`/`BenchmarkSuite`/...) vs. `aiodoo_contract.schemas.evaluation` | **Not a duplicate** | Leave, document | Different domains (multi-suite benchmark catalog vs. single capability-evaluation request/response) — nothing to import | **NO** |
 | `validation/schemas/*` (`DatasetSchema`/`FieldDefinition`), generator-specific row-structure rules | **Not a duplicate** | Leave, document | Describe this repository's own JSONL row envelope; `aiodoo_contract` has no equivalent (out of its ownership per the ADRs) | **NO** |
-| Raising `ContractComplianceRule` from `WARNING` to a hard failure | **Future Work** | Leave | Requires closing generator data-richness gaps first (e.g. coding artifacts with empty `content`/`diff`); tracked in `CONTRACT_ADOPTION.md` §7 | **NO** |
+| Raising `ContractComplianceRule` from `WARNING` to a hard failure | **Future Work** | Leave | Requires closing generator data-richness gaps first (e.g. coding artifacts with empty `content`/`diff`); tracked in `docs/CONTRACT_ADOPTION.md` §7 | **NO** |
 | Rewriting generators to natively emit `aiodoo_contract` shapes instead of projecting | **Out Of Scope** | Leave | Explicitly excluded — "dataset generators remain responsible for producing data, NOT defining contracts"; would discard training-pedagogy richness | **NO** |
 
 ### Implementation batch C
@@ -83,7 +88,7 @@ including every case where duplication was deliberately **not** removed.
    `generators/execution/tests/test_integration_pipeline_reliability.py`,
    `generators/evaluation/tests/unit/test_api_validate.py`,
    `validation/tests/unit/test_contract_compliance.py`.
-6. Write `CONTRACT_ADOPTION.md`; update this file, `README.md`,
+6. Write `docs/CONTRACT_ADOPTION.md`; update this file, `README.md`,
    `CHANGELOG.md`.
 7. Re-run `ruff check`, `ruff format --check`, `pytest`, `coverage report
    --fail-under=60`; confirm zero net-new `mypy` errors against the

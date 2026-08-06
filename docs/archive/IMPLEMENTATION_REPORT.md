@@ -1,3 +1,8 @@
+> **Historical document.** Written when Git tags / release identity existed.
+> Git tags and GitHub Releases were later removed ecosystem-wide.
+> **Current source of truth:** branch `main` only. See `docs/STATUS.md`.
+> Do not treat tag or release recommendations in this file as current instructions.
+
 # aiodoo-datasets — Implementation Report (v2.0.0)
 
 ## Summary
@@ -15,7 +20,7 @@ report, `.gitignore`, removed `.coveragerc`, tracked `datasets/README.md`.
 
 | File | Why |
 | --- | --- |
-| `AUDIT_RESOLUTION.md` | Residual classification for completion pass |
+| `docs/archive/AUDIT_RESOLUTION.md` | Residual classification for completion pass |
 | `CHANGELOG.md` | `[2.0.0]` + honest historical notes |
 | `docs/release_checklist.md` | Real gates (ruff/pytest/coverage 60) |
 | `docs/FUTURE_INTEGRATION_IMPROVEMENTS.md` | Summary no longer overclaims train-all-8 |
@@ -24,7 +29,7 @@ report, `.gitignore`, removed `.coveragerc`, tracked `datasets/README.md`.
 
 | File | Why |
 | --- | --- |
-| `RELEASE_REPORT.md` | Required release hygiene + verdict |
+| `docs/archive/RELEASE_REPORT.md` | Required release hygiene + verdict |
 
 ## Deleted files
 
