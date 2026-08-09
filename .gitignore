@@ -63,6 +63,9 @@ aiodoo_workspace/
 .fresh_venv/
 
 # Build output (JSONL, caches, checkpoints). Keep release inventory README tracked.
+# FP2-native fixture corpora (TR-3) are explicitly tracked under datasets/fp2/.
 datasets/*
 !datasets/README.md
+!datasets/fp2/
+!datasets/fp2/**
 datasets_*/

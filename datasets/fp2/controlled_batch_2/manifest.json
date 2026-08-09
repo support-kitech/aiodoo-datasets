@@ -1,0 +1,44 @@
+{
+  "checksum": "728d9bad313626b470ff155e1211f779b6330758eab57301672a617692e3f227",
+  "continuity_added": 186,
+  "controlled_batch_version": "fp2-controlled-2.0.0-tr7",
+  "development_pack": 1004,
+  "domain_actions": {
+    "clear_odoo": 303,
+    "continuity_added": 186,
+    "continuity_keep": 186,
+    "keep": 896,
+    "set_odoo": 1
+  },
+  "generated_at": "2026-08-08T18:40:47.002472+00:00",
+  "notes": [
+    "TR-5 controlled_batch_1 preserved immutable",
+    "Domain labels corrected via semantic cues; unjustified odoo cleared",
+    "Ambiguous quarantined outside packs/splits",
+    "Continuity expanded with multi-cycle narratives",
+    "Negatives remain in parent quality_negatives.jsonl"
+  ],
+  "per_family": {
+    "capability_intent": 235,
+    "decision_context": 77,
+    "engineering_feedback": 224,
+    "engineering_state": 77,
+    "execution_work_unit": 231,
+    "loop_decision": 77,
+    "observation": 237,
+    "planning_decision": 228
+  },
+  "quarantined": 0,
+  "reasoning_pack": 1078,
+  "source_batch": "controlled_batch_1",
+  "source_version": "fp2-controlled-1.0.0",
+  "splits": {
+    "test": 138,
+    "train": 1115,
+    "validation": 133
+  },
+  "total_native": 1386,
+  "tr7": true,
+  "training_contract_version": "1.0.0",
+  "version": "fp2-controlled-2.0.0-tr7"
+}
